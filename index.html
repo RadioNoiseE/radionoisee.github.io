@@ -1,22 +1,46 @@
-<script>
- const owner = 'radionoisee';
- const repo = 'radionoisee.github.io';
- const path = 'cnt';
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Directory Content List</title>
+    </head>
+    <body>
+        <h1>Content Directory Listing</h1>
+        <div id="link-container">
+        </div>
+        <script>
+         document.addEventListener('DOMContentLoaded', function() {
+             const container = document.getElementById('link-container');
+             const owner = 'RadioNoiseE';
+             const repo = 'radionoisee.github.io';
+             const path = 'cnt';
 
- fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`)
-     .then(response => response.json())
-     .then(files => {
-         const container = document.getElementById('link-container');
-
-         files.forEach(file => {
-             if (file.name.endsWith('.html')) {
-                 const link = document.createElement('a');
-                 link.href = `${path}/${file.name}`;
-                 link.innerText = file.name;
-                 container.appendChild(link);
-                 container.appendChild(document.createElement('br'));
-             }
+             fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`)
+                 .then(response => {
+                     if (!response.ok) {
+                         throw new Error(`HTTP error! status: ${response.status}`);
+                     }
+                     return response.json();
+                 })
+                 .then(data => {
+                     data.forEach(file => {
+                         if (file.name.endsWith('.html')) {
+                             const link = document.createElement('a');
+                             link.href = `${path}/${file.name}`;
+                             link.textContent = file.name;
+                             link.style.display = 'block';
+                             container.appendChild(link);
+                         }
+                     });
+                 })
+                 .catch(error => {
+                     console.error('Error fetching the content:', error);
+                     const errorText = document.createElement('p');
+                     errorText.textContent = 'Failed to load content directory.';
+                     container.appendChild(errorText);
+                 });
          });
-     })
-     .catch(error => console.error('Error loading directory:', error));
-</script>
+        </script>
+    </body>
+</html>
