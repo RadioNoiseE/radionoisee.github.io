@@ -2,13 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Directory Content List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.6">
+        <title>Archive RNE</title>
+        <style>
+         #link-container {
+             font-family: monospace;
+         } a {
+             text-decoration: none;
+             color: black;
+         }
+        </style>
     </head>
     <body>
         <h1>Content Directory Listing</h1>
-        <div id="link-container">
-        </div>
+        <ul id="link-container">
+        </ul>
         <script>
          document.addEventListener('DOMContentLoaded', function() {
              const container = document.getElementById('link-container');
@@ -26,11 +34,13 @@
                  .then(data => {
                      data.forEach(file => {
                          if (file.name.endsWith('.html')) {
+                             const listItem = document.createElement('li');
                              const link = document.createElement('a');
                              link.href = `${path}/${file.name}`;
                              link.textContent = file.name;
                              link.style.display = 'block';
-                             container.appendChild(link);
+                             listItem.appendChild(link);
+                             container.appendChild(linkItem);
                          }
                      });
                  })
