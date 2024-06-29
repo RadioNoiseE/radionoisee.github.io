@@ -1,0 +1,22 @@
+<script>
+ const owner = 'radionoisee';
+ const repo = 'radionoisee.github.io';
+ const path = 'cnt';
+
+ fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`)
+     .then(response => response.json())
+     .then(files => {
+         const container = document.getElementById('link-container');
+
+         files.forEach(file => {
+             if (file.name.endsWith('.html')) {
+                 const link = document.createElement('a');
+                 link.href = `${path}/${file.name}`;
+                 link.innerText = file.name;
+                 container.appendChild(link);
+                 container.appendChild(document.createElement('br'));
+             }
+         });
+     })
+     .catch(error => console.error('Error loading directory:', error));
+</script>
