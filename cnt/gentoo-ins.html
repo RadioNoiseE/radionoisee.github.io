@@ -1,0 +1,1902 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-07-03 Wed 18:52 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9df7aa5">1. Gentoo Linux 使用指北</a>
+<ul>
+<li><a href="#org901a365">1.1. 关于本文</a></li>
+<li><a href="#orgf481cc5">1.2. 基础系统安装</a>
+<ul>
+<li><a href="#orgca621b8">1.2.1. 准备安装环境</a></li>
+<li><a href="#org032c361">1.2.2. 安装系统</a></li>
+<li><a href="#org34b29a7">1.2.3. 配置系统内核（手动配置可选）</a></li>
+<li><a href="#org074e696">1.2.4. 杂项、工具、及系统引导</a></li>
+<li><a href="#org1057f7a">1.2.5. 系统引导</a></li>
+<li><a href="#org6dc505d">1.2.6. 清理</a></li>
+</ul>
+</li>
+<li><a href="#org214d550">1.3. 桌面环境的安装</a>
+<ul>
+<li><a href="#org67ebdd6">1.3.1. 选择</a></li>
+<li><a href="#orgea9badf">1.3.2. XOrg 与 XMonad</a></li>
+<li><a href="#orgd14211f">1.3.3. Wayland 与 SwayWM</a></li>
+</ul>
+</li>
+<li><a href="#org7faab60">1.4. 吐槽与展望</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9df7aa5" class="outline-2">
+<h2 id="org9df7aa5"><span class="section-number-2">1.</span> Gentoo Linux 使用指北</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org901a365" class="outline-3">
+<h3 id="org901a365"><span class="section-number-3">1.1.</span> 关于本文</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+本文是对笔者 4 个月来折腾 Gentoo Linux 的一个总结，包括了安装、优化以及配置的内容。需要注意：
+</p>
+
+<ol class="org-ol">
+<li>文中所述都是关于 Amd64 架构下 Gentoo Linux 的安装和配置；</li>
+<li>本文不是<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64">Gentoo Handbook</a>，请确保在安装之前／之后阅读该官方手册（建议食用英文版、中文版部分翻译不全且过时）；</li>
+<li>本文针对的是笔记本电脑安装桌面系统，内核配置、电源管理、桌面系统安装等部分视个人情况而定；</li>
+<li>笔者电脑配置为：CPU、GPU 分别为牙膏厂 12 代的 i5 和 iRISxe，使用英伟达显卡的读者可能需要另行检索有关信息；使用 UEFI。</li>
+<li>安裝的是 OpenRC、Clang 编译并手動配置內核、內附基於 X11 的 XMonad 以及 Wayland 的 swayWM 入土級指北。</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf481cc5" class="outline-3">
+<h3 id="orgf481cc5"><span class="section-number-3">1.2.</span> 基础系统安装</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orgca621b8" class="outline-4">
+<h4 id="orgca621b8"><span class="section-number-4">1.2.1.</span> 准备安装环境</h4>
+<div class="outline-text-4" id="text-1-2-1">
+</div>
+<ol class="org-ol">
+<li><a id="org2341581"></a>引导<br />
+<div class="outline-text-5" id="text-1-2-1-1">
+<p>
+为了完成 Gentoo Linux 的安装、首先我们肯定要制作一个系统引导盘（LiveUSB）。Gentoo Linux 的安装跟大部分发行版的不同之处就在于它并没有提供一个有 GUI 或 TUI 界面作为安装向导的引导盘。相反，为了最大程度地客制化，它只提供了一个内置各种安装系统必备工具的不包含图形界面的基础系统；我们需要在以 LiveUSB 启动后​<code>chroot</code>​至本机磁盘手动（一般情况下）完成安装。这种繁琐安装方式给予了其最大的灵活性，真正意义上的选择之多样是 Gentoo 一个非常大的优势。
+</p>
+
+<p>
+我们可以从清华镜像源处获得 LiveUSB 的磁盘映像文件。官方提供了三种磁盘文件，这里我们一般选择 install-amd64-mininal 即可，文件地址在：我们可以从清华镜像源处获得 LiveUSB 的磁盘映像文件。官方提供了三种磁盘文件，这里我们一般选择​<code>install-amd64-mininal</code>​即可，文件地址在：
+</p>
+
+<pre class="example">
+https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/.
+</pre>
+
+<p>
+随后将该​<code>iso</code>​文件刻录到 U 盘上（经过了 Hybrid 处理，可以直接刻录到 U 盘上<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>）。这里大家各显神通就好。谨慎的读者还可以校验一下磁盘映像文件的完整性、校验文件也在上面给出的地址下。之后将目标设备关机、插上制作好的引导盘后​<b>先关闭 SecureBoot 后</b>​启动。然后你会看到 OpenRC 引导这 Gentoo Linux 启动，至此我们就完成了第一步：引导。
+</p>
+</div>
+</li>
+
+<li><a id="orge909ea2"></a>连接至网络<br />
+<div class="outline-text-5" id="text-1-2-1-2">
+<p>
+进入 LiveUSB 的环境后，先运行​<code>ifconfig</code>​，看看除了​<code>lo</code>​之外是否有别的网卡设备被检测到（比如​<code>wlan</code>​）。如果没有那说明你的网卡不被支持，可以到互联网上检索并寻求帮助。有的话就可以运行​<code>net-setup</code>​（自带的一个非常贴心的脚本），按照指引连接至网络。如果使用​<code>wlan</code>​，大部分网络都是 WPA2/3，并建议让​<code>dhcp</code>​决定 ip 地址。
+</p>
+
+<p>
+随后可以​<code>ping</code>​一下​<code>gentoo.org</code>​，看看自己是否成功联网。然后视需求编辑​<code>/etc/reslov.conf</code>​（默認可用的编辑器有 nano）。
+</p>
+</div>
+</li>
+
+<li><a id="orgf66cb8f"></a>磁盘分区<br />
+<div class="outline-text-5" id="text-1-2-1-3">
+<p>
+接下来是很重要的一步：给目标设备的磁盘分区。（确定你的电脑使用不是 BIOS 启动，如果是请参考 Handbook）一般至少需要三个分区、分别是 EFI 分区（512MB~1024MB）、swap 分区（主要是笔记本电脑休眠时使用，一般小于等于你的运行时内存大小即可）以及根分区。也是，大家各显神通就好；<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks">这里</a>（Introduction to block devices 至 Partitioning the disk with MBR for BIOS / legacy boot）有 Gentoo 官方给出的方案，以及分区工具​<code>fdisk</code>​的手把手教学可供参考。下面给出我的方案、仅供参考：
+</p>
+
+<pre class="example">
+Disk /dev/nvme0n1: 476.94 GiB, 512110190592 bytes, 1000215216 sectors
+Disk model: [.*]
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: [.*]
+
+Device            Start        End   Sectors   Size Type
+/dev/nvme0n1p1     2048    2099199   2097152     1G Linux filesystem
+/dev/nvme0n1p2  2099200    4196351   2097152     1G EFI System
+/dev/nvme0n1p3  4196352   37750783  33554432    16G Linux swap
+/dev/nvme0n1p4 37750784 1000214527 962463744 458.9G Linux filesystem
+</pre>
+
+<p>
+我额外分出了一个​<code>/boot</code>​分区，即​<code>/dev/nvme0n1p1</code>​。分完区后使用​<code>fdisk -l /dev/[nvme0n1|sda|.*]</code>​输出你的分区方案，最好记录一下，因为之后编辑​<code>/etc/fstab</code>​时会用到。
+</p>
+
+<p>
+随后给这几个分区配置不同的文件系统。EFI 分区须使用 FAT32、其余参考<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks">这里</a>（Creating file systems）。这是我的方案：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">mkfs.ext4 /dev/nvme0n1p1
+mkfs.vfat -F <span style="color: #4e3163;">32</span> /dev/nvme0n1p2
+swapon /dev/nvme0n1p3
+mkfs.btrfs /dev/nvme0n1p4
+</pre>
+</div>
+
+<p>
+然后挂载根目录：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">mount /dev/nvme0n1p4 /mnt/gentoo
+<span style="color: #3a81c3;">cd</span> /mnt/gentoo
+</pre>
+</div>
+
+<p>
+顺便，Gentoo 的 LiveUSB 是没有预装 OpenZFS 所需的工具的，这时候你就需要使用其它镜像，即所谓的特殊情况；注意如果选择了第三方的镜像，可能会需要额外的安装步骤，见 Gentoo Handbook。
+</p>
+</div>
+</li>
+
+<li><a id="orgb1b8f7c"></a>选择 stage3 档案<br />
+<div class="outline-text-5" id="text-1-2-1-4">
+<p>
+关于 stage3，他们是 Gentoo 系统安装的种子。这时你需要作出选择：
+</p>
+
+<ul class="org-ul">
+<li>不喜​<code>systemD</code>​？选择​<code>OpenRC</code>​；</li>
+<li>对​<code>glibc</code>​感到不适？选择​<code>musl-llvm</code>​（注意，没有 gcc 和​<code>glibc</code>​很多软件不打补丁是编译不起来的）；</li>
+<li>被迫害妄想症？选择​<del>OpenBSD</del>​<code>hardened-selinux</code>​；</li>
+<li>喜欢禁欲？选择​<code>nomultilib</code>​。</li>
+</ul>
+
+<p>
+请选择你的毒药。stage3 清单可在<a href="https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/">这里</a>查看。
+</p>
+
+<p>
+作出选择后可使用 wget 或 cURL 将其下载到​<code>/mnt/gentoo</code>​下：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">wget https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/current-stage3-amd64-desktop-openrc/stage3-amd64-desktop-openrc-*.tar.xz
+</pre>
+</div>
+
+<p>
+谨慎的读者这时又可以校验一下磁盘映像文件的完整性了。然后使用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">tar xpvf stage3-*.tar.xz --xattrs-include=<span style="color: #2d9574;">'*.*'</span> --numeric-owner
+</pre>
+</div>
+
+<p>
+解压。注意，一定要用这个命令解压。参数解释在 Handbook 中有，按需食用。
+</p>
+</div>
+</li>
+
+<li><a id="org0cdc224"></a>配置​<code>make.conf</code>​并换源<br />
+<div class="outline-text-5" id="text-1-2-1-5">
+<p>
+编辑​<code>make.conf</code>​这一十分重要的配置文件（注意，是编辑​<code>/mnt/gentoo/etc/portage/make.conf</code>​文件而非​<code>/etc/portage/make.conf</code>​），决定我们的包管理器 emerge 编译时的参数等等，是十分重要的可以优化的地方。
+</p>
+
+<p>
+笔者将详述一下重要的一定要配置的选项，更多敬请参考<a href="https://wiki.gentoo.org/wiki/Make.conf">官方指导</a>：
+</p>
+
+<ul class="org-ul">
+<li><code>COMMON_FLAGS</code>​，作为编译时的一般参数，必备的参数有：​<code>-march=native</code>​（本设备硬件）、​<code>-O2</code>​（官方指导优化等级）、​<code>-pipe</code>​（管道代替中间文件）， 可能還需要使用​<code>resolve-march-native</code>​來取得更多信息（见 bootstrap 处）；</li>
+<li><code>MAKE_OPTS</code>​，一般用来设定 make 时的并行数，一般是中央处理器核心数的\(\frac{1}{2}\)；</li>
+<li><code>CPU_FLAGS_X86</code>​，使用​<code>cpuid2cpuflags</code>​工具获得（须​<code>chroot</code>​后用包管理器取得），为处理器优化可执行文件中使用的指令；</li>
+<li><code>PORTAGE_TMPDIR</code>​，包管理器后端存放中间文件的地方，内存大于 16GB 的建议设为​<code>/tmp</code>​、将其置于内存中，加快编译速度并减少对硬盘的大量读写、延长其使用寿命；</li>
+<li><code>ACCEPT_LICENSE</code>​，安装软件接受的许可证类型，官方提供了几个集合，但像笔者这种没什么节操的当然是用​<code>*</code>​全部接受了；</li>
+<li><code>ACCEPT_KEYWORDS</code>​，选择你安装的软件是使用稳定版本（​<code>amd64</code>​）还是激进版本（​<code>~amd64</code>​），后续是可以单独选择该软件使用何种版本的。</li>
+</ul>
+
+<p>
+随后可以换个源（虽然来说默认的也没有被墙、而且 Gentoo 安装包由于是下载源码然后编译、与二进制发行版相比对网络的要求更低、不换也可以）。对于​<code>make.conf</code>​，可以使用官方提供的工具​<code>mirrorselect</code>​：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">mirrorselect -i -o &gt;&gt; /mnt/gentoo/etc/portage/make.conf
+</pre>
+</div>
+
+<p>
+以 TUI 的方式选择镜像，也可以直接在​<code>make.conf</code>​中加上一行：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #715ab1;">GENTOO_MIRRORS</span>=<span style="color: #2d9574;">"https://mirrors.tuna.tsinghua.edu.cn/gentoo"</span>
+</pre>
+</div>
+
+<p>
+还需换源的文件为​<code>/mnt/gentoo/etc/portage/repos.conf/gentoo.conf</code>​，该文件指定了包管理器 emerge 使用的仓库地址。该文件缺省设置在​<code>/mnt/gentoo/etc/portage/config/repos.conf</code>​，用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/user/portage/repos.conf/gentoo
+</pre>
+</div>
+
+<p>
+创建后按<a href="https://mirrors.tuna.tsinghua.edu.cn/help/gentoo-portage/">指南</a>修改​<code>sync-uri</code>​即可。
+</p>
+</div>
+</li>
+
+<li><a id="orgae2497a"></a>chroot<br />
+<div class="outline-text-5" id="text-1-2-1-6">
+<p>
+终于可以 chroot 了。为了在 chroot 环境中使用 emerge 从互联网上获取软件包，将 DNS 信息复制一下：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+</pre>
+</div>
+
+<p>
+这时建议同步一下电脑的时钟，若误差太多可能会影响后续 emerge 的同步校验：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">chronyd -q
+</pre>
+</div>
+
+<p>
+然后使用 Arch 提供的​<del>牛头人脚本</del>​，随后载入设置并设置一个招摇的提示幅：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">arch-chroot /mnt/gentoo
+<span style="color: #3a81c3;">source</span> /etc/profile
+<span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">PS1</span>=<span style="color: #2d9574;">"(chroot) ${PS1}"</span>
+</pre>
+</div>
+
+<p>
+别忘了把一开始分出来的 EFI 分区挂载一下，对笔者来说是：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">mount /dev/nvme0n1p1 /boot
+mkdir /boot/efi
+mount /dev/nvme0n1p2 /boot/efi
+</pre>
+</div>
+
+<p>
+现在，你已经成功地进入到新环境了。
+</p>
+</div>
+</li>
+
+<li><a id="org17277e0"></a>BootStrap（可选）<br />
+<div class="outline-text-5" id="text-1-2-1-7">
+<p>
+这时，我们处在了一个由先前下载并解压的 stage3 构建的一个基础系统中。它包括了标准库、编译器等 Linux 系统的必要组成部分，是由 Gentoo Release Engineering Team（好高级的名字、发行工程诶）帮我们预先编译好的。根据 FAQ，从头至尾构建这些所得的收益并不会很大，而所花的时间非常长，特别是如果你的 gcc 像笔者一样开启了​<code>lto</code>​、​<code>pgo</code>​等特性，对于一般电脑至少需要 4 小时（甚至 gcc 就要编译至少 3 次［至少是因为，如果你的 gcc 开了 pgo、那么就需要重复编译 5 次］）。故读者需要明智地选择是否进行这一步。若不需要则直接进入下一部分『选择全局配置文件并安装基础系统』即可。选择该部分的读者在下一部分可忽略重复步骤（笔者将会指明）。
+</p>
+
+<p>
+首先我们先同步一下本机的包管理器数据库（其实就是一个在​<code>/var/db/repos/</code>​下的一堆文件）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge --sync
+</pre>
+</div>
+
+<p>
+随后选取你要使用的基础系统配置文件，他们是 Gentoo 系统构建的砖块。它不仅帮你决定了​<code>USE</code>​、​<code>CFLAGS</code>​等的值，更限定了系统上软件包的版本。根据你在选 stage3 时和实际需求选择即可。使用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge profile list
+eselect profile set <span style="color: #3a81c3;">[</span>num<span style="color: #3a81c3;">]</span>
+</pre>
+</div>
+
+<p>
+列出可选配置并应用。<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">这里</a>的 Choosing the right profile 一节有更多相关信息。
+</p>
+</div>
+</li>
+
+<li><a id="org64e4bc2"></a>从 stage1 到 stage2<br />
+<div class="outline-text-5" id="text-1-2-1-8">
+<p>
+官方提供了一个脚本，我们只需要运行它即可：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">cd</span> /var/db/repos/gentoo/scripts
+./bootstrap.sh
+</pre>
+</div>
+
+<p>
+若使用 Intel 的中央处理器，途中编译 gcc 可能会失败。这是由于其大小核导致的。你需要安装​<code>reslove-march-native</code>​来确定​<code>COMMON_FLAGS</code>​的值。
+</p>
+</div>
+</li>
+
+<li><a id="org298c017"></a>从 stage2 到 stage3<br />
+<div class="outline-text-5" id="text-1-2-1-9">
+<p>
+理论上按照 Gentoo 官方的说法，这一步只需要​<code>emerge -e @system</code>​构建系统工具链即可。然而由于那个​<code>bootstrap.sh</code>​脚本估计是没怎么维护了，出来的 gcc 编译器缺少构建系统所需的一个特性、需要手动使用​<code>USE=openmp</code>​开启。这一步你也可以配置更多 gcc 的特性，详见这里。为了开启这些特性，我们需要在​<code>/etc/portage/package.use/</code>​目录下创建一个文件（文件名无所谓，但为了可维护性有两种广泛使用的方案：创建一个文件存放所有软件的​<code>USE</code>​配置和为每一个需要配置的软件创建一个新文件），并写入：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf">sys-devel/gcc openmp
+</pre>
+</div>
+
+<p>
+即可。（如果软件名没有重叠，你也可以省去类名直接写 gcc。）
+</p>
+
+<p>
+随后使用以下命令：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">USE</span>=<span style="color: #2d9574;">"openmp"</span>
+emerge -e @system
+</pre>
+</div>
+
+<p>
+即可重构系统的底层依赖。至此我们就完成了从 stage1 到 stage3 的构建，可喜可贺、可喜可贺。
+</p>
+
+<p>
+由于我们已经选取过了系统的全局配置（那个 profile），可以跳过下一章开头的选取部分。
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org032c361" class="outline-4">
+<h4 id="org032c361"><span class="section-number-4">1.2.2.</span> 安装系统</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="org379a339"></a>同步包管理器数据库并选取全局配置文件<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+首先同步包管理器所使用的软件包数据库（其实这一步就是下载放在不同文件夹里的 ebuild 文件）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge --sync
+</pre>
+</div>
+
+<p>
+现在需要选取系统配置文件，参考官方<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">学习资料</a>中 Choosing the right profile 一节，列出并选择：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge profile list
+emerge profile set <span style="color: #3a81c3;">[</span>num<span style="color: #3a81c3;">]</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgf9f0700"></a>配置​<code>make.conf</code>​文件<br />
+<div class="outline-text-5" id="text-1-2-2-2">
+<p>
+这时我们接着配置这个文件。先前由于没有​<code>cpuid2cpuflags</code>​这个工具，无法配置该环境变量，现在我们只需：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge --oneshot --ask app-portage/cpuid2cpuflags <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#23433;&#35013;</span>
+cpuid2cpuflags <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36755;&#20986;</span>
+emerge -c app-portage/cpuid2cpuflags <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36807;&#27827;&#25286;&#26725;</span>
+</pre>
+</div>
+
+<p>
+即可。
+</p>
+
+<p>
+然后配置显卡（一些软件如 mesa 可能会用到该变量）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"VIDEO_CARDS=\"intel\""</span> &gt;&gt; /etc/portage/make.conf
+</pre>
+</div>
+
+<p>
+怎么指导我的设备该填写怎样的值，需要怎样的配置呢？<a href="https://wiki.gentoo.org/wiki/AMDGPU">AMD</a>、<a href="https://wiki.gentoo.org/wiki/Intel">Intel</a>、Nvidia<a href="https://wiki.gentoo.org/wiki/Nouveau">开源</a>和<a href="https://wiki.gentoo.org/wiki/NVIDIA">闭源</a>。（还是老黄有牌面。）
+</p>
+</div>
+</li>
+
+<li><a id="org80c54fe"></a>重建系统（可选）<br />
+<div class="outline-text-5" id="text-1-2-2-3">
+<p>
+这一步是可选的，且只在你做出了：
+</p>
+
+<ol class="org-ol">
+<li>修改全局的​<code>USE</code>​旗标后；</li>
+<li>出尔反尔、做出了跟你在选取 stage3 文件时截然相反的选择（比如从 OpenRC 投向了 SystemD）；</li>
+<li>不赶时间、生活比较从容时才会带来好处。如果你赶时间，即使你做出了 1、2 中的行为也可以闲适自得地跳过这步，因为可能会需要一段等待的时间。</li>
+</ol>
+
+<p>
+如果坚定信念决定重建，执行：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge -avuDN @world
+</pre>
+</div>
+
+<p>
+然后按下回车就好。等 emerge 干好了工作，再用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge --ask --depclean
+</pre>
+</div>
+
+<p>
+移除不被依赖的软件包（这步十分残忍、请确认后再确认）。
+</p>
+</div>
+</li>
+
+<li><a id="org9227704"></a>本地化<br />
+<div class="outline-text-5" id="text-1-2-2-4">
+<p>
+从这一节开始，就需要区分 OpenRC 和 SystemD 各自的步骤。笔者用的是 OpenRC，使用 SystemD 的用家可以从<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">这里</a>的 Optional: Using systemd as the system and service manager 处开始按步骤使用不同的命令完成安装（两种方案在安装时只会有细节上的区别）。
+</p>
+
+<p>
+首先我们设定时区，使用以下命令查看可用时区：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">ls -l /usr/share/zoneinfo
+</pre>
+</div>
+
+<p>
+所谓时区其实就是这个目录下的類目录中细分的文件，非常符合所谓的 Unix 哲学、这很好。然后应用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Asia/Shanghai"</span> &gt; /etc/timezone
+emerge --config sys-libs/timezone-data
+</pre>
+</div>
+
+<p>
+接着我们设置本地语言环境（locale），修改（取消注释）​<code>/etc/locale.gen</code>​文件即可。编辑修改该文件后、应用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">nano /etc/locale.gen <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#20462;&#25913;&#25991;&#20214;</span>
+locale-gen <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#29983;&#25104;</span>
+eselect locale list <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21015;&#20986;&#21487;&#36873;&#30340;&#26412;&#22320;&#35821;&#35328;&#29615;&#22659;</span>
+eselect locale set <span style="color: #3a81c3;">[</span>num<span style="color: #3a81c3;">]</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36873;&#21462;&#20320;&#38656;&#35201;&#30340;&#29615;&#22659;</span>
+</pre>
+</div>
+
+<p>
+最后我们使上述配置生效：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">env-update &amp;&amp; <span style="color: #3a81c3;">source</span> /etc/profile &amp;&amp; <span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">PS1</span>=<span style="color: #2d9574;">"(chroot) ${PS1}"</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org34b29a7" class="outline-4">
+<h4 id="org34b29a7"><span class="section-number-4">1.2.3.</span> 配置系统内核（手动配置可选）</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+终于到了配置内核的时候。有三种方案供各位选择：
+</p>
+
+<ol class="org-ol">
+<li>用发行版内核、发行版内核不会针对你的设备作任何修改、但主打的一个省心方便且快捷，官方甚至贴心地提供了编译好的内核、将会在下文提到；</li>
+<li>用混合驱动模式、使用官方提供的 genkernel 工具、能够自己配置内核、但对一些后续的扩展来说不是很方便（比如你想打一个 cjkTTY 补丁或者想用 plymouth 配置 Boot Splash）、好处大概在于自动化；</li>
+<li>手动编译、即下文主要讲的方案。</li>
+</ol>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgf6eea70"></a>必要驱动安装<br />
+<div class="outline-text-5" id="text-1-2-3-1">
+<p>
+这一步是无论你使用什么内核安装方式都需要完成的。我使用 emerge 提供的集合方式安装（便于管理）。先创建目录：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">mkdir /etc/portage/sets
+</pre>
+</div>
+
+<p>
+这个目录就是我们存放所有集合文件的地方。随后在该目录下创建一个文件、文件名随意、但最好跟该集合包含的包有关。比如为了存放驱动，我们创建一个名为​<code>firmware</code>​的文件并在其中写入要安装的包：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/sets/firmware
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-kernel/linux-firmware"</span> &gt;&gt; /etc/portage/sets/firmware <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#38656;&#23433;&#35013;&#30340;linux-firmware&#21253;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-firmware/sof-firmware"</span> &gt;&gt; /etc/portage/sets/firmware <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#38656;&#23433;&#35013;&#30340;sof-firmware&#21253;&#65288;&#22768;&#21345;&#39537;&#21160;&#65289;</span>
+</pre>
+</div>
+
+<p>
+随后使用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge --ask @firmware
+</pre>
+</div>
+
+<p>
+即可安装​<code>linux-firmware</code>​和​<code>sof-firmware</code>​两个包。如果不使用集合的方式，则将​<code>@firmware</code>​替换为两个包的名字即可。
+</p>
+</div>
+</li>
+
+<li><a id="org670da7a"></a>发行版内核安装<br />
+<div class="outline-text-5" id="text-1-2-3-2">
+<p>
+以下是使用 GNU GRUB 作为系统引导时的安装步骤，如果有特殊需求参考<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel">这里</a>的 Distribution kernels 一节即可。
+</p>
+
+<p>
+首先我们要安装​<code>installkernel</code>​这个包。如果你有在内核升级后自动帮你运行​<code>grub-mkconfig</code>​指令的需求的话，需要打开该包的​<code>grub</code>​特性：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/package.use/installkernel
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-kernel/installkernel grub"</span> &gt;&gt; /etc/portage/package.use/installkernel
+</pre>
+</div>
+
+<p>
+随后创建 kernel 集合：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/sets/kernel
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-kernel/installkernel"</span> &gt;&gt; /etc/portage/sets/kernel <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#38656;&#23433;&#35013;&#30340;installkernel&#21253;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-kernel/gentoo-kernel"</span> &gt;&gt; /etc/portage/sets/kernel <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#38656;&#23433;&#35013;&#30340;gentoo-kernel&#21253;&#65288;&#22914;&#26524;&#19981;&#24819;&#26412;&#26426;&#32534;&#35793;&#20869;&#26680;&#12289;&#23433;&#35013;gentoo-kernel-bin&#21363;&#21487;&#65289;</span>
+</pre>
+</div>
+
+<p>
+然后就安装。发行版内核很大，你需要等一等。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge --ask @kernel
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org47c3ef9"></a>手动编译内核<br />
+<div class="outline-text-5" id="text-1-2-3-3">
+<p>
+同样创建 kernel 集合先安装需要的包：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/sets/kernel
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-kernel/gentoo-sources"</span> &gt;&gt; /etc/portage/sets/kernel <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#20869;&#26680;&#28304;&#25991;&#20214;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-kernel/dracut"</span> &gt;&gt; /etc/portage/sets/kernel <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">initramfs</span>
+</pre>
+</div>
+
+<p>
+Gentoo 提供了许多内核，比如没有对 Gentoo 进行适配的 vanilla、性能优化的 zen、以及其他的分支，根据喜好／需求选择即可。至于用来生成 initramfs 的 dracut，也可以用官方的 genkernel 替代；但需要注意的是 genkernel 至今未提供对 plymouth 的支持。
+</p>
+
+<p>
+同样使用​<code>emerge -a @kernel</code>​安装后，即可开始配置：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">cd</span> /usr/src/linux-6.1.67-gentoo/ <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#26368;&#21518;&#30340;&#25991;&#20214;&#22841;&#21517;&#20250;&#26681;&#25454;&#20320;&#25152;&#23433;&#35013;&#20869;&#26680;&#21450;&#29256;&#26412;&#26377;&#25152;&#21306;&#21035;</span>
+make menuconfig <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#22522;&#20110;ncurces&#30340;&#33756;&#21333;&#24335;&#37197;&#32622;&#30028;&#38754;</span>
+</pre>
+</div>
+
+<p>
+如果你想使用 clang/llvm 工具链代替 GUN 来编译内核、使用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #715ab1;">LLVM</span>=<span style="color: #4e3163;">1</span> make menuconfig <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#27880;&#24847;&#12289;&#38543;&#21518;make&#26102;&#20063;&#35201;LLVM=1 make -j</span>
+</pre>
+</div>
+
+<p>
+关于内核配置，我不推荐使用​<code>make localyesconfig</code>​的方式，因为这种方式只会将正在使用的驱动改成​<code>yes</code>​（嵌入），建议只做为参考（不怕折腾可以试试先取消选择所有驱动再用​<code>make localmodconfig</code>​）。在配置显卡／声卡／网卡的驱动时，不建议嵌入、而作为模块载入。否则可能导致找不到网卡、无声音、mpv 报错等问题。关于内核各个选项的意义、推荐阅读金步国的<a href="https://www.jinbuguo.com/kernel/longterm-linux-kernel-options.html">Linux-4.4-x86_​64 内核配置选项简介</a>，然后对照着配置就好。遇到不明白的就善用搜索。同时，在<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel">官方文档</a>的 Alternative: Manual configuration 一章中有关于内核必须的配置提示及警告。Gentoo Wiki 上也会写出一些对内核有特殊要求的包对应的配置要求，需要特别注意。比如这是 iwd（​<code>wpa_supplicant</code>​的现代替代）所需的内核配置，写的十分详细：
+</p>
+
+<pre class="example">
+Security options  ---&gt;
+    [*] Enable access key retention support
+    [*] Diffie-Hellman operations on retained keys
+Networking support  ---&gt;
+    [*] Wireless  ---&gt;
+        &lt;M&gt; cfg80211 - wireless configuration API
+Cryptographic API  ---&gt;
+    *** Public-key cryptography ***
+    [*] RSA algorithm
+    [*] Diffie-Hellman algorithm
+    *** Block modes ***
+    [*] ECB support
+    *** Hash modes ***
+    [*] HMAC support
+    *** Digest ***
+    [*] MD4 digest algorithm
+    [*] MD5 digest algorithm
+    [*] SHA1 digest algorithm
+    [*] SHA1 digest algorithm (SSSE3/AVX/AVX2/SHA-NI)   // AMD64 and SSSE3
+    [*] SHA224 and SHA256 digest algorithm
+    [*] SHA256 digest algorithm (SSSE3/AVX/AVX2/SHA-NI) // AMD64 and SSSE3
+    [*] SHA384 and SHA512 digest algorithms
+    [*] SHA512 digest algorithm (SSSE3/AVX/AVX2)        // AMD64 and SSSE3
+    *** Ciphers **
+    [*] AES cipher algorithms
+    [*] AES cipher algorithms (x86_64)                  // AMD64
+    [*] AES cipher algorithms (AES-NI)                  // X86_AES
+    [*] ARC4 cipher algorithm
+    [*] DES and Triple DES EDE cipher algorithms
+    [*] Triple DES EDE cipher algorithm (x86-64)        // AMD64
+    *** Random Number Generation ***
+    [*] User-space interface for hash algorithms
+    [*] User-space interface for symmetric key cipher algorithms
+    [*] Asymmetric (public-key cryptographic) key type  ---&gt;
+        [*] Asymmetric public-key crypto algorithm subtype
+        [*] X.509 certificate parser
+        [*] PKCS#7 message parser
+        &lt;M&gt; PKCS#8 private key parser                   // linux kernel 4.20 or higher
+</pre>
+
+<p>
+所以在手动配置内核所能带来的精简之外，安装软件时便可能需要额外的折腾，比如 iptables、这个东西需要的内核配置特别多，但想要在 QEMU 里玩游戏还必须配置。如果你的笔记本电脑需要能用的电源管理，别忘了看这篇<a href="https://wiki.gentoo.org/wiki/Power_management/Guide">电源管理</a>（建议别嫌麻烦，把​<code>thermald</code>​配一下）和这篇<a href="https://wiki.gentoo.org/wiki/Suspend_and_hibernate">关于休眠</a>的文章。同时也注意一下时钟滴答模型、频率这些对性能影响较大的选项。
+</p>
+
+<p>
+在大显神通之后，想必各位也完成了配置。退出 menuconfig 界面并保存之后，你的配置会被写入当前目录下的​<code>.config</code>​文件中。接下来使用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">make -j11 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#26681;&#25454;&#33258;&#24049;&#30828;&#20214;&#35843;&#25972;</span>
+make modules_install
+make install
+dracut --force --hostonly <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#29983;&#25104;initramfs&#65292;&#22914;&#26524;&#20320;&#22312;&#20869;&#26680;&#20013;&#37197;&#32622;&#20102;&#25903;&#25345;&#30340;&#21387;&#32553;&#26041;&#24335;&#65292;&#21035;&#24536;&#20102;&#25351;&#23450;&#65292;&#22914; --xz</span>
+</pre>
+</div>
+
+<p>
+最后别忘记：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">eselect kernel list <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#26597;&#30475;&#21487;&#29992;&#20869;&#26680;</span>
+eselect kernel set <span style="color: #3a81c3;">[</span>num<span style="color: #3a81c3;">]</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36873;&#21462;</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org074e696" class="outline-4">
+<h4 id="org074e696"><span class="section-number-4">1.2.4.</span> 杂项、工具、及系统引导</h4>
+<div class="outline-text-4" id="text-1-2-4">
+</div>
+<ol class="org-ol">
+<li><a id="org6d2facc"></a><code>fstab</code>​文件<br />
+<div class="outline-text-5" id="text-1-2-4-1">
+<p>
+为了让系统知道该挂载硬盘的哪个分区、每个分区上装的是什么东西、用的是什么文件系统、挂载时需要什么参数、以及挂载的行为、优先级等，需要编辑​<code>/etc/fstab</code>​文件。具体的语法请看<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System">这里</a>的 About fstab 一节。下面是我的配置，供参考：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">/dev/nvme0n1p1    /boot        ext4    defaults        <span style="color: #4e3163;">1</span>    <span style="color: #4e3163;">2</span>
+/dev/nvme0n1p2    /boot/efi    vfat    defaults        <span style="color: #4e3163;">0</span>    <span style="color: #4e3163;">2</span>
+/dev/nvme0n1p3    none         swap    sw              <span style="color: #4e3163;">0</span>    <span style="color: #4e3163;">0</span>
+/dev/nvme0n1p4    /            btrfs   <span style="color: #715ab1;">compress</span>=zstd:2 <span style="color: #4e3163;">0</span>    <span style="color: #4e3163;">1</span>
+</pre>
+</div>
+
+<p>
+这个文件比较重要，千万别手抖。
+</p>
+</div>
+</li>
+
+<li><a id="org8c772ae"></a>网络相关<br />
+<div class="outline-text-5" id="text-1-2-4-2">
+<p>
+我们先给自己的机器设一个主机名（注意：如果你在内核里指定了就不要冲突）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">echo</span> gentoo &gt; /etc/hostname
+</pre>
+</div>
+
+<p>
+随后安装一个网络管理器。一般常用的是 NetworkManager（如果你要用 Gnome 必装、KDE 考虑、xfce 谨慎、对于 WM 来说就太重了），还有就是 Gentoo 自己的 netifrc、ConnMan 这些。我用的是 iwd，单独使用需开启​<code>standalone</code>​特性：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/package.use/iwd
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"net-wireless/iwd client monitor standalone"</span> &gt;&gt; /etc/portage/package.use/iwd
+emerge -a iwd <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#25105;&#20351;&#29992;&#38598;&#21512;&#26469;&#31649;&#29702;&#65292;&#20294;&#20026;&#20102;&#21629;&#20196;&#31934;&#31616;&#24448;&#21518;&#19968;&#27425;&#21482;&#38656;&#23433;&#35013;&#21333;&#20010;&#21253;&#26102;&#20250;&#30452;&#25509;&#23433;&#35013;</span>
+</pre>
+</div>
+
+<p>
+随后编辑​<code>/etc/iwd/main.conf</code>​文件：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">/etc/iwd/main.conf</span>
+
+[<span style="color: #ba2f59; font-weight: bold;">General</span>]
+<span style="color: #715ab1;">EnableNetworkConfiguration</span>=true
+
+[<span style="color: #ba2f59; font-weight: bold;">Network</span>]
+<span style="color: #715ab1;">NameResolvingService</span>=resolvconf
+</pre>
+</div>
+
+<p>
+最后使其开机自启：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">rc-update add iwd default
+</pre>
+</div>
+
+<p>
+也推荐 Gentoo 自己的 netifrc、但是就是说我嫌​<code>net.wlan0</code>​太丑了（其他都是什么​<code>local</code>​、​<code>consolefont</code>​、​<code>tlp</code>​，风格完全不统一啊）。
+</p>
+
+<p>
+然后各位视需求编辑一下​<code>/etc/hosts</code>​文件即可。
+</p>
+</div>
+</li>
+
+<li><a id="orgbacb846"></a>系统信息<br />
+<div class="outline-text-5" id="text-1-2-4-3">
+<p>
+首先设置 root 账户的密码（弱密码会提醒）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">passwd
+</pre>
+</div>
+
+<p>
+随后配置一下 OpenRC，比如看看自己要不要开一个 parallel 什么的（我觉得意义不是很大）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">nano /etc/rc.conf
+</pre>
+</div>
+
+<p>
+由于大部分在大陆买的电脑键盘盘布局是标准的 US 布局，就不需要管​<code>/etc/conf.d/keymap</code>​。但需要注意的是硬件时钟，用​<code>date</code>​命令看看是不是 UTC，如果不是就需要在​<code>/etc/conf.d/hwclock</code>​里设置​<code>clock="local"</code>​。
+</p>
+</div>
+</li>
+
+<li><a id="org83d9c95"></a>系统工具<br />
+<div class="outline-text-5" id="text-1-2-4-4">
+<p>
+先安装系统日志管理，可选的有 sysklogd、syslog-ng 和 metalog。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge -a app-admin/syslog-ng
+</pre>
+</div>
+
+<p>
+随后 Handbook 上建议安装一个 Cron Daemon（定时规划任务）、这个我觉得没必要手动装，你在安装一些需要用到该功能的包时会自动把它作为依赖装上的。可选的有 cronie、dcron、fcron 和 bcron。
+</p>
+
+<p>
+如果你打算就用默认的 bash、装一个自动补全会极大提升你的使用体验：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge -a app-shells/bash-completion
+</pre>
+</div>
+
+<p>
+如果你希望（在启动时）同步硬件时钟：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge -a net-misc/ntp <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#24120;&#29992;&#30340;&#36824;&#26377;chrony&#31561;</span>
+rc-update add ntp-client default
+</pre>
+</div>
+
+<p>
+最后针对你选取的文件系统，需要安装其常用工具：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/sets/fs <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">fs&#38598;&#21512;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-fs/e2fsprogs"</span> &gt;&gt; /etc/portage/sets/fs <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">ext4&#29992;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-fs/dosfstools"</span> &gt;&gt; /etc/portage/sets/fs <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">vFAT&#29992;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-fs/btrfs-progs"</span> &gt;&gt; /etc/portage/sets/fs <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">btrfs&#29992;</span>
+emerge --ask @fs <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#23433;&#35013;</span>
+</pre>
+</div>
+
+<p>
+除非你是 root 敢死队、不然还是装一个 doas／sudo 比较好。我用 doas，因为我是个人笔记本电脑，完全用不到 sudo 的那么多功能：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge -a app-admin/doas
+</pre>
+</div>
+
+<p>
+然后根据<a href="https://wiki.gentoo.org/wiki/Doas">Gentoo Wiki</a>，创建一个安全的配置文件后配置 doas：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/doas.conf
+chown -c root:root /etc/doas.conf
+chmod -c <span style="color: #4e3163;">0400</span> /etc/doas.conf
+</pre>
+</div>
+
+<p>
+然后将对 doas 的配置写在刚创建的​<code>/etc/doas.conf</code>​文件中即可：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">permit nopass :wheel <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21361;&#38505;&#65292;&#38500;&#38750;&#20320;&#30693;&#36947;&#20320;&#22312;&#20570;&#20160;&#20040;&#65292;&#21542;&#21017;&#19981;&#35201;&#29031;&#25220;</span>
+</pre>
+</div>
+
+<p>
+因为除了我之外不会有人碰我电脑，我也不是從事高危行業什么的，所以设置是只要用户在 wheel 组里无需密码就可以用 doas 获得 root 权限。
+</p>
+
+<p>
+最后如果你希望你的开机界面好看一点、可以安装 plymouth：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/sets/bootsplash <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">bootsplash&#38598;&#21512;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-boot/plymouth"</span> &gt;&gt; /etc/portage/sets/bootsplash <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#26412;&#20307;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"sys-boot/plymouth-openrc-plugin"</span> &gt;&gt; /etc/portage/sets/bootsplash <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#20132;&#21512;&#29992;</span>
+</pre>
+</div>
+
+<p>
+这时如果你选了​<code>amd64</code>​的稳定版，你可能会发现它被 mask 了。使用：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/package.accept_keywords/bootsplash
+emerge -a @bootsplash --autounmask-write --autounmask
+mv /etc/portage/package.accept_keywords/._*bootsplash /etc/portage/package.accept_keywords/bootsplash <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#22914;&#26524;&#20320;&#24819;&#25226;&#25152;&#26377;&#38656;&#35201;unmask&#30340;&#25918;&#22312;&#19968;&#20010;&#25991;&#20214;&#37324;&#65292;&#37027;&#20040;&#20063;&#21487;&#20197;&#25226;&#36825;&#19968;&#27493;&#26367;&#25442;&#20026;dispatch-conf</span>
+</pre>
+</div>
+
+<p>
+常用的 unmask 的工具是​<code>dispatch-conf</code>​，但有时候会在决定该将更新的规则写入哪个文件时犯错误，所以上面提供了另一种思路。顺便，它默认的 diff 是没有颜色区分的，这不好；于是我们修改​<code>/etc/dispatch-conf.conf</code>​文件中的一行为：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #715ab1;">diff</span>=<span style="color: #2d9574;">"diff --color=always -Nu '%s' '%s'"</span>
+</pre>
+</div>
+
+<p>
+就好了。你还可以选择其它的 diff 工具，但完全没必要（这些自动生成的规则能有多复杂）。
+</p>
+
+<p>
+回到 plymouth，执行以下命令来选择你需要使用的启动画面：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">plymouth-set-default-theme -l
+</pre>
+</div>
+
+<p>
+选择你要使用的后重新生成 initramfs：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">plymouth-set-default-theme details
+dracut --force --hostonly
+</pre>
+</div>
+
+<p>
+像我这样选了纯文本界面的，可能会有配置终端字体的需求。在​<code>/etc/conf.d/consolefont</code>​文件中修改​<code>consolefont</code>​为你喜欢的字体（注意看注释）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #715ab1;">consolefont</span>=<span style="color: #2d9574;">"sun12x22"</span>
+</pre>
+</div>
+
+<p>
+然后让它开机自启：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">rc-update add consolefont default
+</pre>
+</div>
+
+<p>
+至于我为什么要用 plymouth 专门模拟 OpenRC 启动时的默认行为，因为它原生的界面可能会对不齐（因为它认为屏幕的大小变化了）。
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org1057f7a" class="outline-4">
+<h4 id="org1057f7a"><span class="section-number-4">1.2.5.</span> 系统引导</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+最后一步就是安装系统引导了。这里不说使用 efibootmgr、也不讲 Secure Boot，只说最标准的 GRUB2 引导（我觉得我已经写不动了、而且情况太多了）。首先 UEFI 用户在​<code>/etc/portage/make.conf</code>​文件中加上：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #715ab1;">GRUB_PLATFORMS</span>=<span style="color: #2d9574;">"efi-64"</span>
+</pre>
+</div>
+
+<p>
+再安装 GRUB（注意一定​<b>别</b>​漏了这一步！）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge -a sys-boot/grub
+</pre>
+</div>
+
+<p>
+随后根据你先前给磁盘分区时的方案，将引导安装在该启动目录下。对于我的方案是：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #715ab1;">GRUB_CMDLINE_LINUX_DEFAULT</span>=<span style="color: #2d9574;">'quiet splash'</span>
+<span style="color: #715ab1;">GRUB_GFXMODE</span>=<span style="color: #4e3163;">2160x1440x32</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#25913;&#20026;&#20320;&#33258;&#24049;&#26174;&#31034;&#23631;&#30340;&#21442;&#25968;</span>
+<span style="color: #715ab1;">GRUB_GFXPAYLOAD_LINUX</span>=keep
+</pre>
+</div>
+
+<p>
+最后生成配置即可：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">grub-mkconfig -o /boot/grub/grub.cfg
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6dc505d" class="outline-4">
+<h4 id="org6dc505d"><span class="section-number-4">1.2.6.</span> 清理</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+我们需要收个尾，然后重启离开 livecd 环境进入实打实的 Gentoo Linux 后准备配置桌面环境。
+</p>
+
+<p>
+首先退出 chroot：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">exit</span>
+</pre>
+</div>
+
+<p>
+随后解除挂载后即可关机：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">cd</span>
+umount -l /mnt/gentoo/dev<span style="color: #3a81c3;">{</span>/shm,/pts,<span style="color: #3a81c3;">}</span>
+umount -R /mnt/gentoo
+reboot
+</pre>
+</div>
+
+<p>
+开机后如果没出意外就会进入系统。使用 root 账户登录就准备好安装桌面环境了。如果启动不能也不要惊慌，再用 livecd 启动后 chroot 进去看看是哪里出问题了然后哪里不对改哪里就好。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org214d550" class="outline-3">
+<h3 id="org214d550"><span class="section-number-3">1.3.</span> 桌面环境的安装</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org67ebdd6" class="outline-4">
+<h4 id="org67ebdd6"><span class="section-number-4">1.3.1.</span> 选择</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+人们的 xp 丰富多样，Linux 的桌面环境也是牛鬼蛇神。古有 X Window System、今有 Wayland 作为协议。两者之上又有数不清的被我们成为桌面环境的东西。桌面环境的构成如下：
+</p>
+
+<ul class="org-ul">
+<li>窗口管理器，有平铺式、叠加式和他们的杂交之分，它们控制窗口；</li>
+<li>状态栏、程序坞、合成器等，它们让我们的桌面环境变得很好。</li>
+</ul>
+
+<p>
+目前主流的桌面环境有 Gnome、KDE 和 Xfce 等，还有窗口管理器如 dwm 等。Gnome 这些是由窗口管理器和一些其他的程式组成的环境，而那些窗口管理器则需要用户自己挑选那些用来提供状态栏等功能的程式。
+</p>
+
+<p>
+除此之外，许多人还会选择一个叫显示管理器的东西，它可以为用户提供图形化的登录界面以及符合直觉的切换桌面环境的东西。他们有 sddm、gdm、lightdm、slim 等。关于它们有一个小故事（来自<a href="https://book.bsdcn.org/di-4-zhang-zhuo-mian-an-zhuang/di-4.0-jie-gai-shu">FreeBSD中文社区</a>）：
+</p>
+
+<p class="verse">
+sddm、gdm、lightdm、slim 在系统里​<del>开银趴</del>​乱战：<br />
+sddm：我背后是 KDE<br />
+gdm：我背后是 Gnome<br />
+lightdm：我背后可以是任何一个<br />
+slim：怎么办？好慌，潜水太久，管理员要踢我了<br />
+系统：合着你们在我地盘上养蛊呢<br />
+</p>
+
+<p>
+总之，要不用他们也是完全可行的。
+</p>
+
+<p>
+至于选取哪个桌面系统，我第一、二次安装 Gentoo 时安装的都是 KDE，但我觉得它有些复杂了：有非常灵活的布局，甚至可以手动拖动配置；然而当我想要程序坞根据正在运行的程序自动调整宽度时，网上推荐的方案都是安装一个图标极丑的 latte dock。而且它的整体风格我不太喜欢，知乎上有人评价说像 Windows，虽然我没怎么用过 Windows（一开始想装 Gentoo 就是因为第一次买 Windows 电脑然后用不惯 Windows）所以不知道，但就是感觉不太对。当然 KDE 的性能没得说，资源占用也非常少。接着我试了试 Gnome4，虽然第一眼看上去很好看，交互动作很丰富也很流畅，但是资源占用稍微高了点，同时想要稍微改一改布局什么的话非常反人类，直接就放弃了。所以当时第三次我是安装了 Xfce。
+</p>
+
+<p>
+用着感觉挺舒服的。但之后听说了 XMonad 这个用 Haskell 写的平铺式窗口管理器，非常好奇于是又重装了系统。发现也很好用。Haskell 环境我原来就有，​<del>虽然我一般都写 OCaml 的</del>​，Gentoo 有 slot、不需要担心冲突。至于性能，还是可以的。至于生态，我觉得还是很丰富的，XMonad-contrib 里有各种各样的包满足各种各样的需求。配置也很方便，抄 Wiki 的时候顺便改一改就好了。
+</p>
+
+<p>
+然后第三次的时候装 wine-proton 的时候手残，处理循环依赖的时候忘了​<code>--oneshot</code>​，然后​<code>dispatch-conf</code>​完​<code>emerge -avuDN @world</code>​报依赖冲突，然后我又是一通乱搞，依赖冲突越来越多。于是又重装。还是 XMonad，配置什么都有了，安装了一个非常干净的系统。但越用 X Window System 越觉得不干净。于是又重装，这次是 swayWM，用 Vulkan 后端。第五次重装后我终于觉得能一直用下去了。基于 Wayland 的窗口管理器在字体渲染上整体观感比 XOrg 好了太多，在 XMonad 中我还需要额外设置 modesetting 驱动的 tearfree，而触控屏、触控板的手势等是之前不敢想象的。
+</p>
+
+<p>
+用 swayWM，我写完了物理的 Internal Assignment、完成了 TOK 的大作业、写了一个在 OCaml 里处理 JSON 用的库、​<del>还看完了『平稳世代的韦驮天』和『异世界舅舅』</del>​，感觉十分满意。所以下面将分别讲使用基于 X Window System 的 XMonad 和 Wayland 的 swayWM。
+</p>
+
+<p>
+如果你希望安装其它窗口管理器，在搜索引擎搜索「Gentoo」后加上该窗口管理器的名字然后根据 Wiki 安装即可。如果你希望使用桌面环境，重新选择系统配置文件：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">eselect profile list
+eselect profile set <span style="color: #3a81c3;">[</span>num<span style="color: #3a81c3;">]</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36873;&#21462;&#19978;&#20010;&#21629;&#20196;&#21015;&#20986;&#30340;profile&#20013;&#24102;&#26377;&#26700;&#38754;&#29615;&#22659;&#21517;&#23383;&#30340;&#65292;&#22914;Gnome OpenRC&#31561;</span>
+</pre>
+</div>
+
+<p>
+随后更新：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge -avuDN @world
+</pre>
+</div>
+
+<p>
+随后遵从 Gentoo Wiki 的安装指南即可。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgea9badf" class="outline-4">
+<h4 id="orgea9badf"><span class="section-number-4">1.3.2.</span> XOrg 与 XMonad</h4>
+<div class="outline-text-4" id="text-1-3-2">
+</div>
+<ol class="org-ol">
+<li><a id="org6df0c83"></a>安装必要软件<br />
+<div class="outline-text-5" id="text-1-3-2-1">
+<p>
+创建 wm 集合：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/sets/wm
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-base/xorg-server"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">XOrg&#26381;&#21153;&#22120;&#65292;&#36825;&#26102;&#21487;&#20197;&#19981;&#35013;&#65292;&#22312;&#23433;&#35013;XMonad&#26102;&#34987;&#20316;&#20026;&#20381;&#36182;&#23433;&#35013;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-wm/xmonad"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#31383;&#21475;&#31649;&#29702;&#22120;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-wm/xmonad-contrib"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#23545;&#31383;&#21475;&#31649;&#29702;&#22120;&#30340;&#65288;&#31038;&#21306;&#65289;&#25193;&#23637;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-misc/xmobar"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36319;Xmonad&#37197;&#22871;&#30340;&#21516;&#26679;&#20351;&#29992;Haskell&#20316;&#25104;&#30340;&#29366;&#24577;&#26639;&#65292;&#21487;&#36873;&#30340;&#36824;&#26377;dzen</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-misc/picom"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21512;&#25104;&#22120;&#65292;&#22914;&#26524;&#20320;&#19981;&#38656;&#35201;&#31383;&#21475;&#36879;&#26126;&#31561;&#29305;&#25928;&#21487;&#20197;&#19981;&#35013;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"media-gfx/feh"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#29992;&#26469;&#35774;&#23450;&#32972;&#26223;&#22270;&#29255;&#30340;&#65292;&#22823;&#27010;&#29575;&#26159;&#24517;&#35013;&#30340;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-misc/slock"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sucklss&#20986;&#21697;&#30340;&#24456;&#31934;&#33268;&#30340;&#38145;&#23631;&#24037;&#20855;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"media-gfx/scrot"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">X11&#19979;&#30340;&#25130;&#22270;&#24037;&#20855;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-misc/rofi"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#24212;&#29992;&#31243;&#24335;&#21551;&#21160;&#22120;&#65292;&#19981;&#29992;dmenu&#26159;&#22240;&#20026;&#23427;&#20250;&#36974;&#20303;&#29366;&#24577;&#26639;&#65292;&#36825;&#19981;&#22909;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-terms/alacritty"</span> &gt;&gt; /etc/portage/sets/wm <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#34987;&#35465;&#20026;&#26368;&#24555;&#30340;&#32456;&#31471;&#27169;&#25311;&#22120;&#65292;&#32654;&#20013;&#19981;&#36275;&#22312;&#20110;&#26159;&#29992;Rust&#20889;&#30340;&#65288;&#32534;&#35793;Rust&#23545;Gentoo&#29992;&#25143;&#19981;&#21451;&#22909;&#65289;</span>
+</pre>
+</div>
+
+<p>
+随后一键安装：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">emerge --ask @wm
+</pre>
+</div>
+
+<p>
+然后就没有然后了，可以开始配置了。
+</p>
+</div>
+</li>
+
+<li><a id="org646cf21"></a>配置<br />
+<div class="outline-text-5" id="text-1-3-2-2">
+<p>
+因为 XMonad 的特殊性，我们需要先创建一个普通用户（使用 XMonad 窗口管理器的）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">useradd -m -G users,wheel,audio,cdrom,cron,portage,usb,video -s /bin/bash larry <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21019;&#24314;Larry&#22902;&#29275;&#29992;&#25143;</span>
+passwd larry <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#35774;&#32622;&#29992;&#25143;&#23494;&#30721;</span>
+</pre>
+</div>
+
+<p>
+随后使用​<code>exit</code>​退出 root 账户后用新创建的用户账户登录后就可以正式开始配置了
+</p>
+
+<p>
+首先我们要写​<code>.xinitrc</code>​脚本，当我们使用​<code>startx</code>​的时候调用的就是这个脚本来启动 XMonad 的：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch ~/.xinitrc
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"exec dbus-launch --sh-syntax --exit-with-session xmonad"</span> &gt;&gt; ~/.xinitrc
+</pre>
+</div>
+
+<p>
+即可。
+</p>
+
+<p>
+如果你需要在登录到该用户后自动开启 XMonad，则在​<code>.bash_profile</code>​中添加：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">if </span><span style="color: #3a81c3;">shopt</span> -q login_shell; <span style="color: #3a81c3; font-weight: bold;">then</span>
+    <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> -f ~/.bashrc <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span> &amp;&amp; <span style="color: #3a81c3;">source</span> ~/.bashrc
+    <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> -t <span style="color: #4e3163;">0</span> &amp;&amp; $<span style="color: #2d9574;">(</span><span style="color: #6c3163;">tty</span><span style="color: #2d9574;">)</span> == /dev/tty1 &amp;&amp; <span style="color: #4e3163;">!</span> $<span style="color: #715ab1;">DISPLAY</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span> &amp;&amp; <span style="color: #3a81c3; font-weight: bold;">exec</span> startx
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+    <span style="color: #3a81c3; font-weight: bold;">exit</span> <span style="color: #4e3163;">1</span>
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+</pre>
+</div>
+
+<p>
+即可。如果你有需要在进入桌面环境时启动的程式（如 fcitx），可以选择在这里添加，但更建议使用 XMonad 的​<code>XMonad.Util.SpawnOnce</code>​进行配置。
+</p>
+
+<p>
+随后我们先配置 XMonad 和 XMobar，请参考<a href="https://xmonad.org/TUTORIAL.html">官方教程</a>，应该不需要 Haskell 基础。对于上述安装的辅助软件，这里有一个适配的基础配置：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Util.EZConfig</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Util.Ungrab</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Util.Loggers</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Util.SpawnOnce</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Hooks.EwmhDesktops</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Hooks.DynamicLog</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Hooks.ManageHelpers</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Hooks.StatusBar</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Hooks.StatusBar.PP</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Layout.ThreeColumns</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Layout.Magnifier</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #ba2f59; font-weight: bold;">XMonad.Layout.Spacing</span>
+
+<span style="color: #6c3163; font-weight: bold;">main</span> <span style="color: #715ab1;">::</span> <span style="color: #ba2f59; font-weight: bold;">IO</span> <span style="color: #3a81c3; font-weight: bold;">()</span>
+<span style="color: #6c3163; font-weight: bold;">main</span> <span style="color: #715ab1;">=</span> xmonad
+     <span style="color: #715ab1;">.</span> ewmhFullscreen
+     <span style="color: #715ab1;">.</span> ewmh
+     <span style="color: #715ab1;">.</span> withEasySB <span style="color: #3a81c3;">(</span>statusBarProp <span style="color: #2d9574;">"xmobar"</span> <span style="color: #6c3163;">(</span>pure myXmobarPP<span style="color: #6c3163;">)</span><span style="color: #3a81c3;">)</span> defToggleStrutsKey
+     <span style="color: #715ab1;">$</span> conf
+
+<span style="color: #6c3163; font-weight: bold;">conf</span> <span style="color: #715ab1;">=</span> def
+     <span style="color: #3a81c3;">{</span> terminal    <span style="color: #715ab1;">=</span> <span style="color: #2d9574;">"alacritty"</span>                   <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Set the default terminal emulator</span>
+     , modMask     <span style="color: #715ab1;">=</span> mod4Mask                      <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Rebind Mod to the &lt;meta&gt; key</span>
+     , startupHook <span style="color: #715ab1;">=</span> xinit                         <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Things to be started with XMonad</span>
+     , layoutHook  <span style="color: #715ab1;">=</span> spacingWithEdge <span style="color: #4e3163;">6</span> <span style="color: #715ab1;">$</span> myLayout  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Use custom layouts</span>
+     , manageHook  <span style="color: #715ab1;">=</span> myManageHook                  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Match on certain windows</span>
+     <span style="color: #3a81c3;">}</span>
+  <span style="color: #715ab1;">`additionalKeysP`</span>
+     <span style="color: #3a81c3;">[</span> <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"M-S-z"</span>,           spawn <span style="color: #2d9574;">"slock"</span><span style="color: #6c3163;">)</span>                                                          <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Lock the screen</span>
+     , <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"M-C-s"</span>, unGrab <span style="color: #715ab1;">*&gt;</span> spawn <span style="color: #2d9574;">"scrot -s --quality 100 -e \'mv $f ~/Images/\'"</span><span style="color: #6c3163;">)</span>                  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Screenshot functionality</span>
+     , <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"M-S-l"</span>,           spawn <span style="color: #2d9574;">"rofi -config ~/.rofirc -show drun"</span><span style="color: #6c3163;">)</span>                              <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Spotlight</span>
+     , <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"&lt;XF86AudioLowerVolume&gt;"</span> , unGrab <span style="color: #715ab1;">*&gt;</span> spawn <span style="color: #2d9574;">"pactl set-sink-volume @DEFAULT_SINK@ -1000"</span><span style="color: #6c3163;">)</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Decrease volume</span>
+     , <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"&lt;XF86AudioRaiseVolume&gt;"</span> , unGrab <span style="color: #715ab1;">*&gt;</span> spawn <span style="color: #2d9574;">"pactl set-sink-volume @DEFAULT_SINK@ +1000"</span><span style="color: #6c3163;">)</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Increase volume</span>
+     , <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"&lt;XF86AudioMute&gt;"</span>        , unGrab <span style="color: #715ab1;">*&gt;</span> spawn <span style="color: #2d9574;">"pactl set-sink-volume @DEFAULT_SINK@ toggle"</span><span style="color: #6c3163;">)</span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Toggle (un)mute volume</span>
+     , <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"&lt;XF86MonBrightnessDown&gt;"</span>, unGrab <span style="color: #715ab1;">*&gt;</span> spawn <span style="color: #2d9574;">"xbacklight -6"</span><span style="color: #6c3163;">)</span>                                <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Decrease monitor backlight</span>
+     , <span style="color: #6c3163;">(</span><span style="color: #2d9574;">"&lt;XF86MonBrightnessUp&gt;"</span>  , unGrab <span style="color: #715ab1;">*&gt;</span> spawn <span style="color: #2d9574;">"xbacklight +6"</span><span style="color: #6c3163;">)</span>                                <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Increase monitor backlight</span>
+     <span style="color: #3a81c3;">]</span>
+
+<span style="color: #6c3163; font-weight: bold;">xinit</span> <span style="color: #715ab1;">::</span> <span style="color: #ba2f59; font-weight: bold;">X</span> <span style="color: #3a81c3; font-weight: bold;">()</span>
+<span style="color: #6c3163; font-weight: bold;">xinit</span> <span style="color: #715ab1;">=</span> <span style="color: #3a81c3; font-weight: bold;">do</span>
+      spawnOnce <span style="color: #2d9574;">"feh --bg-fill --no-fehbg ~/.background"</span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Set background</span>
+      spawnOnce <span style="color: #2d9574;">"picom --config ~/.picomrc -b"</span>            <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Windows compositor</span>
+      spawnOnce <span style="color: #2d9574;">"fcitx"</span>                                   <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Input method initialize</span>
+
+<span style="color: #6c3163; font-weight: bold;">myLayout</span> <span style="color: #715ab1;">=</span> tiled <span style="color: #715ab1;">|||</span> <span style="color: #ba2f59; font-weight: bold;">Mirror</span> tiled <span style="color: #715ab1;">|||</span> <span style="color: #ba2f59; font-weight: bold;">Full</span> <span style="color: #715ab1;">|||</span> threeCol
+       <span style="color: #3a81c3; font-weight: bold;">where</span>
+         threeCol <span style="color: #715ab1;">=</span> magnifiercz' <span style="color: #4e3163;">1.3</span> <span style="color: #715ab1;">$</span> <span style="color: #ba2f59; font-weight: bold;">ThreeColMid</span> nmaster delta ratio
+         tiled    <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">Tall</span> nmaster delta ratio
+         nmaster  <span style="color: #715ab1;">=</span> <span style="color: #4e3163;">1</span>      <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Default number of windows in the master pane</span>
+         ratio    <span style="color: #715ab1;">=</span> <span style="color: #4e3163;">1</span><span style="color: #715ab1;">/</span><span style="color: #4e3163;">2</span>    <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Default proportion of the screen occupied by master pane</span>
+         delta    <span style="color: #715ab1;">=</span> <span style="color: #4e3163;">2</span><span style="color: #715ab1;">/</span><span style="color: #4e3163;">100</span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Percent of screen to increment by when resizing panes</span>
+
+<span style="color: #6c3163; font-weight: bold;">myXmobarPP</span> <span style="color: #715ab1;">::</span> <span style="color: #ba2f59; font-weight: bold;">PP</span>
+<span style="color: #6c3163; font-weight: bold;">myXmobarPP</span> <span style="color: #715ab1;">=</span> def
+           <span style="color: #3a81c3;">{</span> ppSep             <span style="color: #715ab1;">=</span> blue <span style="color: #2d9574;">" &#8226; "</span>
+           , ppTitleSanitize   <span style="color: #715ab1;">=</span> xmobarStrip
+           , ppCurrent         <span style="color: #715ab1;">=</span> wrap <span style="color: #2d9574;">" "</span> <span style="color: #2d9574;">""</span> <span style="color: #715ab1;">.</span> xmobarBorder <span style="color: #2d9574;">"Top"</span> <span style="color: #2d9574;">"#8a9a7b"</span> <span style="color: #4e3163;">2</span>
+           , ppHidden          <span style="color: #715ab1;">=</span> white <span style="color: #715ab1;">.</span> wrap <span style="color: #2d9574;">" "</span> <span style="color: #2d9574;">""</span>
+           , ppHiddenNoWindows <span style="color: #715ab1;">=</span> lowWhite <span style="color: #715ab1;">.</span> wrap <span style="color: #2d9574;">" "</span> <span style="color: #2d9574;">""</span>
+           , ppUrgent          <span style="color: #715ab1;">=</span> red <span style="color: #715ab1;">.</span> wrap <span style="color: #6c3163;">(</span>yellow <span style="color: #2d9574;">"!"</span><span style="color: #6c3163;">)</span> <span style="color: #6c3163;">(</span>yellow <span style="color: #2d9574;">"!"</span><span style="color: #6c3163;">)</span>
+           , ppOrder           <span style="color: #715ab1;">=</span> <span style="color: #715ab1;">\</span><span style="color: #6c3163;">[</span>ws, l, <span style="color: #3a81c3; font-weight: bold;">_</span>, wins<span style="color: #6c3163;">]</span> <span style="color: #715ab1;">-&gt;</span> <span style="color: #6c3163;">[</span>ws, l, wins<span style="color: #6c3163;">]</span>
+           , ppExtras          <span style="color: #715ab1;">=</span> <span style="color: #6c3163;">[</span>logTitles formatFocused formatUnfocused<span style="color: #6c3163;">]</span>
+           <span style="color: #3a81c3;">}</span>
+         <span style="color: #3a81c3; font-weight: bold;">where</span>
+           formatFocused   <span style="color: #715ab1;">=</span> wrap <span style="color: #3a81c3;">(</span>white    <span style="color: #2d9574;">"["</span><span style="color: #3a81c3;">)</span> <span style="color: #3a81c3;">(</span>white    <span style="color: #2d9574;">"]"</span><span style="color: #3a81c3;">)</span> <span style="color: #715ab1;">.</span> red  <span style="color: #715ab1;">.</span> ppWindow
+           formatUnfocused <span style="color: #715ab1;">=</span> wrap <span style="color: #3a81c3;">(</span>lowWhite <span style="color: #2d9574;">"["</span><span style="color: #3a81c3;">)</span> <span style="color: #3a81c3;">(</span>lowWhite <span style="color: #2d9574;">"]"</span><span style="color: #3a81c3;">)</span> <span style="color: #715ab1;">.</span> cyan <span style="color: #715ab1;">.</span> ppWindow
+           ppWindow <span style="color: #715ab1;">::</span> <span style="color: #ba2f59; font-weight: bold;">String</span> <span style="color: #715ab1;">-&gt;</span> <span style="color: #ba2f59; font-weight: bold;">String</span>
+           ppWindow <span style="color: #715ab1;">=</span> xmobarRaw <span style="color: #715ab1;">.</span> <span style="color: #3a81c3;">(</span><span style="color: #715ab1;">\</span>w <span style="color: #715ab1;">-&gt;</span> <span style="color: #3a81c3; font-weight: bold;">if</span> null w <span style="color: #3a81c3; font-weight: bold;">then</span> <span style="color: #2d9574;">"untitled"</span> <span style="color: #3a81c3; font-weight: bold;">else</span> w<span style="color: #3a81c3;">)</span> <span style="color: #715ab1;">.</span> shorten <span style="color: #4e3163;">20</span>
+           blue, lowWhite, magenta, red, white, yellow, green, cyan <span style="color: #715ab1;">::</span> <span style="color: #ba2f59; font-weight: bold;">String</span> <span style="color: #715ab1;">-&gt;</span> <span style="color: #ba2f59; font-weight: bold;">String</span>
+           magenta  <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#a292a3"</span> <span style="color: #2d9574;">""</span>
+           blue     <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#8ba4b0"</span> <span style="color: #2d9574;">""</span>
+           white    <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#C8C093"</span> <span style="color: #2d9574;">""</span>
+           yellow   <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#c4b28a"</span> <span style="color: #2d9574;">""</span>
+           red      <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#c4746e"</span> <span style="color: #2d9574;">""</span>
+           lowWhite <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#bbbbbb"</span> <span style="color: #2d9574;">""</span>
+           green    <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#8a9a7b"</span> <span style="color: #2d9574;">""</span>
+           cyan     <span style="color: #715ab1;">=</span> xmobarColor <span style="color: #2d9574;">"#8ea4a2"</span> <span style="color: #2d9574;">""</span>
+
+<span style="color: #6c3163; font-weight: bold;">myManageHook</span> <span style="color: #715ab1;">::</span> <span style="color: #ba2f59; font-weight: bold;">ManageHook</span>
+<span style="color: #6c3163; font-weight: bold;">myManageHook</span> <span style="color: #715ab1;">=</span> composeAll
+             <span style="color: #3a81c3;">[</span> isDialog                 <span style="color: #715ab1;">--&gt;</span> doFloat
+             , className <span style="color: #715ab1;">=?</span> <span style="color: #2d9574;">"mpv"</span>       <span style="color: #715ab1;">--&gt;</span> doFloat
+             , className <span style="color: #715ab1;">=?</span> <span style="color: #2d9574;">"fontforge"</span> <span style="color: #715ab1;">--&gt;</span> doFloat
+             <span style="color: #3a81c3;">]</span>
+</pre>
+</div>
+
+<p>
+以及对应的 XMobar 配置：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ba2f59; font-weight: bold;">Config</span> <span style="color: #3a81c3;">{</span> overrideRedirect <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">False</span>
+       , font     <span style="color: #715ab1;">=</span> <span style="color: #2d9574;">"xft:IBM3270-13.2:antialias=ture,notoSansMonoCJKjp-11.6"</span>
+       , additionalFonts <span style="color: #715ab1;">=</span> <span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"xft:notoSansMonoCJKjp-10"</span> <span style="color: #6c3163;">]</span>
+       , bgColor  <span style="color: #715ab1;">=</span> <span style="color: #2d9574;">"#5f5f5f"</span>
+       , fgColor  <span style="color: #715ab1;">=</span> <span style="color: #2d9574;">"#f8f8f2"</span>
+       , position <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">TopW</span> <span style="color: #ba2f59; font-weight: bold;">L</span> <span style="color: #4e3163;">100</span>
+       , persistent  <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">False</span>
+       , hideOnStart <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">False</span>
+       , commands <span style="color: #715ab1;">=</span> <span style="color: #6c3163;">[</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">MultiCpu</span>
+                        <span style="color: #2d9574;">[</span> <span style="color: #2d9574;">"--template"</span> , <span style="color: #2d9574;">"Cpu: &lt;total0&gt;:&lt;total1&gt;%"</span>
+                        , <span style="color: #2d9574;">"--Low"</span>      , <span style="color: #2d9574;">"50"</span>
+                        , <span style="color: #2d9574;">"--High"</span>     , <span style="color: #2d9574;">"85"</span>
+                        , <span style="color: #2d9574;">"--low"</span>      , <span style="color: #2d9574;">"white"</span>
+                        , <span style="color: #2d9574;">"--normal"</span>   , <span style="color: #2d9574;">"white"</span>
+                        , <span style="color: #2d9574;">"--high"</span>     , <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #2d9574;">]</span> <span style="color: #4e3163;">10</span>
+                    , <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Alsa</span> <span style="color: #2d9574;">"default"</span> <span style="color: #2d9574;">"Master"</span>
+                        <span style="color: #2d9574;">[</span> <span style="color: #2d9574;">"--template"</span>, <span style="color: #2d9574;">"&lt;volumestatus&gt;"</span>
+                        , <span style="color: #2d9574;">"--suffix"</span>  , <span style="color: #2d9574;">"True"</span>
+                        , <span style="color: #2d9574;">"--"</span>
+                        , <span style="color: #2d9574;">"--on"</span>, <span style="color: #2d9574;">""</span>
+                        <span style="color: #2d9574;">]</span>
+                    , <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Battery</span>
+                        <span style="color: #2d9574;">[</span> <span style="color: #2d9574;">"--template"</span> , <span style="color: #2d9574;">"Batt: &lt;acstatus&gt;"</span>
+                        , <span style="color: #2d9574;">"--Low"</span>      , <span style="color: #2d9574;">"10"</span>
+                        , <span style="color: #2d9574;">"--High"</span>     , <span style="color: #2d9574;">"80"</span>
+                        , <span style="color: #2d9574;">"--low"</span>      , <span style="color: #2d9574;">"white"</span>
+                        , <span style="color: #2d9574;">"--normal"</span>   , <span style="color: #2d9574;">"white"</span>
+                        , <span style="color: #2d9574;">"--high"</span>     , <span style="color: #2d9574;">"white"</span>
+                        , <span style="color: #2d9574;">"--"</span>
+                        , <span style="color: #2d9574;">"-o"</span>  , <span style="color: #2d9574;">"&lt;left&gt;% (&lt;timeleft&gt;)"</span>
+                        , <span style="color: #2d9574;">"-O"</span>  , <span style="color: #2d9574;">"&lt;fc=#a292a3&gt;Charging&lt;/fc&gt;"</span>
+                        , <span style="color: #2d9574;">"-i"</span>  , <span style="color: #2d9574;">"&lt;fc=#8ea4a2&gt;Charged&lt;/fc&gt;"</span>
+                        <span style="color: #2d9574;">]</span> <span style="color: #4e3163;">50</span>
+                    , <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">DynNetwork</span>
+                        <span style="color: #2d9574;">[</span> <span style="color: #2d9574;">"--template"</span> , <span style="color: #2d9574;">"&lt;dev&gt;: &lt;tx&gt;:&lt;rx&gt;kB/s"</span>
+                        , <span style="color: #2d9574;">"--Low"</span>      , <span style="color: #2d9574;">"1000"</span>
+                        , <span style="color: #2d9574;">"--High"</span>     , <span style="color: #2d9574;">"5000"</span>
+                        , <span style="color: #2d9574;">"--low"</span>      , <span style="color: #2d9574;">"white"</span>
+                        , <span style="color: #2d9574;">"--normal"</span>   , <span style="color: #2d9574;">"white"</span>
+                        , <span style="color: #2d9574;">"--high"</span>     , <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #2d9574;">]</span> <span style="color: #4e3163;">10</span>
+                    , <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Memory</span> <span style="color: #2d9574;">[</span><span style="color: #2d9574;">"--template"</span>, <span style="color: #2d9574;">"Mem: &lt;usedratio&gt;%"</span><span style="color: #2d9574;">]</span> <span style="color: #4e3163;">10</span>
+                    , <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Swap</span> <span style="color: #2d9574; font-weight: bold;">[]</span> <span style="color: #4e3163;">10</span>
+                    , <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Date</span> <span style="color: #2d9574;">"%a %Y-%m-%d %H:%M"</span> <span style="color: #2d9574;">"date"</span> <span style="color: #4e3163;">10</span>
+                    , <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">XMonadLog</span>
+                    <span style="color: #6c3163;">]</span>
+       , sepChar  <span style="color: #715ab1;">=</span> <span style="color: #2d9574;">"%"</span>
+       , alignSep <span style="color: #715ab1;">=</span> <span style="color: #2d9574;">"}{"</span>
+       , template <span style="color: #715ab1;">=</span> <span style="color: #2d9574;">"%XMonadLog% }{ %alsa:default:Master% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %battery% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %multicpu% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %memory% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %date% "</span>
+       <span style="color: #3a81c3;">}</span>
+</pre>
+</div>
+
+<p>
+对于快捷键绑定，调整声音和屏幕亮度处需要你使用 pulseaudio 和 acpilight，安装／配置请自行搜索 Gentoo Wiki。同时为了使状态栏的配置正生效，你需要安装 IBM 的 3270 字体和 Noto CJK 字体。将他们分别放在​<code>/.xmonad/xmonad.hs</code>​和​<code>~/.xmobar</code>​文件中，随后执行：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">xmonad --recompile
+</pre>
+</div>
+
+<p>
+若无报错则可以使用。
+</p>
+
+<p>
+接下来就是一些杂项的配置，如合成器 picom：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #715ab1;">vsync</span>=true
+<span style="color: #715ab1;">experimental-backend</span>=true
+<span style="color: #715ab1;">shadow</span>=false
+<span style="color: #715ab1;">shadow-radius</span>=7
+<span style="color: #715ab1;">shadow-opacity</span>=.76
+<span style="color: #715ab1;">shadow-offset</span>=-7
+<span style="color: #715ab1;">shadow-blue</span>=.1
+<span style="color: #715ab1;">inactive-opacity</span>=0.79
+<span style="color: #715ab1;">frame-opacity</span>=0.76
+<span style="color: #715ab1;">inactive-opacity-overwrite</span>=false
+<span style="color: #715ab1;">active-opacity</span>=0.87
+wintypes:
+{
+  <span style="color: #715ab1;">tooltip</span> = { fade = true; shadow = false; opacity = 0.75; focus = true; full-shadow = false; };
+  <span style="color: #715ab1;">dock</span> = { shadow = false; clip-shadow-above = true; opacity = 1 }
+  <span style="color: #715ab1;">dnd</span> = { shadow = false; }
+  <span style="color: #715ab1;">popup_menu</span> = { opacity = 0.77; shadow = false; }
+  <span style="color: #715ab1;">dropdown_menu</span> = { opacity = 0.77; shadow = false; }
+};
+<span style="color: #715ab1;">opacity-rule</span> = [
+  <span style="color: #2d9574;">"100:class_g = 'mpv' &amp;&amp; focused"</span>,
+  <span style="color: #2d9574;">"100:class_g = 'Virt-manager' &amp;&amp; focused"</span>,
+  <span style="color: #2d9574;">"100:class_g = 'fontforge' &amp;&amp; focused"</span>
+]
+</pre>
+</div>
+
+<p>
+将你希望配置的东西配置完就可以重启进入 XMonad 桌面环境了。随着使用慢慢打磨自己的配置就好。
+</p>
+</div>
+</li>
+
+<li><a id="orgacfa2cd"></a>常见事故<br />
+<div class="outline-text-5" id="text-1-3-2-3">
+<p>
+如果你在使用时发现有屏幕撕裂等的现象，请先阅读这篇关于 XOrg 的文章，随后以「Screen Tearing」「XOrg」以及你的显卡配置在搜索引擎上搜索方案，常见的包括开启 VSync、Intel 显卡使用 modesetting 驱动替代 xf86 驱动等。
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgd14211f" class="outline-4">
+<h4 id="orgd14211f"><span class="section-number-4">1.3.3.</span> Wayland 与 SwayWM</h4>
+<div class="outline-text-4" id="text-1-3-3">
+</div>
+<ol class="org-ol">
+<li><a id="org1be0be8"></a>安装必要软件<br />
+<div class="outline-text-5" id="text-1-3-3-1">
+<p>
+首先创建 winmgr 集合：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">touch /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21019;&#24314;&#38598;&#21512;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"media-libs/vulkan-loader"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#22914;&#26524;&#20320;&#20351;&#29992;&#40664;&#35748;&#30340;gles2&#21518;&#31471;&#21017;&#19981;&#38656;&#35201;&#65288;&#22914;&#26524;&#20320;&#19981;&#30693;&#36947;&#36825;&#26159;&#20160;&#20040;&#37027;&#23601;&#19981;&#35201;&#21152;&#65289;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"dev-libs/wayland"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Wayland&#21327;&#35758;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-base/xwayland"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#25903;&#25345;&#22312;Wayland&#19979;&#36816;&#34892;X11&#24212;&#29992;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-wm/sway"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#31383;&#21475;&#31649;&#29702;&#22120;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/waybar"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#29366;&#24577;&#26639;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/swaybg"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#32972;&#26223;&#22270;&#29255;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/swayidle"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#23450;&#26102;&#20219;&#21153;&#65292;&#22914;&#19968;&#27573;&#26102;&#38388;&#26410;&#25805;&#20316;&#21518;&#20241;&#30496;&#31561;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/swaylock"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#38145;&#23631;&#29992;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/mako"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36890;&#30693;&#24377;&#31383;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"x11-libs/libnotify"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">firefox&#65295;thunderbird&#25512;&#36865;&#21040;mako&#20381;&#36084;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/grim"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#25130;&#23631;&#29992;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/foot"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#36731;&#37327;&#32423;&#30340;Wayland&#21407;&#29983;&#32456;&#31471;&#27169;&#25311;&#22120;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"gui-apps/wl-clipboard"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21098;&#20999;&#26495;</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"dev-libs/bemenu"</span> &gt;&gt; /etc/portage/sets/winmgr <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">dmenu&#26469;&#21040;Wayland</span>
+</pre>
+</div>
+
+<p>
+然后先​<code>emerge --pretend --ask @winmgr</code>​看一下​<code>USE</code>​旗标有没有需要改动的，最后安装集合就好。
+</p>
+</div>
+</li>
+
+<li><a id="org9a1b242"></a>配置<br />
+<div class="outline-text-5" id="text-1-3-3-2">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">~/.config/sway/config</span>
+
+set $term foot <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#20320;&#25361;&#36873;&#30340;&#32456;&#31471;&#27169;&#25311;&#22120;&#65292;&#27604;&#22914;&#25105;&#29992;&#30340;&#12300;&#36275;&#12301;&#27169;&#25311;&#22120;</span>
+set $menu bemenu-run -b -n -fn iosevka:10 --tb <span style="color: #2d9574;">"#00000000"</span> --fb <span style="color: #2d9574;">"#00000000"</span> --cb <span style="color: #2d9574;">"#00000000"</span> --nb <span style="color: #2d9574;">"#00000000"</span> --hb <span style="color: #2d9574;">"#00000000"</span> --fbb <span style="color: #2d9574;">"#00000000"</span> --sb <span style="color: #2d9574;">"#09ABAC5A"</span> --ab <span style="color: #2d9574;">"#00000000"</span> --scb <span style="color: #2d9574;">"#00000000"</span> --tf <span style="color: #2d9574;">"#E1E1E1"</span> --border 6 --bdr <span style="color: #2d9574;">"#00000000"</span> --width-factor 1 --wrap --prompt <span style="color: #2d9574;">"spotlight"</span> --hp 4 --no-spacing --sf <span style="color: #2d9574;">"#D9534F"</span> | xargs swaymsg exec -- <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#22914;&#26524;&#20320;&#24819;&#35753;bemenu&#32972;&#26223;&#36879;&#26126;&#20986;&#29616;&#22312;&#23631;&#24149;&#24213;&#37096;</span>
+set $lock swaylock -u -e -f -c 00000000 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21435;&#38500;swaylock&#30340;&#26377;&#28857;&#24378;&#22904;&#23457;&#32654;&#30340;&#35299;&#38145;&#25928;&#26524;&#65288;&#30495;&#26159;&#36234;&#26469;&#36234;&#24576;&#24565;slock&#20102;&#65289;&#65292;&#20320;&#36824;&#21487;&#20197;&#12300;&#35753;&#38145;&#23631;&#32972;&#26223;&#36879;&#26126;&#12301;&#20160;&#20040;&#30340;&#65292;&#23427;&#25903;&#25345;&#38145;&#23631;&#26102;&#26174;&#31034;&#22270;&#29255;&#65292;&#20320;&#21482;&#38656;&#35201;&#20889;&#19968;&#20010;&#33050;&#26412;&#35843;&#29992;image magick&#39044;&#22788;&#29702;&#23601;&#22909;</span>
+<span style="color: #715ab1;">for_window [class</span>=<span style="color: #2d9574;">".*"</span>] opacity set 0.84 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#22914;&#26524;&#20320;&#24076;&#26395;&#35753;&#25152;&#26377;&#31383;&#21475;&#36879;&#26126;</span>
+<span style="color: #715ab1;">for_window [app_id</span>=<span style="color: #2d9574;">"mpv"</span>] floating enable, opacity set 1 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#22914;&#26524;&#20320;&#24076;&#26395;&#23545;&#19968;&#20123;&#31383;&#21475;&#29305;&#27530;&#23545;&#24453;&#65288;&#25105;&#30456;&#20449;&#20320;&#32943;&#23450;&#19981;&#24076;&#26395;mpv&#32972;&#26223;&#26159;&#36879;&#26126;&#30340;&#65289;&#65292;&#21516;&#26102;&#35753;&#23427;&#28014;&#21160;</span>
+xwayland enabled <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#25903;&#25345;X11&#24212;&#29992;</span>
+<span style="color: #715ab1;">for_window [window_role</span>=<span style="color: #2d9574;">"pop-up"</span>] floating enable
+<span style="color: #715ab1;">for_window [window_role</span>=<span style="color: #2d9574;">"bubble"</span>] floating enable
+<span style="color: #715ab1;">for_window [window_role</span>=<span style="color: #2d9574;">"dialog"</span>] floating enable
+<span style="color: #715ab1;">for_window [window_type</span>=<span style="color: #2d9574;">"dialog"</span>] floating enable
+<span style="color: #715ab1;">for_window [window_role</span>=<span style="color: #2d9574;">"task_dialog"</span>] floating enable
+<span style="color: #715ab1;">for_window [window_type</span>=<span style="color: #2d9574;">"menu"</span>] floating enable
+<span style="color: #715ab1;">for_window [window_type</span>=<span style="color: #2d9574;">"notification"</span>] floating enable
+<span style="color: #715ab1;">for_window [app_id</span>=<span style="color: #2d9574;">"floating"</span>] floating enable
+<span style="color: #715ab1;">for_window [app_id</span>=<span style="color: #2d9574;">"floating_update"</span>] floating enable, resize set width 1000px height 600px
+<span style="color: #715ab1;">for_window [class</span>=<span style="color: #2d9574;">"(?i)pinentry"</span>] floating enable
+<span style="color: #715ab1;">for_window [title</span>=<span style="color: #2d9574;">"Administrator privileges required"</span>] floating enable
+
+<span style="color: #715ab1;">for_window [title</span>=<span style="color: #2d9574;">"About Mizilla Firefox"</span>] floating enable
+<span style="color: #715ab1;">for_window [window_role</span>=<span style="color: #2d9574;">"About"</span>] floating enable
+<span style="color: #715ab1;">for_window [app_id</span>=<span style="color: #2d9574;">"firefox"</span> title=<span style="color: #2d9574;">"Library"</span>] floating enable, border none, sticky enable
+<span style="color: #715ab1;">for_window [title</span>=<span style="color: #2d9574;">"Firefox - Sharing Indicator"</span>] kill <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#26234;&#24935;&#30340;&#31383;&#21475;&#21028;&#26029;&#65292;Gentoo Wiki&#19978;&#25220;&#30340;</span>
+hide_edge_borders smart
+gaps inner 6
+gaps outer 0
+smart_gaps off <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#35774;&#32622;&#36793;&#26694;&#38388;&#36317;</span>
+default_border none
+default_floating_border none <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21435;&#25481;&#27599;&#20010;&#31383;&#21475;&#30340;&#26631;&#39064;&#26639;</span>
+exec mako <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#38656;&#35201;&#22312;&#21551;&#21160;&#26102;&#21551;&#21160;&#30340;&#24212;&#29992;&#65292;&#27604;&#22914;&#20320;&#35201;&#29992;fcitx&#36755;&#20837;&#26041;&#27861;&#65292;&#23601;&#26159;exec fcitx5 -d</span>
+bindsym --release Print exec grim ~/Images/ps_$(date +<span style="color: #2d9574;">"%Y%m%d%H%M%S"</span>).png
+bindsym $mod+Print exec grimshot save area ~/Images/psa_$(date +<span style="color: #2d9574;">"%Y%m%d%H%M%S"</span>).png <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#25130;&#23631;&#30340;&#24555;&#25463;&#38190;</span>
+<span style="color: #ba2f59; font-weight: bold;">bar</span> {
+    status_command waybar
+    mode invisible
+} <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#26631;&#39064;&#26639;&#20351;&#29992;waybar&#26102;&#30340;&#37197;&#32622;</span>
+</pre>
+</div>
+
+<p>
+等等很多其他的配置，建议在<a href="https://swaywm.org/">这里</a>和<a href="https://github.com/swaywm/sway">这里</a>等地方看看如何配置。（注意，如果你有玩遊戲的需求，可能會希望同時使用觸控板和鍵盤，配置 libinput 的​<code>dwt disable</code>​即可。）
+</p>
+
+<p>
+至于 waybar 状态栏，主要就是​<code>~/.config/waybar/config</code>​和​<code>~/.config/waybar/style.css</code>​两个文件。一个语法非常直观、另一个就是 CSS 文件，从网上找找别人的配置、看看文档、抄一抄改一改就好。配色倒是个难题，我从 MacOS 同样背景图片的状态栏上抄了颜色，感觉不那么违和了。
+</p>
+
+<p>
+如果你希望用 Vulkan 代替默認的 OpenGL（​<code>gles2</code>​），則還需要在​<code>~/.bashrc</code>​或者別的什麼地方加上：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">WLR_RENDERER</span>=vulkan
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org78ac20f"></a>常见问题<br />
+<div class="outline-text-5" id="text-1-3-3-3">
+<p>
+swayWM 有些时候过于守旧，过分追求与 i3 的兼容了。这就导致很多看起来很合理也很正常的特性他们就是不支持，比如圆角窗口。这还不是最离谱的，它不支持在当前焦点（focus）和先前焦点的浮动窗口中切换焦点（之所以说浮动是因为只有浮动才会发生窗口遮挡的情况；tabbed 等问题不严重）。解决方案见<a href="https://www.reddit.com/r/swaywm/comments/etpjix/i_created_a_script_to_implement_window_back_and/">r/swayWM</a>，原理就是用一个 shell 脚本在后台去读 swaymsg。首先创建一个脚本，建议为：​<code>~/.config/sway/track_prev_focus</code>​，内容如下：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">sh</span>
+
+<span style="color: #715ab1;">prev_focus</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">swaymsg -r -t get_seats | jq '.[0].focus'</span><span style="color: #3a81c3;">)</span>
+
+swaymsg -m -t subscribe <span style="color: #2d9574;">'["window"]'</span> | <span style="color: #2d9574;">\</span>
+  jq --unbuffered <span style="color: #2d9574;">'select(.change == "focus").container.id'</span> | <span style="color: #2d9574;">\</span>
+  <span style="color: #3a81c3; font-weight: bold;">while </span><span style="color: #3a81c3;">read</span> new_focus; <span style="color: #3a81c3; font-weight: bold;">do</span>
+    swaymsg <span style="color: #2d9574;">"[con_id=${prev_focus}] mark --add _prev"</span> &amp;&gt;/dev/null
+    <span style="color: #715ab1;">prev_focus</span>=$<span style="color: #715ab1;">new_focus</span>
+  <span style="color: #3a81c3; font-weight: bold;">done</span>
+</pre>
+</div>
+
+<p>
+然后​<code>chmod +x ~/.config/sway/track_prev_focus</code>​给予执行权限。然后在 swayWM 配置中加入：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #715ab1;">bindsym $mod+Tab [con_mark</span>=_prev] focus
+</pre>
+</div>
+
+<p>
+即当我想要切换当前焦点至上一个聚焦的窗口时，按下​<code>$mod</code>​和​<code>Tab</code>​的快捷键组合。为了让它生效，你还得在启动 swayWM 是同时启动上面创建的跟踪脚本。推荐的策略是在你的配置文件里加上：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf">exec ~/.config/sway/track_prev_focus
+</pre>
+</div>
+
+<p>
+非常的折腾。让我们看看开发者是怎么说的：
+</p>
+
+<blockquote>
+<p>
+I have a systemd process which keeps track of the window ordering and puts it into redis and then a separate script which reads from redis to pick the last focused window. It works very well, but as someone who has implemented this feature fully using IPC, it's easy, but not trivial. The current version is written in Lua, but I can post the first shell version later if you want a solution in the interim.
+</p>
+</blockquote>
+
+<p>
+同时：
+</p>
+
+<blockquote>
+<p>
+Rejecting this for the same reasons i3 did. You should try to convince i3 first - we aren't a second chance for rejected i3 features.
+</p>
+</blockquote>
+
+<p>
+真是残念。『我们才不是 i3 的备胎呢』​<del>傲娇已经退环境了</del>​。
+</p>
+
+<p>
+别的我思来想去感觉只有输入法有点坑了。众所周知，fcitx5 对 Wayland 的支持是比较好的，然而 fcitx5 被​<code>amd64</code>​的关键词蒙蔽了。所以在 iptm 集合里我们需要写的是：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf">app-i18n/fcitx:5
+app-i18n/fcitx-gtk:5 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#19968;&#23450;&#35201;&#27880;&#24847;&#36825;&#20010;&#65292;&#27809;&#26377;&#23427;&#22312;&#25152;&#20197;&#22522;&#20110;gtk&#30340;&#36719;&#20214;&#19979;&#20505;&#36873;&#24377;&#31383;&#37117;&#26159;&#27809;&#26377;&#30340;&#65292;&#19981;&#30693;&#20026;&#20160;&#20040;fcitx5&#37324;&#21253;&#21547;&#20102;qt&#30340;&#20294;&#27809;gtk</span>
+app-i18n/fcitx-rime:5 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#25442;&#25104;&#20320;&#24819;&#29992;&#30340;&#36755;&#20837;&#27861;&#65288;&#26694;&#26550;&#65289;</span>
+app-i18n/fcitx-configtool:5 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#22270;&#20687;&#21270;&#37197;&#32622;&#30028;&#38754;&#65292;&#36824;&#26159;&#24314;&#35758;&#35013;&#19968;&#20010;&#30340;&#65292;&#24403;&#28982;&#20063;&#21487;&#20197;&#25163;&#21160;&#32534;&#36753;&#37027;&#20010;&#37197;&#32622;&#25991;&#20214;&#25110;&#32773;&#27839;&#29992;&#20043;&#21069;&#30340;&#37197;&#32622;</span>
+</pre>
+</div>
+
+<p>
+然后在​<code>~/.bashrc</code>​或者类似的什么地方写上这些环境变量：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">GTK_IM_MODULE</span>=fcitx <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">emacs GDK_IS_WAYLAND_DISPLAY assertion fail</span>
+<span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">QT_IM_MODULE</span>=fcitx
+<span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">XMODIFIERS</span>=@<span style="color: #715ab1;">im</span>=fcitx
+</pre>
+</div>
+
+<p>
+注意​<code>GTK_IM_MODULE</code>​这一变量，官方的建议是用​<code>wayland</code>​的值，但 Emacs 会报错。所以如果你不用 Emacs 就把它换成 wayland。
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org7faab60" class="outline-3">
+<h3 id="org7faab60"><span class="section-number-3">1.4.</span> 吐槽与展望</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Gentoo 是 1999 年 10 月 4 日出现的，现在已经 2024 年了，真的是「20 years of compile」，而它很有名的一点就是需要编译。网上有人用 Gentoo 把硬盘弄坏的、被怀疑在挖矿的、把主板烧了的，各种各样。然而就在不久就之前，Gentoo 的二进制更成熟了。真是一件大好事（虽然估计对我没什么影响就是了）。
+</p>
+
+<p>
+关于 Gentoo 的安装，我这里只是给了一个大概的思路：如果你真的想要用 Gentoo 的话，Gentoo Wiki 绝对是你的好伙伴。从电源管理到内核的 pgo 优化再到如何读写中文、如何用 QEMU 虚拟化。
+</p>
+
+<p>
+本来这里该写的是吐槽，但我发现真的没什么好说的，只能说希望随着硬件性能的提升 Gentoo 能够凭借极致的客制化成为主流发行版之一吧？
+</p>
+
+<p>
+最后祝各位都能调教出一个和自己 xp 的系统。
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">不像 FreeBSD。</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">Created: 2024-07-03 Wed 18:52</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
