@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-06-27 Thu 19:24 -->
+<!-- 2024-07-09 Tue 19:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -199,60 +199,61 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc0082ca">1. Linux 下基于 QEMU 的纯净 Android 虚拟机（KVM と VirGL、小足印）</a>
+<li><a href="#orgf693d57">1. Linux下基于QEMU的纯净Android虚拟机（KVMとVirGL、小足印）</a>
 <ul>
-<li><a href="#org3cdbc32">1.1. 写在前面</a></li>
-<li><a href="#org499d47b">1.2. 安装有 KVM／VirGL 和 SDL 支持的 QEMU（非 Gentoo 用家可跳过）</a>
+<li><a href="#org5bce96f">1.1. 写在前面</a></li>
+<li><a href="#org572c134">1.2. 安装有KVM／VirGL和SDL支持的QEMU（非Gentoo用家可跳过）</a>
 <ul>
-<li><a href="#org7091b3d">1.2.1. 本体</a></li>
-<li><a href="#orgb86f59f">1.2.2. EDK II OVMF</a></li>
+<li><a href="#orgd09cb8d">1.2.1. 本体</a></li>
+<li><a href="#org634c005">1.2.2. EDK II OVMF</a></li>
 </ul>
 </li>
-<li><a href="#org6a81edb">1.3. 取得 Android-x86 系统镜像</a></li>
-<li><a href="#org157ddd6">1.4. 安装虚拟机</a>
+<li><a href="#org5be3d2c">1.3. 取得Android-x86系统镜像</a></li>
+<li><a href="#org97d0253">1.4. 安装虚拟机</a>
 <ul>
-<li><a href="#org0a824da">1.4.1. 启动脚本</a></li>
-<li><a href="#org1caf5d6">1.4.2. 创建虚拟磁盘</a></li>
-<li><a href="#org26f7a45">1.4.3. 安装</a></li>
+<li><a href="#org608b6f5">1.4.1. 启动脚本</a></li>
+<li><a href="#orgc6ae0d4">1.4.2. 创建虚拟磁盘</a></li>
+<li><a href="#org0f12b5c">1.4.3. 安装</a></li>
 </ul>
 </li>
-<li><a href="#org37f4f4b">1.5. 优化／配置</a>
+<li><a href="#org385df13">1.5. 优化／配置</a>
 <ul>
-<li><a href="#orgf8a50b9">1.5.1. 调整屏幕分辨率／尺寸参数</a></li>
+<li><a href="#orgea1259e">1.5.1. 调整屏幕分辨率／尺寸参数</a></li>
 </ul>
 </li>
-<li><a href="#org9ba0eac">1.6. 写在最后</a></li>
+<li><a href="#org1593a36">1.6. 写在最后</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc0082ca" class="outline-2">
-<h2 id="orgc0082ca"><span class="section-number-2">1.</span> Linux 下基于 QEMU 的纯净 Android 虚拟机（KVM と VirGL、小足印）</h2>
+
+<div id="outline-container-orgf693d57" class="outline-2">
+<h2 id="orgf693d57"><span class="section-number-2">1.</span> Linux下基于QEMU的纯净Android虚拟机（KVMとVirGL、小足印）</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org3cdbc32" class="outline-3">
-<h3 id="org3cdbc32"><span class="section-number-3">1.1.</span> 写在前面</h3>
+<div id="outline-container-org5bce96f" class="outline-3">
+<h3 id="org5bce96f"><span class="section-number-3">1.1.</span> 写在前面</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-最近有在电脑上玩明日方舟的需求，因为是 Linux 电脑、模拟 iOS 是不现实的，所以打算搭一个安卓虚拟机。至于为什么不用 WayDroid，主要是因为它的 Makefile 似乎只支持 SystemD 系统、同时需要内核支持（显得十分肮脏）。于是我还是用老办法，使用 QEMU 模拟之。
+最近有在电脑上玩明日方舟的需求，因为是Linux电脑、模拟iOS是不现实的，所以打算搭一个安卓虚拟机。至于为什么不用WayDroid，主要是因为它的Makefile似乎只支持SystemD系统、同时需要内核支持（显得十分肮脏）。于是我还是用老办法，使用QEMU模拟之。
 </p>
 
 <p>
-本文所写的方法仅依赖 QEMU（需有 KVM 和 VirGL 及 SDL 支持），能够在 X 和 Wayland 环境下正常工作。笔者使用的系统为 Gentoo、故支持 QEMU 内 UEFI 启动的 OVMF 默认安装路径可能跟你的会有不同。
+本文所写的方法仅依赖QEMU（需有KVM和VirGL及SDL支持），能够在X和Wayland环境下正常工作。笔者使用的系统为Gentoo、故支持QEMU内UEFI启动的OVMF默认安装路径可能跟你的会有不同。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org499d47b" class="outline-3">
-<h3 id="org499d47b"><span class="section-number-3">1.2.</span> 安装有 KVM／VirGL 和 SDL 支持的 QEMU（非 Gentoo 用家可跳过）</h3>
+<div id="outline-container-org572c134" class="outline-3">
+<h3 id="org572c134"><span class="section-number-3">1.2.</span> 安装有KVM／VirGL和SDL支持的QEMU（非Gentoo用家可跳过）</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org7091b3d" class="outline-4">
-<h4 id="org7091b3d"><span class="section-number-4">1.2.1.</span> 本体</h4>
+<div id="outline-container-orgd09cb8d" class="outline-4">
+<h4 id="orgd09cb8d"><span class="section-number-4">1.2.1.</span> 本体</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
-在 Gentoo 下，安装​<code>app-emulation/qemu</code>​，并确保其启用了以下两个 USE 旗标：
+在Gentoo下，安装<code>app-emulation/qemu</code>，并确保其启用了以下两个USE旗标：
 </p>
 
 <pre class="example">
@@ -262,11 +263,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgb86f59f" class="outline-4">
-<h4 id="orgb86f59f"><span class="section-number-4">1.2.2.</span> EDK II OVMF</h4>
+<div id="outline-container-org634c005" class="outline-4">
+<h4 id="org634c005"><span class="section-number-4">1.2.2.</span> EDK II OVMF</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
-为了支持 UEFI，我们还需要安装​<code>sys-firmware/edk2-ovmf</code>​。它会被安装至路径：
+为了支持UEFI，我们还需要安装<code>sys-firmware/edk2-ovmf</code>。它会被安装至路径：
 </p>
 
 <pre class="example">
@@ -282,45 +283,45 @@ total 6.2M
 </div>
 </div>
 
-<div id="outline-container-org6a81edb" class="outline-3">
-<h3 id="org6a81edb"><span class="section-number-3">1.3.</span> 取得 Android-x86 系统镜像</h3>
+<div id="outline-container-org5be3d2c" class="outline-3">
+<h3 id="org5be3d2c"><span class="section-number-3">1.3.</span> 取得Android-x86系统镜像</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
-于<a href="https://sourceforge.net/projects/android-x86/files/"><code>https://sourceforge.net/projects/android-x86/files/</code></a>下载系统镜像。除该项目之外，你还可以选择其他的项目，如开发更活跃、引入新特性更多的 BlissOS。
+于<a href="https://sourceforge.net/projects/android-x86/files/"><code>https://sourceforge.net/projects/android-x86/files/</code></a>下载系统镜像。除该项目之外，你还可以选择其他的项目，如开发更活跃、引入新特性更多的BlissOS。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org157ddd6" class="outline-3">
-<h3 id="org157ddd6"><span class="section-number-3">1.4.</span> 安装虚拟机</h3>
+<div id="outline-container-org97d0253" class="outline-3">
+<h3 id="org97d0253"><span class="section-number-3">1.4.</span> 安装虚拟机</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
-<div id="outline-container-org0a824da" class="outline-4">
-<h4 id="org0a824da"><span class="section-number-4">1.4.1.</span> 启动脚本</h4>
+<div id="outline-container-org608b6f5" class="outline-4">
+<h4 id="org608b6f5"><span class="section-number-4">1.4.1.</span> 启动脚本</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
-新建一个文件夹，将取得的系统镜像重命名为​<code>android-x86.iso</code>​后存入该路径。随后在该文件夹中创建名为​<code>LaunchD.sh</code>​的脚本，内容如下：
+新建一个文件夹，将取得的系统镜像重命名为<code>android-x86.iso</code>后存入该路径。随后在该文件夹中创建名为<code>LaunchD.sh</code>的脚本，内容如下：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/usr/bin/</span><span style="color: #3a81c3; font-weight: bold;">sh</span>
+<pre class="src src-shell"><span style="color: #a49da5; font-style: italic;">#!/usr/bin/</span><span style="color: #3a81c3; font-weight: bold;">sh</span>
 
-<span style="color: #715ab1;">VM_PATH</span>=<span style="color: #2d9574;">"/home/$(</span><span style="color: #6c3163;">whoami</span><span style="color: #2d9574;">)/Android"</span>
+<span style="color: #715ab1; font-style: italic;">VM_PATH</span>=<span style="color: #2d9574;">"/home/</span><span style="color: #2d9574; font-weight: bold;">$(</span><span style="color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">whoami</span><span style="color: #2d9574; font-weight: bold;">)</span><span style="color: #2d9574;">/Android"</span>
 
-<span style="color: #715ab1;">args</span>=<span style="color: #3a81c3;">(</span>
+<span style="color: #715ab1; font-style: italic;">args</span>=(
   -enable-kvm
   -bios <span style="color: #2d9574;">"/usr/share/edk2-ovmf/OVMF_CODE.fd"</span>
-  -m <span style="color: #4e3163;">8G</span>
-  -smp $<span style="color: #6c3163;">(</span><span style="color: #2d9574;">(</span><span style="color: #6c3163;">$</span><span style="color: #67b11d;">(</span><span style="color: #6c3163;">nproc</span><span style="color: #67b11d;">)</span>/2<span style="color: #2d9574;">)</span><span style="color: #6c3163;">)</span>
+  -m 8G
+  -smp $((<span style="color: #3a81c3; font-weight: bold;">$(</span><span style="color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">nproc</span><span style="color: #3a81c3; font-weight: bold;">)</span>/2))
   -device intel-hda
   -device hda-duplex
   -device virtio-vga-gl
   -display sdl,<span style="color: #715ab1;">gl</span>=on
-  -hda <span style="color: #2d9574;">"$VM_PATH/android.img"</span>
-  -cdrom <span style="color: #2d9574;">"$VM_PATH/android-x86.iso"</span>
-<span style="color: #3a81c3;">)</span>
+  -hda <span style="color: #2d9574;">"</span><span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">VM_PATH</span><span style="color: #2d9574;">/android.img"</span>
+  -cdrom <span style="color: #2d9574;">"</span><span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">VM_PATH</span><span style="color: #2d9574;">/android-x86.iso"</span>
+)
 
-qemu-system-x86_64 <span style="color: #2d9574;">"${args[@]}"</span>
+<span style="color: #2aa1ae; font-weight: bold;">qemu-system-x86_64</span> <span style="color: #2d9574;">"</span><span style="color: #3a81c3; font-weight: bold;">${</span><span style="color: #4e3163; background-color: #fbf8ef; font-style: italic;">args</span><span style="color: #655370; background-color: #fbf8ef;">[@]</span><span style="color: #3a81c3; font-weight: bold;">}</span><span style="color: #2d9574;">"</span>
 </pre>
 </div>
 
@@ -328,9 +329,9 @@ qemu-system-x86_64 <span style="color: #2d9574;">"${args[@]}"</span>
 其中需要注意的是：
 </p>
 <ul class="org-ul">
-<li><code>bios</code>​指定 OVMF 的路径、可能需要根据你的发行版安装的位置进行调整；</li>
-<li><code>m</code>​和​<code>smp</code>​请根据实际情况调整；</li>
-<li><code>intel-hda</code>​和​​<code>hda-duplex</code>​为音频系统相关。</li>
+<li><code>bios</code>指定OVMF的路径、可能需要根据你的发行版安装的位置进行调整；</li>
+<li><code>m</code>和<code>smp</code>请根据实际情况调整；</li>
+<li><code>intel-hda</code>和<code>hda-duplex</code>为音频系统相关。</li>
 </ul>
 
 <p>
@@ -338,32 +339,32 @@ qemu-system-x86_64 <span style="color: #2d9574;">"${args[@]}"</span>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">chmod +x LaunchD.sh
+<pre class="src src-shell"><span style="color: #2aa1ae; font-weight: bold;">chmod</span> +x LaunchD.sh
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1caf5d6" class="outline-4">
-<h4 id="org1caf5d6"><span class="section-number-4">1.4.2.</span> 创建虚拟磁盘</h4>
+<div id="outline-container-orgc6ae0d4" class="outline-4">
+<h4 id="orgc6ae0d4"><span class="section-number-4">1.4.2.</span> 创建虚拟磁盘</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <p>
-为存放我们的 Android 虚拟机，我们需要创建一个虚拟磁盘，如以下命令以创建一个 60G 的磁盘：
+为存放我们的Android虚拟机，我们需要创建一个虚拟磁盘，如以下命令以创建一个60G的磁盘：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">qemu-img create -f qcow2 android.img <span style="color: #4e3163;">60G</span>
+<pre class="src src-shell"><span style="color: #2aa1ae; font-weight: bold;">qemu-img</span> create <span style="color: #4e3163;">-f</span> qcow2 android.img 60G
 </pre>
 </div>
 
 <p>
-需要注意，​<code>60G</code>​为该磁盘的最大大小，也即该文件的最大大小；文件的实际大小会随其中实际装载的数据的大小而变化。
+需要注意，<code>60G</code>为该磁盘的最大大小，也即该文件的最大大小；文件的实际大小会随其中实际装载的数据的大小而变化。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org26f7a45" class="outline-4">
-<h4 id="org26f7a45"><span class="section-number-4">1.4.3.</span> 安装</h4>
+<div id="outline-container-org0f12b5c" class="outline-4">
+<h4 id="org0f12b5c"><span class="section-number-4">1.4.3.</span> 安装</h4>
 <div class="outline-text-4" id="text-1-4-3">
 <p>
 运行脚本启动该虚拟机。按照<a href="https://www.android-x86.org/installhowto.html">官方指南</a>安装即可。
@@ -372,32 +373,32 @@ qemu-system-x86_64 <span style="color: #2d9574;">"${args[@]}"</span>
 </div>
 </div>
 
-<div id="outline-container-org37f4f4b" class="outline-3">
-<h3 id="org37f4f4b"><span class="section-number-3">1.5.</span> 优化／配置</h3>
+<div id="outline-container-org385df13" class="outline-3">
+<h3 id="org385df13"><span class="section-number-3">1.5.</span> 优化／配置</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-orgf8a50b9" class="outline-4">
-<h4 id="orgf8a50b9"><span class="section-number-4">1.5.1.</span> 调整屏幕分辨率／尺寸参数</h4>
+<div id="outline-container-orgea1259e" class="outline-4">
+<h4 id="orgea1259e"><span class="section-number-4">1.5.1.</span> 调整屏幕分辨率／尺寸参数</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 首先如下修改启动脚本，添加窗口尺寸参数：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #f2241f;">&lt;</span><span style="color: #d3d3e7;">   </span><span style="color: #f2241f;">-device</span><span style="color: #d3d3e7;"> </span><span style="color: #f2241f;">virtio-vga-gl,xres=2160,yres=1440</span>
+<pre class="src src-diff"><span style="color: #f2241f;">&lt;</span><span style="color: #f2241f;">   -device virtio-vga-gl,xres=2160,yres=1440</span>
 <span style="color: #6c3163; background-color: #ddd8eb;">---</span>
-&gt;<span style="color: #d3d3e7;">   </span>-device<span style="color: #d3d3e7;"> </span>virtio-vga-gl
+&gt;   -device virtio-vga-gl
 </pre>
 </div>
 
 <p>
-随后启动虚拟机，并于启动加载器选择 DEBUG 模式，进入 MirBSD Korn Shell 环境。随后在其中执行：
+随后启动虚拟机，并于启动加载器选择DEBUG模式，进入MirBSD Korn Shell环境。随后在其中执行：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">mkdir /boot/
-mount /dev/sda1 /boot/
-vi /boot/efi/boot/android.cfg
+<pre class="src src-shell"><span style="color: #2aa1ae; font-weight: bold;">mkdir</span> /boot/
+<span style="color: #2aa1ae; font-weight: bold;">mount</span> /dev/sda1 /boot/
+<span style="color: #2aa1ae; font-weight: bold;">vi</span> /boot/efi/boot/android.cfg
 </pre>
 </div>
 
@@ -406,18 +407,18 @@ vi /boot/efi/boot/android.cfg
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #6c3163; background-color: #ddd8eb;">@@</span><span style="color: #d3d3e7;"> </span><span style="color: #6c3163; background-color: #ddd8eb;">-10,7</span><span style="color: #d3d3e7;"> </span><span style="color: #6c3163; background-color: #ddd8eb;">+10,7</span><span style="color: #d3d3e7;"> </span><span style="color: #6c3163; background-color: #ddd8eb;">@@</span>
-<span style="color: #dc752f;">  </span><span style="color: #d3d3e7;"> </span>set<span style="color: #d3d3e7;"> </span>kd=$2
-<span style="color: #dc752f;">  </span><span style="color: #d3d3e7;"> </span>shift<span style="color: #d3d3e7;"> </span>3
-<span style="color: #f2241f;">-</span><span style="color: #d3d3e7;">  </span><span style="color: #f2241f;">linux</span><span style="color: #d3d3e7;"> </span><span style="color: #f2241f;">$kd/kernel</span><span style="color: #d3d3e7;"> </span><span style="color: #f2241f;">root=/dev/ram0</span><span style="color: #d3d3e7;"> </span><span style="color: #f2241f;">$src</span><span style="color: #d3d3e7;"> </span><span style="color: #f2241f;">$@</span>
-<span style="color: #67b11d;">+</span><span style="color: #d3d3e7;">  </span><span style="color: #67b11d;">linux</span><span style="color: #d3d3e7;"> </span><span style="color: #67b11d;">$kd/kernel</span><span style="color: #d3d3e7;"> </span><span style="color: #67b11d;">root=/dev/ram0</span><span style="color: #d3d3e7;"> </span><span style="color: #67b11d;">$src</span><span style="color: #d3d3e7;"> </span><span style="color: #67b11d;">$@</span><span style="color: #d3d3e7;"> </span><span style="color: #fbf8ef; background-color: #67b11d;">nomodeset</span><span style="color: #fbf8ef; background-color: #67b11d;"> </span><span style="color: #fbf8ef; background-color: #67b11d;">video=2160*1440</span>
-<span style="color: #dc752f;">  </span><span style="color: #d3d3e7;"> </span>initrd<span style="color: #d3d3e7;"> </span>$kd/initrd.img
+<pre class="src src-diff"><span style="color: #6c3163; background-color: #ddd8eb;">@@ -10,7 +10,7 @@</span>
+   set kd=$2
+   shift 3
+<span style="color: #f2241f;">-</span><span style="color: #f2241f;">  linux $kd/kernel root=/dev/ram0 $src $@</span>
+<span style="color: #67b11d;">+</span><span style="color: #67b11d;">  linux $kd/kernel root=/dev/ram0 $src $@ </span><span style="color: #fbf8ef; background-color: #67b11d;">nomodeset video=2160*1440</span>
+   initrd $kd/initrd.img
 
-<span style="color: #6c3163; background-color: #ddd8eb;">@@</span><span style="color: #d3d3e7;"> </span><span style="color: #6c3163; background-color: #ddd8eb;">-49,6</span><span style="color: #d3d3e7;"> </span><span style="color: #6c3163; background-color: #ddd8eb;">+49,7</span><span style="color: #d3d3e7;"> </span><span style="color: #6c3163; background-color: #ddd8eb;">@@</span>
-<span style="color: #dc752f;">  </span><span style="color: #d3d3e7;"> </span>loadfont<span style="color: #d3d3e7;"> </span>DejaVuSansMono-18
-<span style="color: #67b11d;">+</span><span style="color: #d3d3e7;">  </span><span style="color: #67b11d;">set</span><span style="color: #d3d3e7;"> </span><span style="color: #67b11d;">gfxmode=2160x1440</span>
-<span style="color: #dc752f;">  </span><span style="color: #d3d3e7;"> </span>terminal_output<span style="color: #d3d3e7;"> </span>gfxterm
-<span style="color: #dc752f;">  </span><span style="color: #d3d3e7;"> </span>set<span style="color: #d3d3e7;"> </span>theme=$prefix/theme/theme.txt
+<span style="color: #6c3163; background-color: #ddd8eb;">@@ -49,6 +49,7 @@</span>
+   loadfont DejaVuSansMono-18
+<span style="color: #67b11d;">+</span><span style="color: #67b11d;">  set gfxmode=2160x1440</span>
+   terminal_output gfxterm
+   set theme=$prefix/theme/theme.txt
 </pre>
 </div>
 
@@ -426,27 +427,27 @@ vi /boot/efi/boot/android.cfg
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">umount /dev/sda1
-rm -r /boot/
-<span style="color: #3a81c3; font-weight: bold;">exit</span>
+<pre class="src src-shell"><span style="color: #2aa1ae; font-weight: bold;">umount</span> /dev/sda1
+<span style="color: #2aa1ae; font-weight: bold;">rm</span> <span style="color: #4e3163;">-r</span> /boot/
+<span style="color: #2aa1ae; font-weight: bold;">exit</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9ba0eac" class="outline-3">
-<h3 id="org9ba0eac"><span class="section-number-3">1.6.</span> 写在最后</h3>
+<div id="outline-container-org1593a36" class="outline-3">
+<h3 id="org1593a36"><span class="section-number-3">1.6.</span> 写在最后</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
-如此，我们可以实现一个较高性能的安卓虚拟机，而且是在较为干净的情况下。至于为什么不用 GTK 显示前端，因为它不好！
+如此，我们可以实现一个较高性能的安卓虚拟机，而且是在较为干净的情况下。至于为什么不用GTK显示前端，因为它不好！
 </p>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-06-27 Thu 19:24</p>
+<p class="date">Created: 2024-07-09 Tue 19:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
