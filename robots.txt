@@ -1,11 +1,32 @@
 User-agent: Baiduspider
 Disallow: /
 
+User-agent: Baiduspider-news
+Disallow: /
+
+User-agent: Baiduspider-render
+Disallow: /
+
+User-agent: Baiduspider-image
+Disallow: /
+
 User-agent: Sogou spider
+Disallow: /
+
+User-agent: Sogou web spider
 Disallow: /
 
 User-agent: 360Spider
 Disallow: /
 
 User-agent: HaosouSpider
+Disallow: /
+
+User-agent: yisouspider
+Disallow: /
+
+User-agent: YoudaoBot
+Disallow: /
+
+User-agent: EasouSpider
 Disallow: /
