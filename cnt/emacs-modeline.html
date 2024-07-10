@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-07-10 Wed 15:51 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org71bcf26">1. 自己写Emacs的ModeLine</a>
+<ul>
+<li><a href="#org80bc96c">1.1. 写在前面</a></li>
+<li><a href="#orgd7b0004">1.2. 宗旨</a></li>
+<li><a href="#org154dba8">1.3. 值从哪里来</a></li>
+<li><a href="#org1e9be74">1.4. 状态栏中的属性</a></li>
+<li><a href="#org0adcb38">1.5. 计算空格</a></li>
+<li><a href="#orgdf99bb2">1.6. 最后</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org71bcf26" class="outline-2">
+<h2 id="org71bcf26"><span class="section-number-2">1.</span> 自己写Emacs的ModeLine</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org80bc96c" class="outline-3">
+<h3 id="org80bc96c"><span class="section-number-3">1.1.</span> 写在前面</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Emacs的ModeLine<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>作为一个常驻的状态栏，一直都是美化中较为重要的一部分。
+因为我之前一直是用Spacemacs的，它默认的状态栏还是很好看的，所以也没去折腾。
+昨天<del>因为感觉不舒服，</del>决定不用它、自己写一个<a href="https://github.com/RadioNoiseE/eMaCs">配置</a>，于是就仔细研究了一下这个东西。
+</p>
+
+<p>
+至于为什么不用那些成熟的方案，因为我觉得没必要。
+</p>
+
+
+<div id="orge251bcd" class="figure">
+<p><img src="../img/emacs-modeline-01.png" alt="emacs-modeline-01.png" align="center" width="900px" />
+</p>
+<p><span class="figure-number">Figure 1: </span>最终效果</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd7b0004" class="outline-3">
+<h3 id="orgd7b0004"><span class="section-number-3">1.2.</span> 宗旨</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+状态栏的内容由缓冲区局部变量<code>mode-line-format</code>指定。这个变量的值是一个状态栏结构（<i>mode line construct</i>），
+即一个控制状态栏上内容的模板（列表）。直观一些，可以看如下的Emacs 27.1的状态栏定义：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #3a81c3; font-weight: bold;">setq</span> mode-line-format
+      (list (<span style="color: #2d9574;">"%e"</span> mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-position (vc-mode vc-mode) mode-line-modes mode-line-misc-info mode-line-end-spaces)))
+</pre>
+</div>
+
+<p>
+简化版的默认值为：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #2d9574;">"-"</span>
+ mode-line-mule-info
+ mode-line-modified
+ mode-line-frame-identification
+ mode-line-buffer-identification
+ <span style="color: #2d9574;">"   "</span>
+ mode-line-position
+ (vc-mode vc-mode)
+ <span style="color: #2d9574;">"   "</span>
+ mode-line-modes
+ (which-function-mode (<span style="color: #2d9574;">""</span> which-func-format <span style="color: #2d9574;">"--"</span>))
+ (global-mode-string (<span style="color: #2d9574;">"--"</span> global-mode-string))
+ <span style="color: #2d9574;">"-%-"</span>)
+</pre>
+</div>
+
+<p>
+而列表中的每一个元素都代表一个状态栏上的模块，它们被如此定义：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #3a81c3; font-weight: bold;">setq-default</span>
+ mode-line-buffer-identification
+ '(<span style="color: #3a81c3;">:eval</span> (propertize <span style="color: #2d9574;">"%12b"</span>
+                     'face (<span style="color: #3a81c3; font-weight: bold;">if</span> (mode-line-window-selected-p)
+                               'bold
+                             'italic))))
+</pre>
+</div>
+
+<p>
+关于状态栏数据结构完整的定义，请参阅<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Data.html">官方文档</a>。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org154dba8" class="outline-3">
+<h3 id="org154dba8"><span class="section-number-3">1.3.</span> 值从哪里来</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+我们可以使用<code>%</code>构造来作为替代各种类型的数据的字符串，比如使用<code>%f</code>来表示当前访问的文件名。完整的构造表格可以在<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html">这里</a>查看。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1e9be74" class="outline-3">
+<h3 id="org1e9be74"><span class="section-number-3">1.4.</span> 状态栏中的属性</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+某些文本属性在状态栏中是有意义的，如<code>face</code>属性影响文本的外观；<code>help-echo</code>属性关联文本与字符串；<code>keymap</code>则使文本对鼠标操作敏感。
+有四种方法来为状态栏中的文本添加属性：
+</p>
+
+<ol class="org-ol">
+<li>将带有文本属性的字符串直接插入状态栏的数据结构（列表）；</li>
+<li>为<code>%</code>构造附加属性，使得展开后的字符串携带相同属性；</li>
+<li>使用<code>(:propertize elt props...)</code>构造为<code>elt</code>指定被<code>props</code>定义的文本属性；</li>
+<li>在状态栏数据结构中插入包含<code>:eval form</code>的列表，同时使<code>form</code>计算为携带文本属性的字符串。</li>
+</ol>
+
+<p>
+注意，<code>keymap</code>属性仅对鼠标点击有实际效果；绑定键无效，因为你（正常情况下）不可能将光标移到状态栏中。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0adcb38" class="outline-3">
+<h3 id="org0adcb38"><span class="section-number-3">1.5.</span> 计算空格</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+当你希望让你的状态栏向两边分散对齐时，你需要使用计算空格（并填充）的方法。
+如下定义两个函数：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #3a81c3; font-weight: bold;">defun</span> <span style="color: #6c3163; font-weight: bold;">mode-line-fill</span> (reserve)
+  (<span style="color: #3a81c3; font-weight: bold;">when</span>
+      (<span style="color: #3a81c3; font-weight: bold;">and</span> window-system (eq 'right (get-scroll-bar-mode)))
+    (<span style="color: #3a81c3; font-weight: bold;">setq</span> reserve (- reserve 3)))
+  (propertize <span style="color: #2d9574;">" "</span> 'display
+              `((space <span style="color: #3a81c3;">:align-to</span> (- (+ right right-fringe right-margin) ,reserve)))))
+
+(<span style="color: #3a81c3; font-weight: bold;">defun</span> <span style="color: #6c3163; font-weight: bold;">mode-line-flush-right</span> (right-line)
+  (<span style="color: #3a81c3; font-weight: bold;">let</span> ((right-length (length (format-mode-line right-line))))
+    (list (mode-line-fill right-length) right-line)))
+</pre>
+</div>
+
+<p>
+其中，第一个函数填充空格直到右侧元素处于窗口的边缘；第二个函数计算右侧元素的宽度，并连接填充空格和右侧元素的列表。
+</p>
+
+<p>
+注意使用的<code>format-mode-line</code>函数，它可被用来求得将出现在状态栏中的元素（包括<code>%</code>构造）的字符串。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdf99bb2" class="outline-3">
+<h3 id="orgdf99bb2"><span class="section-number-3">1.6.</span> 最后</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+相信看到这里，聪明的你一定能自己写出一个自己喜欢的轻量的状态栏了。最后给出我的配置（不想动脑的改一改就能用了）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #a49da5; font-style: italic;">;; </span><span style="color: #a49da5; font-style: italic;">modeline</span>
+
+(<span style="color: #3a81c3; font-weight: bold;">setq</span> mode-line-position
+      (list
+       <span style="color: #2d9574;">"  ("</span> (propertize <span style="color: #2d9574;">"%l"</span> 'face 'font-lock-type-face)
+       <span style="color: #2d9574;">","</span> (propertize <span style="color: #2d9574;">"%c"</span> 'face 'font-lock-type-face) <span style="color: #2d9574;">")   "</span>))
+
+(<span style="color: #3a81c3; font-weight: bold;">defun</span> <span style="color: #6c3163; font-weight: bold;">mode-line-fill</span> (reserve)
+  (<span style="color: #3a81c3; font-weight: bold;">when</span>
+      (<span style="color: #3a81c3; font-weight: bold;">and</span> window-system (eq 'right (get-scroll-bar-mode)))
+    (<span style="color: #3a81c3; font-weight: bold;">setq</span> reserve (- reserve 3)))
+  (propertize <span style="color: #2d9574;">" "</span> 'display
+              `((space <span style="color: #3a81c3;">:align-to</span> (- (+ right right-fringe right-margin) ,reserve)))))
+
+(<span style="color: #3a81c3; font-weight: bold;">defun</span> <span style="color: #6c3163; font-weight: bold;">mode-line-flush-right</span> (right-line)
+  (<span style="color: #3a81c3; font-weight: bold;">let</span> ((right-length (length (format-mode-line right-line))))
+    (list (mode-line-fill right-length) right-line)))
+
+(<span style="color: #3a81c3; font-weight: bold;">defun</span> <span style="color: #6c3163; font-weight: bold;">truncate-mode-line-construct</span> (construct length)
+  (<span style="color: #3a81c3; font-weight: bold;">let*</span> ((full-string (format-mode-line construct))
+         (truncated-string (truncate-string-to-width full-string length)))
+    (replace-regexp-in-string <span style="color: #2d9574;">"%"</span> <span style="color: #2d9574;">"%%"</span> truncated-string)))
+
+(<span style="color: #3a81c3; font-weight: bold;">setq-default</span> mode-line-format
+              (list
+               '(<span style="color: #3a81c3;">:eval</span> (propertize <span style="color: #2d9574;">"%e"</span> 'face 'font-lock-type-face))
+               mode-line-front-space
+               '(<span style="color: #3a81c3;">:eval</span> (propertize <span style="color: #2d9574;">"%@"</span> 'face 'font-lock-constant-face))
+               '(<span style="color: #3a81c3;">:eval</span> (propertize <span style="color: #2d9574;">"%t%Z"</span> 'face 'font-lock-string-face))
+               '(<span style="color: #3a81c3;">:eval</span> (propertize <span style="color: #2d9574;">"%*%+"</span> 'face 'font-lock-warning-face))
+               '(<span style="color: #3a81c3;">:eval</span> (propertize <span style="color: #2d9574;">"  %F"</span> 'face 'font-lock-keyword-face))
+               '(<span style="color: #3a81c3;">:eval</span> (propertize <span style="color: #2d9574;">"  %b"</span> 'face 'font-lock-escape-face))
+               mode-line-position
+               '(<span style="color: #3a81c3;">:eval</span> (mode-line-flush-right
+                        (list
+                         mode-line-modes
+                         <span style="color: #2d9574;">" ["</span>
+                         (propertize (truncate-mode-line-construct <span style="color: #2d9574;">"%p"</span> 3) 'face 'font-lock-comment-face)
+                         (propertize <span style="color: #2d9574;">":"</span> 'face 'font-lock-warning-face)
+                         (propertize <span style="color: #2d9574;">"%I"</span> 'face 'font-lock-string-face)
+                         <span style="color: #2d9574;">"] "</span>
+                         mode-line-end-spaces)))))
+
+(<span style="color: #3a81c3; font-weight: bold;">provide</span> '<span style="color: #4e3163;">modeline</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://www.emacswiki.org/emacs/ModeLine">https://www.emacswiki.org/emacs/ModeLine</a></p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">Created: 2024-07-10 Wed 15:51</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
