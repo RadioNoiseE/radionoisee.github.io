@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-07-09 Tue 19:43 -->
+<!-- 2024-08-13 Tue 15:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
+<title>Linux下字体渲染的优化</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -195,42 +195,35 @@
 </head>
 <body>
 <div id="content" class="content">
+<h1 class="title">Linux下字体渲染的优化</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge494a79">1. Linux下字体渲染的优化</a>
+<li><a href="#orga36c3fa">1. 生存策略</a>
 <ul>
-<li><a href="#org0373e6f">1.1. 生存策略</a>
-<ul>
-<li><a href="#org0644667">1.1.1. 当前之怪现状</a></li>
-<li><a href="#org9817b81">1.1.2. 关于FontConfig</a></li>
+<li><a href="#org5206a63">1.1. 当前之怪现状</a></li>
+<li><a href="#org2ac52df">1.2. 关于FontConfig</a></li>
 </ul>
 </li>
-<li><a href="#org449b338">1.2. 实践</a>
+<li><a href="#org1005d96">2. 实践</a>
 <ul>
-<li><a href="#orgb3f233e">1.2.1. 字体族配置</a></li>
-<li><a href="#org23f4cf0">1.2.2. 启用对应预设</a></li>
+<li><a href="#org1e82e93">2.1. 字体族配置</a></li>
+<li><a href="#orgda1401f">2.2. 启用对应预设</a></li>
 </ul>
 </li>
-<li><a href="#org45b6fe5">1.3. 最后</a></li>
-</ul>
-</li>
+<li><a href="#orgc466c8a">3. 最后</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge494a79" class="outline-2">
-<h2 id="orge494a79"><span class="section-number-2">1.</span> Linux下字体渲染的优化</h2>
+<div id="outline-container-orga36c3fa" class="outline-2">
+<h2 id="orga36c3fa"><span class="section-number-2">1.</span> 生存策略</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org0373e6f" class="outline-3">
-<h3 id="org0373e6f"><span class="section-number-3">1.1.</span> 生存策略</h3>
+<div id="outline-container-org5206a63" class="outline-3">
+<h3 id="org5206a63"><span class="section-number-3">1.1.</span> 当前之怪现状</h3>
 <div class="outline-text-3" id="text-1-1">
-</div>
-<div id="outline-container-org0644667" class="outline-4">
-<h4 id="org0644667"><span class="section-number-4">1.1.1.</span> 当前之怪现状</h4>
-<div class="outline-text-4" id="text-1-1-1">
 <p>
 现在对于Linux下的字体渲染，感觉有几种（比较主流的）论调：
 </p>
@@ -251,9 +244,9 @@
 </div>
 </div>
 
-<div id="outline-container-org9817b81" class="outline-4">
-<h4 id="org9817b81"><span class="section-number-4">1.1.2.</span> 关于FontConfig</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-org2ac52df" class="outline-3">
+<h3 id="org2ac52df"><span class="section-number-3">1.2.</span> 关于FontConfig</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 如果你愿意去找一找，可以看到互联网上有一些使用FontConfig的教程。他们大多都忽略了一个较好的实践——使用预设。于是他们需要重新实现：
 </p>
@@ -386,13 +379,13 @@ Available fontconfig .conf files (* is enabled):
 </div>
 </div>
 
-<div id="outline-container-org449b338" class="outline-3">
-<h3 id="org449b338"><span class="section-number-3">1.2.</span> 实践</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org1005d96" class="outline-2">
+<h2 id="org1005d96"><span class="section-number-2">2.</span> 实践</h2>
+<div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgb3f233e" class="outline-4">
-<h4 id="orgb3f233e"><span class="section-number-4">1.2.1.</span> 字体族配置</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-org1e82e93" class="outline-3">
+<h3 id="org1e82e93"><span class="section-number-3">2.1.</span> 字体族配置</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 这一步极为简单，只需要创建配置文件<code>/etc/fonts/local.conf</code>并按格式：
 </p>
@@ -445,9 +438,9 @@ Available fontconfig .conf files (* is enabled):
 </div>
 </div>
 
-<div id="outline-container-org23f4cf0" class="outline-4">
-<h4 id="org23f4cf0"><span class="section-number-4">1.2.2.</span> 启用对应预设</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-orgda1401f" class="outline-3">
+<h3 id="orgda1401f"><span class="section-number-3">2.2.</span> 启用对应预设</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 请确保主要字体（比如我使用的思源系列）是用包管理器安装的，否则可能会缺少对应的预设文件需要你想办法解决。
 </p>
@@ -671,13 +664,12 @@ Available fontconfig .conf files (* is enabled):
 </div>
 </div>
 
-<div id="outline-container-org45b6fe5" class="outline-3">
-<h3 id="org45b6fe5"><span class="section-number-3">1.3.</span> 最后</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-orgc466c8a" class="outline-2">
+<h2 id="orgc466c8a"><span class="section-number-2">3.</span> 最后</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 所以Linux下的字体渲染并没有那么不堪，想要达到不错的效果也并不复杂，FontConfig的机制甚至十分灵活（相比胶水字体）。希望各位能多多去看文档。
 </p>
-</div>
 </div>
 </div>
 <div id="footnotes">
@@ -692,7 +684,7 @@ Available fontconfig .conf files (* is enabled):
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-07-09 Tue 19:43</p>
+<p class="date">Created: 2024-08-13 Tue 15:15</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

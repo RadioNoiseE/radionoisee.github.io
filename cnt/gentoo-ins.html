@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-07-09 Tue 19:37 -->
+<!-- 2024-08-13 Tue 15:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
+<title>Gentoo Linux实用指北</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -227,44 +227,81 @@
 </head>
 <body>
 <div id="content" class="content">
+<h1 class="title">Gentoo Linux实用指北</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org636d40f">1. Gentoo Linux使用指北</a>
+<li><a href="#orgf645c0f">1. 关于本文</a></li>
+<li><a href="#orga537fc4">2. 基础系统安装</a>
 <ul>
-<li><a href="#org21316bd">1.1. 关于本文</a></li>
-<li><a href="#org96064d1">1.2. 基础系统安装</a>
+<li><a href="#org022d631">2.1. 准备安装环境</a>
 <ul>
-<li><a href="#orgc26ee54">1.2.1. 准备安装环境</a></li>
-<li><a href="#org47c6d5c">1.2.2. 安装系统</a></li>
-<li><a href="#org88d92eb">1.2.3. 配置系统内核（手动配置可选）</a></li>
-<li><a href="#org13346a5">1.2.4. 杂项、工具、及系统引导</a></li>
-<li><a href="#org67a894d">1.2.5. 系统引导</a></li>
-<li><a href="#orgef2cc3f">1.2.6. 清理</a></li>
+<li><a href="#orga3b1c45">2.1.1. 引导</a></li>
+<li><a href="#orga714602">2.1.2. 连接至网络</a></li>
+<li><a href="#org02cae4b">2.1.3. 磁盘分区</a></li>
+<li><a href="#orga6a6cfd">2.1.4. 选择stage3档案</a></li>
+<li><a href="#orgc344070">2.1.5. 配置<code>make.conf</code>并换源</a></li>
+<li><a href="#orgdd67ad4">2.1.6. chroot</a></li>
+<li><a href="#orga7e21a0">2.1.7. BootStrap（可选）</a></li>
+<li><a href="#orge08df9c">2.1.8. 从stage1到stage2</a></li>
+<li><a href="#orga876169">2.1.9. 从stage2到stage3</a></li>
 </ul>
 </li>
-<li><a href="#orga084cf7">1.3. 桌面环境的安装</a>
+<li><a href="#org2f9bbdb">2.2. 安装系统</a>
 <ul>
-<li><a href="#orgab88fed">1.3.1. 选择</a></li>
-<li><a href="#org959c130">1.3.2. XOrg与XMonad</a></li>
-<li><a href="#orge7d5438">1.3.3. Wayland 与 SwayWM</a></li>
+<li><a href="#orgd0aaaac">2.2.1. 同步包管理器数据库并选取全局配置文件</a></li>
+<li><a href="#org66708f0">2.2.2. 配置<code>make.conf</code>文件</a></li>
+<li><a href="#org3c6c378">2.2.3. 重建系统（可选）</a></li>
+<li><a href="#org61e5f54">2.2.4. 本地化</a></li>
 </ul>
 </li>
-<li><a href="#org6cbdbfe">1.4. 吐槽与展望</a></li>
+<li><a href="#org4a7b2f7">2.3. 配置系统内核（手动配置可选）</a>
+<ul>
+<li><a href="#org95bb099">2.3.1. 必要驱动安装</a></li>
+<li><a href="#org2562ed4">2.3.2. 发行版内核安装</a></li>
+<li><a href="#org9edf073">2.3.3. 手动编译内核</a></li>
 </ul>
 </li>
+<li><a href="#org498261d">2.4. 杂项、工具、及系统引导</a>
+<ul>
+<li><a href="#org8103925">2.4.1. <code>fstab</code>文件</a></li>
+<li><a href="#org9d36fe1">2.4.2. 网络相关</a></li>
+<li><a href="#org99b6989">2.4.3. 系统信息</a></li>
+<li><a href="#org033f70b">2.4.4. 系统工具</a></li>
+</ul>
+</li>
+<li><a href="#org757e5ac">2.5. 系统引导</a></li>
+<li><a href="#orge0b5815">2.6. 清理</a></li>
+</ul>
+</li>
+<li><a href="#org980b543">3. 桌面环境的安装</a>
+<ul>
+<li><a href="#org1766093">3.1. 选择</a></li>
+<li><a href="#org58718c9">3.2. XOrg与XMonad</a>
+<ul>
+<li><a href="#org560a21a">3.2.1. 安装必要软件</a></li>
+<li><a href="#org7971099">3.2.2. 配置</a></li>
+<li><a href="#org823ffa6">3.2.3. 常见事故</a></li>
+</ul>
+</li>
+<li><a href="#org56213c1">3.3. Wayland 与 SwayWM</a>
+<ul>
+<li><a href="#org79dfa53">3.3.1. 安装必要软件</a></li>
+<li><a href="#orgc0f908a">3.3.2. 配置</a></li>
+<li><a href="#org3ecf24c">3.3.3. 常见问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgbe30102">4. 吐槽与展望</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org636d40f" class="outline-2">
-<h2 id="org636d40f"><span class="section-number-2">1.</span> Gentoo Linux使用指北</h2>
+<div id="outline-container-orgf645c0f" class="outline-2">
+<h2 id="orgf645c0f"><span class="section-number-2">1.</span> 关于本文</h2>
 <div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-org21316bd" class="outline-3">
-<h3 id="org21316bd"><span class="section-number-3">1.1.</span> 关于本文</h3>
-<div class="outline-text-3" id="text-1-1">
 <p>
 本文是对笔者4个月来折腾Gentoo Linux的一个总结，包括了安装、优化以及配置的内容。需要注意：
 </p>
@@ -279,17 +316,17 @@
 </div>
 </div>
 
-<div id="outline-container-org96064d1" class="outline-3">
-<h3 id="org96064d1"><span class="section-number-3">1.2.</span> 基础系统安装</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-orga537fc4" class="outline-2">
+<h2 id="orga537fc4"><span class="section-number-2">2.</span> 基础系统安装</h2>
+<div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgc26ee54" class="outline-4">
-<h4 id="orgc26ee54"><span class="section-number-4">1.2.1.</span> 准备安装环境</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-org022d631" class="outline-3">
+<h3 id="org022d631"><span class="section-number-3">2.1.</span> 准备安装环境</h3>
+<div class="outline-text-3" id="text-2-1">
 </div>
-<ol class="org-ol">
-<li><a id="orgfb03d9d"></a>引导<br />
-<div class="outline-text-5" id="text-1-2-1-1">
+<div id="outline-container-orga3b1c45" class="outline-4">
+<h4 id="orga3b1c45"><span class="section-number-4">2.1.1.</span> 引导</h4>
+<div class="outline-text-4" id="text-2-1-1">
 <p>
 为了完成Gentoo Linux的安装、首先我们肯定要制作一个系统引导盘（LiveUSB）。Gentoo Linux的安装跟大部分发行版的不同之处就在于它并没有提供一个有GUI或TUI界面作为安装向导的引导盘。相反，为了最大程度地客制化，它只提供了一个内置各种安装系统必备工具的不包含图形界面的基础系统；我们需要在以LiveUSB启动后<code>chroot</code>至本机磁盘手动（一般情况下）完成安装。这种繁琐安装方式给予了其最大的灵活性，真正意义上的选择之多样是Gentoo一个非常大的优势。
 </p>
@@ -306,10 +343,11 @@ https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/current-in
 随后将该<code>iso</code>文件刻录到U盘上（经过了Hybrid处理，可以直接刻录到U盘上<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>）。这里大家各显神通就好。谨慎的读者还可以校验一下磁盘映像文件的完整性、校验文件也在上面给出的地址下。之后将目标设备关机、插上制作好的引导盘后<b>先关闭SecureBoot后</b>启动。然后你会看到OpenRC引导这Gentoo Linux启动，至此我们就完成了第一步：引导。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="orgb8a9d50"></a>连接至网络<br />
-<div class="outline-text-5" id="text-1-2-1-2">
+<div id="outline-container-orga714602" class="outline-4">
+<h4 id="orga714602"><span class="section-number-4">2.1.2.</span> 连接至网络</h4>
+<div class="outline-text-4" id="text-2-1-2">
 <p>
 进入LiveUSB的环境后，先运行<code>ifconfig</code>，看看除了<code>lo</code>之外是否有别的网卡设备被检测到（比如<code>wlan</code>）。如果没有那说明你的网卡不被支持，可以到互联网上检索并寻求帮助。有的话就可以运行<code>net-setup</code>（自带的一个非常贴心的脚本），按照指引连接至网络。如果使用<code>wlan</code>，大部分网络都是WPA2/3，并建议让<code>dhcp</code>决定ip地址。
 </p>
@@ -318,10 +356,11 @@ https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/current-in
 随后可以<code>ping</code>一下<code>gentoo.org</code>，看看自己是否成功联网。然后视需求编辑<code>/etc/reslov.conf</code>（默認可用的编辑器有nano）。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org0c1929e"></a>磁盘分区<br />
-<div class="outline-text-5" id="text-1-2-1-3">
+<div id="outline-container-org02cae4b" class="outline-4">
+<h4 id="org02cae4b"><span class="section-number-4">2.1.3.</span> 磁盘分区</h4>
+<div class="outline-text-4" id="text-2-1-3">
 <p>
 接下来是很重要的一步：给目标设备的磁盘分区。（确定你的电脑使用不是BIOS启动，如果是请参考Handbook）一般至少需要三个分区、分别是EFI分区（512MB~1024MB）、swap分区（主要是笔记本电脑休眠时使用，一般小于等于你的运行时内存大小即可）以及根分区。也是，大家各显神通就好；<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks">这里</a>（Introduction to block devices至Partitioning the disk with MBR for BIOS / legacy boot）有Gentoo官方给出的方案，以及分区工具<code>fdisk</code>的手把手教学可供参考。下面给出我的方案、仅供参考：
 </p>
@@ -372,10 +411,11 @@ Device            Start        End   Sectors   Size Type
 顺便，Gentoo的LiveUSB是没有预装OpenZFS所需的工具的，这时候你就需要使用其它镜像，即所谓的特殊情况；注意如果选择了第三方的镜像，可能会需要额外的安装步骤，见GentooHandbook。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org2f82acf"></a>选择stage3档案<br />
-<div class="outline-text-5" id="text-1-2-1-4">
+<div id="outline-container-orga6a6cfd" class="outline-4">
+<h4 id="orga6a6cfd"><span class="section-number-4">2.1.4.</span> 选择stage3档案</h4>
+<div class="outline-text-4" id="text-2-1-4">
 <p>
 关于stage3，他们是Gentoo系统安装的种子。这时你需要作出选择：
 </p>
@@ -413,10 +453,11 @@ Device            Start        End   Sectors   Size Type
 解压。注意，一定要用这个命令解压。参数解释在Handbook中有，按需食用。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org267344d"></a>配置<code>make.conf</code>并换源<br />
-<div class="outline-text-5" id="text-1-2-1-5">
+<div id="outline-container-orgc344070" class="outline-4">
+<h4 id="orgc344070"><span class="section-number-4">2.1.5.</span> 配置<code>make.conf</code>并换源</h4>
+<div class="outline-text-4" id="text-2-1-5">
 <p>
 编辑<code>make.conf</code>这一十分重要的配置文件（注意，是编辑<code>/mnt/gentoo/etc/portage/make.conf</code>文件而非<code>/etc/portage/make.conf</code>），决定我们的包管理器emerge编译时的参数等等，是十分重要的可以优化的地方。
 </p>
@@ -465,10 +506,11 @@ Device            Start        End   Sectors   Size Type
 创建后按<a href="https://mirrors.tuna.tsinghua.edu.cn/help/gentoo-portage/">指南</a>修改<code>sync-uri</code>即可。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="orgda0766b"></a>chroot<br />
-<div class="outline-text-5" id="text-1-2-1-6">
+<div id="outline-container-orgdd67ad4" class="outline-4">
+<h4 id="orgdd67ad4"><span class="section-number-4">2.1.6.</span> chroot</h4>
+<div class="outline-text-4" id="text-2-1-6">
 <p>
 终于可以chroot了。为了在chroot环境中使用emerge从互联网上获取软件包，将DNS信息复制一下：
 </p>
@@ -513,10 +555,11 @@ Device            Start        End   Sectors   Size Type
 现在，你已经成功地进入到新环境了。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org25ff149"></a>BootStrap（可选）<br />
-<div class="outline-text-5" id="text-1-2-1-7">
+<div id="outline-container-orga7e21a0" class="outline-4">
+<h4 id="orga7e21a0"><span class="section-number-4">2.1.7.</span> BootStrap（可选）</h4>
+<div class="outline-text-4" id="text-2-1-7">
 <p>
 这时，我们处在了一个由先前下载并解压的stage3构建的一个基础系统中。它包括了标准库、编译器等Linux系统的必要组成部分，是由Gentoo Release Engineering Team（好高级的名字、发行工程诶）帮我们预先编译好的。根据FAQ，从头至尾构建这些所得的收益并不会很大，而所花的时间非常长，特别是如果你的gcc像笔者一样开启了<code>lto</code>、<code>pgo</code>等特性，对于一般电脑至少需要4小时（甚至gcc就要编译至少3次［至少是因为，如果你的gcc开了pgo、那么就需要重复编译5次］）。故读者需要明智地选择是否进行这一步。若不需要则直接进入下一部分『选择全局配置文件并安装基础系统』即可。选择该部分的读者在下一部分可忽略重复步骤（笔者将会指明）。
 </p>
@@ -544,10 +587,11 @@ Device            Start        End   Sectors   Size Type
 列出可选配置并应用。<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">这里</a>的Choosing the right profile一节有更多相关信息。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org286566f"></a>从stage1到stage2<br />
-<div class="outline-text-5" id="text-1-2-1-8">
+<div id="outline-container-orge08df9c" class="outline-4">
+<h4 id="orge08df9c"><span class="section-number-4">2.1.8.</span> 从stage1到stage2</h4>
+<div class="outline-text-4" id="text-2-1-8">
 <p>
 官方提供了一个脚本，我们只需要运行它即可：
 </p>
@@ -562,10 +606,11 @@ Device            Start        End   Sectors   Size Type
 若使用Intel的中央处理器，途中编译gcc可能会失败。这是由于其大小核导致的。你需要安装<code>reslove-march-native</code>来确定<code>COMMON_FLAGS</code>的值。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="orgbc5bdab"></a>从stage2到stage3<br />
-<div class="outline-text-5" id="text-1-2-1-9">
+<div id="outline-container-orga876169" class="outline-4">
+<h4 id="orga876169"><span class="section-number-4">2.1.9.</span> 从stage2到stage3</h4>
+<div class="outline-text-4" id="text-2-1-9">
 <p>
 理论上按照Gentoo官方的说法，这一步只需要<code>emerge -e @system</code>构建系统工具链即可。然而由于那个<code>bootstrap.sh</code>脚本估计是没怎么维护了，出来的gcc编译器缺少构建系统所需的一个特性、需要手动使用<code>USE=openmp</code>开启。这一步你也可以配置更多gcc的特性，详见这里。为了开启这些特性，我们需要在<code>/etc/portage/package.use/</code>目录下创建一个文件（文件名无所谓，但为了可维护性有两种广泛使用的方案：创建一个文件存放所有软件的<code>USE</code>配置和为每一个需要配置的软件创建一个新文件），并写入：
 </p>
@@ -597,17 +642,16 @@ Device            Start        End   Sectors   Size Type
 由于我们已经选取过了系统的全局配置（那个profile），可以跳过下一章开头的选取部分。
 </p>
 </div>
-</li>
-</ol>
+</div>
 </div>
 
-<div id="outline-container-org47c6d5c" class="outline-4">
-<h4 id="org47c6d5c"><span class="section-number-4">1.2.2.</span> 安装系统</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-org2f9bbdb" class="outline-3">
+<h3 id="org2f9bbdb"><span class="section-number-3">2.2.</span> 安装系统</h3>
+<div class="outline-text-3" id="text-2-2">
 </div>
-<ol class="org-ol">
-<li><a id="orgcacb283"></a>同步包管理器数据库并选取全局配置文件<br />
-<div class="outline-text-5" id="text-1-2-2-1">
+<div id="outline-container-orgd0aaaac" class="outline-4">
+<h4 id="orgd0aaaac"><span class="section-number-4">2.2.1.</span> 同步包管理器数据库并选取全局配置文件</h4>
+<div class="outline-text-4" id="text-2-2-1">
 <p>
 首先同步包管理器所使用的软件包数据库（其实这一步就是下载放在不同文件夹里的ebuild文件）：
 </p>
@@ -627,10 +671,11 @@ Device            Start        End   Sectors   Size Type
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="orgb3a9993"></a>配置<code>make.conf</code>文件<br />
-<div class="outline-text-5" id="text-1-2-2-2">
+<div id="outline-container-org66708f0" class="outline-4">
+<h4 id="org66708f0"><span class="section-number-4">2.2.2.</span> 配置<code>make.conf</code>文件</h4>
+<div class="outline-text-4" id="text-2-2-2">
 <p>
 这时我们接着配置这个文件。先前由于没有<code>cpuid2cpuflags</code>这个工具，无法配置该环境变量，现在我们只需：
 </p>
@@ -659,10 +704,11 @@ Device            Start        End   Sectors   Size Type
 怎么指导我的设备该填写怎样的值，需要怎样的配置呢？<a href="https://wiki.gentoo.org/wiki/AMDGPU">AMD</a>、<a href="https://wiki.gentoo.org/wiki/Intel">Intel</a>、Nvidia<a href="https://wiki.gentoo.org/wiki/Nouveau">开源</a>和<a href="https://wiki.gentoo.org/wiki/NVIDIA">闭源</a>。（还是老黄有牌面。）
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org7e9f200"></a>重建系统（可选）<br />
-<div class="outline-text-5" id="text-1-2-2-3">
+<div id="outline-container-org3c6c378" class="outline-4">
+<h4 id="org3c6c378"><span class="section-number-4">2.2.3.</span> 重建系统（可选）</h4>
+<div class="outline-text-4" id="text-2-2-3">
 <p>
 这一步是可选的，且只在你做出了：
 </p>
@@ -695,10 +741,11 @@ Device            Start        End   Sectors   Size Type
 移除不被依赖的软件包（这步十分残忍、请确认后再确认）。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org2e3a209"></a>本地化<br />
-<div class="outline-text-5" id="text-1-2-2-4">
+<div id="outline-container-org61e5f54" class="outline-4">
+<h4 id="org61e5f54"><span class="section-number-4">2.2.4.</span> 本地化</h4>
+<div class="outline-text-4" id="text-2-2-4">
 <p>
 从这一节开始，就需要区分OpenRC和SystemD各自的步骤。笔者用的是OpenRC，使用SystemD的用家可以从<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">这里</a>的Optional: Using systemd as the system and service manager处开始按步骤使用不同的命令完成安装（两种方案在安装时只会有细节上的区别）。
 </p>
@@ -743,13 +790,12 @@ Device            Start        End   Sectors   Size Type
 </pre>
 </div>
 </div>
-</li>
-</ol>
+</div>
 </div>
 
-<div id="outline-container-org88d92eb" class="outline-4">
-<h4 id="org88d92eb"><span class="section-number-4">1.2.3.</span> 配置系统内核（手动配置可选）</h4>
-<div class="outline-text-4" id="text-1-2-3">
+<div id="outline-container-org4a7b2f7" class="outline-3">
+<h3 id="org4a7b2f7"><span class="section-number-3">2.3.</span> 配置系统内核（手动配置可选）</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 终于到了配置内核的时候。有三种方案供各位选择：
 </p>
@@ -761,9 +807,9 @@ Device            Start        End   Sectors   Size Type
 </ol>
 </div>
 
-<ol class="org-ol">
-<li><a id="orgb90e262"></a>必要驱动安装<br />
-<div class="outline-text-5" id="text-1-2-3-1">
+<div id="outline-container-org95bb099" class="outline-4">
+<h4 id="org95bb099"><span class="section-number-4">2.3.1.</span> 必要驱动安装</h4>
+<div class="outline-text-4" id="text-2-3-1">
 <p>
 这一步是无论你使用什么内核安装方式都需要完成的。我使用emerge提供的集合方式安装（便于管理）。先创建目录：
 </p>
@@ -797,10 +843,11 @@ Device            Start        End   Sectors   Size Type
 即可安装<code>linux-firmware</code>和<code>sof-firmware</code>两个包。如果不使用集合的方式，则将<code>@firmware</code>替换为两个包的名字即可。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org4b756fb"></a>发行版内核安装<br />
-<div class="outline-text-5" id="text-1-2-3-2">
+<div id="outline-container-org2562ed4" class="outline-4">
+<h4 id="org2562ed4"><span class="section-number-4">2.3.2.</span> 发行版内核安装</h4>
+<div class="outline-text-4" id="text-2-3-2">
 <p>
 以下是使用GNU GRUB作为系统引导时的安装步骤，如果有特殊需求参考<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel">这里</a>的Distribution kernels一节即可。
 </p>
@@ -835,10 +882,11 @@ Device            Start        End   Sectors   Size Type
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="orgd6eca58"></a>手动编译内核<br />
-<div class="outline-text-5" id="text-1-2-3-3">
+<div id="outline-container-org9edf073" class="outline-4">
+<h4 id="org9edf073"><span class="section-number-4">2.3.3.</span> 手动编译内核</h4>
+<div class="outline-text-4" id="text-2-3-3">
 <p>
 同样创建kernel集合先安装需要的包：
 </p>
@@ -944,17 +992,16 @@ Cryptographic API  ---&gt;
 </pre>
 </div>
 </div>
-</li>
-</ol>
+</div>
 </div>
 
-<div id="outline-container-org13346a5" class="outline-4">
-<h4 id="org13346a5"><span class="section-number-4">1.2.4.</span> 杂项、工具、及系统引导</h4>
-<div class="outline-text-4" id="text-1-2-4">
+<div id="outline-container-org498261d" class="outline-3">
+<h3 id="org498261d"><span class="section-number-3">2.4.</span> 杂项、工具、及系统引导</h3>
+<div class="outline-text-3" id="text-2-4">
 </div>
-<ol class="org-ol">
-<li><a id="org5fb09a4"></a><code>fstab</code>文件<br />
-<div class="outline-text-5" id="text-1-2-4-1">
+<div id="outline-container-org8103925" class="outline-4">
+<h4 id="org8103925"><span class="section-number-4">2.4.1.</span> <code>fstab</code>文件</h4>
+<div class="outline-text-4" id="text-2-4-1">
 <p>
 为了让系统知道该挂载硬盘的哪个分区、每个分区上装的是什么东西、用的是什么文件系统、挂载时需要什么参数、以及挂载的行为、优先级等，需要编辑<code>/etc/fstab</code>文件。具体的语法请看<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System">这里</a>的About fstab一节。下面是我的配置，供参考：
 </p>
@@ -971,10 +1018,11 @@ Cryptographic API  ---&gt;
 这个文件比较重要，千万别手抖。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="orgf6a1994"></a>网络相关<br />
-<div class="outline-text-5" id="text-1-2-4-2">
+<div id="outline-container-org9d36fe1" class="outline-4">
+<h4 id="org9d36fe1"><span class="section-number-4">2.4.2.</span> 网络相关</h4>
+<div class="outline-text-4" id="text-2-4-2">
 <p>
 我们先给自己的机器设一个主机名（注意：如果你在内核里指定了就不要冲突）：
 </p>
@@ -1027,10 +1075,11 @@ Cryptographic API  ---&gt;
 然后各位视需求编辑一下<code>/etc/hosts</code>文件即可。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="orgc883213"></a>系统信息<br />
-<div class="outline-text-5" id="text-1-2-4-3">
+<div id="outline-container-org99b6989" class="outline-4">
+<h4 id="org99b6989"><span class="section-number-4">2.4.3.</span> 系统信息</h4>
+<div class="outline-text-4" id="text-2-4-3">
 <p>
 首先设置root账户的密码（弱密码会提醒）：
 </p>
@@ -1053,10 +1102,11 @@ Cryptographic API  ---&gt;
 由于大部分在大陆买的电脑键盘盘布局是标准的US布局，就不需要管<code>/etc/conf.d/keymap</code>。但需要注意的是硬件时钟，用<code>date</code>命令看看是不是UTC，如果不是就需要在<code>/etc/conf.d/hwclock</code>里设置<code>clock="local"</code>。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="orgd7f783e"></a>系统工具<br />
-<div class="outline-text-5" id="text-1-2-4-4">
+<div id="outline-container-org033f70b" class="outline-4">
+<h4 id="org033f70b"><span class="section-number-4">2.4.4.</span> 系统工具</h4>
+<div class="outline-text-4" id="text-2-4-4">
 <p>
 先安装系统日志管理，可选的有sysklogd、syslog-ng和metalog。
 </p>
@@ -1211,13 +1261,12 @@ Cryptographic API  ---&gt;
 至于我为什么要用plymouth专门模拟OpenRC启动时的默认行为，因为它原生的界面可能会对不齐（因为它认为屏幕的大小变化了）。
 </p>
 </div>
-</li>
-</ol>
+</div>
 </div>
 
-<div id="outline-container-org67a894d" class="outline-4">
-<h4 id="org67a894d"><span class="section-number-4">1.2.5.</span> 系统引导</h4>
-<div class="outline-text-4" id="text-1-2-5">
+<div id="outline-container-org757e5ac" class="outline-3">
+<h3 id="org757e5ac"><span class="section-number-3">2.5.</span> 系统引导</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 最后一步就是安装系统引导了。这里不说使用efibootmgr、也不讲Secure Boot，只说最标准的GRUB2引导（我觉得我已经写不动了、而且情况太多了）。首先UEFI用户在<code>/etc/portage/make.conf</code>文件中加上：
 </p>
@@ -1258,9 +1307,9 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-orgef2cc3f" class="outline-4">
-<h4 id="orgef2cc3f"><span class="section-number-4">1.2.6.</span> 清理</h4>
-<div class="outline-text-4" id="text-1-2-6">
+<div id="outline-container-orge0b5815" class="outline-3">
+<h3 id="orge0b5815"><span class="section-number-3">2.6.</span> 清理</h3>
+<div class="outline-text-3" id="text-2-6">
 <p>
 我们需要收个尾，然后重启离开livecd环境进入实打实的Gentoo Linux后准备配置桌面环境。
 </p>
@@ -1293,13 +1342,13 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-orga084cf7" class="outline-3">
-<h3 id="orga084cf7"><span class="section-number-3">1.3.</span> 桌面环境的安装</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-org980b543" class="outline-2">
+<h2 id="org980b543"><span class="section-number-2">3.</span> 桌面环境的安装</h2>
+<div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgab88fed" class="outline-4">
-<h4 id="orgab88fed"><span class="section-number-4">1.3.1.</span> 选择</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-org1766093" class="outline-3">
+<h3 id="org1766093"><span class="section-number-3">3.1.</span> 选择</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 人们的xp丰富多样，Linux的桌面环境也是牛鬼蛇神。古有X Window System、今有Wayland作为协议。两者之上又有数不清的被我们成为桌面环境的东西。桌面环境的构成如下：
 </p>
@@ -1371,13 +1420,13 @@ slim：怎么办？好慌，潜水太久，管理员要踢我了<br />
 </div>
 </div>
 
-<div id="outline-container-org959c130" class="outline-4">
-<h4 id="org959c130"><span class="section-number-4">1.3.2.</span> XOrg与XMonad</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-org58718c9" class="outline-3">
+<h3 id="org58718c9"><span class="section-number-3">3.2.</span> XOrg与XMonad</h3>
+<div class="outline-text-3" id="text-3-2">
 </div>
-<ol class="org-ol">
-<li><a id="org0307bb7"></a>安装必要软件<br />
-<div class="outline-text-5" id="text-1-3-2-1">
+<div id="outline-container-org560a21a" class="outline-4">
+<h4 id="org560a21a"><span class="section-number-4">3.2.1.</span> 安装必要软件</h4>
+<div class="outline-text-4" id="text-3-2-1">
 <p>
 创建wm集合：
 </p>
@@ -1410,10 +1459,11 @@ slim：怎么办？好慌，潜水太久，管理员要踢我了<br />
 然后就没有然后了，可以开始配置了。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org4ac90ef"></a>配置<br />
-<div class="outline-text-5" id="text-1-3-2-2">
+<div id="outline-container-org7971099" class="outline-4">
+<h4 id="org7971099"><span class="section-number-4">3.2.2.</span> 配置</h4>
+<div class="outline-text-4" id="text-3-2-2">
 <p>
 因为XMonad的特殊性，我们需要先创建一个普通用户（使用XMonad窗口管理器的）：
 </p>
@@ -1465,91 +1515,91 @@ slim：怎么办？好慌，潜水太久，管理员要踢我了<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">import XMonad
-import XMonad.Util.EZConfig
-import XMonad.Util.Ungrab
-import XMonad.Util.Loggers
-import XMonad.Util.SpawnOnce
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
-import XMonad.Layout.ThreeColumns
-import XMonad.Layout.Magnifier
-import XMonad.Layout.Spacing
+<pre class="src src-haskell"><span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3;">XMonad</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Util</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">EZConfig</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Util</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Ungrab</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Util</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Loggers</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Util</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">SpawnOnce</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Hooks</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">EwmhDesktops</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Hooks</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">DynamicLog</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Hooks</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">ManageHelpers</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Hooks</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">StatusBar</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Hooks</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">StatusBar</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">PP</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Layout</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">ThreeColumns</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Layout</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Magnifier</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> <span style="color: #3a81c3; font-weight: bold;">XMonad</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Layout</span><span style="color: #3a81c3; font-weight: bold;">.</span><span style="color: #3a81c3; font-weight: bold;">Spacing</span>
 
-main :: IO ()
-main = xmonad
-     . ewmhFullscreen
-     . ewmh
-     . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
-     $ conf
+<span style="color: #6c3163; font-weight: bold;">main</span> <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #ba2f59; font-weight: bold;">IO</span> <span style="color: #655370; background-color: #fbf8ef;">()</span>
+<span style="color: #2aa1ae; font-weight: bold;">main</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163; font-style: italic;">xmonad</span>
+     <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #4e3163; font-style: italic;">ewmhFullscreen</span>
+     <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #4e3163; font-style: italic;">ewmh</span>
+     <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #2aa1ae; font-weight: bold;">withEasySB</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">statusBarProp</span> <span style="color: #2d9574;">"xmobar"</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">pure</span> <span style="color: #715ab1;">myXmobarPP</span><span style="color: #655370; background-color: #fbf8ef;">))</span> <span style="color: #715ab1;">defToggleStrutsKey</span>
+     <span style="color: #3a81c3; font-weight: bold;">$</span> <span style="color: #4e3163; font-style: italic;">conf</span>
 
-conf = def
-     { terminal    = "alacritty"                   -- Set the default terminal emulator
-     , modMask     = mod4Mask                      -- Rebind Mod to the &lt;meta&gt; key
-     , startupHook = xinit                         -- Things to be started with XMonad
-     , layoutHook  = spacingWithEdge 6 $ myLayout  -- Use custom layouts
-     , manageHook  = myManageHook                  -- Match on certain windows
-     }
-  `additionalKeysP`
-     [ ("M-S-z",           spawn "slock")                                                          -- Lock the screen
-     , ("M-C-s", unGrab *&gt; spawn "scrot -s --quality 100 -e \'mv $f ~/Images/\'")                  -- Screenshot functionality
-     , ("M-S-l",           spawn "rofi -config ~/.rofirc -show drun")                              -- Spotlight
-     , ("&lt;XF86AudioLowerVolume&gt;" , unGrab *&gt; spawn "pactl set-sink-volume @DEFAULT_SINK@ -1000")   -- Decrease volume
-     , ("&lt;XF86AudioRaiseVolume&gt;" , unGrab *&gt; spawn "pactl set-sink-volume @DEFAULT_SINK@ +1000")   -- Increase volume
-     , ("&lt;XF86AudioMute&gt;"        , unGrab *&gt; spawn "pactl set-sink-volume @DEFAULT_SINK@ toggle")  -- Toggle (un)mute volume
-     , ("&lt;XF86MonBrightnessDown&gt;", unGrab *&gt; spawn "xbacklight -6")                                -- Decrease monitor backlight
-     , ("&lt;XF86MonBrightnessUp&gt;"  , unGrab *&gt; spawn "xbacklight +6")                                -- Increase monitor backlight
-     ]
+<span style="color: #2aa1ae; font-weight: bold;">conf</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #715ab1;">def</span>
+     <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #715ab1;">terminal</span>    <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2d9574;">"alacritty"</span>                   <span style="color: #a49da5; font-style: italic;">-- Set the default terminal emulator</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">modMask</span>     <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #715ab1;">mod4Mask</span>                      <span style="color: #a49da5; font-style: italic;">-- Rebind Mod to the &lt;meta&gt; key</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">startupHook</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #715ab1;">xinit</span>                         <span style="color: #a49da5; font-style: italic;">-- Things to be started with XMonad</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">layoutHook</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">spacingWithEdge</span> <span style="color: #4e3163;">6</span> <span style="color: #3a81c3; font-weight: bold;">$</span> <span style="color: #4e3163; font-style: italic;">myLayout</span>  <span style="color: #a49da5; font-style: italic;">-- Use custom layouts</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">manageHook</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #715ab1;">myManageHook</span>                  <span style="color: #a49da5; font-style: italic;">-- Match on certain windows</span>
+     <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style="color: #3a81c3; font-weight: bold;">`</span><span style="color: #3a81c3; font-weight: bold;">additionalKeysP</span><span style="color: #3a81c3; font-weight: bold;">`</span>
+     <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"M-S-z"</span><span style="color: #655370; background-color: #fbf8ef;">,</span>           <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"slock"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>                                                          <span style="color: #a49da5; font-style: italic;">-- Lock the screen</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"M-C-s"</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">unGrab</span> <span style="color: #3a81c3; font-weight: bold;">*&gt;</span> <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"scrot -s --quality 100 -e \'mv $f ~/Images/\'"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>                  <span style="color: #a49da5; font-style: italic;">-- Screenshot functionality</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"M-S-l"</span><span style="color: #655370; background-color: #fbf8ef;">,</span>           <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"rofi -config ~/.rofirc -show drun"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>                              <span style="color: #a49da5; font-style: italic;">-- Spotlight</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"&lt;XF86AudioLowerVolume&gt;"</span> <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">unGrab</span> <span style="color: #3a81c3; font-weight: bold;">*&gt;</span> <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"pactl set-sink-volume @DEFAULT_SINK@ -1000"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>   <span style="color: #a49da5; font-style: italic;">-- Decrease volume</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"&lt;XF86AudioRaiseVolume&gt;"</span> <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">unGrab</span> <span style="color: #3a81c3; font-weight: bold;">*&gt;</span> <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"pactl set-sink-volume @DEFAULT_SINK@ +1000"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>   <span style="color: #a49da5; font-style: italic;">-- Increase volume</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"&lt;XF86AudioMute&gt;"</span>        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">unGrab</span> <span style="color: #3a81c3; font-weight: bold;">*&gt;</span> <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"pactl set-sink-volume @DEFAULT_SINK@ toggle"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>  <span style="color: #a49da5; font-style: italic;">-- Toggle (un)mute volume</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"&lt;XF86MonBrightnessDown&gt;"</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">unGrab</span> <span style="color: #3a81c3; font-weight: bold;">*&gt;</span> <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"xbacklight -6"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>                                <span style="color: #a49da5; font-style: italic;">-- Decrease monitor backlight</span>
+     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"&lt;XF86MonBrightnessUp&gt;"</span>  <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">unGrab</span> <span style="color: #3a81c3; font-weight: bold;">*&gt;</span> <span style="color: #2aa1ae; font-weight: bold;">spawn</span> <span style="color: #2d9574;">"xbacklight +6"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>                                <span style="color: #a49da5; font-style: italic;">-- Increase monitor backlight</span>
+     <span style="color: #655370; background-color: #fbf8ef;">]</span>
 
-xinit :: X ()
-xinit = do
-      spawnOnce "feh --bg-fill --no-fehbg ~/.background"  -- Set background
-      spawnOnce "picom --config ~/.picomrc -b"            -- Windows compositor
-      spawnOnce "fcitx"                                   -- Input method initialize
+<span style="color: #6c3163; font-weight: bold;">xinit</span> <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #ba2f59; font-weight: bold;">X</span> <span style="color: #655370; background-color: #fbf8ef;">()</span>
+<span style="color: #2aa1ae; font-weight: bold;">xinit</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #3a81c3; font-weight: bold;">do</span>
+      <span style="color: #2aa1ae; font-weight: bold;">spawnOnce</span> <span style="color: #2d9574;">"feh --bg-fill --no-fehbg ~/.background"</span>  <span style="color: #a49da5; font-style: italic;">-- Set background</span>
+      <span style="color: #2aa1ae; font-weight: bold;">spawnOnce</span> <span style="color: #2d9574;">"picom --config ~/.picomrc -b"</span>            <span style="color: #a49da5; font-style: italic;">-- Windows compositor</span>
+      <span style="color: #2aa1ae; font-weight: bold;">spawnOnce</span> <span style="color: #2d9574;">"fcitx"</span>                                   <span style="color: #a49da5; font-style: italic;">-- Input method initialize</span>
 
-myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
-       where
-         threeCol = magnifiercz' 1.3 $ ThreeColMid nmaster delta ratio
-         tiled    = Tall nmaster delta ratio
-         nmaster  = 1      -- Default number of windows in the master pane
-         ratio    = 1/2    -- Default proportion of the screen occupied by master pane
-         delta    = 2/100  -- Percent of screen to increment by when resizing panes
+<span style="color: #2aa1ae; font-weight: bold;">myLayout</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163; font-style: italic;">tiled</span> <span style="color: #3a81c3; font-weight: bold;">|||</span> <span style="color: #ba2f59; font-weight: bold;">Mirror</span> <span style="color: #715ab1;">tiled</span> <span style="color: #3a81c3; font-weight: bold;">|||</span> <span style="color: #ba2f59; font-weight: bold;">Full</span> <span style="color: #3a81c3; font-weight: bold;">|||</span> <span style="color: #4e3163; font-style: italic;">threeCol</span>
+       <span style="color: #3a81c3; font-weight: bold;">where</span>
+         <span style="color: #2aa1ae; font-weight: bold;">threeCol</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">magnifiercz'</span> 1.3 <span style="color: #3a81c3; font-weight: bold;">$</span> <span style="color: #ba2f59; font-weight: bold;">ThreeColMid</span> <span style="color: #715ab1;">nmaster</span> <span style="color: #715ab1;">delta</span> <span style="color: #715ab1;">ratio</span>
+         <span style="color: #2aa1ae; font-weight: bold;">tiled</span>    <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #ba2f59; font-weight: bold;">Tall</span> <span style="color: #715ab1;">nmaster</span> <span style="color: #715ab1;">delta</span> <span style="color: #715ab1;">ratio</span>
+         <span style="color: #2aa1ae; font-weight: bold;">nmaster</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163;">1</span>      <span style="color: #a49da5; font-style: italic;">-- Default number of windows in the master pane</span>
+         <span style="color: #2aa1ae; font-weight: bold;">ratio</span>    <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163;">1</span><span style="color: #3a81c3; font-weight: bold;">/</span><span style="color: #4e3163;">2</span>    <span style="color: #a49da5; font-style: italic;">-- Default proportion of the screen occupied by master pane</span>
+         <span style="color: #2aa1ae; font-weight: bold;">delta</span>    <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163;">2</span><span style="color: #3a81c3; font-weight: bold;">/</span><span style="color: #4e3163;">100</span>  <span style="color: #a49da5; font-style: italic;">-- Percent of screen to increment by when resizing panes</span>
 
-myXmobarPP :: PP
-myXmobarPP = def
-           { ppSep             = blue " • "
-           , ppTitleSanitize   = xmobarStrip
-           , ppCurrent         = wrap " " "" . xmobarBorder "Top" "#8a9a7b" 2
-           , ppHidden          = white . wrap " " ""
-           , ppHiddenNoWindows = lowWhite . wrap " " ""
-           , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-           , ppOrder           = \[ws, l, _, wins] -&gt; [ws, l, wins]
-           , ppExtras          = [logTitles formatFocused formatUnfocused]
-           }
-         where
-           formatFocused   = wrap (white    "[") (white    "]") . red  . ppWindow
-           formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . cyan . ppWindow
-           ppWindow :: String -&gt; String
-           ppWindow = xmobarRaw . (\w -&gt; if null w then "untitled" else w) . shorten 20
-           blue, lowWhite, magenta, red, white, yellow, green, cyan :: String -&gt; String
-           magenta  = xmobarColor "#a292a3" ""
-           blue     = xmobarColor "#8ba4b0" ""
-           white    = xmobarColor "#C8C093" ""
-           yellow   = xmobarColor "#c4b28a" ""
-           red      = xmobarColor "#c4746e" ""
-           lowWhite = xmobarColor "#bbbbbb" ""
-           green    = xmobarColor "#8a9a7b" ""
-           cyan     = xmobarColor "#8ea4a2" ""
+<span style="color: #6c3163; font-weight: bold;">myXmobarPP</span> <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #ba2f59; font-weight: bold;">PP</span>
+<span style="color: #2aa1ae; font-weight: bold;">myXmobarPP</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #715ab1;">def</span>
+           <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #715ab1;">ppSep</span>             <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">blue</span> <span style="color: #2d9574;">" &#8226; "</span>
+           <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">ppTitleSanitize</span>   <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #715ab1;">xmobarStrip</span>
+           <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">ppCurrent</span>         <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">wrap</span> <span style="color: #2d9574;">" "</span> <span style="color: #2d9574;">""</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarBorder</span> <span style="color: #2d9574;">"Top"</span> <span style="color: #2d9574;">"#8a9a7b"</span> <span style="color: #4e3163;">2</span>
+           <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">ppHidden</span>          <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163; font-style: italic;">white</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #2aa1ae; font-weight: bold;">wrap</span> <span style="color: #2d9574;">" "</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">ppHiddenNoWindows</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163; font-style: italic;">lowWhite</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #2aa1ae; font-weight: bold;">wrap</span> <span style="color: #2d9574;">" "</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">ppUrgent</span>          <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163; font-style: italic;">red</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #2aa1ae; font-weight: bold;">wrap</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">yellow</span> <span style="color: #2d9574;">"!"</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">yellow</span> <span style="color: #2d9574;">"!"</span><span style="color: #655370; background-color: #fbf8ef;">)</span>
+           <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">ppOrder</span>           <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #3a81c3; font-weight: bold;">\</span><span style="color: #655370; background-color: #fbf8ef;">[</span><span style="color: #715ab1;">ws</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">l</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #3a81c3; font-weight: bold;">_</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">wins</span><span style="color: #655370; background-color: #fbf8ef;">]</span> <span style="color: #3a81c3; font-weight: bold;">-&gt;</span> <span style="color: #655370; background-color: #fbf8ef;">[</span><span style="color: #715ab1;">ws</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">l</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">wins</span><span style="color: #655370; background-color: #fbf8ef;">]</span>
+           <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">ppExtras</span>          <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #655370; background-color: #fbf8ef;">[</span><span style="color: #2aa1ae; font-weight: bold;">logTitles</span> <span style="color: #715ab1;">formatFocused</span> <span style="color: #715ab1;">formatUnfocused</span><span style="color: #655370; background-color: #fbf8ef;">]</span>
+           <span style="color: #655370; background-color: #fbf8ef;">}</span>
+         <span style="color: #3a81c3; font-weight: bold;">where</span>
+           <span style="color: #2aa1ae; font-weight: bold;">formatFocused</span>   <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">wrap</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">white</span>    <span style="color: #2d9574;">"["</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">white</span>    <span style="color: #2d9574;">"]"</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #4e3163; font-style: italic;">red</span>  <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #4e3163; font-style: italic;">ppWindow</span>
+           <span style="color: #2aa1ae; font-weight: bold;">formatUnfocused</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">wrap</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">lowWhite</span> <span style="color: #2d9574;">"["</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2aa1ae; font-weight: bold;">lowWhite</span> <span style="color: #2d9574;">"]"</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #4e3163; font-style: italic;">cyan</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #4e3163; font-style: italic;">ppWindow</span>
+           <span style="color: #6c3163; font-weight: bold;">ppWindow</span> <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #ba2f59; font-weight: bold;">String</span> <span style="color: #3a81c3; font-weight: bold;">-&gt;</span> <span style="color: #ba2f59; font-weight: bold;">String</span>
+           <span style="color: #2aa1ae; font-weight: bold;">ppWindow</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #4e3163; font-style: italic;">xmobarRaw</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #3a81c3; font-weight: bold;">\</span><span style="color: #715ab1;">w</span> <span style="color: #3a81c3; font-weight: bold;">-&gt;</span> <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #2aa1ae; font-weight: bold;">null</span> <span style="color: #715ab1;">w</span> <span style="color: #3a81c3; font-weight: bold;">then</span> <span style="color: #2d9574;">"untitled"</span> <span style="color: #3a81c3; font-weight: bold;">else</span> <span style="color: #715ab1;">w</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #3a81c3; font-weight: bold;">.</span> <span style="color: #2aa1ae; font-weight: bold;">shorten</span> <span style="color: #4e3163;">20</span>
+           <span style="color: #6c3163; font-weight: bold;">blue</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #6c3163; font-weight: bold;">lowWhite</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #6c3163; font-weight: bold;">magenta</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #6c3163; font-weight: bold;">red</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #6c3163; font-weight: bold;">white</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #6c3163; font-weight: bold;">yellow</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #6c3163; font-weight: bold;">green</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #6c3163; font-weight: bold;">cyan</span> <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #ba2f59; font-weight: bold;">String</span> <span style="color: #3a81c3; font-weight: bold;">-&gt;</span> <span style="color: #ba2f59; font-weight: bold;">String</span>
+           <span style="color: #2aa1ae; font-weight: bold;">magenta</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#a292a3"</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #2aa1ae; font-weight: bold;">blue</span>     <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#8ba4b0"</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #2aa1ae; font-weight: bold;">white</span>    <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#C8C093"</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #2aa1ae; font-weight: bold;">yellow</span>   <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#c4b28a"</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #2aa1ae; font-weight: bold;">red</span>      <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#c4746e"</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #2aa1ae; font-weight: bold;">lowWhite</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#bbbbbb"</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #2aa1ae; font-weight: bold;">green</span>    <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#8a9a7b"</span> <span style="color: #2d9574;">""</span>
+           <span style="color: #2aa1ae; font-weight: bold;">cyan</span>     <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">xmobarColor</span> <span style="color: #2d9574;">"#8ea4a2"</span> <span style="color: #2d9574;">""</span>
 
-myManageHook :: ManageHook
-myManageHook = composeAll
-             [ isDialog                 --&gt; doFloat
-             , className =? "mpv"       --&gt; doFloat
-             , className =? "fontforge" --&gt; doFloat
-             ]
+<span style="color: #6c3163; font-weight: bold;">myManageHook</span> <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #ba2f59; font-weight: bold;">ManageHook</span>
+<span style="color: #2aa1ae; font-weight: bold;">myManageHook</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2aa1ae; font-weight: bold;">composeAll</span>
+             <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #4e3163; font-style: italic;">isDialog</span>                 <span style="color: #3a81c3; font-weight: bold;">--&gt;</span> <span style="color: #4e3163; font-style: italic;">doFloat</span>
+             <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">className</span> <span style="color: #3a81c3; font-weight: bold;">=?</span> <span style="color: #2d9574;">"mpv"</span>       <span style="color: #3a81c3; font-weight: bold;">--&gt;</span> <span style="color: #4e3163; font-style: italic;">doFloat</span>
+             <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #4e3163; font-style: italic;">className</span> <span style="color: #3a81c3; font-weight: bold;">=?</span> <span style="color: #2d9574;">"fontforge"</span> <span style="color: #3a81c3; font-weight: bold;">--&gt;</span> <span style="color: #4e3163; font-style: italic;">doFloat</span>
+             <span style="color: #655370; background-color: #fbf8ef;">]</span>
 </pre>
 </div>
 
@@ -1558,57 +1608,57 @@ myManageHook = composeAll
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">Config { overrideRedirect = False
-       , font     = "xft:IBM3270-13.2:antialias=ture,notoSansMonoCJKjp-11.6"
-       , additionalFonts = [ "xft:notoSansMonoCJKjp-10" ]
-       , bgColor  = "#5f5f5f"
-       , fgColor  = "#f8f8f2"
-       , position = TopW L 100
-       , persistent  = False
-       , hideOnStart = False
-       , commands = [ Run MultiCpu
-                        [ "--template" , "Cpu: &lt;total0&gt;:&lt;total1&gt;%"
-                        , "--Low"      , "50"
-                        , "--High"     , "85"
-                        , "--low"      , "white"
-                        , "--normal"   , "white"
-                        , "--high"     , "white"
-                        ] 10
-                    , Run Alsa "default" "Master"
-                        [ "--template", "&lt;volumestatus&gt;"
-                        , "--suffix"  , "True"
-                        , "--"
-                        , "--on", ""
-                        ]
-                    , Run Battery
-                        [ "--template" , "Batt: &lt;acstatus&gt;"
-                        , "--Low"      , "10"
-                        , "--High"     , "80"
-                        , "--low"      , "white"
-                        , "--normal"   , "white"
-                        , "--high"     , "white"
-                        , "--"
-                        , "-o"  , "&lt;left&gt;% (&lt;timeleft&gt;)"
-                        , "-O"  , "&lt;fc=#a292a3&gt;Charging&lt;/fc&gt;"
-                        , "-i"  , "&lt;fc=#8ea4a2&gt;Charged&lt;/fc&gt;"
-                        ] 50
-                    , Run DynNetwork
-                        [ "--template" , "&lt;dev&gt;: &lt;tx&gt;:&lt;rx&gt;kB/s"
-                        , "--Low"      , "1000"
-                        , "--High"     , "5000"
-                        , "--low"      , "white"
-                        , "--normal"   , "white"
-                        , "--high"     , "white"
-                        ] 10
-                    , Run Memory ["--template", "Mem: &lt;usedratio&gt;%"] 10
-                    , Run Swap [] 10
-                    , Run Date "%a %Y-%m-%d %H:%M" "date" 10
-                    , Run XMonadLog
-                    ]
-       , sepChar  = "%"
-       , alignSep = "}{"
-       , template = "%XMonadLog% }{ %alsa:default:Master% &lt;fc=#8ba4b0&gt;•&lt;/fc&gt; %battery% &lt;fc=#8ba4b0&gt;•&lt;/fc&gt; %multicpu% &lt;fc=#8ba4b0&gt;•&lt;/fc&gt; %memory% &lt;fc=#8ba4b0&gt;•&lt;/fc&gt; %date% "
-       }
+<pre class="src src-haskell"><span style="color: #ba2f59; font-weight: bold;">Config</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #715ab1;">overrideRedirect</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #ba2f59; font-weight: bold;">False</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">font</span>     <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2d9574;">"xft:IBM3270-13.2:antialias=ture,notoSansMonoCJKjp-11.6"</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">additionalFonts</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #2d9574;">"xft:notoSansMonoCJKjp-10"</span> <span style="color: #655370; background-color: #fbf8ef;">]</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">bgColor</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2d9574;">"#5f5f5f"</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">fgColor</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2d9574;">"#f8f8f2"</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">position</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #ba2f59; font-weight: bold;">TopW</span> <span style="color: #ba2f59; font-weight: bold;">L</span> <span style="color: #4e3163;">100</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">persistent</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #ba2f59; font-weight: bold;">False</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">hideOnStart</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #ba2f59; font-weight: bold;">False</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">commands</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">MultiCpu</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #2d9574;">"--template"</span> <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"Cpu: &lt;total0&gt;:&lt;total1&gt;%"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--Low"</span>      <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"50"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--High"</span>     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"85"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--low"</span>      <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--normal"</span>   <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--high"</span>     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">]</span> <span style="color: #4e3163;">10</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Alsa</span> <span style="color: #2d9574;">"default"</span> <span style="color: #2d9574;">"Master"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #2d9574;">"--template"</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"&lt;volumestatus&gt;"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--suffix"</span>  <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"True"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--on"</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">""</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">]</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Battery</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #2d9574;">"--template"</span> <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"Batt: &lt;acstatus&gt;"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--Low"</span>      <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"10"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--High"</span>     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"80"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--low"</span>      <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--normal"</span>   <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--high"</span>     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"-o"</span>  <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"&lt;left&gt;% (&lt;timeleft&gt;)"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"-O"</span>  <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"&lt;fc=#a292a3&gt;Charging&lt;/fc&gt;"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"-i"</span>  <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"&lt;fc=#8ea4a2&gt;Charged&lt;/fc&gt;"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">]</span> <span style="color: #4e3163;">50</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">DynNetwork</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">[</span> <span style="color: #2d9574;">"--template"</span> <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"&lt;dev&gt;: &lt;tx&gt;:&lt;rx&gt;kB/s"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--Low"</span>      <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"1000"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--High"</span>     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"5000"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--low"</span>      <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--normal"</span>   <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"--high"</span>     <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"white"</span>
+                        <span style="color: #655370; background-color: #fbf8ef;">]</span> <span style="color: #4e3163;">10</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Memory</span> <span style="color: #655370; background-color: #fbf8ef;">[</span><span style="color: #2d9574;">"--template"</span><span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #2d9574;">"Mem: &lt;usedratio&gt;%"</span><span style="color: #655370; background-color: #fbf8ef;">]</span> <span style="color: #4e3163;">10</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Swap</span> <span style="color: #655370; background-color: #fbf8ef;">[]</span> <span style="color: #4e3163;">10</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">Date</span> <span style="color: #2d9574;">"%a %Y-%m-%d %H:%M"</span> <span style="color: #2d9574;">"date"</span> <span style="color: #4e3163;">10</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #ba2f59; font-weight: bold;">Run</span> <span style="color: #ba2f59; font-weight: bold;">XMonadLog</span>
+                    <span style="color: #655370; background-color: #fbf8ef;">]</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">sepChar</span>  <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2d9574;">"%"</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">alignSep</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2d9574;">"}{"</span>
+       <span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #715ab1;">template</span> <span style="color: #3a81c3; font-weight: bold;">=</span> <span style="color: #2d9574;">"%XMonadLog% }{ %alsa:default:Master% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %battery% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %multicpu% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %memory% &lt;fc=#8ba4b0&gt;&#8226;&lt;/fc&gt; %date% "</span>
+       <span style="color: #655370; background-color: #fbf8ef;">}</span>
 </pre>
 </div>
 
@@ -1661,25 +1711,25 @@ wintypes:
 将你希望配置的东西配置完就可以重启进入XMonad桌面环境了。随着使用慢慢打磨自己的配置就好。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="orgd77ffda"></a>常见事故<br />
-<div class="outline-text-5" id="text-1-3-2-3">
+<div id="outline-container-org823ffa6" class="outline-4">
+<h4 id="org823ffa6"><span class="section-number-4">3.2.3.</span> 常见事故</h4>
+<div class="outline-text-4" id="text-3-2-3">
 <p>
 如果你在使用时发现有屏幕撕裂等的现象，请先阅读这篇关于XOrg的文章，随后以「Screen Tearing」「XOrg」以及你的显卡配置在搜索引擎上搜索方案，常见的包括开启VSync、Intel显卡使用modesetting驱动替代xf86驱动等。
 </p>
 </div>
-</li>
-</ol>
+</div>
 </div>
 
-<div id="outline-container-orge7d5438" class="outline-4">
-<h4 id="orge7d5438"><span class="section-number-4">1.3.3.</span> Wayland 与 SwayWM</h4>
-<div class="outline-text-4" id="text-1-3-3">
+<div id="outline-container-org56213c1" class="outline-3">
+<h3 id="org56213c1"><span class="section-number-3">3.3.</span> Wayland 与 SwayWM</h3>
+<div class="outline-text-3" id="text-3-3">
 </div>
-<ol class="org-ol">
-<li><a id="orgabe999a"></a>安装必要软件<br />
-<div class="outline-text-5" id="text-1-3-3-1">
+<div id="outline-container-org79dfa53" class="outline-4">
+<h4 id="org79dfa53"><span class="section-number-4">3.3.1.</span> 安装必要软件</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <p>
 首先创建winmgr集合：
 </p>
@@ -1707,10 +1757,11 @@ wintypes:
 然后先<code>emerge --pretend --ask @winmgr</code>看一下<code>USE</code>旗标有没有需要改动的，最后安装集合就好。
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org6d3795e"></a>配置<br />
-<div class="outline-text-5" id="text-1-3-3-2">
+<div id="outline-container-orgc0f908a" class="outline-4">
+<h4 id="orgc0f908a"><span class="section-number-4">3.3.2.</span> 配置</h4>
+<div class="outline-text-4" id="text-3-3-2">
 <div class="org-src-container">
 <pre class="src src-conf"><span style="color: #a49da5; font-style: italic;"># </span><span style="color: #a49da5; font-style: italic;">~/.config/sway/config</span>
 
@@ -1769,10 +1820,11 @@ bindsym $mod+Print exec grimshot save area ~/Images/psa_$(date +<span style="col
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="org8307cec"></a>常见问题<br />
-<div class="outline-text-5" id="text-1-3-3-3">
+<div id="outline-container-org3ecf24c" class="outline-4">
+<h4 id="org3ecf24c"><span class="section-number-4">3.3.3.</span> 常见问题</h4>
+<div class="outline-text-4" id="text-3-3-3">
 <p>
 swayWM有些时候过于守旧，过分追求与i3的兼容了。这就导致很多看起来很合理也很正常的特性他们就是不支持，比如圆角窗口。这还不是最离谱的，它不支持在当前焦点（focus）和先前焦点的浮动窗口中切换焦点（之所以说浮动是因为只有浮动才会发生窗口遮挡的情况；tabbed等问题不严重）。解决方案见<a href="https://www.reddit.com/r/swaywm/comments/etpjix/i_created_a_script_to_implement_window_back_and/">r/swayWM</a>，原理就是用一个shell脚本在后台去读swaymsg。首先创建一个脚本，建议为：<code>~/.config/sway/track_prev_focus</code>，内容如下：
 </p>
@@ -1860,14 +1912,13 @@ app-i18n/fcitx-configtool:5 <span style="color: #a49da5; font-style: italic;"># 
 注意<code>GTK_IM_MODULE</code>这一变量，官方的建议是用<code>wayland</code>的值，但Emacs会报错。所以如果你不用Emacs就把它换成wayland。
 </p>
 </div>
-</li>
-</ol>
+</div>
 </div>
 </div>
 
-<div id="outline-container-org6cbdbfe" class="outline-3">
-<h3 id="org6cbdbfe"><span class="section-number-3">1.4.</span> 吐槽与展望</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-orgbe30102" class="outline-2">
+<h2 id="orgbe30102"><span class="section-number-2">4.</span> 吐槽与展望</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 Gentoo是1999年10月4日出现的，现在已经2024年了，真的是「20 years of compile」，而它很有名的一点就是需要编译。网上有人用Gentoo把硬盘弄坏的、被怀疑在挖矿的、把主板烧了的，各种各样。然而就在不久就之前，Gentoo的二进制更成熟了。真是一件大好事（虽然估计对我没什么影响就是了）。
 </p>
@@ -1885,7 +1936,6 @@ Gentoo是1999年10月4日出现的，现在已经2024年了，真的是「20 yea
 </p>
 </div>
 </div>
-</div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -1896,7 +1946,7 @@ Gentoo是1999年10月4日出现的，现在已经2024年了，真的是「20 yea
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-07-09 Tue 19:37</p>
+<p class="date">Created: 2024-08-13 Tue 15:11</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
