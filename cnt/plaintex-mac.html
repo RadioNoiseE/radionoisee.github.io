@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-08-14 Wed 20:47 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plain-TeX宏集</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Plain-TeX宏集</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc11b2cc">1. 介绍</a></li>
+<li><a href="#org39dd441">2. 字体类</a>
+<ul>
+<li><a href="#orgc826b0a">2.1. HZ</a></li>
+<li><a href="#orgd67419c">2.2. Protrude</a></li>
+<li><a href="#orgf6a4bd2">2.3. 尺寸相关</a></li>
+<li><a href="#orgcacfff6">2.4. 更换字体</a></li>
+</ul>
+</li>
+<li><a href="#orge7b88bb">3. 标记元素</a>
+<ul>
+<li><a href="#orgd17551a">3.1. 标题</a></li>
+<li><a href="#org997ad33">3.2. 章节</a></li>
+<li><a href="#orgd40ecf7">3.3. 图文混排</a></li>
+<li><a href="#org9a1aa9d">3.4. 列表</a></li>
+</ul>
+</li>
+<li><a href="#orga6c5492">4. 未完待续</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc11b2cc" class="outline-2">
+<h2 id="orgc11b2cc"><span class="section-number-2">1.</span> 介绍</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+本文记录并收集一些在LuaTeX引擎下使用plain-TeX排版的宏集。效果如此：
+</p>
+
+
+<div id="orgd3a67c7" class="figure">
+<p><img src="../img/plaintex-mac-01.png" alt="plaintex-mac-01.png" loading="lazy" align="center" width="85%" />
+</p>
+<p><span class="figure-number">Figure 1: </span>经济暑假作业</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org39dd441" class="outline-2">
+<h2 id="org39dd441"><span class="section-number-2">2.</span> 字体类</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc826b0a" class="outline-3">
+<h3 id="orgc826b0a"><span class="section-number-3">2.1.</span> HZ</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+即在断行结果较差时自动调整字符宽度以优化结果。注意在我的设定下该特性会影响断行算法。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\adjustspacing</span>=2
+<span style="color: #696969;">\def\hzf</span>#1{<span style="color: #696969;">\expandglyphsinfont</span>#1 20 20 10}
+</pre>
+</div>
+
+<p>
+应用例：<code>\hzf\tenrm</code>。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd67419c" class="outline-3">
+<h3 id="orgd67419c"><span class="section-number-3">2.2.</span> Protrude</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+类似标点悬挂，也会影响断行算法。比较坑的一点是Han The THanh的设定不能直接用，因为LuaTeX下数值含义改变了。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\protrudechars</span>=2
+<span style="color: #696969;">\def\prf</span>#1{#1<span style="color: #696969;">\setbox</span>0<span style="color: #696969;">\hbox</span> to1em{}
+ <span style="color: #696969;">\def\s@m</span>##1##2##3{<span style="color: #696969;">\numexpr\dimexpr\fontcharwd</span>##1##2*##3/<span style="color: #696969;">\wd</span>0<span style="color: #696969;">\relax</span>}
+ <span style="color: #696969;">\def\r@c</span>##1##2=##3;{<span style="color: #696969;">\rpcode</span>##1##2=<span style="color: #696969;">\s@m</span>##1{##2}{##3}}
+ <span style="color: #696969;">\def\l@c</span>##1##2=##3;{<span style="color: #696969;">\lpcode</span>##1##2=<span style="color: #696969;">\s@m</span>##1{##2}{##3}}
+ <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\!</span>=200; <span style="color: #696969;">\r@c</span>#1`\,=700; <span style="color: #696969;">\r@c</span>#1`<span style="color: #dc752f;">\-</span>=700; <span style="color: #696969;">\r@c</span>#1`\.=700;
+ <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\;</span>=500; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\:</span>=500; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\?</span>=200; <span style="color: #696969;">\l@c</span>#1`\`=700;
+ <span style="color: #696969;">\r@c</span>#1`\'=700; <span style="color: #696969;">\l@c</span>#1 92=500; <span style="color: #696969;">\r@c</span>#1 34=500; <span style="color: #696969;">\r@c</span>#1 123=300;
+ <span style="color: #696969;">\r@c</span>#1 124=200; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\)</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\A</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\F</span>=50;
+ <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\K</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\L</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\T</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\V</span>=50;
+ <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\W</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\X</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\Y</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\k</span>=50;
+ <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\r</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\t</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\v</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\w</span>=50;
+ <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\x</span>=50; <span style="color: #696969;">\r@c</span>#1`<span style="color: #696969;">\y</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #dc752f;">\(</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\A</span>=50;
+ <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\J</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\T</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\V</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\W</span>=50;
+ <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\X</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\Y</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\v</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\w</span>=50;
+ <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\x</span>=50; <span style="color: #696969;">\l@c</span>#1`<span style="color: #696969;">\y</span>=0;}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf6a4bd2" class="outline-3">
+<h3 id="orgf6a4bd2"><span class="section-number-3">2.3.</span> 尺寸相关</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+LaTeX2e的NFSS2果然是好文明，虽然有点粗暴。幸好，手动枚举也还能接受。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\font\ch</span>=cmcsc10 at 11pt
+<span style="color: #696969;">\font\twelverm</span>=cmr12
+<span style="color: #696969;">\font\twelvebf</span>=cmbx12
+<span style="color: #696969;">\font\twelveit</span>=cmti12
+<span style="color: #696969;">\font\twelvesl</span>=cmsl12
+<span style="color: #696969;">\font\twelvemus</span>=cmmi12
+<span style="color: #696969;">\font\eightrm</span>=cmr8
+<span style="color: #696969;">\font\eightbf</span>=cmbx8
+<span style="color: #696969;">\font\eightit</span>=cmti8
+<span style="color: #696969;">\font\eightsl</span>=cmsl8
+<span style="color: #696969;">\font\eightmus</span>=cmmi8
+<span style="color: #696969;">\def\bigtype</span>{<span style="color: #696969;">\let</span><span style="color: #ba2f59; font-weight: bold;">\rm</span>=<span style="color: #696969;">\twelverm</span> <span style="color: #696969;">\let</span><span style="color: #6c4173;">\bf</span>=<span style="color: #696969;">\twelvebf</span>
+ <span style="color: #696969;">\let</span><span style="color: #3a81c3; font-style: italic;">\it</span>=<span style="color: #696969;">\twelveit</span> <span style="color: #696969;">\let</span><span style="color: #3a81c3; font-style: italic;">\sl</span>=<span style="color: #696969;">\twelvesl</span> <span style="color: #696969;">\let\mus</span>=<span style="color: #696969;">\twelvemus</span>
+ <span style="color: #696969;">\baselineskip</span>=14pt minus 1pt
+ <span style="color: #ba2f59; font-weight: bold;">\rm</span>}
+<span style="color: #696969;">\def\medtype</span>{<span style="color: #696969;">\let</span><span style="color: #ba2f59; font-weight: bold;">\rm</span>=<span style="color: #696969;">\tenrm</span> <span style="color: #696969;">\let</span><span style="color: #6c4173;">\bf</span>=<span style="color: #696969;">\tenbf</span>
+ <span style="color: #696969;">\let</span><span style="color: #3a81c3; font-style: italic;">\it</span>=<span style="color: #696969;">\tenit</span> <span style="color: #696969;">\let</span><span style="color: #3a81c3; font-style: italic;">\sl</span>=<span style="color: #696969;">\tensl</span> <span style="color: #696969;">\let\mus</span>=<span style="color: #696969;">\teni</span>
+ <span style="color: #696969;">\baselineskip</span>=12pt minus 1pt
+ <span style="color: #ba2f59; font-weight: bold;">\rm</span>}
+<span style="color: #696969;">\def\smalltype</span>{<span style="color: #696969;">\let</span><span style="color: #ba2f59; font-weight: bold;">\rm</span>=<span style="color: #696969;">\eightrm</span> <span style="color: #696969;">\let</span><span style="color: #6c4173;">\bf</span>=<span style="color: #696969;">\eightbf</span>
+ <span style="color: #696969;">\let</span><span style="color: #3a81c3; font-style: italic;">\it</span>=<span style="color: #696969;">\eightit</span> <span style="color: #696969;">\let</span><span style="color: #3a81c3; font-style: italic;">\sl</span>=<span style="color: #696969;">\eightsl</span> <span style="color: #696969;">\let\mus</span>=<span style="color: #696969;">\eightmus</span>
+ <span style="color: #696969;">\baselineskip</span>=9.5pt minus .75pt
+ <span style="color: #ba2f59; font-weight: bold;">\rm</span>}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcacfff6" class="outline-3">
+<h3 id="orgcacfff6"><span class="section-number-3">2.4.</span> 更换字体</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+使用老爷子排版Concrete Mathematics时用的字体组合（注意此时主要字体变为了<code>\textrm</code>）：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\def\hex@</span>#1{<span style="color: #696969;">\ifcase</span>#1 0<span style="color: #696969;">\or</span> 1<span style="color: #696969;">\or</span> 2<span style="color: #696969;">\or</span> 3<span style="color: #696969;">\or</span> 4<span style="color: #696969;">\or</span> 5<span style="color: #696969;">\or</span> 6<span style="color: #696969;">\or</span> 7<span style="color: #696969;">\or</span> 8<span style="color: #696969;">\or</span> 9<span style="color: #696969;">\or</span> A<span style="color: #696969;">\or</span> B<span style="color: #696969;">\or</span> C<span style="color: #696969;">\or</span> D<span style="color: #696969;">\or</span> E<span style="color: #696969;">\or</span> F<span style="color: #696969;">\fi</span>}
+<span style="color: #696969;">\font</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textrm</span>=ccr10
+<span style="color: #696969;">\font</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textit</span>=ccti10
+<span style="color: #696969;">\font</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textsl</span>=ccsl10
+<span style="color: #696969;">\font</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textbf</span>=cmbx10
+<span style="color: #696969;">\font</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textsc</span>=cccsc10
+<span style="color: #696969;">\font\oldsty</span>=ccmi10
+<span style="color: #696969;">\font\mathtext</span>=ccr10
+<span style="color: #696969;">\font\mathsubtext</span>=ccr7
+<span style="color: #696969;">\font\mathsubsubtext</span>=ccr5
+<span style="color: #696969;">\font\mathlet</span>=eurm10 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathlet</span>=0pt
+<span style="color: #696969;">\font\mathsublet</span>=eurm7 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathsublet</span>=0pt
+<span style="color: #696969;">\font\mathsubsublet</span>=eurm5 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathsubsublet</span>=0pt
+<span style="color: #696969;">\skewchar\mathlet</span>='177 <span style="color: #696969;">\skewchar\mathsublet</span>='177 <span style="color: #696969;">\skewchar\mathsubsublet</span>='177
+<span style="color: #696969;">\font\mathsym</span>=cmsy10
+<span style="color: #696969;">\font\mathsubsym</span>=cmsy7
+<span style="color: #696969;">\font\mathsubsubsym</span>=cmsy5
+<span style="color: #696969;">\skewchar\mathsym</span>='60 <span style="color: #696969;">\skewchar\mathsubsym</span>='60 <span style="color: #696969;">\skewchar\mathsubsubsym</span>='60
+<span style="color: #696969;">\font\mathext</span>=cmex10
+<span style="color: #696969;">\font\mathsubext</span>=cmex10
+<span style="color: #696969;">\font\mathsubsubext</span>=cmex10
+<span style="color: #696969;">\font\mathscr</span>=euxm10<span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathscr</span>=0pt
+<span style="color: #696969;">\font\mathsubscr</span>=euxm7 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathsubscr</span>=0pt
+<span style="color: #696969;">\font\mathsubsubscr</span>=euxm5 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathsubsubscr</span>=0pt
+<span style="color: #696969;">\skewchar\mathscr</span>='60 <span style="color: #696969;">\skewchar\mathsubscr</span>='60 <span style="color: #696969;">\skewchar\mathsubsubscr</span>='60
+<span style="color: #696969;">\font\mathfr</span>=eufm10<span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathfr</span>=0pt
+<span style="color: #696969;">\font\mathsubfr</span>=eufm7 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathsubfr</span>=0pt
+<span style="color: #696969;">\font\mathsubsubfr</span>=eufm5 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\mathsubsubfr</span>=0pt
+<span style="color: #696969;">\font\matheuex</span>=euex10<span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\matheuex</span>=0pt
+<span style="color: #696969;">\font\eulerbf</span>=eurb10 <span style="color: #696969;">\fontdimen</span>2<span style="color: #696969;">\eulerbf</span>=0pt
+<span style="color: #696969;">\font\teneq</span>=cmr10 
+<span style="color: #696969;">\def</span><span style="color: #ba2f59; font-weight: bold;">\rm</span>{<span style="color: #696969;">\fam\z@</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textrm</span>}
+<span style="color: #696969;">\def</span><span style="color: #3a81c3; font-style: italic;">\it</span>{<span style="color: #696969;">\fam\itfam</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textit</span>} <span style="color: #696969;">\textfont\itfam</span>=<span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textit</span>
+<span style="color: #696969;">\def</span><span style="color: #3a81c3; font-style: italic;">\sl</span>{<span style="color: #696969;">\fam\slfam</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textsl</span>} <span style="color: #696969;">\textfont\slfam</span>=<span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textsl</span>
+<span style="color: #696969;">\def</span><span style="color: #6c4173;">\bf</span>{<span style="color: #696969;">\fam\bffam</span><span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textbf</span>} <span style="color: #696969;">\textfont\bffam</span>=<span style="color: #dc752f; font-weight: bold;">\</span><span style="color: #3a81c3; font-weight: bold;">textbf</span>
+<span style="color: #696969;">\newfam\scrfam</span> <span style="color: #696969;">\edef\scrfam@</span>{<span style="color: #696969;">\hex@\scrfam</span>} <span style="color: #696969;">\def\scr</span>{<span style="color: #696969;">\fam\scrfam</span> }
+<span style="color: #696969;">\newfam\frfam</span> <span style="color: #696969;">\edef\frfam@</span>{<span style="color: #696969;">\hex@\frfam</span>} <span style="color: #696969;">\def\frak</span>{<span style="color: #696969;">\fam\frfam</span> }
+<span style="color: #696969;">\newfam\euexfam</span> <span style="color: #696969;">\edef\euexfam@</span>{<span style="color: #696969;">\hex@\euexfam</span>}
+<span style="color: #696969;">\newfam\eqfam</span> <span style="color: #696969;">\edef\eqfam@</span>{<span style="color: #696969;">\hex@\eqfam</span>}
+<span style="color: #696969;">\textfont</span>0=<span style="color: #696969;">\mathtext</span>
+<span style="color: #696969;">\scriptfont</span>0=<span style="color: #696969;">\mathsubtext</span>
+<span style="color: #696969;">\scriptscriptfont</span>0=<span style="color: #696969;">\mathsubsubtext</span>
+<span style="color: #696969;">\textfont</span>1=<span style="color: #696969;">\mathlet</span> <span style="color: #696969;">\let\tfont</span>=<span style="color: #696969;">\teni</span>
+<span style="color: #696969;">\scriptfont</span>1=<span style="color: #696969;">\mathsublet</span>
+<span style="color: #696969;">\scriptscriptfont</span>1=<span style="color: #696969;">\mathsubsublet</span>
+<span style="color: #696969;">\textfont</span>2=<span style="color: #696969;">\mathsym</span>
+<span style="color: #696969;">\scriptfont</span>2=<span style="color: #696969;">\mathsubsym</span>
+<span style="color: #696969;">\scriptscriptfont</span>2=<span style="color: #696969;">\mathsubsubsym</span>
+<span style="color: #696969;">\textfont</span>3=<span style="color: #696969;">\mathext</span>
+<span style="color: #696969;">\scriptfont</span>3=<span style="color: #696969;">\mathsubext</span>
+<span style="color: #696969;">\scriptscriptfont</span>3=<span style="color: #696969;">\mathsubsubext</span>
+<span style="color: #696969;">\textfont\scrfam</span>=<span style="color: #696969;">\mathscr</span>
+<span style="color: #696969;">\scriptfont\scrfam</span>=<span style="color: #696969;">\mathsubscr</span>
+<span style="color: #696969;">\scriptscriptfont\scrfam</span>=<span style="color: #696969;">\mathsubsubscr</span>
+<span style="color: #696969;">\textfont\frfam</span>=<span style="color: #696969;">\mathfr</span>
+<span style="color: #696969;">\scriptfont\frfam</span>=<span style="color: #696969;">\mathsubfr</span>
+<span style="color: #696969;">\scriptscriptfont\frfam</span>=<span style="color: #696969;">\mathsubsubfr</span>
+<span style="color: #696969;">\textfont\euexfam</span>=<span style="color: #696969;">\matheuex</span>
+<span style="color: #696969;">\scriptfont\euexfam</span>=<span style="color: #696969;">\mathsubsym</span> 
+<span style="color: #696969;">\scriptscriptfont\euexfam</span>=<span style="color: #696969;">\mathsubsubsym</span>
+<span style="color: #696969;">\textfont\eqfam</span>=<span style="color: #696969;">\teneq</span>
+<span style="color: #696969;">\mathcode</span>`0="7130 <span style="color: #696969;">\mathcode</span>`1="7131 <span style="color: #696969;">\mathcode</span>`2="7132 <span style="color: #696969;">\mathcode</span>`3="7133
+<span style="color: #696969;">\mathcode</span>`4="7134 <span style="color: #696969;">\mathcode</span>`5="7135 <span style="color: #696969;">\mathcode</span>`6="7136 <span style="color: #696969;">\mathcode</span>`7="7137
+<span style="color: #696969;">\mathcode</span>`8="7138 <span style="color: #696969;">\mathcode</span>`9="7139 <span style="color: #696969;">\mathcode</span>`+="2<span style="color: #696969;">\frfam@</span>2B
+<span style="color: #696969;">\mathcode</span>`-="2<span style="color: #696969;">\frfam@</span>2D <span style="color: #696969;">\mathcode</span>`!="0<span style="color: #696969;">\frfam@</span>21
+<span style="color: #696969;">\mathcode</span>`(="4<span style="color: #696969;">\frfam@</span>28 <span style="color: #696969;">\delcode</span>`(="<span style="color: #696969;">\frfam@</span>28300
+<span style="color: #696969;">\mathcode</span>`)="5<span style="color: #696969;">\frfam@</span>29 <span style="color: #696969;">\delcode</span>`)="<span style="color: #696969;">\frfam@</span>29301
+<span style="color: #696969;">\mathcode</span>`[="4<span style="color: #696969;">\frfam@</span>5B <span style="color: #696969;">\delcode</span>`[="<span style="color: #696969;">\frfam@</span>5B302
+<span style="color: #696969;">\mathcode</span>`]="5<span style="color: #696969;">\frfam@</span>5D <span style="color: #696969;">\delcode</span>`]="<span style="color: #696969;">\frfam@</span>5D303
+<span style="color: #696969;">\mathcode</span>`=="3<span style="color: #696969;">\frfam@</span>3D
+<span style="color: #696969;">\mathchardef\intop</span>="1<span style="color: #696969;">\euexfam@</span>52 <span style="color: #696969;">\mathchardef\ointop</span>="1<span style="color: #696969;">\euexfam@</span>48
+<span style="color: #696969;">\mathchardef\coprod</span>="1<span style="color: #696969;">\euexfam@</span>60 <span style="color: #696969;">\mathchardef\prod</span>="1<span style="color: #696969;">\euexfam@</span>51
+<span style="color: #696969;">\mathchardef\sum</span>="1<span style="color: #696969;">\euexfam@</span>50
+<span style="color: #696969;">\mathchardef\braceld</span>="<span style="color: #696969;">\euexfam@</span>7A <span style="color: #696969;">\mathchardef\bracerd</span>="<span style="color: #696969;">\euexfam@</span>7B
+<span style="color: #696969;">\mathchardef\bracelu</span>="<span style="color: #696969;">\euexfam@</span>7C <span style="color: #696969;">\mathchardef\braceru</span>="<span style="color: #696969;">\euexfam@</span>7D
+<span style="color: #696969;">\mathchardef\infty</span>="0<span style="color: #696969;">\euexfam@</span>31 <span style="color: #696969;">\mathchardef\nearrow</span>="3<span style="color: #696969;">\euexfam@</span>25
+<span style="color: #696969;">\mathchardef\searrow</span>="3<span style="color: #696969;">\euexfam@</span>26 <span style="color: #696969;">\mathchardef\nwarrow</span>="3<span style="color: #696969;">\euexfam@</span>2D
+<span style="color: #696969;">\mathchardef\swarrow</span>="3<span style="color: #696969;">\euexfam@</span>2E <span style="color: #696969;">\mathchardef\Leftrightarrow</span>="3<span style="color: #696969;">\euexfam@</span>2C
+<span style="color: #696969;">\mathchardef\Leftarrow</span>="3<span style="color: #696969;">\euexfam@</span>28
+<span style="color: #696969;">\mathchardef\Rightarrow</span>="3<span style="color: #696969;">\euexfam@</span>29
+<span style="color: #696969;">\mathchardef\leftrightarrow</span>="3<span style="color: #696969;">\euexfam@</span>24 <span style="color: #696969;">\mathcode</span>`\^^W="3<span style="color: #696969;">\euexfam@</span>24
+<span style="color: #696969;">\mathchardef\leftarrow</span>="3<span style="color: #696969;">\euexfam@</span>20 <span style="color: #696969;">\let\gets</span>=<span style="color: #696969;">\leftarrow</span> <span style="color: #696969;">\mathcode</span>`\^^X="3<span style="color: #696969;">\euexfam@</span>20
+<span style="color: #696969;">\mathchardef\rightarrow</span>="3<span style="color: #696969;">\euexfam@</span>21 <span style="color: #696969;">\let\to</span>=<span style="color: #696969;">\rightarrow</span> <span style="color: #696969;">\mathcode</span>`\^^Y="3<span style="color: #696969;">\euexfam@</span>21
+<span style="color: #696969;">\mathchardef\leftharpoonup</span>="3<span style="color: #696969;">\euexfam@</span>18
+<span style="color: #696969;">\mathchardef\leftharpoondown</span>="3<span style="color: #696969;">\euexfam@</span>19
+<span style="color: #696969;">\mathchardef\rightharpoonup</span>="3<span style="color: #696969;">\euexfam@</span>1A
+<span style="color: #696969;">\mathchardef\rightharpoondown</span>="3<span style="color: #696969;">\euexfam@</span>1B
+<span style="color: #696969;">\mathchardef\Relbar</span>="3<span style="color: #696969;">\eqfam@</span>3D
+<span style="color: #696969;">\mathchardef\Gamma</span>="7100 <span style="color: #696969;">\mathchardef\Delta</span>="7101 <span style="color: #696969;">\mathchardef\Theta</span>="7102
+<span style="color: #696969;">\mathchardef\Lambda</span>="7103 <span style="color: #696969;">\mathchardef\Xi</span>="7104 <span style="color: #696969;">\mathchardef\Pi</span>="7105
+<span style="color: #696969;">\mathchardef\Sigma</span>="7106 <span style="color: #696969;">\mathchardef\Upsilon</span>="7107 <span style="color: #696969;">\mathchardef\Phi</span>="7108
+<span style="color: #696969;">\mathchardef\Psi</span>="7109 <span style="color: #696969;">\mathchardef\Omega</span>="710A <span style="color: #696969;">\mathchardef\leq</span>="3<span style="color: #696969;">\scrfam@</span>14
+<span style="color: #696969;">\mathchardef\geq</span>="3<span style="color: #696969;">\scrfam@</span>15 <span style="color: #696969;">\mathchardef\Re</span>="0<span style="color: #696969;">\scrfam@</span>3C <span style="color: #696969;">\mathchardef\Im</span>="0<span style="color: #696969;">\scrfam@</span>3D
+<span style="color: #696969;">\mathchardef\aleph</span>="0<span style="color: #696969;">\scrfam@</span>40
+<span style="color: #696969;">\def\uparrow</span>{<span style="color: #696969;">\delimiter</span>"3<span style="color: #696969;">\euexfam@</span>22378 } <span style="color: #696969;">\mathcode</span>`\^^K="3<span style="color: #696969;">\euexfam@</span>22
+<span style="color: #696969;">\def\downarrow</span>{<span style="color: #696969;">\delimiter</span>"3<span style="color: #696969;">\euexfam@</span>23379 } <span style="color: #696969;">\mathcode</span>`\^^A="3<span style="color: #696969;">\euexfam@</span>23
+<span style="color: #696969;">\def\updownarrow</span>{<span style="color: #696969;">\delimiter</span>"3<span style="color: #696969;">\euexfam@</span>6C33F }
+<span style="color: #696969;">\def\Uparrow</span>{<span style="color: #696969;">\delimiter</span>"3<span style="color: #696969;">\euexfam@</span>2A37E }
+<span style="color: #696969;">\def\Downarrow</span>{<span style="color: #696969;">\delimiter</span>"3<span style="color: #696969;">\euexfam@</span>2B37F }
+<span style="color: #696969;">\def\Updownarrow</span>{<span style="color: #696969;">\delimiter</span>"3<span style="color: #696969;">\euexfam@</span>6D377 }
+<span style="color: #696969;">\def\rbrace</span>{<span style="color: #696969;">\delimiter</span>"5<span style="color: #696969;">\scrfam@</span>67<span style="color: #696969;">\euexfam@</span>09 } <span style="color: #696969;">\let</span>\}=<span style="color: #696969;">\rbrace</span>
+<span style="color: #696969;">\def\lbrace</span>{<span style="color: #696969;">\delimiter</span>"4<span style="color: #696969;">\scrfam@</span>66<span style="color: #696969;">\euexfam@</span>08 } <span style="color: #696969;">\let</span>\{=<span style="color: #696969;">\lbrace</span>
+<span style="color: #696969;">\def\vert</span>{<span style="color: #696969;">\delimiter</span>"<span style="color: #696969;">\scrfam@</span>6A30C }
+<span style="color: #696969;">\def\backslash</span>{<span style="color: #696969;">\delimiter</span>"<span style="color: #696969;">\scrfam@</span>6E30F }
+<span style="color: #696969;">\let\varsigma</span>=<span style="color: #696969;">\sigma</span> <span style="color: #696969;">\let\varrho</span>=<span style="color: #696969;">\rho</span>
+</pre>
+</div>
+
+<p>
+有一点鲁棒性，但不多（主要是字族在原本的<code>gkpmac.tex</code>里是写死的，我因为没看过AmS-TeX实现，怕它载了什么新的字体导致爆炸的发生）。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge7b88bb" class="outline-2">
+<h2 id="orge7b88bb"><span class="section-number-2">3.</span> 标记元素</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgd17551a" class="outline-3">
+<h3 id="orgd17551a"><span class="section-number-3">3.1.</span> 标题</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+从TeXbook的<i>Example Formats</i>一节摘出来的。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\def\ti</span>#1{<span style="color: #696969;">\gdef\t@@</span>{<span style="color: #696969;">\uppercase</span>{#1}}}
+<span style="color: #696969;">\def\au</span>#1{<span style="color: #696969;">\gdef\a@@</span>{<span style="color: #696969;">\uppercase</span>{#1}}}
+<span style="color: #696969;">\def\ft</span>{<span style="color: #696969;">\vbox</span>{<span style="color: #696969;">\bigtype</span><span style="color: #6c4173;">\bf</span>
+ <span style="color: #696969;">\line</span>{<span style="color: #696969;">\hrulefill</span>}<span style="color: #696969;">\kern</span>-.5<span style="color: #696969;">\baselineskip\line</span>{<span style="color: #696969;">\hrulefill\phantom</span>{ {<span style="color: #696969;">\t@@</span>} }<span style="color: #696969;">\hrulefill</span>}
+ <span style="color: #696969;">\kern</span>-.5<span style="color: #696969;">\baselineskip\line</span>{<span style="color: #696969;">\hrulefill\hbox</span>{ {<span style="color: #696969;">\t@@</span>} }<span style="color: #696969;">\hrulefill</span>}
+ <span style="color: #696969;">\kern</span>-.5<span style="color: #696969;">\baselineskip\line</span>{<span style="color: #696969;">\hrulefill\phantom</span>{ {<span style="color: #696969;">\a@@</span>} }<span style="color: #696969;">\hrulefill</span>}
+ <span style="color: #696969;">\kern</span>-.5<span style="color: #696969;">\baselineskip\line</span>{<span style="color: #696969;">\hrulefill\hbox</span>{ {<span style="color: #696969;">\a@@</span>} }<span style="color: #696969;">\hrulefill</span>}}}
+</pre>
+</div>
+
+<p>
+使用例：<code>\ti{Title Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org997ad33" class="outline-3">
+<h3 id="org997ad33"><span class="section-number-3">3.2.</span> 章节</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+少用不优雅的<code>%</code>的技巧在于进入Vertical Mode。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\newcount\secno</span>
+<span style="color: #696969;">\def\chap</span>#1.{<span style="color: #696969;">\global\secno</span>=0<span style="color: #696969;">\vskip</span>0pt plus.3<span style="color: #696969;">\vsize\penalty</span>-250
+ <span style="color: #696969;">\vskip</span>0pt plus-.3<span style="color: #696969;">\vsize</span><span style="color: #3a81c3; font-weight: bold;">\bigskip</span><span style="color: #696969;">\vskip</span>.16in
+ <span style="color: #696969;">\message</span>{c:#1}<span style="color: #696969;">\centerline</span>{<span style="color: #696969;">\ch</span>#1}<span style="color: #696969;">\nobreak</span><span style="color: #3a81c3; font-weight: bold;">\smallskip</span>}
+<span style="color: #696969;">\def\sect</span>#1<span style="color: #3a81c3; font-weight: bold;">\par</span>{<span style="color: #696969;">\advance\secno</span> by 1<span style="color: #696969;">\vskip</span>0pt plus.3<span style="color: #696969;">\vsize\penalty</span>-250
+ <span style="color: #696969;">\vskip</span>0pt plus-.3<span style="color: #696969;">\vsize</span><span style="color: #3a81c3; font-weight: bold;">\bigskip</span><span style="color: #696969;">\vskip\parskip</span>
+ <span style="color: #696969;">\expandafter\message</span>{s<span style="color: #696969;">\the\secno</span>:#1}<span style="color: #696969;">\leftline</span>{<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;">\the\secno</span><span style="color: #6c4173;">.</span><span style="color: #3a81c3; font-weight: bold;">\enspace</span><span style="color: #6c4173;">#1</span>}<span style="color: #696969;">\nobreak</span><span style="color: #3a81c3; font-weight: bold;">\smallskip\noindent</span>}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd40ecf7" class="outline-3">
+<h3 id="orgd40ecf7"><span class="section-number-3">3.3.</span> 图文混排</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+用的是设置hbox宽度的方法。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\long\def\illu</span>#1#2 #3<span style="color: #696969;">\eillu</span>{<span style="color: #696969;">\bgroup\vskip\smallskipamount\kern\lineskip\saveimageresource</span> width #2 {#1}
+ <span style="color: #696969;">\setbox</span>0=<span style="color: #696969;">\hbox</span>{<span style="color: #696969;">\useimageresource\lastsavedimageresourceindex</span>}
+ <span style="color: #696969;">\dimen</span>0=<span style="color: #696969;">\hsize\advance\dimen</span>0 by-<span style="color: #696969;">\wd</span>0<span style="color: #696969;">\advance\dimen</span>0 by-.7cm
+ <span style="color: #696969;">\setbox</span>1=<span style="color: #696969;">\vbox</span>{<span style="color: #696969;">\hsize</span>=<span style="color: #696969;">\dimen</span>0<span style="color: #3a81c3; font-weight: bold;">\noindent</span> #3}
+ <span style="color: #696969;">\dimen</span>1=<span style="color: #696969;">\ht</span>1<span style="color: #696969;">\ifdim\ht</span>0&gt;<span style="color: #696969;">\ht</span>1<span style="color: #696969;">\dimen</span>1=<span style="color: #696969;">\ht</span>0<span style="color: #696969;">\setbox</span>3=<span style="color: #696969;">\box</span>0<span style="color: #696969;">\setbox</span>0=<span style="color: #696969;">\box</span>1<span style="color: #696969;">\setbox</span>1=<span style="color: #696969;">\box</span>3<span style="color: #696969;">\fi</span>
+ <span style="color: #696969;">\hbox</span> to<span style="color: #696969;">\hsize</span>{<span style="color: #696969;">\vbox</span> to<span style="color: #696969;">\dimen</span>1{<span style="color: #696969;">\vss\box</span>1<span style="color: #696969;">\vss</span>}<span style="color: #696969;">\kern</span>.7cm<span style="color: #696969;">\vbox</span> to<span style="color: #696969;">\dimen</span>1{<span style="color: #696969;">\vss\box</span>0<span style="color: #696969;">\vss</span>}}<span style="color: #696969;">\egroup</span>}
+<span style="color: #696969;">\def\eillu</span>{<span style="color: #696969;">\relax</span>}
+</pre>
+</div>
+
+<p>
+使用例：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\illu</span>{cnce.jpeg}{4.4cm} As the government increases the tax imposed on tobacco, the relative price is changed, creating incentives
+ for consumers to change their consumption patterns; tobacco that is taxed becomes relatively more expensive and the consumption
+ is reduced.<span style="color: #3a81c3; font-weight: bold;">\par</span>
+ Thus there is a decrease in supply and an upward shift of the supply curve from <span style="color: #8b4513;">$MPC$</span> to <span style="color: #8b4513;">$MPC + {</span><span style="color: #8b4513; font-weight: bold;">\rm</span><span style="color: #8b4513; font-weight: bold;"> tax</span><span style="color: #8b4513;">}$</span> while intersecting
+ <span style="color: #8b4513;">$MPB$</span> at the <span style="color: #8b4513;">$Q</span><span style="color: #fa8072;">_{\rm opt}</span><span style="color: #8b4513;">$</span> level of output, with quantity produced and consumed dropping to <span style="color: #8b4513;">$Q</span><span style="color: #fa8072;">_{\rm opt}</span><span style="color: #8b4513;">$</span> which is the socially
+ optimum quantity. The price increases from <span style="color: #8b4513;">$P</span><span style="color: #fa8072;">_{\rm m}</span><span style="color: #8b4513;">$</span> to <span style="color: #8b4513;">$P</span><span style="color: #fa8072;">_{\rm c}</span><span style="color: #8b4513;">$</span>, however.<span style="color: #696969;">\eillu</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9a1aa9d" class="outline-3">
+<h3 id="org9a1aa9d"><span class="section-number-3">3.4.</span> 列表</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\xdef\cl</span>{<span style="color: #3a81c3; font-weight: bold;">\item</span>{}}
+<span style="color: #696969;">\def\bul</span>{<span style="color: #696969;">\parskip</span>=2pt<span style="color: #3a81c3; font-weight: bold;">\par</span><span style="color: #696969;">\penalty</span>-250<span style="color: #696969;">\hangindent\parindent\textindent</span>{<span style="color: #a49da5; font-style: italic;">%</span>
+ <span style="color: #696969;">\hbox</span> to<span style="color: #696969;">\parindent</span>{<span style="color: #3a81c3; font-weight: bold;">\enspace</span><span style="color: #696969;">\kern</span>.6pt{<span style="color: #696969;">\smalltype\raise</span>.3pt<span style="color: #696969;">\hbox</span>{<span style="color: #696969;">\bullet</span>}}<span style="color: #696969;">\hss</span>}}<span style="color: #696969;">\parskip</span>=0pt}
+<span style="color: #696969;">\def\bull</span>#1{<span style="color: #696969;">\def\p</span>##1{<span style="color: #696969;">\hbox</span> to 1.4em{(<span style="color: #696969;">\hfil</span>##1<span style="color: #696969;">\hfil</span>)}}<span style="color: #696969;">\itemitem</span>{<span style="color: #696969;">\hbox</span> to <span style="color: #696969;">\parindent</span>{<span style="color: #3a81c3; font-weight: bold;">\enspace</span><span style="color: #696969;">\kern</span>.6pt#1<span style="color: #696969;">\hss</span>}}}
+</pre>
+</div>
+
+<p>
+使用例：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-tex"><span style="color: #696969;">\bul</span> {<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;"> Market power</span>} is a fundamental distinction between market structures. It's the extent to which individual firm
+ in the industry is able to control the price at which it sells its products. On the basis of market power, we can distinguish
+ between:
+ <span style="color: #696969;">\bull</span>{<span style="color: #696969;">\p</span> a} The extreme of {<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;"> perfect competition</span>}, where firms have no ability to control the price of there products;
+  also known as {<span style="color: #3a81c3; font-weight: bold;">\it</span><span style="color: #3a81c3; font-style: italic;"> zero market power</span>}
+ <span style="color: #696969;">\bull</span>{<span style="color: #696969;">\p</span> b} The extreme of {<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;"> monopoly</span>}, where there is single firm in the market when the firm itself is the market;
+  the firm has the greatest ability to control the price of its product. It's also known as {<span style="color: #3a81c3; font-weight: bold;">\it</span><span style="color: #3a81c3; font-style: italic;"> the greatest amount of</span>
+<span style="color: #3a81c3; font-style: italic;">  market power</span>}.
+<span style="color: #696969;">\cl</span> In between the two extremes are the other two market structures: {<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;"> monopolistic competition</span>} and {<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;"> oligopoly</span>}.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga6c5492" class="outline-2">
+<h2 id="orga6c5492"><span class="section-number-2">4.</span> 未完待续</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+暑假作业好多。
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2024-08-14 Wed 20:47</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
