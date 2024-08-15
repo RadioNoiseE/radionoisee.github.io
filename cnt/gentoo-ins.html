@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-13 Tue 15:11 -->
+<!-- 2024-08-15 Thu 15:58 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gentoo Linux实用指北</title>
@@ -232,75 +232,75 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf645c0f">1. 关于本文</a></li>
-<li><a href="#orga537fc4">2. 基础系统安装</a>
+<li><a href="#orgadf6dd2">1. 关于本文</a></li>
+<li><a href="#org4c81dc2">2. 基础系统安装</a>
 <ul>
-<li><a href="#org022d631">2.1. 准备安装环境</a>
+<li><a href="#orgd079163">2.1. 准备安装环境</a>
 <ul>
-<li><a href="#orga3b1c45">2.1.1. 引导</a></li>
-<li><a href="#orga714602">2.1.2. 连接至网络</a></li>
-<li><a href="#org02cae4b">2.1.3. 磁盘分区</a></li>
-<li><a href="#orga6a6cfd">2.1.4. 选择stage3档案</a></li>
-<li><a href="#orgc344070">2.1.5. 配置<code>make.conf</code>并换源</a></li>
-<li><a href="#orgdd67ad4">2.1.6. chroot</a></li>
-<li><a href="#orga7e21a0">2.1.7. BootStrap（可选）</a></li>
-<li><a href="#orge08df9c">2.1.8. 从stage1到stage2</a></li>
-<li><a href="#orga876169">2.1.9. 从stage2到stage3</a></li>
+<li><a href="#org03ee8e5">2.1.1. 引导</a></li>
+<li><a href="#org119066c">2.1.2. 连接至网络</a></li>
+<li><a href="#org3d1100b">2.1.3. 磁盘分区</a></li>
+<li><a href="#org50204f6">2.1.4. 选择stage3档案</a></li>
+<li><a href="#orgf0bbee0">2.1.5. 配置<code>make.conf</code>并换源</a></li>
+<li><a href="#orgc1ba392">2.1.6. chroot</a></li>
+<li><a href="#orgbcb845b">2.1.7. BootStrap（可选）</a></li>
+<li><a href="#org478c9b7">2.1.8. 从stage1到stage2</a></li>
+<li><a href="#orgf3feeb1">2.1.9. 从stage2到stage3</a></li>
 </ul>
 </li>
-<li><a href="#org2f9bbdb">2.2. 安装系统</a>
+<li><a href="#org520134a">2.2. 安装系统</a>
 <ul>
-<li><a href="#orgd0aaaac">2.2.1. 同步包管理器数据库并选取全局配置文件</a></li>
-<li><a href="#org66708f0">2.2.2. 配置<code>make.conf</code>文件</a></li>
-<li><a href="#org3c6c378">2.2.3. 重建系统（可选）</a></li>
-<li><a href="#org61e5f54">2.2.4. 本地化</a></li>
+<li><a href="#org0dae30c">2.2.1. 同步包管理器数据库并选取全局配置文件</a></li>
+<li><a href="#org855359b">2.2.2. 配置<code>make.conf</code>文件</a></li>
+<li><a href="#org2ea799b">2.2.3. 重建系统（可选）</a></li>
+<li><a href="#org645926c">2.2.4. 本地化</a></li>
 </ul>
 </li>
-<li><a href="#org4a7b2f7">2.3. 配置系统内核（手动配置可选）</a>
+<li><a href="#org0e89703">2.3. 配置系统内核（手动配置可选）</a>
 <ul>
-<li><a href="#org95bb099">2.3.1. 必要驱动安装</a></li>
-<li><a href="#org2562ed4">2.3.2. 发行版内核安装</a></li>
-<li><a href="#org9edf073">2.3.3. 手动编译内核</a></li>
+<li><a href="#org315e4f7">2.3.1. 必要驱动安装</a></li>
+<li><a href="#org52441f3">2.3.2. 发行版内核安装</a></li>
+<li><a href="#org4a44ef8">2.3.3. 手动编译内核</a></li>
 </ul>
 </li>
-<li><a href="#org498261d">2.4. 杂项、工具、及系统引导</a>
+<li><a href="#orgd492f06">2.4. 杂项、工具、及系统引导</a>
 <ul>
-<li><a href="#org8103925">2.4.1. <code>fstab</code>文件</a></li>
-<li><a href="#org9d36fe1">2.4.2. 网络相关</a></li>
-<li><a href="#org99b6989">2.4.3. 系统信息</a></li>
-<li><a href="#org033f70b">2.4.4. 系统工具</a></li>
+<li><a href="#org608bd64">2.4.1. <code>fstab</code>文件</a></li>
+<li><a href="#org81746d4">2.4.2. 网络相关</a></li>
+<li><a href="#org3c40ea3">2.4.3. 系统信息</a></li>
+<li><a href="#orge52a25f">2.4.4. 系统工具</a></li>
 </ul>
 </li>
-<li><a href="#org757e5ac">2.5. 系统引导</a></li>
-<li><a href="#orge0b5815">2.6. 清理</a></li>
+<li><a href="#orgfae57ad">2.5. 系统引导</a></li>
+<li><a href="#org4b4f640">2.6. 清理</a></li>
 </ul>
 </li>
-<li><a href="#org980b543">3. 桌面环境的安装</a>
+<li><a href="#orgb19aaea">3. 桌面环境的安装</a>
 <ul>
-<li><a href="#org1766093">3.1. 选择</a></li>
-<li><a href="#org58718c9">3.2. XOrg与XMonad</a>
+<li><a href="#org405482b">3.1. 选择</a></li>
+<li><a href="#org89e1c1e">3.2. XOrg与XMonad</a>
 <ul>
-<li><a href="#org560a21a">3.2.1. 安装必要软件</a></li>
-<li><a href="#org7971099">3.2.2. 配置</a></li>
-<li><a href="#org823ffa6">3.2.3. 常见事故</a></li>
+<li><a href="#orgf0fdade">3.2.1. 安装必要软件</a></li>
+<li><a href="#orgf23e3e8">3.2.2. 配置</a></li>
+<li><a href="#orgeeb0e7b">3.2.3. 常见事故</a></li>
 </ul>
 </li>
-<li><a href="#org56213c1">3.3. Wayland 与 SwayWM</a>
+<li><a href="#orgee06cd4">3.3. Wayland与SwayWM</a>
 <ul>
-<li><a href="#org79dfa53">3.3.1. 安装必要软件</a></li>
-<li><a href="#orgc0f908a">3.3.2. 配置</a></li>
-<li><a href="#org3ecf24c">3.3.3. 常见问题</a></li>
+<li><a href="#org2b0034a">3.3.1. 安装必要软件</a></li>
+<li><a href="#org6fd3df9">3.3.2. 配置</a></li>
+<li><a href="#org24c7db3">3.3.3. 常见问题</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgbe30102">4. 吐槽与展望</a></li>
+<li><a href="#orge5407d8">4. 吐槽与展望</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf645c0f" class="outline-2">
-<h2 id="orgf645c0f"><span class="section-number-2">1.</span> 关于本文</h2>
+<div id="outline-container-orgadf6dd2" class="outline-2">
+<h2 id="orgadf6dd2"><span class="section-number-2">1.</span> 关于本文</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 本文是对笔者4个月来折腾Gentoo Linux的一个总结，包括了安装、优化以及配置的内容。需要注意：
@@ -316,16 +316,16 @@
 </div>
 </div>
 
-<div id="outline-container-orga537fc4" class="outline-2">
-<h2 id="orga537fc4"><span class="section-number-2">2.</span> 基础系统安装</h2>
+<div id="outline-container-org4c81dc2" class="outline-2">
+<h2 id="org4c81dc2"><span class="section-number-2">2.</span> 基础系统安装</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org022d631" class="outline-3">
-<h3 id="org022d631"><span class="section-number-3">2.1.</span> 准备安装环境</h3>
+<div id="outline-container-orgd079163" class="outline-3">
+<h3 id="orgd079163"><span class="section-number-3">2.1.</span> 准备安装环境</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-orga3b1c45" class="outline-4">
-<h4 id="orga3b1c45"><span class="section-number-4">2.1.1.</span> 引导</h4>
+<div id="outline-container-org03ee8e5" class="outline-4">
+<h4 id="org03ee8e5"><span class="section-number-4">2.1.1.</span> 引导</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 为了完成Gentoo Linux的安装、首先我们肯定要制作一个系统引导盘（LiveUSB）。Gentoo Linux的安装跟大部分发行版的不同之处就在于它并没有提供一个有GUI或TUI界面作为安装向导的引导盘。相反，为了最大程度地客制化，它只提供了一个内置各种安装系统必备工具的不包含图形界面的基础系统；我们需要在以LiveUSB启动后<code>chroot</code>至本机磁盘手动（一般情况下）完成安装。这种繁琐安装方式给予了其最大的灵活性，真正意义上的选择之多样是Gentoo一个非常大的优势。
@@ -345,8 +345,8 @@ https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/current-in
 </div>
 </div>
 
-<div id="outline-container-orga714602" class="outline-4">
-<h4 id="orga714602"><span class="section-number-4">2.1.2.</span> 连接至网络</h4>
+<div id="outline-container-org119066c" class="outline-4">
+<h4 id="org119066c"><span class="section-number-4">2.1.2.</span> 连接至网络</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 进入LiveUSB的环境后，先运行<code>ifconfig</code>，看看除了<code>lo</code>之外是否有别的网卡设备被检测到（比如<code>wlan</code>）。如果没有那说明你的网卡不被支持，可以到互联网上检索并寻求帮助。有的话就可以运行<code>net-setup</code>（自带的一个非常贴心的脚本），按照指引连接至网络。如果使用<code>wlan</code>，大部分网络都是WPA2/3，并建议让<code>dhcp</code>决定ip地址。
@@ -358,8 +358,8 @@ https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/current-in
 </div>
 </div>
 
-<div id="outline-container-org02cae4b" class="outline-4">
-<h4 id="org02cae4b"><span class="section-number-4">2.1.3.</span> 磁盘分区</h4>
+<div id="outline-container-org3d1100b" class="outline-4">
+<h4 id="org3d1100b"><span class="section-number-4">2.1.3.</span> 磁盘分区</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 接下来是很重要的一步：给目标设备的磁盘分区。（确定你的电脑使用不是BIOS启动，如果是请参考Handbook）一般至少需要三个分区、分别是EFI分区（512MB~1024MB）、swap分区（主要是笔记本电脑休眠时使用，一般小于等于你的运行时内存大小即可）以及根分区。也是，大家各显神通就好；<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks">这里</a>（Introduction to block devices至Partitioning the disk with MBR for BIOS / legacy boot）有Gentoo官方给出的方案，以及分区工具<code>fdisk</code>的手把手教学可供参考。下面给出我的方案、仅供参考：
@@ -413,8 +413,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-orga6a6cfd" class="outline-4">
-<h4 id="orga6a6cfd"><span class="section-number-4">2.1.4.</span> 选择stage3档案</h4>
+<div id="outline-container-org50204f6" class="outline-4">
+<h4 id="org50204f6"><span class="section-number-4">2.1.4.</span> 选择stage3档案</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 关于stage3，他们是Gentoo系统安装的种子。这时你需要作出选择：
@@ -455,8 +455,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-orgc344070" class="outline-4">
-<h4 id="orgc344070"><span class="section-number-4">2.1.5.</span> 配置<code>make.conf</code>并换源</h4>
+<div id="outline-container-orgf0bbee0" class="outline-4">
+<h4 id="orgf0bbee0"><span class="section-number-4">2.1.5.</span> 配置<code>make.conf</code>并换源</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <p>
 编辑<code>make.conf</code>这一十分重要的配置文件（注意，是编辑<code>/mnt/gentoo/etc/portage/make.conf</code>文件而非<code>/etc/portage/make.conf</code>），决定我们的包管理器emerge编译时的参数等等，是十分重要的可以优化的地方。
@@ -508,8 +508,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-orgdd67ad4" class="outline-4">
-<h4 id="orgdd67ad4"><span class="section-number-4">2.1.6.</span> chroot</h4>
+<div id="outline-container-orgc1ba392" class="outline-4">
+<h4 id="orgc1ba392"><span class="section-number-4">2.1.6.</span> chroot</h4>
 <div class="outline-text-4" id="text-2-1-6">
 <p>
 终于可以chroot了。为了在chroot环境中使用emerge从互联网上获取软件包，将DNS信息复制一下：
@@ -557,8 +557,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-orga7e21a0" class="outline-4">
-<h4 id="orga7e21a0"><span class="section-number-4">2.1.7.</span> BootStrap（可选）</h4>
+<div id="outline-container-orgbcb845b" class="outline-4">
+<h4 id="orgbcb845b"><span class="section-number-4">2.1.7.</span> BootStrap（可选）</h4>
 <div class="outline-text-4" id="text-2-1-7">
 <p>
 这时，我们处在了一个由先前下载并解压的stage3构建的一个基础系统中。它包括了标准库、编译器等Linux系统的必要组成部分，是由Gentoo Release Engineering Team（好高级的名字、发行工程诶）帮我们预先编译好的。根据FAQ，从头至尾构建这些所得的收益并不会很大，而所花的时间非常长，特别是如果你的gcc像笔者一样开启了<code>lto</code>、<code>pgo</code>等特性，对于一般电脑至少需要4小时（甚至gcc就要编译至少3次［至少是因为，如果你的gcc开了pgo、那么就需要重复编译5次］）。故读者需要明智地选择是否进行这一步。若不需要则直接进入下一部分『选择全局配置文件并安装基础系统』即可。选择该部分的读者在下一部分可忽略重复步骤（笔者将会指明）。
@@ -589,8 +589,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-orge08df9c" class="outline-4">
-<h4 id="orge08df9c"><span class="section-number-4">2.1.8.</span> 从stage1到stage2</h4>
+<div id="outline-container-org478c9b7" class="outline-4">
+<h4 id="org478c9b7"><span class="section-number-4">2.1.8.</span> 从stage1到stage2</h4>
 <div class="outline-text-4" id="text-2-1-8">
 <p>
 官方提供了一个脚本，我们只需要运行它即可：
@@ -608,8 +608,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-orga876169" class="outline-4">
-<h4 id="orga876169"><span class="section-number-4">2.1.9.</span> 从stage2到stage3</h4>
+<div id="outline-container-orgf3feeb1" class="outline-4">
+<h4 id="orgf3feeb1"><span class="section-number-4">2.1.9.</span> 从stage2到stage3</h4>
 <div class="outline-text-4" id="text-2-1-9">
 <p>
 理论上按照Gentoo官方的说法，这一步只需要<code>emerge -e @system</code>构建系统工具链即可。然而由于那个<code>bootstrap.sh</code>脚本估计是没怎么维护了，出来的gcc编译器缺少构建系统所需的一个特性、需要手动使用<code>USE=openmp</code>开启。这一步你也可以配置更多gcc的特性，详见这里。为了开启这些特性，我们需要在<code>/etc/portage/package.use/</code>目录下创建一个文件（文件名无所谓，但为了可维护性有两种广泛使用的方案：创建一个文件存放所有软件的<code>USE</code>配置和为每一个需要配置的软件创建一个新文件），并写入：
@@ -645,12 +645,12 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-org2f9bbdb" class="outline-3">
-<h3 id="org2f9bbdb"><span class="section-number-3">2.2.</span> 安装系统</h3>
+<div id="outline-container-org520134a" class="outline-3">
+<h3 id="org520134a"><span class="section-number-3">2.2.</span> 安装系统</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-orgd0aaaac" class="outline-4">
-<h4 id="orgd0aaaac"><span class="section-number-4">2.2.1.</span> 同步包管理器数据库并选取全局配置文件</h4>
+<div id="outline-container-org0dae30c" class="outline-4">
+<h4 id="org0dae30c"><span class="section-number-4">2.2.1.</span> 同步包管理器数据库并选取全局配置文件</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 首先同步包管理器所使用的软件包数据库（其实这一步就是下载放在不同文件夹里的ebuild文件）：
@@ -673,8 +673,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-org66708f0" class="outline-4">
-<h4 id="org66708f0"><span class="section-number-4">2.2.2.</span> 配置<code>make.conf</code>文件</h4>
+<div id="outline-container-org855359b" class="outline-4">
+<h4 id="org855359b"><span class="section-number-4">2.2.2.</span> 配置<code>make.conf</code>文件</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 这时我们接着配置这个文件。先前由于没有<code>cpuid2cpuflags</code>这个工具，无法配置该环境变量，现在我们只需：
@@ -706,8 +706,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-org3c6c378" class="outline-4">
-<h4 id="org3c6c378"><span class="section-number-4">2.2.3.</span> 重建系统（可选）</h4>
+<div id="outline-container-org2ea799b" class="outline-4">
+<h4 id="org2ea799b"><span class="section-number-4">2.2.3.</span> 重建系统（可选）</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 这一步是可选的，且只在你做出了：
@@ -743,8 +743,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-org61e5f54" class="outline-4">
-<h4 id="org61e5f54"><span class="section-number-4">2.2.4.</span> 本地化</h4>
+<div id="outline-container-org645926c" class="outline-4">
+<h4 id="org645926c"><span class="section-number-4">2.2.4.</span> 本地化</h4>
 <div class="outline-text-4" id="text-2-2-4">
 <p>
 从这一节开始，就需要区分OpenRC和SystemD各自的步骤。笔者用的是OpenRC，使用SystemD的用家可以从<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">这里</a>的Optional: Using systemd as the system and service manager处开始按步骤使用不同的命令完成安装（两种方案在安装时只会有细节上的区别）。
@@ -793,8 +793,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-org4a7b2f7" class="outline-3">
-<h3 id="org4a7b2f7"><span class="section-number-3">2.3.</span> 配置系统内核（手动配置可选）</h3>
+<div id="outline-container-org0e89703" class="outline-3">
+<h3 id="org0e89703"><span class="section-number-3">2.3.</span> 配置系统内核（手动配置可选）</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 终于到了配置内核的时候。有三种方案供各位选择：
@@ -807,8 +807,8 @@ Device            Start        End   Sectors   Size Type
 </ol>
 </div>
 
-<div id="outline-container-org95bb099" class="outline-4">
-<h4 id="org95bb099"><span class="section-number-4">2.3.1.</span> 必要驱动安装</h4>
+<div id="outline-container-org315e4f7" class="outline-4">
+<h4 id="org315e4f7"><span class="section-number-4">2.3.1.</span> 必要驱动安装</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 这一步是无论你使用什么内核安装方式都需要完成的。我使用emerge提供的集合方式安装（便于管理）。先创建目录：
@@ -845,8 +845,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-org2562ed4" class="outline-4">
-<h4 id="org2562ed4"><span class="section-number-4">2.3.2.</span> 发行版内核安装</h4>
+<div id="outline-container-org52441f3" class="outline-4">
+<h4 id="org52441f3"><span class="section-number-4">2.3.2.</span> 发行版内核安装</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 以下是使用GNU GRUB作为系统引导时的安装步骤，如果有特殊需求参考<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel">这里</a>的Distribution kernels一节即可。
@@ -884,8 +884,8 @@ Device            Start        End   Sectors   Size Type
 </div>
 </div>
 
-<div id="outline-container-org9edf073" class="outline-4">
-<h4 id="org9edf073"><span class="section-number-4">2.3.3.</span> 手动编译内核</h4>
+<div id="outline-container-org4a44ef8" class="outline-4">
+<h4 id="org4a44ef8"><span class="section-number-4">2.3.3.</span> 手动编译内核</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <p>
 同样创建kernel集合先安装需要的包：
@@ -995,12 +995,12 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-org498261d" class="outline-3">
-<h3 id="org498261d"><span class="section-number-3">2.4.</span> 杂项、工具、及系统引导</h3>
+<div id="outline-container-orgd492f06" class="outline-3">
+<h3 id="orgd492f06"><span class="section-number-3">2.4.</span> 杂项、工具、及系统引导</h3>
 <div class="outline-text-3" id="text-2-4">
 </div>
-<div id="outline-container-org8103925" class="outline-4">
-<h4 id="org8103925"><span class="section-number-4">2.4.1.</span> <code>fstab</code>文件</h4>
+<div id="outline-container-org608bd64" class="outline-4">
+<h4 id="org608bd64"><span class="section-number-4">2.4.1.</span> <code>fstab</code>文件</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 为了让系统知道该挂载硬盘的哪个分区、每个分区上装的是什么东西、用的是什么文件系统、挂载时需要什么参数、以及挂载的行为、优先级等，需要编辑<code>/etc/fstab</code>文件。具体的语法请看<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System">这里</a>的About fstab一节。下面是我的配置，供参考：
@@ -1020,8 +1020,8 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-org9d36fe1" class="outline-4">
-<h4 id="org9d36fe1"><span class="section-number-4">2.4.2.</span> 网络相关</h4>
+<div id="outline-container-org81746d4" class="outline-4">
+<h4 id="org81746d4"><span class="section-number-4">2.4.2.</span> 网络相关</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 我们先给自己的机器设一个主机名（注意：如果你在内核里指定了就不要冲突）：
@@ -1077,8 +1077,8 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-org99b6989" class="outline-4">
-<h4 id="org99b6989"><span class="section-number-4">2.4.3.</span> 系统信息</h4>
+<div id="outline-container-org3c40ea3" class="outline-4">
+<h4 id="org3c40ea3"><span class="section-number-4">2.4.3.</span> 系统信息</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 首先设置root账户的密码（弱密码会提醒）：
@@ -1104,8 +1104,8 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-org033f70b" class="outline-4">
-<h4 id="org033f70b"><span class="section-number-4">2.4.4.</span> 系统工具</h4>
+<div id="outline-container-orge52a25f" class="outline-4">
+<h4 id="orge52a25f"><span class="section-number-4">2.4.4.</span> 系统工具</h4>
 <div class="outline-text-4" id="text-2-4-4">
 <p>
 先安装系统日志管理，可选的有sysklogd、syslog-ng和metalog。
@@ -1264,8 +1264,8 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-org757e5ac" class="outline-3">
-<h3 id="org757e5ac"><span class="section-number-3">2.5.</span> 系统引导</h3>
+<div id="outline-container-orgfae57ad" class="outline-3">
+<h3 id="orgfae57ad"><span class="section-number-3">2.5.</span> 系统引导</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 最后一步就是安装系统引导了。这里不说使用efibootmgr、也不讲Secure Boot，只说最标准的GRUB2引导（我觉得我已经写不动了、而且情况太多了）。首先UEFI用户在<code>/etc/portage/make.conf</code>文件中加上：
@@ -1307,8 +1307,8 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-orge0b5815" class="outline-3">
-<h3 id="orge0b5815"><span class="section-number-3">2.6.</span> 清理</h3>
+<div id="outline-container-org4b4f640" class="outline-3">
+<h3 id="org4b4f640"><span class="section-number-3">2.6.</span> 清理</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 我们需要收个尾，然后重启离开livecd环境进入实打实的Gentoo Linux后准备配置桌面环境。
@@ -1342,12 +1342,12 @@ Cryptographic API  ---&gt;
 </div>
 </div>
 
-<div id="outline-container-org980b543" class="outline-2">
-<h2 id="org980b543"><span class="section-number-2">3.</span> 桌面环境的安装</h2>
+<div id="outline-container-orgb19aaea" class="outline-2">
+<h2 id="orgb19aaea"><span class="section-number-2">3.</span> 桌面环境的安装</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org1766093" class="outline-3">
-<h3 id="org1766093"><span class="section-number-3">3.1.</span> 选择</h3>
+<div id="outline-container-org405482b" class="outline-3">
+<h3 id="org405482b"><span class="section-number-3">3.1.</span> 选择</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 人们的xp丰富多样，Linux的桌面环境也是牛鬼蛇神。古有X Window System、今有Wayland作为协议。两者之上又有数不清的被我们成为桌面环境的东西。桌面环境的构成如下：
@@ -1420,12 +1420,12 @@ slim：怎么办？好慌，潜水太久，管理员要踢我了<br />
 </div>
 </div>
 
-<div id="outline-container-org58718c9" class="outline-3">
-<h3 id="org58718c9"><span class="section-number-3">3.2.</span> XOrg与XMonad</h3>
+<div id="outline-container-org89e1c1e" class="outline-3">
+<h3 id="org89e1c1e"><span class="section-number-3">3.2.</span> XOrg与XMonad</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org560a21a" class="outline-4">
-<h4 id="org560a21a"><span class="section-number-4">3.2.1.</span> 安装必要软件</h4>
+<div id="outline-container-orgf0fdade" class="outline-4">
+<h4 id="orgf0fdade"><span class="section-number-4">3.2.1.</span> 安装必要软件</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 创建wm集合：
@@ -1461,8 +1461,8 @@ slim：怎么办？好慌，潜水太久，管理员要踢我了<br />
 </div>
 </div>
 
-<div id="outline-container-org7971099" class="outline-4">
-<h4 id="org7971099"><span class="section-number-4">3.2.2.</span> 配置</h4>
+<div id="outline-container-orgf23e3e8" class="outline-4">
+<h4 id="orgf23e3e8"><span class="section-number-4">3.2.2.</span> 配置</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 因为XMonad的特殊性，我们需要先创建一个普通用户（使用XMonad窗口管理器的）：
@@ -1713,8 +1713,8 @@ wintypes:
 </div>
 </div>
 
-<div id="outline-container-org823ffa6" class="outline-4">
-<h4 id="org823ffa6"><span class="section-number-4">3.2.3.</span> 常见事故</h4>
+<div id="outline-container-orgeeb0e7b" class="outline-4">
+<h4 id="orgeeb0e7b"><span class="section-number-4">3.2.3.</span> 常见事故</h4>
 <div class="outline-text-4" id="text-3-2-3">
 <p>
 如果你在使用时发现有屏幕撕裂等的现象，请先阅读这篇关于XOrg的文章，随后以「Screen Tearing」「XOrg」以及你的显卡配置在搜索引擎上搜索方案，常见的包括开启VSync、Intel显卡使用modesetting驱动替代xf86驱动等。
@@ -1723,12 +1723,12 @@ wintypes:
 </div>
 </div>
 
-<div id="outline-container-org56213c1" class="outline-3">
-<h3 id="org56213c1"><span class="section-number-3">3.3.</span> Wayland 与 SwayWM</h3>
+<div id="outline-container-orgee06cd4" class="outline-3">
+<h3 id="orgee06cd4"><span class="section-number-3">3.3.</span> Wayland与SwayWM</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org79dfa53" class="outline-4">
-<h4 id="org79dfa53"><span class="section-number-4">3.3.1.</span> 安装必要软件</h4>
+<div id="outline-container-org2b0034a" class="outline-4">
+<h4 id="org2b0034a"><span class="section-number-4">3.3.1.</span> 安装必要软件</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 首先创建winmgr集合：
@@ -1759,8 +1759,8 @@ wintypes:
 </div>
 </div>
 
-<div id="outline-container-orgc0f908a" class="outline-4">
-<h4 id="orgc0f908a"><span class="section-number-4">3.3.2.</span> 配置</h4>
+<div id="outline-container-org6fd3df9" class="outline-4">
+<h4 id="org6fd3df9"><span class="section-number-4">3.3.2.</span> 配置</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <div class="org-src-container">
 <pre class="src src-conf"><span style="color: #a49da5; font-style: italic;"># </span><span style="color: #a49da5; font-style: italic;">~/.config/sway/config</span>
@@ -1822,8 +1822,8 @@ bindsym $mod+Print exec grimshot save area ~/Images/psa_$(date +<span style="col
 </div>
 </div>
 
-<div id="outline-container-org3ecf24c" class="outline-4">
-<h4 id="org3ecf24c"><span class="section-number-4">3.3.3.</span> 常见问题</h4>
+<div id="outline-container-org24c7db3" class="outline-4">
+<h4 id="org24c7db3"><span class="section-number-4">3.3.3.</span> 常见问题</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
 swayWM有些时候过于守旧，过分追求与i3的兼容了。这就导致很多看起来很合理也很正常的特性他们就是不支持，比如圆角窗口。这还不是最离谱的，它不支持在当前焦点（focus）和先前焦点的浮动窗口中切换焦点（之所以说浮动是因为只有浮动才会发生窗口遮挡的情况；tabbed等问题不严重）。解决方案见<a href="https://www.reddit.com/r/swaywm/comments/etpjix/i_created_a_script_to_implement_window_back_and/">r/swayWM</a>，原理就是用一个shell脚本在后台去读swaymsg。首先创建一个脚本，建议为：<code>~/.config/sway/track_prev_focus</code>，内容如下：
@@ -1916,8 +1916,8 @@ app-i18n/fcitx-configtool:5 <span style="color: #a49da5; font-style: italic;"># 
 </div>
 </div>
 
-<div id="outline-container-orgbe30102" class="outline-2">
-<h2 id="orgbe30102"><span class="section-number-2">4.</span> 吐槽与展望</h2>
+<div id="outline-container-orge5407d8" class="outline-2">
+<h2 id="orge5407d8"><span class="section-number-2">4.</span> 吐槽与展望</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Gentoo是1999年10月4日出现的，现在已经2024年了，真的是「20 years of compile」，而它很有名的一点就是需要编译。网上有人用Gentoo把硬盘弄坏的、被怀疑在挖矿的、把主板烧了的，各种各样。然而就在不久就之前，Gentoo的二进制更成熟了。真是一件大好事（虽然估计对我没什么影响就是了）。
@@ -1946,7 +1946,7 @@ Gentoo是1999年10月4日出现的，现在已经2024年了，真的是「20 yea
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-08-13 Tue 15:11</p>
+<p class="date">Created: 2024-08-15 Thu 15:58</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
