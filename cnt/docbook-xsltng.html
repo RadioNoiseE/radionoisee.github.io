@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-09-02 Mon 17:07 -->
+<!-- 2024-09-02 Mon 17:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>现代DocBook环境构建</title>
@@ -200,21 +200,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4928be4">1. 简介</a></li>
-<li><a href="#orgd175a9f">2. 工具安装</a>
+<li><a href="#org2d2d6e1">1. 简介</a></li>
+<li><a href="#org00309ed">2. 工具安装</a>
 <ul>
-<li><a href="#org9ac510d">2.1. SaxonC</a></li>
-<li><a href="#orgf9dcd2a">2.2. xslTNG</a></li>
+<li><a href="#org92757bf">2.1. SaxonC</a></li>
+<li><a href="#orgb723b84">2.2. xslTNG</a></li>
 </ul>
 </li>
-<li><a href="#org0eb9ad6">3. 使用例</a></li>
-<li><a href="#org7220b42">4. 写在后面</a></li>
+<li><a href="#org5aab7ff">3. 使用例</a></li>
+<li><a href="#org7e7d52c">4. 写在后面</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4928be4" class="outline-2">
-<h2 id="org4928be4"><span class="section-number-2">1.</span> 简介</h2>
+<div id="outline-container-org2d2d6e1" class="outline-2">
+<h2 id="org2d2d6e1"><span class="section-number-2">1.</span> 简介</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 这篇介绍如何配置一个精简的现代DocBook编写环境。我们使用SaxonC和xslTNG。
@@ -227,12 +227,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgd175a9f" class="outline-2">
-<h2 id="orgd175a9f"><span class="section-number-2">2.</span> 工具安装</h2>
+<div id="outline-container-org00309ed" class="outline-2">
+<h2 id="org00309ed"><span class="section-number-2">2.</span> 工具安装</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org9ac510d" class="outline-3">
-<h3 id="org9ac510d"><span class="section-number-3">2.1.</span> SaxonC</h3>
+<div id="outline-container-org92757bf" class="outline-3">
+<h3 id="org92757bf"><span class="section-number-3">2.1.</span> SaxonC</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 截至写作时，SaxonC的版本号为12.5。因为我穷，所以我使用的的是HE版本。
@@ -271,8 +271,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgf9dcd2a" class="outline-3">
-<h3 id="orgf9dcd2a"><span class="section-number-3">2.2.</span> xslTNG</h3>
+<div id="outline-container-orgb723b84" class="outline-3">
+<h3 id="orgb723b84"><span class="section-number-3">2.2.</span> xslTNG</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 从<a href="https://github.com/docbook/xslTNG/releases/latest"><code>https://github.com/docbook/xslTNG/releases/latest</code></a>下载最新的release并解压。建议下<code>nosaxon</code>的。随便找个地方把它放好就行了。
@@ -281,8 +281,8 @@
 </div>
 </div>
 
-<div id="outline-container-org0eb9ad6" class="outline-2">
-<h2 id="org0eb9ad6"><span class="section-number-2">3.</span> 使用例</h2>
+<div id="outline-container-org5aab7ff" class="outline-2">
+<h2 id="org5aab7ff"><span class="section-number-2">3.</span> 使用例</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 一个简单的例子：
@@ -310,7 +310,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #2aa1ae; font-weight: bold;">saxonc</span> <span style="color: #4e3163;">-s:test.xml</span> <span style="color: #4e3163;">-xsl:/home/</span><span style="color: #4e3163; font-weight: bold;">$(</span><span style="color: #6c3163;">whoami</span><span style="color: #4e3163; font-weight: bold;">)</span><span style="color: #4e3163;">/DocBook-xslTNG/xslt/docbook.xsl</span> <span style="color: #4e3163;">-o:test.html</span>
+<pre class="src src-bash"><span style="color: #2aa1ae; font-weight: bold;">saxonc</span> <span style="color: #4e3163;">-s:test.xml</span> <span style="color: #4e3163;">-xsl:/home/</span><span style="color: #4e3163; font-weight: bold;">$(</span><span style="color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">whoami</span><span style="color: #4e3163; font-weight: bold;">)</span><span style="color: #4e3163;">/DocBook-xslTNG/xslt/docbook.xsl</span> <span style="color: #4e3163;">-o:test.html</span>
 </pre>
 </div>
 
@@ -319,7 +319,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #2aa1ae; font-weight: bold;">cp</span> <span style="color: #4e3163;">-r</span> /home/<span style="color: #3a81c3; font-weight: bold;">$(</span><span style="color: #6c3163;">whoami</span><span style="color: #3a81c3; font-weight: bold;">)</span>/DocBook-xslTNG/resources/* .
+<pre class="src src-bash"><span style="color: #2aa1ae; font-weight: bold;">cp</span> <span style="color: #4e3163;">-r</span> /home/<span style="color: #3a81c3; font-weight: bold;">$(</span><span style="color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">whoami</span><span style="color: #3a81c3; font-weight: bold;">)</span>/DocBook-xslTNG/resources/* .
 </pre>
 </div>
 
@@ -328,14 +328,14 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #2aa1ae; font-weight: bold;">xdg-open</span> test/html
+<pre class="src src-bash"><span style="color: #2aa1ae; font-weight: bold;">xdg-open</span> test.html
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7220b42" class="outline-2">
-<h2 id="org7220b42"><span class="section-number-2">4.</span> 写在后面</h2>
+<div id="outline-container-org7e7d52c" class="outline-2">
+<h2 id="org7e7d52c"><span class="section-number-2">4.</span> 写在后面</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 没了。
@@ -344,7 +344,7 @@
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-09-02 Mon 17:07</p>
+<p class="date">Created: 2024-09-02 Mon 17:22</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
