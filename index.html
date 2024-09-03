@@ -36,30 +36,16 @@
     <div id="content" class="content">
       <h2>Content Directory Listing</h2>
       <ul id="link-container">
+        <li><a href="cnt/docbook-xsltng.html">现代DocBook环境：SaxonC与xslTNG</a></li>
+        <li><a href="cnt/emacs-modeline.html">自己写Emacs状态栏</a></li>
+	<li><a href="cnt/gentoo-ins.html">Gentoo安装配置</a></li>
+	<li><a href="cnt/linux-font-render.html">Linux下的字体渲染</a></li>
+	<li><a href="cnt/mutt-intro.html">用mutt读邮件</a></li>
+	<li><a href="cnt/ocaml-json.html">OcaML写JSON解析器</a></li>
+	<li><a href="cnt/plaintex-mac.html">PlainTeX宏收集</a></li>
+	<li><a href="cnt/qemu-android.html">基于QEMU的干净安卓虚拟机</a></li>
+	<li><a href="cnt/tbt-ch12.html">TeXbyTopic第12章中文翻译</a></li>
       </ul>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const container = document.getElementById('link-container');    
-          fetch(`https://api.github.com/repos/RadioNoiseE/radionoisee.github.io/contents/cnt`)
-           .then(response => {
-              if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
-              return response.json(); })
-           .then(data => {
-              data.forEach(file => {
-                if (file.name.endsWith('.html')) {
-                  const listItem = document.createElement('li');
-                  const link = document.createElement('a');
-                  link.href = `cnt/${file.name}`;
-                  link.textContent = file.name.replace('.html', '');
-                  link.style.display = 'block';
-                  listItem.appendChild(link);
-                  container.appendChild(listItem); }}); })
-           .catch(error => {
-              console.error('Error fetching the content:', error);
-              const errorText = document.createElement('p');
-              errorText.textContent = 'Failed to load content directory.';
-              container.appendChild(errorText); }); });
-      </script>
     </div>
   </body>
 </html>

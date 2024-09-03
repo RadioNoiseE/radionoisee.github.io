@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive RNE</title>
+    <style>
+      body { font-family: serif;
+             line-height: 1.4;
+             background-color: #f4f4f9;
+             color: #333;
+             justify-content: center; }
+      #content { max-width: 600px;
+                 margin: 70px auto;
+                 padding: 10px;
+                 background-color: white;
+                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                 gap: 20px; }
+      h2 { text-align: center;
+           color: #333;
+           font-size: 24px; }
+      p { text-align: center;
+          color: red; }
+      #link-container {
+        font-family: monospace;
+      } a {
+        text-decoration: none;
+        color: #0066cc;
+        font-size: 12px;
+        transition: background-color 0.3s ease;
+      } a:hover {
+        background-color: #f0f8ff; }
+    </style>
+  </head>
+  <body>
+    <div id="content" class="content">
+      <h2>Content Directory Listing</h2>
+      <ul id="link-container">
+      </ul>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const container = document.getElementById('link-container');    
+          fetch(`https://api.github.com/repos/RadioNoiseE/radionoisee.github.io/contents/cnt`)
+           .then(response => {
+              if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
+              return response.json(); })
+           .then(data => {
+              data.forEach(file => {
+                if (file.name.endsWith('.html')) {
+                  const listItem = document.createElement('li');
+                  const link = document.createElement('a');
+                  link.href = `cnt/${file.name}`;
+                  link.textContent = file.name.replace('.html', '');
+                  link.style.display = 'block';
+                  listItem.appendChild(link);
+                  container.appendChild(listItem); }}); })
+           .catch(error => {
+              console.error('Error fetching the content:', error);
+              const errorText = document.createElement('p');
+              errorText.textContent = 'Failed to load content directory.';
+              container.appendChild(errorText); }); });
+      </script>
+    </div>
+  </body>
+</html>
