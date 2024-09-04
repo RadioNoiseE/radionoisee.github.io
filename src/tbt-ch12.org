@@ -1,0 +1,851 @@
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS: smpl
+
+#+TITLE: TeX by Topic第12章〈翻译〉
+
+* 摘要
+
+TeX中的展开不同于其他许多程序设计语言中的过程调用。本章将讨论与展开相关的命令，并给出一些（不那么具体）的实例。
+
+- ~\relax~　什么都不做。
+- ~\expandafter~　（从输入流上）取走其后的两个记号，将第二个记号展开一步并置于第一个记号之后。
+- ~\noexpand~　使其后的记号不被展开。
+- ~\edef~　进行宏定义；该宏的定义内容将会在定义时被展开。
+- ~\aftergroup~　存储其后的一个记号并在当前分组结束后将其放入输入流中。
+- ~\afterassignment~　存储其后的一个记号并在下一个赋值抑或宏定义后执行之。
+- ~\the~　将TeX中的某些量展开为由字符记号构成的字符串。
+
+* 简介
+
+TeX的展开处理器接受来自输入处理器中的记号流，并将其输出为供执行处理器处理的记号流。对于输入处理器而言有两种记号：
+可展开的和不可展开的。那类不可展开的主要包含赋值或供排版内容的记号会原封不动通过展开处理器；
+而可展开的记号则会被展开，同时展开的结果会被重新检验（以确保其已经完全展开）。
+
+* 展开惯例
+
+那些若不进行抑制，则会被展开的结构体有：
+
+- 宏；
+- 条件判断；
+- ~\number~、~\romannumeral~；
+- ~\string~、~\fontname~、~\jobname~､~\meaning~、~\the~；
+- ~\csname ... \endcsname~；
+- ~\expandafter~、~\noexpand~；
+- ~\topmark~、~\botmark~、~\firstmark~、~\splitfirstmark~、~\splitbotmark~；
+- ~\input~、~\endinput~。
+
+下面则是展开会被抑制的情况：
+
+- 当TeX在读入被以下列方法定义的记号时
+  - 一个⟨let assignment⟩、即使用~\let~或~\futurelet~时，
+  - 一个⟨shorthand definition⟩、即使用~\chardef~或~\mathchardef~时，
+    也可能是一个⟨register def⟩、即使用~\countdef~、~\dimendef~、~\skipdef~、~\muskipdef~或~\toksdef~时，
+  - 一个⟨definition⟩、即使用~\def~、~\gdef~、~\edef~或~\xdef~进行宏定义时，
+  - ⟨simple assignment⟩、即使用~\read~或~\font~进行简单赋值时；
+- 当⟨parameter text⟩或宏参量被读入时，也可能在当使用~\def~、~\gdef~或~\read~定义的控制序列被读入时；
+- 当作为⟨token variable⟩的记号列表、~\uppercase~、~\lowercase~或~\write~的参量被读取时，
+  但是作为~\write~的参量时则会被在作用时展开；
+- 当在错误恢复中该记号将被删除时；
+- 当作为条件判断（错误）的一部分被忽略时；
+- 在当TeX需要知道紧随其后的是什么时，有两种情况
+  - 在被用于表示整数的左引号后时（正因如此、~\catcode`\a~中~\a~不会被展开），
+  - 在一个数学模式开后出现后判断是否紧随另一个同类字符时（若如此、则为公式展示模式），
+- 当一个对齐环境的导言被读入时，但是若记号前面出现~\span~、或记号出现在~\tabskip~赋值中时，其仍会被展开。
+
+* 颠倒展开顺序
+
+有时会出现需要调整记号的一般展开顺序的情况。为此，TeX提供了几种机制。本节中描述的某些控制序列的应用并不局限于展开。
+
+** 提前一步展开：~\expandafter~
+
+最常用的可用于颠倒展开顺序的工具是~\expandafter~。以下：
+
+#+BEGIN_SRC tex
+  \expandafter⟨token1⟩⟨token2⟩
+#+END_SRC
+
+序列等同于：
+
+#+BEGIN_SRC tex
+  ⟨token1⟩⟨the expansion of token2⟩
+#+END_SRC
+
+若在以下两种情况出现时则须格外注意：
+
+- 若⟨token2⟩是一个宏、则其会被它的宏定义结果替换、而非它的最终完全展开结果，所以
+  #+BEGIN_SRC tex
+    \def\tokentwo{\ifsomecondition this \else that \fi}
+    \def\tokenone#1{...}
+  #+END_SRC
+  以下的
+  #+BEGIN_SRC tex
+    \expandafter\tokenone\tokentwo
+  #+END_SRC
+  会将\ifsomecondition作为\tokenone的参数
+    #+BEGIN_SRC tex
+    \tokenone #1 -> ...
+              #1 <- \ifsomecondition
+  #+END_SRC
+- 若~\tokentwo~是一个使用一个或更多参量的宏、则足够多的其后的记号会被吸收、从而成为~\tokentwo~的参量完成宏替换内容的构成。
+
+** 完全展开：~\edef~
+
+宏通常是被使用~\def~定义的，但当我们希望使用宏替换内容去反映其被定义时的状况（而非通过其反映被调用时的状况）时，
+即可使用「展开定义」、~\edef~。它会将宏替换内容在被赋值给（被定义的）宏之前完全展开。
+
+#+BEGIN_SRC tex
+\edef\modedef{This macro was defined in
+              `\ifvmode vertical\else \ifmmode math
+               \else horizontal\fi\fi' mode}
+#+END_SRC
+
+因为模式测试在定义时即被执行，故该宏的替换文本将会是一个字符串。
+一个更有用的例子：若要使用~\input~读入一个~@~的类别码将会发生改变的文件，则可以将
+
+#+BEGIN_SRC tex
+  \edef\restorecat{\catcode`@=\the\catcode`@}
+#+END_SRC
+
+放在文件开头，并将~\restorecat~放在文件末尾。
+
+与「只展开一步」的~\expandafter~不同，在~\edef~内的展开是彻底的：它会持续展开，直到只有不可展开的字符或控制序列留在输入流中。
+对于这类彻底的展开，有两个例外情况：
+
+- 任何~\noexpand~之后的控制序列不会被展开；
+- 若~\sometokenlist~是一个记号列表、则以下
+  #+BEGIN_SRC tex
+    \the\sometokenlist
+  #+END_SRC
+  只会展开为记号列表的内容、而其内容并不会被进一步展开。
+  
+在某些情况之下，~\edef~可被方便地「滥用」，即当我们无意定义一个控制序列、仅关注其展开结果时。比如，使用如下定义：
+
+#+BEGIN_SRC tex
+  \def\othermacro{\ifnum1>0 {this}\else {that}\fi}
+  \def\somemacro#1{...}
+#+END_SRC
+
+后，宏调用:
+
+#+BEGIN_SRC tex
+  \expandafter\somemacro\othermacro
+#+END_SRC
+
+将会给出如下对参量的赋值：
+
+#+BEGIN_SRC tex
+  #1 <- \ifnum
+#+END_SRC
+
+为使其正确，我们可以这么写：
+
+#+BEGIN_SRC tex
+  \edef\next{\noexpand\somemacro\othermacro}\next
+#+END_SRC
+
+其中的条件判断被~\edef~完全展开，所以~\next~的替换文本将会是：
+
+#+BEGIN_SRC tex
+  \somemacro{this}
+#+END_SRC
+
+同时其后的~\next~调用将执行该定义。
+
+** ~\afterassignment~
+
+~\afterassignment~指令从输入流上取走一个记号，并在下一个赋值或宏定义后将其插入到记号流中。
+如果随后出现的是将盒子赋给盒子寄存器的赋值，则该记号会在界定盒子内容的左花括号之后被插入。
+
+使用这种方式只能存储一个记号；之后出现的其它的~\afterassignment~存储的记号会覆盖之前的记号。
+
+不妨考虑实际使用~\afterassignment~的例子。一个诱人的想法可能是定义一个宏去完成如下的：
+
+- 将参数赋予某个值；
+- 进行一些基于该参数新值的简单计算。
+
+这是对其较直接的实现方法：
+
+#+BEGIN_SRC tex
+  \def\setfontsize#1{\thefontsize=#1pt\relax
+                     \baselineskip=1.2\thefontsize\relax}
+  \setfontsize{10}
+#+END_SRC
+
+而，基于~\afterassignment~，我们可以有如下更优雅的实现方法：
+
+#+BEGIN_SRC tex
+  \def\setbaselineskip{\baselineskip=1.2\thefontsize\relax}
+  \def\fontsize{\afterassignment\setbaselineskip
+                \thefontsize}
+  \fontsize=10pt
+#+END_SRC
+
+此时，这个宏看上去更像一个赋值：等号是可选的。实际上它的展开以一个将会被赋值的变量结束。
+控制序列~\setbaselineskip~被存储直至对~\thefontsize~赋值后才执行。
+
+** ~\aftergroup~
+
+某些记号可被
+
+#+BEGIN_SRC tex
+  \aftergroup⟨token⟩
+#+END_SRC
+
+控制序列存储以备当前分组结束后再行插入。这些记号会在~\aftergroup~序列出现的分组结束后被插入。
+分组可同时被使用直接或间接的花括号来定界，或使用~\begingroup~及~\endgroup~。
+
+#+BEGIN_SRC tex
+  {\aftergroup\a \aftergroup\b}
+#+END_SRC
+
+等同于
+
+#+BEGIN_SRC tex
+  \a \b
+#+END_SRC
+  
+此命令可以有许多应用。其中~\textvcenter~宏对其的应用可被找到；另一个则是plain-TeX中的脚注机制。
+在plain-TeX中，使用脚注命令的语法如下
+
+#+BEGIN_SRC tex
+  \footnote⟨footnote symbol⟩{⟨footnote text⟩}
+#+END_SRC
+
+这让它看起来像是使用两个参数的宏。然而，若它使用两个参数，则意味着它令人不快的需要读入脚注文本，
+因为这会妨碍脚注中出现如类别码变动等的情况。
+
+实际上，该脚注宏主要是以如下的方式实现的：
+
+- 首先、~\footnote~宏开启一个（脚注）浮动体插入物
+  #+BEGIN_SRC tex
+    \def\footnote#1{ ...#1... %treat the footnote sign
+    \insert\footins\bgroup
+  #+END_SRC
+- 在该插入物盒子中、~\aftergroup~的命令使得该盒子能够被正确地关闭
+  #+BEGIN_SRC tex
+    \bgroup\aftergroup\@foot
+  #+END_SRC
+  其起到的作用是、使用户输入的结束脚注文本的右花括号无效化，而左花括号则需使用如下方式无效化
+  #+BEGIN_SRC tex
+    \let\next=} %end of definition \footnote
+  #+END_SRC
+  即将随后的左花括号记号赋值给~\next~序列；
+- 脚注文本即可如一般文本一样在浮动体插入物盒子中排版；
+- 脚注后、如下定义的~\@foot~序列
+  #+BEGIN_SRC tex
+    \def\@foot{\strut\egroup}
+  #+END_SRC
+  会被最后执行从而关闭插入物盒子。
+
+* 抑制展开
+
+有时抑制应发生的展开是极必要的。控制序列~\string~和~\noexpand~可供在这时使用。
+~\string~的使用较为局限，这是由于它会将一个控制序列记号转换为一个字符串（此时~\escapechar~的值会被用于替换原类别码为0的字符）。
+显而易见，它很适合用在使用~\write~的场合，来输出一个控制序列的名字；其别的用途可见对~\newif~的介绍。
+
+所有~\string~输出的字符除类别码10的空格外，都属于类别码12（「其他」）。
+
+** ~\noexpand~
+
+命令~\noexpand~是可展开的，且其会展开为其后面的记号。（它后面的）记号的意义会暂时等同于~\relax~，如此使其不会被进一步展开。
+
+对于控制序列~\noexpand~而言，最重要的应用莫过于在~\edef~中抑制展开（但在~\write~的情况下，它也经常能够替代~\string~）。
+考虑下例：
+
+#+BEGIN_SRC tex
+  \edef\one{\def\noexpand\two{\the\prevdepth}}
+#+END_SRC
+
+若没有~\noexpand~，则TeX会试图展开~\two~，便会出现「未定义控制序列」的报错。
+另一个（没太大意义的）例子可表明~\noexpand~使其后的记号（暂时）等同于~\relax~：
+
+#+BEGIN_SRC tex
+  \def\a{b}
+  \noexpand\a
+#+END_SRC
+
+因~\noexpand~使控制序列~\a~暂时等同于\relax，故上段代码将不会产生任何输出。
+
+** ~\noexpand~及活动字符
+
+序列~\noexpand⟨token⟩~的组合总是等同于~\relax~，即便该记号是一个活动字符。所以，
+
+#+BEGIN_SRC tex
+  \csname\noexpand~\endcsname
+#+END_SRC
+
+的意思不同于~\char`\~~。相反，因为不可展开的命令——比如~\relax~——不被允许出现在~\csname~和~\endcsname~中，
+它会提示出现错误。解决方法则是转而使用~\string~。
+
+但在某些其他情境下，~\noexpand⟨active character⟩~的序列等同于该字符不可展开的形式。
+这时条件判断命令~\if~和~\ifcat~可被使用说明这一点。以下：
+
+#+BEGIN_SRC tex
+  \if\noexpand~\relax % is false
+#+END_SRC
+
+此时~~~的字符编码被测试；
+
+#+BEGIN_SRC tex
+  \def\a{...} \if\noexpand\a\relax % is true
+#+END_SRC
+
+将比较两个控制序列。
+
+* ~\relax~
+
+控制序列~\relax~不可展开，它被执行的时候则什么也不会做。
+
+以上说明感觉上有些似是而非，不妨看一个例子。给出如下计数器：
+
+#+BEGIN_SRC tex
+  \newcount\MyCount
+  \newcount\MyOtherCount \MyOtherCount=2
+#+END_SRC
+
+在赋值过程中：
+
+#+BEGIN_SRC tex
+  \MyCount=1\number\MyOtherCount3\relax4
+#+END_SRC
+
+命令~\number~是可展开的，而~\relax~则不可被展开。当TeX构建将被赋给的值的时候，它会展开所有命令直到遇到非数字或不可展开的命令为止。
+所以它读入1；它会展开~\number\MyOtherCount~（其展开后值为2）；
+它接着读入3；它又读入~\relax~，而由于其不可展开，于是便最终停止对赋值过程中值的构建。
+所以最终赋给~\MyCount~的值是123，又因为展开的结果为：
+
+#+BEGIN_SRC tex
+  \MyCount=123\relax4
+#+END_SRC
+
+且~\relax~的执行结果是什么也不做，所以该序列将会把值123赋给~\MyCount~，并排版数字4。
+
+命令~\relax~还可被用于（显式）表示一个命令的结束，如下例：
+
+#+BEGIN_SRC tex
+  \everypar{\hskip 0cm plus 1fil }
+  \indent Later that day, ...
+#+END_SRC
+
+这段代码是有歧义的：TeX实际上读到的是：
+
+#+BEGIN_SRC tex
+\hskip 0cm plus 1fil L
+#+END_SRC
+
+而~fil L~虽然看起来不太正常，但实际上是一种合法的表示~fill~的方式。可用~\relax~漂亮地解决：
+
+#+BEGIN_SRC tex
+  \everypar{\hskip 0cm plus 1fil\relax}
+#+END_SRC
+
+** ~\relax~与~\csname~
+
+若~\csname ... \endcsname~被用于构建一个未被定义的控制序列，该序列会被等同于~\relax~，
+同时整个构建其的语句也会被等同于~\relax~。
+
+但是，被赋给的~\relax~值仅在局部生效：
+
+#+BEGIN_SRC tex
+  {\xdef\test{\expandafter\noexpand\csname xx\endcsname}}
+  \test
+#+END_SRC
+
+会给出未定义控制序列~\xx~的错误。
+
+考虑LaTeX中的环境，其使用：
+
+#+BEGIN_SRC tex
+  \begin{...} ... \end{...}
+#+END_SRC
+
+定界。这两个表示开始和结束的命令（究其本质）是如此定义的：
+
+#+BEGIN_SRC tex
+  \def\begin#1{\begingroup\csname#1\endcsname}
+  \def\end#1{\csname end#1\endcsname \endgroup}
+#+END_SRC
+
+故，对于列表环境，实际定义的是命令~\list~和~\endlist~。但是即使没有定义对应的~\end...~，
+其仍可用来表示一个合法环境。如：
+
+#+BEGIN_SRC tex
+  \begin{it} ... \end{it}
+#+END_SRC
+
+等价于~\begingroup\it ... \relax\endgroup~
+
+此处使用~\begingroup~、~\endgroup~而非~\bgroup~、~\egroup~的原理见下文。
+
+** 使用~\relax~抑制展开
+
+因为命令~\relax~不可展开的缘故，（使用如~\edef~或~\write~时）通过使某个控制序列暂时地等价于~\relax~即可使该序列不被展开。
+
+#+BEGIN_SRC tex
+  {\let\somemacro=\relax \write\outfile{\somemacro}}
+#+END_SRC
+
+该代码片段则会将~`\somemacro'~写入到输出文件中。若~\let~部分被遗漏，则会将宏~\somemacro~的展开结果写入到文件中
+（若其未定义则给出该宏未定义之错误）。
+
+** TeX自动插入的~\relax~
+
+TeX自己也会在某些情况下插入~\relax~。具体来说，就是当TeX仍在确定文本范围时读到序列~\or~、~\else~或~\fi~时。
+
+例子：
+
+#+BEGIN_SRC tex
+  \ifvoid1\else ... \fi
+#+END_SRC
+
+在内部被转换为：
+
+#+BEGIN_SRC tex
+  \ifvoid1\relax \else ... \fi
+#+END_SRC
+
+类似的，如果判断语句~\if~、~\ifcat~仅有一条分支，如：
+
+#+BEGIN_SRC tex
+  \if1\else ...
+#+END_SRC
+
+TeX也会插入一个~\relax~。于是上段代码等同于：
+
+#+BEGIN_SRC tex
+  \if1\relax\else ...
+#+END_SRC
+
+还有另一~\relax~被使用的情况。当某一序列被使用⟨shorthand definition⟩——即，一个⟨registerdef⟩或~\chardef~、~\mathchardef~
+——定义时，它的含义被短暂地等同于~\relax~。这使得我们能够这样写：
+
+#+BEGIN_SRC tex
+  \chardef\foo=123\foo
+#+END_SRC
+
+** 表示非宏的值：~\the~
+
+在TeX中，展开被准确地定义。所有能被展开的记号都已在上方给出。除此之外，其中也有能够以不严格的方式「展开」的记号：
+如将~\parindent~展开为它的值，比方说~20pt~。
+
+故除上面描述的外，展开处理器还会将一个⟨integer parameter⟩、一个⟨glue parameter⟩、一个⟨dimen parameter⟩
+抑或是⟨token parameter⟩的值转换为一串字符记号。而~\the~（除非被抑制）被展开后将拿取变量作为参数。
+（在大多数情况下），其展开的结果是一串除类别码皆为10的空格之外类别码为12的记号。
+
+所有能以~\the~作为前缀记号的如下所列：
+
+- ⟨parameter⟩或⟨register⟩：如果寄存器的参量是一种整数、伸缩胶、长度或数学模式中的伸缩胶，则其值以一串字符记号的形式被给出；
+  若为记号列表（如~\everypar~或~\toks5~），结果则会是一串（任意的）记号（盒子寄存器在这里不予考虑）；
+- ⟨codename⟩⟨8-bit number⟩；
+- ⟨special register⟩：整数寄存器如~\prevgraf~、~\deadcycles~、~\insertpenalties~、~\inputlineno~、~\badness~、~\parshape~、
+  ~\spacefactor~（仅出现在水平模式中）和~\prevdepth~（仅出现在竖直模式中），
+  长度寄存器如~\pagetotal~、~\pagegoal~、~\pagestretch~、~\pagefilstretch~、~\pagefillstretch~、~\pagefilllstretch~、
+  ~\pageshrink~、和~\pagedepth~；
+- 字体属性：~\fontdimen⟨parameter numberihfont⟩~、~\skewchar⟨font⟩~和~\hyphenchar⟨font⟩~；
+- 前量：~\lastpenalty~、~\lastkern~和~\lastskip~；
+- ⟨defined character⟩：任何使用~\chardef~或~\mathchardef~定义的控制序列、结果是十进制数，
+  有时、~\the~会返回一个控制序列记号或是前者的列表；
+- ⟨font⟩：结果是代表该字体的控制序列；
+- ⟨token variable⟩：记号列表寄存器以及⟨token parameter⟩可以使用~\the~为前缀，展开结果是它们的内容。
+
+思考一个使用~\the~的例子。若有一个将使用~\input~读入的某个字符（不妨让它为~@~）的类别码被改变了的文件。我们可以写出：
+
+#+BEGIN_SRC tex
+  \edef\restorecat{\catcode`@=\the\catcode`@}
+#+END_SRC
+
+并在该文件的末尾写上~\restorecat~。若类别为11，则~\restorecat~的定义等同于：
+
+#+BEGIN_SRC tex
+  \catcode`@=11
+#+END_SRC
+
+* 实例
+
+** 滞后展开[fn::译注：实际上是越过一个记号展开后面的记号，这里为了使章节名紧凑，且原文为「expand after」，故译为「滞后展开」。其意指将目前的记号滞后，先行展开其后的记号。]
+
+对于控制序列~\expandafter~，最显而易见的使用方式莫过于提前展开一个（位于后部）控制序列：
+
+#+BEGIN_SRC tex
+  \def\stepcounter#1{\expandafter\advance\csname
+                     #1:counter\endcsname 1\relax}
+  \stepcounter{foo}
+#+END_SRC
+
+此处使用的~\expandafter~使得~\csname~得以将~\foo:counter~控制序列构建完毕；在~\expandafter~展开后，该声明被缩减为：
+
+#+BEGIN_SRC tex
+  \advance\foo:counter 1\relax
+#+END_SRC
+
+越过不属于控制序列的记号也是可能的，在：
+
+#+BEGIN_SRC tex
+  \uppercase\expandafter{\romannumeral \year}
+#+END_SRC
+
+它先行展开左花括号右侧的~\romannumeral~宏。自然，你也可以越过两个控制序列展开：
+
+#+BEGIN_SRC tex
+  \def\globalstepcounter#1{\expandafter\global\expandafter\advance
+                           \csname #1:counter\endcsname 1\relax}
+#+END_SRC
+
+如果你觉得只能使用~\expandafter~颠倒两个控制序列的执行顺序，你还可以颠倒三个的，使用：
+
+#+BEGIN_SRC tex
+  \expandafter\expandafter\expandafter\a\expandafter\b\c
+#+END_SRC
+
+即可最先展开~\c~而得到：
+
+#+BEGIN_SRC tex
+  \expandafter \a \b
+#+END_SRC
+
+三个控制序列作为结果。
+
+条件判断中，~\expandafter~还有更预料不到的作用；如下：
+
+#+BEGIN_SRC tex
+  \def\bold#1{{\bf #1}}
+#+END_SRC
+
+代码中，序列：
+
+#+BEGIN_SRC tex
+  \ifnum1>0 \bold \fi {word}
+#+END_SRC
+
+并不会让「word」被加粗，而：
+
+#+BEGIN_SRC tex
+  \ifnum1>0 \expandafter\bold \fi {word}
+#+END_SRC
+
+则可以（使其被加粗）。控制序列~\expandafter~会让TeX先一步看到~\fi~并在它构建宏~\bold~的参数之前移除之。
+
+** ~\edef~内部的定义
+
+有一个以执行代替展开的TeX命令值得特别指出：元命令\def（以及所有其他的⟨def⟩命令）不会被展开。
+所以以下写法：
+
+#+BEGIN_SRC tex
+  \edef\next{\def\thing{text}}
+#+END_SRC
+
+会给出一个宏~\thing~未定义的错误，即使一般情况下~\def~后的展开被抑制。而若使用这种写法：
+
+#+BEGIN_SRC tex
+  \edef\next{\def\noexpand\thing{text}}
+#+END_SRC
+
+~\next~的意义会是：
+
+#+BEGIN_SRC tex
+  macro: \def \thing {text}
+#+END_SRC
+
+以下定义：
+
+#+BEGIN_SRC tex
+  \edef\next{\def\noexpand\thing{text}\thing}
+#+END_SRC
+
+又会给出宏~\thing~未定义的错误（但这次是由于它的第二次出现），因为~\thing~只有在~\next~被实际调用时才会被定义
+（在定义~\next~宏时是不会定义~\thing~的）。
+
+** 展开与~\write~
+
+~\write~中的作为参量的记号列表几乎被以同~\edef~的替换文本相同的方法被处理；即，可展开的控制序列和活动字符被完全展开。
+在~\write~中不可展开的控制序列，被像有~\string~作前缀那样被处理。
+
+在使用~\write~输出控制序列时，需要注意某些情况。其更复杂的原因来自于~\write~参量的展开仅在它被输出的时候发生。
+一个有启发性的例子：假设有一个宏~\somecs~，同时你希望将以下序列：
+
+#+BEGIN_SRC tex
+  \def\othercs{\somecs 的展开}
+#+END_SRC
+
+写入到文件中。
+
+首先想到的方法是：
+
+#+BEGIN_SRC tex
+  \write\myfile{\def\othercs{\somecs}}
+#+END_SRC
+
+然而，这会提示~\othercs~未定义之错误，因为~\write~会尝试展开其。好事是~\somecs~也被展开，所以该部分目的算是被达到了。
+
+随后的实现是：
+
+#+BEGIN_SRC tex
+  \write\myfile{\def\noexpand\othercs{\somecs}}
+#+END_SRC
+
+它几乎就对了，但不完全对。我们写出的定义是：
+
+#+BEGIN_SRC tex
+  \def\othercs{\somecs 的展开}
+#+END_SRC
+
+它看起来无可挑剔。
+
+但是，写入——当然也包括写入参量的展开——并非即时进行的，它是在（它出现的）该部分页面输出时才进行的。
+所以，那时~\somecs~的值可能会发生变化。这也就意味着写入到文件中的值不一定是~\write~命令被给出时的值。
+所以，必须以某种方式使用当前的展开结果作为~\write~的参量。
+
+于是我们尝试：
+
+#+BEGIN_SRC tex
+  \edef\act{\write\myfile{\def\noexpand\othercs{\somecs}}}
+  \act
+#+END_SRC
+
+这时写入的命令会是：
+
+#+BEGIN_SRC tex
+  \write\myfile{\def\othercs{\somecs}} 的值
+#+END_SRC
+
+命令~\noexpand~抑制了~\edef~对~\othercs~的展开，但在对~\act~定义后它就消失了，这就导致在写入时还将出现未定义控制序列的错误。
+于是我们最终的解决方案是如下的：
+
+#+BEGIN_SRC tex
+  \edef\act{\write\myfile
+            {\def \noexpand\noexpand \noexpand\othercs{\somecs}}}
+  \act
+#+END_SRC
+
+此时~\act~开始的写入命令实际上是：
+
+#+BEGIN_SRC tex
+  \write\myfile{\def\noexpand\othercs{\somecs 的当前值}
+#+END_SRC
+
+而实际写入的序列是:
+
+#+BEGIN_SRC tex
+  \def\othercs{\somecs 的当前值}
+#+END_SRC
+
+以上描述的机制即为一些宏集对宏进行交叉索引的底层原理。
+
+** 在~\edef~中受控制的展开
+
+有时你需要使用~\edef~去取得当前的状态，你也许还会希望能仅将宏替换文本展开到某个特定的程度。
+假设已有：
+
+#+BEGIN_SRC tex
+  \def\a{\b} \def\b{c} \def\d{\e} \def\e{f}
+#+END_SRC
+
+而你希望定义使~\a~只展开一步、而使~\d~完全展开的宏~\g~。随后的代码可以实现之：
+
+#+BEGIN_SRC tex
+  \edef\g{\expandafter\noexpand\a \d}
+#+END_SRC
+
+因为~\expandafter~越过其后的~\noexpand~将~\a~展开了一步、于是便留下了~\noexpand\b~序列。
+
+在你需要在~\edef~中使用~\csname~构建一个控制序列时，这个技巧非常有用。如在~\edef~中，以下序列：
+
+#+BEGIN_SRC tex
+  \expandafter\noexpand\csname name\endcsname
+#+END_SRC
+
+会恰好展开为~\name~，不多也不少。再举一个例子：
+
+#+BEGIN_SRC tex
+  \def\condition{true}
+#+END_SRC
+
+首先有以上的定义，而后的：
+
+#+BEGIN_SRC tex
+  \edef\setmycondition{\expandafter\noexpand
+                       \csname mytest\condition\endcsname}
+#+END_SRC
+
+就会将~\setmycondition~展开为~\mytesttrue~。
+
+** 对展开的多重抑制
+
+上节中介绍，在一个命令前使用~\noexpand~能够在如~\edef~和~\write~的展开中防止该命令的展开。
+但是如果一些记号将会被不止一个展开命令处理，就需要更强力的手段。
+
+下面是一个可以在此时被使用的技巧：在需要被扩展保护的命令前使用~\protect~。在不需要扩展的阶段，~\protect~的定义如下：
+
+#+BEGIN_SRC tex
+  \def\protect{\noexpand\protect\noexpand}
+#+END_SRC
+
+当随后这个命令需要被使用（展开）时，~\protect~是这样定义的：
+
+#+BEGIN_SRC tex
+  \def\protect{}
+#+END_SRC
+
+这为什么可以达到所需效果呢？以下：
+
+#+BEGIN_SRC tex
+  \protect\somecs
+#+END_SRC
+
+一开始的展开结果是：
+
+#+BEGIN_SRC tex
+  \noexpand\protect\noexpand\somecs
+#+END_SRC
+
+在~\edef~中该段序列则会更彻底地被展开，即为：
+
+#+BEGIN_SRC tex
+  \protect\somecs
+#+END_SRC
+
+所以，展开的结果等同于原序列。
+
+** ~\relax~的更多示例
+
+在第一个例子中，~\relax~被用来阻止TeX读入多余的记号。以下就是一些使用其来界定数字的示例。
+
+以下赋值及定义：
+
+#+BEGIN_SRC tex
+  \countdef\pageno=0 \pageno=1
+  \def\Par{\par\penalty200}
+#+END_SRC
+
+后，用以下的方式使用时：
+
+#+BEGIN_SRC tex
+  \Par\number\pageno
+#+END_SRC
+
+会让TeX错认为是：
+
+#+BEGIN_SRC tex
+  \par\penalty2001
+#+END_SRC
+
+此时简单地修改定义即可：
+
+#+BEGIN_SRC tex
+  \def\Par{\par\penalty200 }
+#+END_SRC
+
+（因为⟨optional space⟩被允许在数字后出现）。
+
+但并非所有情况下都有简单的处理方法。如下的序列中：
+
+#+BEGIN_SRC tex
+  \def\ifequal#1#2{\ifnum#1=#2 1\else 0\fi}
+#+END_SRC
+
+此处的问题在于~#2~后的空格是必要的、多余的、亦或就是错的类似~\ifequal{27}{28}~的比较两个数字（的大小）的调用会给出正确的1或0。
+此时空格对于防止TeX误解是必要的。
+
+但是，~\ifequal\somecounter\othercounter~的调用则会在两个计数器相等时给出给出1。这时该空格则是多余的。
+能兼顾两种情况的解决方法是：
+
+#+BEGIN_SRC tex
+  \def\ifequal#1#2{\ifnum#1=#2\relax 1\else 0\fi}
+#+END_SRC
+
+由于~\relax~不会被展开，所以注意：
+
+#+BEGIN_SRC tex
+  \edef\foo{1\ifequal\counta\countb}
+#+END_SRC
+
+会将宏~\foo~定义为~1\relax1~或~10~。
+
+** 实例：存储及恢复类别码
+
+在很多应用情形中，有必要在某段代码执行时改变某个字符的类别码。如果该段代码的作者正好也是该段代码前后代码的作者，
+那么他只需简单地把它改回去即可。但如果前后代码是另一位作者写的，那么就需要存贮该类别码的值并最后恢复它。
+
+如果能够这么写：
+
+#+BEGIN_SRC tex
+  \storecat@
+    ...some code...
+  \restorecat@
+#+END_SRC
+
+来处理字符的类别码改变；以及这样写：
+
+#+BEGIN_SRC tex
+  \storecat\%
+#+END_SRC
+
+
+来处理注释字符（或忽略、不合法字符）的类别码改变。基本原理是定义：
+
+#+BEGIN_SRC tex
+  \def\storecat#1{%
+      \expandafter\edef\csname restorecat#1\endcsname
+      {\catcode`#1=\the\catcode`#1}}
+#+END_SRC
+
+所以，如~\storecat$~的语句会如此：
+
+#+BEGIN_SRC tex
+  \catcode`$=3
+#+END_SRC
+
+定义~\restorecat$~单一控制序列而宏~\restorecat~可以被如此实现：
+
+#+BEGIN_SRC tex
+  \def\restorecat#1{%
+  \csname restorecat#1\endcsname}
+#+END_SRC
+
+很可惜，事情没这么简单。
+
+问题出在了活动字符身上，因为它们会在~\csname ... \endcsname~内被展开。我们可能会尝试在每个地方加上~\noexpand~，
+但这仍然是错误的。正如之前介绍的那样，这样只会使（暂时）序列等同于不可展开的~\relax~，
+而~\csname~和~\endcsname~中不允许出现不可展开的序列。正确的方法便是使用~\string#1~。
+当参数是形如~\%~的控制符号时，转义字符需要暂时被无效化。
+
+完整（自然也是正确的）宏在此被给出。宏~\storecat~默认会让作为其参数的字符的类别码为12。
+
+#+BEGIN_SRC tex
+  \newcount\tempcounta % just a temporary
+  \def\csarg#1#2{\expandafter#1\csname#2\endcsname}
+  \def\storecat#1%
+      {\tempcounta\escapechar \escapechar=-1
+      \csarg\edef{restorecat\string#1}%
+      {\catcode`\string#1=
+      \the\catcode\expandafter`\string#1}%
+      \catcode\expandafter`\string#1=12\relax
+      \escapechar\tempcounta}
+  \def\restorecat#1%
+      {\tempcounta\escapechar \escapechar=-1
+      \csname restorecat\string#1\endcsname
+      \escapechar\tempcounta}
+#+END_SRC
+
+
+* 示例
+
+** ~\aftergroup~与盒子的结合
+
+有时，我们可能希望在构造完盒子后立即对它做些什么。~\aftergroup~命令可被用来将用来创建盒子的命令及处理盒子的命令融合到一个宏中。
+比如，此处有一个名为~\textvcenter~的宏。其可以用来构造能在数学模式之外使用的~\vcenter~盒子。
+
+#+BEGIN_SRC tex
+  \def\textvcenter{\hbox \bgroup$\everyvbox{\everyvbox{}%
+                   \aftergroup$\aftergroup\egroup}\vcenter}
+#+END_SRC
+
+原理是该宏会插入~\hbox {$~，而与其配对的~$}~会被使用~\aftergroup~命令插入。
+为了使~\aftergroup~命令出现在盒子中，我们使用了~\everyvbox~命令。
+这个宏甚至能与⟨box specification⟩一起使用。比如说：
+
+#+BEGIN_SRC tex
+  \textvcenter spread 8pt{\hbox{a}\vfil\hbox{b}}
+#+END_SRC
+
+同时也因为构造的结果单纯就是一个~\hbox~，它也能在~\setbox~复制中使用。

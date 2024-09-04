@@ -1,0 +1,85 @@
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS: smpl
+
+#+TITLE: 现代DocBook环境构建
+
+* 简介
+
+这篇介绍如何配置一个精简的现代DocBook编写环境。我们使用SaxonC和xslTNG。
+选取SaxonC是由于我不希望为了它搭建一个Java环境、而xslTNG则是很新很好的基于XSLT3.0的DocBook用XSL样表。
+
+本文不会教你怎么写DocBook5.0。
+
+* 工具安装
+
+** SaxonC
+
+截至写作时，SaxonC的版本号为12.5。因为我穷，所以我使用的的是HE版本。
+
+首先从[[https://www.saxonica.com/download/c.xml][~https://www.saxonica.com/download/c.xml~]]下载你对应操作系统的安装包并解包。
+随后进入她并找到名为~libsaxon-hec~的动态链接库文件，将她移动到随便哪里（只要能用绝对路径表示并相对稳定即可）：
+
+#+BEGIN_SRC bash
+  doas mv ~/Downloads/libsaxon-HEC-linux-amd64-v12.5.0/libs/nix/libsaxon-hec-12.5.0.so /usr/local/lib64/saxonc/
+#+END_SRC
+
+记住这个绝对路径。随后我们需要更改构建文件，一般位于~command~文件夹下。将~library_dir~改为刚才的绝对路径：
+
+#+BEGIN_SRC diff
+5c5
+< library_dir="../libs/nix"
+---
+> library_dir="/usr/local/lib64/saxonc"
+#+END_SRC
+
+随后执行构建脚本即可生成名为~transform~的二进制可执行文件。把它放到~$PATH~中并改名为~saxonc~即可：
+
+#+BEGIN_SRC bash
+  install -s -m 755 transform /usr/local/bin/saxonc
+#+END_SRC
+
+** xslTNG
+
+从[[https://github.com/docbook/xslTNG/releases/latest][~https://github.com/docbook/xslTNG/releases/latest~]]下载最新的release并解压。建议下~nosaxon~的。随便找个地方把它放好就行了。
+
+* 使用例
+
+一个简单的例子：
+
+#+BEGIN_SRC xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <book xml:id="simple_book" xmlns="http://docbook.org/ns/docbook" version="5.0">
+    <title>Very simple book</title>
+    <chapter xml:id="chapter_1">
+      <title>Chapter 1</title>
+      <para>Hello world!</para>
+      <para>I hope that your day is proceeding <emphasis>splendidly</emphasis>!</para>
+    </chapter>
+    <chapter xml:id="chapter_2">
+      <title>Chapter 2</title>
+      <para>Hello again, world!</para>
+    </chapter>
+  </book>
+#+END_SRC
+
+编译到HTML：
+
+#+BEGIN_SRC bash
+  saxonc -s:test.xml -xsl:/home/$(whoami)/DocBook-xslTNG/xslt/docbook.xsl -o:test.html
+#+END_SRC
+
+随后把xslTNG的资源目录移过来：
+
+#+BEGIN_SRC bash
+  cp -r /home/$(whoami)/DocBook-xslTNG/resources/* .
+#+END_SRC
+
+然后预览：
+
+#+BEGIN_SRC bash
+  xdg-open test.html
+#+END_SRC
+
+* 写在后面
+
+没了。

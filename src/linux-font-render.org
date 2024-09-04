@@ -1,0 +1,389 @@
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS: smpl
+
+#+TITLE: Linux下字体渲染的优化
+
+* 生存策略
+
+** 当前之怪现状
+
+现在对于Linux下的字体渲染，感觉有几种（比较主流的）论调：
+
+ - 矢量字体渲染技术不行；
+ - 开源字体设计不行（于是就有人把「微软雅黑」放到Linux上、造成极为地狱的渲染效果，甚至2024年了还在用点阵字体[fn::我不是不能接受点阵字体什么的，只是觉得完全没这个必要。]）；
+ - Linux没有图形界面的美观需求，于是不关心字体渲染。
+
+可以说极为难崩。
+
+2024年了，经过非常少的配置，7px大小的中文矢量字体在我的2K屏幕上轮廓依然锐利；而且是在我完全不使用字体微调的基础上（我极其厌恶扭曲了轮廓的字体）。靠（专利过期后默认开启的）次像素渲染和LCD滤镜善后加上抗锯齿足矣。
+
+** 关于FontConfig
+
+如果你愿意去找一找，可以看到互联网上有一些使用FontConfig的教程。他们大多都忽略了一个较好的实践——使用预设。于是他们需要重新实现：
+
+ - 根据简中／繁中／日文等语言选取对应的字体获得正确的字形；
+ - 根据语境选取正确的引号[fn::因为不知道什么原因，西文的半角引号在中文字体里被做成了全宽。]；
+ - 渲染相关的事务。
+
+但实际上，FontConfig是有对应预设的，比如对于我系统上安装的字体，有：
+
+#+BEGIN_SRC
+  Available fontconfig .conf files (* is enabled):
+    [1]   05-reset-dirs-sample.conf
+    [2]   09-autohint-if-no-hinting.conf
+    [3]   10-autohint.conf
+    [4]   10-hinting-full.conf
+    [5]   10-hinting-medium.conf
+    [6]   10-hinting-none.conf *
+    [7]   10-hinting-slight.conf
+    [8]   10-no-antialias.conf
+    [9]   10-scale-bitmap-fonts.conf *
+    [10]  10-sub-pixel-bgr.conf
+    [11]  10-sub-pixel-none.conf
+    [12]  10-sub-pixel-rgb.conf
+    [13]  10-sub-pixel-vbgr.conf
+    [14]  10-sub-pixel-vrgb.conf *
+    [15]  10-unhinted.conf
+    [16]  10-yes-antialias.conf *
+    [17]  11-lcdfilter-default.conf
+    [18]  11-lcdfilter-legacy.conf
+    [19]  11-lcdfilter-light.conf *
+    [20]  11-lcdfilter-none.conf
+    [21]  20-unhint-small-vera.conf *
+    [22]  25-unhint-nonlatin.conf
+    [23]  30-metric-aliases.conf *
+    [24]  35-lang-normalize.conf *
+    [25]  40-nonlatin.conf *
+    [26]  45-generic.conf *
+    [27]  45-latin.conf *
+    [28]  48-spacing.conf *
+    [29]  49-sansserif.conf *
+    [30]  50-user.conf *
+    [31]  51-local.conf *
+    [32]  60-generic.conf *
+    [33]  60-latin.conf *
+    [34]  60-liberation.conf *
+    [35]  61-urw-bookman.conf
+    [36]  61-urw-c059.conf
+    [37]  61-urw-d050000l.conf
+    [38]  61-urw-fallback-backwards.conf
+    [39]  61-urw-fallback-generics.conf
+    [40]  61-urw-fallback-specifics.conf
+    [41]  61-urw-gothic.conf
+    [42]  61-urw-nimbus-mono-ps.conf
+    [43]  61-urw-nimbus-roman.conf
+    [44]  61-urw-nimbus-sans.conf
+    [45]  61-urw-p052.conf
+    [46]  61-urw-standard-symbols-ps.conf
+    [47]  61-urw-z003.conf
+    [48]  63-source-code-pro.conf
+    [49]  65-fonts-persian.conf *
+    [50]  65-khmer.conf
+    [51]  65-nonlatin.conf *
+    [52]  66-iosevka.conf
+    [53]  66-iosevka-curly.conf
+    [54]  66-iosevka-curly-slab.conf *
+    [55]  66-iosevka-slab.conf
+    [56]  69-unifont.conf *
+    [57]  70-no-bitmaps.conf
+    [58]  70-noto-cjk.conf *
+    [59]  70-yes-bitmaps.conf
+    [60]  80-delicious.conf *
+    [61]  90-synthetic.conf *
+#+END_SRC
+
+你只需要启用你需要的就好了。（~eselect~是Gentoo的好东西，其他发行版只需要链接~conf.avail~路径下的预设即可，见下文）。
+
+所以，实际上你需要写的只有这些：
+
+#+BEGIN_SRC xml
+  <?xml version="1.0"?>
+  <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+  <fontconfig>
+    <alias>
+      <family>sans-serif</family>
+      <prefer>
+        <family>Liberation Sans</family>
+        <family>Noto Sans CJK SC</family>
+      </prefer>
+      <default>
+        <family>Apple Symbol</family>
+      </default>
+    </alias>
+    <alias>
+      <family>serif</family>
+      <prefer>
+        <family>Liberation Serif</family>
+        <family>Noto Serif CJK SC</family>
+      </prefer>
+      <default>
+        <family>Apple Symbol</family>
+      </default>
+    </alias>
+    <alias>
+      <family>monospace</family>
+      <prefer>
+        <family>Iosevka Curly Slab</family>
+        <family>Noto Sans CJK SC</family>
+      </prefer>
+      <default>
+        <family>Apple Symbol</family>
+      </default>
+    </alias>
+  </fontconfig>
+#+END_SRC
+
+也就是说只需指定三个字体族的偏好字体即可。
+
+* 实践
+
+** 字体族配置
+
+这一步极为简单，只需要创建配置文件~/etc/fonts/local.conf~并按格式：
+
+#+BEGIN_SRC xml
+  <?xml version="1.0"?>
+  <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+  <fontconfig>
+    <alias>
+      <family>sans-serif</family>
+      <prefer>
+        <family>FSS1</family>
+        <family>FSS2</family>
+      </prefer>
+      <default>
+        <family>FSSB</family>
+      </default>
+    </alias>
+    <alias>
+      <family>serif</family>
+      <prefer>
+        <family>FSF1</family>
+        <family>FSF2</family>
+      </prefer>
+      <default>
+        <family>FSFB</family>
+      </default>
+    </alias>
+    <alias>
+      <family>monospace</family>
+      <prefer>
+        <family>FMS1</family>
+        <family>FMS2</family>
+      </prefer>
+      <default>
+        <family>FMSB</family>
+      </default>
+    </alias>
+  </fontconfig>
+#+END_SRC
+
+写入你喜欢的字体即可，不需要什么~binding="strong"~。注意~prefer~里按喜好程度填，~default~里填回滚字体，不需要管什么「中文环境下引号全宽所以中文字体是写在西文字体前面还是后面」这种问题。
+
+顺便，该~local.conf~文件生效需要启用预设~51-local.conf~，见下。
+
+** 启用对应预设
+
+请确保主要字体（比如我使用的思源系列）是用包管理器安装的，否则可能会缺少对应的预设文件需要你想办法解决。
+
+在Gentoo上可以使用~eselect~，其他发行版只需要使用：
+
+#+BEGIN_SRC shell
+  ln -s /usr/share/fontconfig/conf.avail/0-example-config.conf $XDG_CONFIG_HOME/fontconfig/conf.d
+#+END_SRC
+
+预设主要分两类，渲染相关的和语言环境下字体选择相关的：
+
+ - 渲染相关的有字体微调、抗锯齿（默认启用）和次像素渲染（其字节码解释器是默认打开的）。其中字体微调风格视你的喜好选择~hintnone~、~hintslight~、~hintmedium~还是~hintfull~。次像素渲染则根据你的显示屏选择像素排布是RGB、BGR、V-RGB还是V-BGR，可以参考[[http://www.lagom.nl/lcd-test/subpixel.php][Subpixel layout - Lagom LCD test]]网站；滤镜也是根据你的喜好选择。预设文件有这些：
+
+   #+BEGIN_SRC
+     [2]   09-autohint-if-no-hinting.conf
+     [3]   10-autohint.conf
+     [4]   10-hinting-full.conf
+     [5]   10-hinting-medium.conf
+     [6]   10-hinting-none.conf *
+     [7]   10-hinting-slight.conf
+     [8]   10-no-antialias.conf
+     [9]   10-scale-bitmap-fonts.conf *
+     [10]  10-sub-pixel-bgr.conf
+     [11]  10-sub-pixel-none.conf
+     [12]  10-sub-pixel-rgb.conf
+     [13]  10-sub-pixel-vbgr.conf
+     [14]  10-sub-pixel-vrgb.conf *
+     [15]  10-unhinted.conf
+     [16]  10-yes-antialias.conf *
+     [17]  11-lcdfilter-default.conf *
+     [18]  11-lcdfilter-legacy.conf
+     [19]  11-lcdfilter-light.conf
+     [20]  20-unhint-small-vera.conf *
+     [21]  25-unhint-nonlatin.conf
+   #+END_SRC
+
+ - 语言环境下的预设文件有：
+
+   #+BEGIN_SRC
+     [23]  35-lang-normalize.conf *
+     [24]  40-nonlatin.conf *
+     [25]  45-generic.conf *
+     [26]  45-latin.conf *
+     [27]  48-spacing.conf *
+     [28]  49-sansserif.conf *
+     [50]  65-nonlatin.conf *
+   #+END_SRC
+
+ - 随字体如NotoCJK、Iosevka等分发的预设文件比如：
+
+   #+BEGIN_SRC
+     [51]  66-iosevka.conf
+     [52]  66-iosevka-curly.conf
+     [53]  66-iosevka-curly-slab.conf *
+     [54]  66-iosevka-slab.conf
+     [57]  70-noto-cjk.conf *
+   #+END_SRC
+
+   其中~noto-cjk.conf~提供了根据~lang-normalize.conf~决定使用何种字体的特性：
+
+   #+BEGIN_SRC xml
+     <?xml version="1.0"?>
+     <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+     <fontconfig>
+       <match target="pattern">
+         <test name="lang">
+           <string>ja</string>
+         </test>
+         <test name="family">
+           <string>serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Serif CJK JP</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>ko</string>
+         </test>
+         <test name="family">
+           <string>serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Serif CJK KR</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>zh-cn</string>
+         </test>
+         <test name="family">
+           <string>serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Serif CJK SC</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>zh-tw</string>
+         </test>
+         <test name="family">
+           <string>serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Serif CJK TC</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>ja</string>
+         </test>
+         <test name="family">
+           <string>sans-serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans CJK JP</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>ko</string>
+         </test>
+         <test name="family">
+           <string>sans-serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans CJK KR</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>zh-cn</string>
+         </test>
+         <test name="family">
+           <string>sans-serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans CJK SC</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>zh-tw</string>
+         </test>
+         <test name="family">
+           <string>sans-serif</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans CJK TC</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>ja</string>
+         </test>
+         <test name="family">
+           <string>monospace</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans Mono CJK JP</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>ko</string>
+         </test>
+         <test name="family">
+           <string>monospace</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans Mono CJK KR</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>zh-cn</string>
+         </test>
+         <test name="family">
+           <string>monospace</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans Mono CJK SC</string>
+         </edit>
+       </match>
+       <match target="pattern">
+         <test name="lang">
+           <string>zh-tw</string>
+         </test>
+         <test name="family">
+           <string>monospace</string>
+         </test>
+         <edit name="family" mode="prepend">
+           <string>Noto Sans Mono CJK TC</string>
+         </edit>
+       </match>
+     </fontconfig>
+   #+END_SRC
+
+选取预设文件的时候看一下文件注释和内容去确定它是干什么的就好。我的感觉是很多预设都帮你选好了，你只需要看着添加一些／取消选择一些就好。
+
+* 最后
+
+所以Linux下的字体渲染并没有那么不堪，想要达到不错的效果也并不复杂，FontConfig的机制甚至十分灵活（相比胶水字体）。希望各位能多多去看文档。

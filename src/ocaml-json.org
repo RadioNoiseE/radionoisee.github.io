@@ -1,0 +1,319 @@
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS: smpl
+
+#+TITLE: 用OCaml写JSON解析器
+
+* 写在前面
+
+本文实际上补完『Real World OCaml』一书中的第16章。不同之处在于我们只使用标准库（而非Core），
+同时只使用OCamlyacc（而非更现代的Menhir、因为用不着）。
+
+本文描述仅作教学用途，即只是一个简单的解析器，不涉及ATD（即由JSON自动映射到OCaml类型），对Unicode的处理并不完善。
+
+你只需要有最基础的OCaml开发环境即可，Opam不是必须的。你最好有OCaml相关语法知识，虽然没有我觉得也能看懂。
+
+* 数据类型
+
+我们首先需要为JSON中的每种数据类型在OCaml中作相应定义。创建~datatype.ml~文件，写入：
+
+#+BEGIN_SRC ocaml
+  type stt = [
+    | `Integer of int
+    | `Float of float
+    | `Bool of bool
+    | `String of string
+    | `Array of stt list
+    | `Object of (string * stt) list
+    ]
+#+END_SRC
+
+即，我们分别定义了JSON中的整型数、浮点数、布尔值、字符串、数组（作为由~stt~中一个类型组成的列表）和对象
+（作为由一个字符串及其对应的~stt~中一个类型组成的列表）。
+
+* 定义解析器
+
+这一步，我们需要创建解析器规范文件，用于描述文法。我使用文件名~parser.mly~，我们将会用OCamlyacc处理它。
+规范文件分为两部分，使用~%%~分隔：第一部分主要用于初始化解析器，而后半部分则指定文法。
+
+#+BEGIN_SRC ocaml
+  %token <int> INT
+  %token <float> FLOAT
+  %token TRUE
+  %token FALSE
+  %token <string> STRING
+  %token COLON
+  %token COMMA
+  %token LEFT_BRACK
+  %token RIGHT_BRACK
+  %token LEFT_BRACE
+  %token RIGHT_BRACE
+  %token EOF
+#+END_SRC
+
+上面我们描述了解析器会遇到的所有token，使用~%token <type> uid~的语法；其中~<type>~为可选，表示带有值的token。
+
+#+BEGIN_SRC ocaml
+  %type <Datatype.stt> decl
+  %start decl
+  %{ open Datatype %}
+  %%
+#+END_SRC
+
+随后，我们确定文法分析的结果类型于一开始定义的一致，并且为了能在文法分析中使用这些类型，读入~datatype.ml~文件。
+第一部分结束。
+
+#+BEGIN_SRC ocaml
+  decl:
+    | expr EOF { $1 }
+    ;
+#+END_SRC
+
+入口，将文件中所有（EOF之前的）内容交由~expr~，而词法分析的结果则为~expr~返回的结果：~$1~（~$2~则代表EOF）。
+
+#+BEGIN_SRC ocaml
+  expr:
+    | NULL { Null }
+    | INT { `Integer($1) }
+    | FLOAT { `Float($1) }
+    | TRUE { `Bool(true) }
+    | FALSE { `Bool(false) }
+    | STRING { `String($1) }
+    | LEFT_BRACK array_fields RIGHT_BRACK { `Array($2) }
+    | LEFT_BRACE object_fields RIGHT_BRACE { `Object($2) }
+    ;
+#+END_SRC
+
+我们定义了在~expr~中如何解析：遇到整型数则返回类型为整型数的值，浮点数、字符串同理；遇到布尔值则分别返回真／假；
+遇到由方括号界定的数组时则交由~array_fields~处理，并返回其结果，对象同理。
+
+#+BEGIN_SRC ocaml
+  object_fields:
+    | rev_object_fields { List.rev($1) }
+    ;
+  rev_object_fields:
+    | /* Null */ { [] }
+    | rev_object_fields COMMA STRING COLON expr { ($3, $5) :: $1 }
+    | STRING COLON expr { [($1, $3)] }
+    ;
+#+END_SRC
+
+之所以对于~object_fields~的规则构造不符合直觉的左递归后逆置的下推自动机，是由于OCamlyacc会生成左递归解析器，
+如此能够减少栈空间的占用。
+
+而我们做的就是依次将最右边的一个对象压到列表里去，同时处理空对象的情况。需要注意的是第二部分的注释我们需要使用C的语法。
+
+同理，我们有对于数组的规则。
+
+#+BEGIN_SRC ocaml
+  array_fields:
+    | rev_array_fields { List.rev($1) }
+    ;
+  rev_array_fields:
+    | /* Null */ { [] }
+    | rev_array_fields COMMA expr { $3 :: $1 }
+    | expr { [$1] }
+    ;
+#+END_SRC
+
+* 词法分析
+
+我们在上面描述了文法解析器的规则，而一开始声明的那些token是哪里来的呢？就是在这一部分词法分析的时候被定义的。该文件为~lexer.mll~。
+
+#+BEGIN_SRC ocaml
+  {
+    open Lexing
+    open Parser
+
+    exception SyntaxError of string
+
+    let next_line lexbuf =
+      let pos = lexbuf.lex_curr_p in
+      lexbuf.lex_curr_p <- {
+	pos with pos_bol = lexbuf.lex_curr_p;
+                 pos_lnum = pos.pos_lnum + 1
+	}
+  }
+#+END_SRC
+
+第一部分，我们建立了一个（可选）的环境：我们打开了两个有用的模块，其中~Lexing~模块定义了在随后的工具函数中被使用的~lexbuf~结构，
+其包含了词法分析机的状态；定义了一个~SyntaxError~的异常；同时定义了一个工具函数~next_line~，用来跟踪token的位置。
+
+#+BEGIN_SRC ocaml
+  let int = '-'? ['0'-'9'] ['0'-'9']*
+  let digit = ['0'-'9']
+  let frac = '.' digit*
+  let exp = ['e' 'E'] ['-' '+']? digit+
+  let float = digit* frac? exp?
+  let white = [' ' '\t']+
+  let newline = '\r' | '\n' | '\r\n'
+#+END_SRC
+
+上面我们创建了一组正则表达式，以此匹配整型数／浮点数／空白字符／行送。基本上是很正常的正则语法。
+
+#+BEGIN_SRC ocaml
+  rule read =
+    parse
+    | null { NULL }
+    | white { read lexbuf }
+    | newline { next_line lexbuf; read lexbuf }
+    | int { INT (int_of_string (Lexing.lexeme lexbuf)) }
+    | float { FLOAT (float_of_string (Lexing.lexeme lexbuf)) }
+    | "true" { TRUE }
+    | "false" { FALSE }
+    | '\"' { read_string (Buffer.create 17) lexbuf }
+    | ':' { COLON }
+    | ',' { COMMA }
+    | '[' { LEFT_BRACK }
+    | ']' { RIGHT_BRACK }
+    | '{' { LEFT_BRACE }
+    | '}' { RIGHT_BRACE }
+    | _ { raise (SyntaxError ("Unexpected char: " ^ Lexing.lexeme lexbuf)) }
+    | eof { EOF }
+  and read_string buf =
+    parse
+    | '\"' { STRING (Buffer.contents buf) }
+    | '\\' '/' { Buffer.add_char buf '/'; read_string buf lexbuf }
+    | '\\' '\\' { Buffer.add_char buf '\\'; read_string buf lexbuf }
+    | '\\' 'b' { Buffer.add_char buf '\b'; read_string buf lexbuf }
+    | '\\' 'f' { Buffer.add_char buf '\012'; read_string buf lexbuf }
+    | '\\' 'n' { Buffer.add_char buf '\n'; read_string buf lexbuf }
+    | '\\' 'r' { Buffer.add_char buf '\r'; read_string buf lexbuf }
+    | '\\' 't' { Buffer.add_char buf '\t'; read_string buf lexbuf }
+    | [^ '\"' '\\']+ { Buffer.add_string buf (Lexing.lexeme lexbuf); read_string buf lexbuf }
+    | _ { raise (SyntaxError ("Illegal string character: " ^ Lexing.lexeme lexbuf)) }
+    | eof { raise (SyntaxError ("String terminated by EOF")) }
+#+END_SRC
+
+上面的片段总体上还是符合直觉的。首先~read~会对空字符返回~NULL~的token，忽略空白字符，遇到换行字符时使用刚定义的函数换行并读入新行，
+正则匹配到整型数和浮点数时会返回各自的~INT~或~FLOAT~的token并将字符串类型转换，等等。
+
+对于字符串开始处的引号，它会调用随后定义的一个~read_string~工具（其是被递归定义的）：处理一些被转义的特殊字符，将它们读入缓冲区；
+读入所有不特殊的字符，并在读到另一个（象征字符串结束的）引号时返回~STRING~类型的token，而缓冲区内的字符串将会被作为值传回。
+当读到非法字符，和在字符串未结束即到达文件末尾时会抛出错误。
+
+* 集成
+
+最后我们可以将上面的词法分析和文法解析集成起来。命名为~util.ml~。
+
+#+BEGIN_SRC ocaml
+  type t = Datatype.stt
+  open Datatype
+#+END_SRC
+
+我们首先定义~t~为解析之后返回类型的别名，并打开该类型定义文件。
+
+#+BEGIN_SRC ocaml
+  let print_position lexbuf =
+    let pos = lexbuf.lex_curr_p in
+    fprintf stderr "%s:%d:%d" pos.pos_fname pos.pos_lnum (pos.pos_cnum - pos.pos_bol +1)
+
+  let parse_with_error lexbuf =
+    try Parser.decl Lexer.read lexbuf with
+    | SyntaxError msg ->
+       fprintf stderr "%a: %s\n" print_position lexbuf msg;
+       None
+    | Parser.error ->
+       fprintf stderr "%a: Syntax error\n" print_position lexbuf;
+       exit (-1)
+
+  let rec parse (json: string): t =
+    match parse_with_error lexbuf with
+    | Some value -> value;
+		    parse lexbuf
+    | None -> ()
+#+END_SRC
+
+上面，我们定义了输出当前位置、尝试解析并捕获异常、以及实际解析的函数。注意这里我们的错误恢复非常简陋，甚至都不是恐慌模式，
+而是、什么都不是。
+
+#+BEGIN_SRC ocaml
+  let typeof = function
+    | `Integer _ -> "int"
+    | `Float _ -> "float"
+    | `Bool _ -> "bool"
+    | `String _ -> "string"
+    | `Array _ -> "array"
+    | `Object _ -> "object"
+
+  exception NotNumericValue
+  exception NotStringableValue
+  exception NotArray
+  exception EmptyArray
+  exception NotObject
+  exception EmptyObject
+
+  let as_number = function
+    | `Int i -> float i
+    | `Float f -> float f
+    | _ -> raise NotNumericValue
+
+  let as_string = function
+    | `String s -> string s
+    | _ -> NotStringableValue
+
+  let get_mem n = function
+    | `Array (a) -> List.nth a n
+    | `Array ([]) -> raise EmptyArray
+    | _ -> raise NotArray
+
+  let get_child k = function
+    | `Object (o) -> List.assoc k o
+    | `Object ([]) -> raise EmptyObject
+    | _ -> raise NotObject
+#+END_SRC
+
+上面我们定义了一些帮手函数，用于从解析之后的数据结构中取得我们需要的信息。
+
+* 使用
+
+我们可以执行：
+
+#+BEGIN_SRC shell
+  ocamllex lexer.mll
+  ocamlyacc parser.mly
+  ocamlopt -c datatype.ml -for-pack Json
+  ocamlopt -c parser.mli
+  ocamlopt -c lexer.ml -for-pack Json
+  ocamlopt -c parser.ml -for-pack Json
+  ocamlopt -c util.ml -for-pack Json
+  ocamlopt -pack -o json.cmx datatype.cmx lexer.cmx parser.cmx util.cmx
+#+END_SRC
+
+来将这个解析器打包。随后创建以下用例：
+
+#+BEGIN_SRC ocaml
+  let json_string = {|
+		     {"number" : 42,
+		     "string" : "yes",
+		     "list": ["for", "sure", 42]}|}  (* val json_string : string *)
+
+  let json = parse json_string;;  (* val json : Json.Datatype.stt *)
+
+  let num = json
+	    |> get_child "number"
+	    |> as_number;;  (* val num : float *)
+  print_float num;;
+
+  let mem = json
+	    |> get_child "list"
+	    |> get_mem 0
+	    |> as_string;;  (* val mem : string *)
+  print_string mem;;
+#+END_SRC
+
+命名为~test.ml~后，使用：
+
+#+BEGIN_SRC shell
+  ocamlopt -c test.ml
+  ocamlopt json.cmx test.cmx
+  ./a.out
+#+END_SRC
+
+完成对JSON的解析。
+
+* 最后
+
+感觉OCamllex和OCamlyacc用来解析JSON这种简单的东西没这个必要，反而更繁琐了不是。
+但本文主要是介绍如何使用这些工具，而不是如何解析JSON。
+
+一定是这样的吧。

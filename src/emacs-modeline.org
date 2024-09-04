@@ -1,0 +1,148 @@
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS: smpl
+
+#+TITLE: 自己写Emacs的ModeLine
+
+* 写在前面
+
+Emacs的ModeLine[fn::https://www.emacswiki.org/emacs/ModeLine]作为一个常驻的状态栏，一直都是美化中较为重要的一部分。
+因为我之前一直是用Spacemacs的，它默认的状态栏还是很好看的，所以也没去折腾。
+昨天+因为感觉不舒服，+决定不用它、自己写一个[[https://github.com/RadioNoiseE/eMaCs][配置]]，于是就仔细研究了一下这个东西。
+
+至于为什么不用那些成熟的方案，因为我觉得没必要。
+
+#+CAPTION: 最终效果
+#+ATTR_HTML: :width 85%
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :loading lazy
+[[../img/emacs-modeline-01.png]]
+
+* 宗旨
+
+状态栏的内容由缓冲区局部变量~mode-line-format~指定。这个变量的值是一个状态栏结构（/mode line construct/），
+即一个控制状态栏上内容的模板（列表）。直观一些，可以看如下的Emacs 27.1的状态栏定义：
+
+#+BEGIN_SRC elisp
+  (setq mode-line-format
+	(list ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-position (vc-mode vc-mode) mode-line-modes mode-line-misc-info mode-line-end-spaces)))
+#+END_SRC
+
+简化版的默认值为：
+
+#+BEGIN_SRC elisp
+  ("-"
+   mode-line-mule-info
+   mode-line-modified
+   mode-line-frame-identification
+   mode-line-buffer-identification
+   "   "
+   mode-line-position
+   (vc-mode vc-mode)
+   "   "
+   mode-line-modes
+   (which-function-mode ("" which-func-format "--"))
+   (global-mode-string ("--" global-mode-string))
+   "-%-")
+#+END_SRC
+
+而列表中的每一个元素都代表一个状态栏上的模块，它们被如此定义：
+
+#+BEGIN_SRC elisp
+  (setq-default
+   mode-line-buffer-identification
+   '(:eval (propertize "%12b"
+		       'face (if (mode-line-window-selected-p)
+				 'bold
+			       'italic))))
+#+END_SRC
+
+关于状态栏数据结构完整的定义，请参阅[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Data.html][官方文档]]。
+
+* 值从哪里来
+
+我们可以使用~%~构造来作为替代各种类型的数据的字符串，比如使用~%f~来表示当前访问的文件名。完整的构造表格可以在[[https://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html][这里]]查看。
+
+* 状态栏中的属性
+
+某些文本属性在状态栏中是有意义的，如~face~属性影响文本的外观；~help-echo~属性关联文本与字符串；~keymap~则使文本对鼠标操作敏感。
+有四种方法来为状态栏中的文本添加属性：
+
+1) 将带有文本属性的字符串直接插入状态栏的数据结构（列表）；
+2) 为~%~构造附加属性，使得展开后的字符串携带相同属性；
+3) 使用~(:propertize elt props...)~构造为~elt~指定被~props~定义的文本属性；
+4) 在状态栏数据结构中插入包含~:eval form~的列表，同时使~form~计算为携带文本属性的字符串。
+
+注意，~keymap~属性仅对鼠标点击有实际效果；绑定键无效，因为你（正常情况下）不可能将光标移到状态栏中。
+
+* 计算空格
+
+当你希望让你的状态栏向两边分散对齐时，你需要使用计算空格（并填充）的方法。
+如下定义两个函数：
+
+#+BEGIN_SRC elisp
+  (defun mode-line-fill (reserve)
+    (when
+	(and window-system (eq 'right (get-scroll-bar-mode)))
+      (setq reserve (- reserve 3)))
+    (propertize " " 'display
+		`((space :align-to (- (+ right right-fringe right-margin) ,reserve)))))
+
+  (defun mode-line-flush-right (right-line)
+    (let ((right-length (length (format-mode-line right-line))))
+      (list (mode-line-fill right-length) right-line)))
+#+END_SRC
+
+其中，第一个函数填充空格直到右侧元素处于窗口的边缘；第二个函数计算右侧元素的宽度，并连接填充空格和右侧元素的列表。
+
+注意使用的~format-mode-line~函数，它可被用来求得将出现在状态栏中的元素（包括~%~构造）的字符串。
+
+* 最后
+
+相信看到这里，聪明的你一定能自己写出一个自己喜欢的轻量的状态栏了。最后给出我的配置（不想动脑的改一改就能用了）：
+
+#+BEGIN_SRC elisp
+  ;; modeline
+
+  (setq mode-line-position
+	(list
+	 "  (" (propertize "%l" 'face 'font-lock-type-face)
+	 "," (propertize "%c" 'face 'font-lock-type-face) ")   "))
+
+  (defun mode-line-fill (reserve)
+    (when
+	(and window-system (eq 'right (get-scroll-bar-mode)))
+      (setq reserve (- reserve 3)))
+    (propertize " " 'display
+		`((space :align-to (- (+ right right-fringe right-margin) ,reserve)))))
+
+  (defun mode-line-flush-right (right-line)
+    (let ((right-length (length (format-mode-line right-line))))
+      (list (mode-line-fill right-length) right-line)))
+
+  (defun truncate-mode-line-construct (construct length)
+    (let* ((full-string (format-mode-line construct))
+	   (truncated-string (truncate-string-to-width full-string length)))
+      (replace-regexp-in-string "%" "%%" truncated-string)))
+
+  (setq-default mode-line-format
+		(list
+		 '(:eval (propertize "%e" 'face 'font-lock-type-face))
+		 mode-line-front-space
+		 '(:eval (propertize "%@" 'face 'font-lock-constant-face))
+		 '(:eval (propertize "%t%Z" 'face 'font-lock-string-face))
+		 '(:eval (propertize "%*%+" 'face 'font-lock-warning-face))
+		 '(:eval (propertize "  %F" 'face 'font-lock-keyword-face))
+		 '(:eval (propertize "  %b" 'face 'font-lock-escape-face))
+		 mode-line-position
+		 '(:eval (mode-line-flush-right
+			  (list
+			   mode-line-modes
+			   " ["
+			   (propertize (truncate-mode-line-construct "%p" 3) 'face 'font-lock-comment-face)
+			   (propertize ":" 'face 'font-lock-warning-face)
+			   (propertize "%I" 'face 'font-lock-string-face)
+			   "] "
+			   mode-line-end-spaces)))))
+
+  (provide 'modeline)
+#+END_SRC

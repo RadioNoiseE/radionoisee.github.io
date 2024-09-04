@@ -1,0 +1,278 @@
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS: smpl
+
+#+TITLE: Plain-TeX宏集
+
+* 介绍
+
+本文记录并收集一些在LuaTeX引擎下使用plain-TeX排版的宏集。效果如此：
+
+#+CAPTION: 经济暑假作业
+#+ATTR_HTML: :width 85%
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :loading lazy
+[[../img/plaintex-mac-01.png]]
+
+* 字体类
+
+** HZ
+
+即在断行结果较差时自动调整字符宽度以优化结果。注意在我的设定下该特性会影响断行算法。
+
+#+BEGIN_SRC tex
+  \adjustspacing=2
+  \def\hzf#1{\expandglyphsinfont#1 20 20 10}
+#+END_SRC
+
+应用例：~\hzf\tenrm~。
+
+** Protrude
+
+类似标点悬挂，也会影响断行算法。比较坑的一点是Han The THanh的设定不能直接用，因为LuaTeX下数值含义改变了。
+
+#+BEGIN_SRC tex
+  \protrudechars=2
+  \def\prf#1{#1\setbox0\hbox to1em{}
+   \def\s@m##1##2##3{\numexpr\dimexpr\fontcharwd##1##2*##3/\wd0\relax}
+   \def\r@c##1##2=##3;{\rpcode##1##2=\s@m##1{##2}{##3}}
+   \def\l@c##1##2=##3;{\lpcode##1##2=\s@m##1{##2}{##3}}
+   \r@c#1`\!=200; \r@c#1`\,=700; \r@c#1`\-=700; \r@c#1`\.=700;
+   \r@c#1`\;=500; \r@c#1`\:=500; \r@c#1`\?=200; \l@c#1`\`=700;
+   \r@c#1`\'=700; \l@c#1 92=500; \r@c#1 34=500; \r@c#1 123=300;
+   \r@c#1 124=200; \r@c#1`\)=50; \r@c#1`\A=50; \r@c#1`\F=50;
+   \r@c#1`\K=50; \r@c#1`\L=50; \r@c#1`\T=50; \r@c#1`\V=50;
+   \r@c#1`\W=50; \r@c#1`\X=50; \r@c#1`\Y=50; \r@c#1`\k=50;
+   \r@c#1`\r=50; \r@c#1`\t=50; \r@c#1`\v=50; \r@c#1`\w=50;
+   \r@c#1`\x=50; \r@c#1`\y=50; \l@c#1`\(=50; \l@c#1`\A=50;
+   \l@c#1`\J=50; \l@c#1`\T=50; \l@c#1`\V=50; \l@c#1`\W=50;
+   \l@c#1`\X=50; \l@c#1`\Y=50; \l@c#1`\v=50; \l@c#1`\w=50;
+   \l@c#1`\x=50; \l@c#1`\y=0;}
+#+END_SRC
+
+** 尺寸相关
+
+LaTeX2e的NFSS2果然是好文明，虽然有点粗暴。幸好，手动枚举也还能接受。
+
+#+BEGIN_SRC tex
+  \font\ch=cmcsc10 at 11pt
+  \font\twelverm=cmr12
+  \font\twelvebf=cmbx12
+  \font\twelveit=cmti12
+  \font\twelvesl=cmsl12
+  \font\twelvemus=cmmi12
+  \font\eightrm=cmr8
+  \font\eightbf=cmbx8
+  \font\eightit=cmti8
+  \font\eightsl=cmsl8
+  \font\eightmus=cmmi8
+  \def\bigtype{\let\rm=\twelverm \let\bf=\twelvebf
+   \let\it=\twelveit \let\sl=\twelvesl \let\mus=\twelvemus
+   \baselineskip=14pt minus 1pt
+   \rm}
+  \def\medtype{\let\rm=\tenrm \let\bf=\tenbf
+   \let\it=\tenit \let\sl=\tensl \let\mus=\teni
+   \baselineskip=12pt minus 1pt
+   \rm}
+  \def\smalltype{\let\rm=\eightrm \let\bf=\eightbf
+   \let\it=\eightit \let\sl=\eightsl \let\mus=\eightmus
+   \baselineskip=9.5pt minus .75pt
+   \rm}
+#+END_SRC
+
+** 更换字体
+
+使用老爷子排版Concrete Mathematics时用的字体组合（注意此时主要字体变为了~\textrm~）：
+
+#+BEGIN_SRC tex
+  \def\hex@#1{\ifcase#1 0\or 1\or 2\or 3\or 4\or 5\or 6\or 7\or 8\or 9\or A\or B\or C\or D\or E\or F\fi}
+  \font\textrm=ccr10
+  \font\textit=ccti10
+  \font\textsl=ccsl10
+  \font\textbf=cmbx10
+  \font\textsc=cccsc10
+  \font\oldsty=ccmi10
+  \font\mathtext=ccr10
+  \font\mathsubtext=ccr7
+  \font\mathsubsubtext=ccr5
+  \font\mathlet=eurm10 \fontdimen2\mathlet=0pt
+  \font\mathsublet=eurm7 \fontdimen2\mathsublet=0pt
+  \font\mathsubsublet=eurm5 \fontdimen2\mathsubsublet=0pt
+  \skewchar\mathlet='177 \skewchar\mathsublet='177 \skewchar\mathsubsublet='177
+  \font\mathsym=cmsy10
+  \font\mathsubsym=cmsy7
+  \font\mathsubsubsym=cmsy5
+  \skewchar\mathsym='60 \skewchar\mathsubsym='60 \skewchar\mathsubsubsym='60
+  \font\mathext=cmex10
+  \font\mathsubext=cmex10
+  \font\mathsubsubext=cmex10
+  \font\mathscr=euxm10\fontdimen2\mathscr=0pt
+  \font\mathsubscr=euxm7 \fontdimen2\mathsubscr=0pt
+  \font\mathsubsubscr=euxm5 \fontdimen2\mathsubsubscr=0pt
+  \skewchar\mathscr='60 \skewchar\mathsubscr='60 \skewchar\mathsubsubscr='60
+  \font\mathfr=eufm10\fontdimen2\mathfr=0pt
+  \font\mathsubfr=eufm7 \fontdimen2\mathsubfr=0pt
+  \font\mathsubsubfr=eufm5 \fontdimen2\mathsubsubfr=0pt
+  \font\matheuex=euex10\fontdimen2\matheuex=0pt
+  \font\eulerbf=eurb10 \fontdimen2\eulerbf=0pt
+  \font\teneq=cmr10 
+  \def\rm{\fam\z@\textrm}
+  \def\it{\fam\itfam\textit} \textfont\itfam=\textit
+  \def\sl{\fam\slfam\textsl} \textfont\slfam=\textsl
+  \def\bf{\fam\bffam\textbf} \textfont\bffam=\textbf
+  \newfam\scrfam \edef\scrfam@{\hex@\scrfam} \def\scr{\fam\scrfam }
+  \newfam\frfam \edef\frfam@{\hex@\frfam} \def\frak{\fam\frfam }
+  \newfam\euexfam \edef\euexfam@{\hex@\euexfam}
+  \newfam\eqfam \edef\eqfam@{\hex@\eqfam}
+  \textfont0=\mathtext
+  \scriptfont0=\mathsubtext
+  \scriptscriptfont0=\mathsubsubtext
+  \textfont1=\mathlet \let\tfont=\teni
+  \scriptfont1=\mathsublet
+  \scriptscriptfont1=\mathsubsublet
+  \textfont2=\mathsym
+  \scriptfont2=\mathsubsym
+  \scriptscriptfont2=\mathsubsubsym
+  \textfont3=\mathext
+  \scriptfont3=\mathsubext
+  \scriptscriptfont3=\mathsubsubext
+  \textfont\scrfam=\mathscr
+  \scriptfont\scrfam=\mathsubscr
+  \scriptscriptfont\scrfam=\mathsubsubscr
+  \textfont\frfam=\mathfr
+  \scriptfont\frfam=\mathsubfr
+  \scriptscriptfont\frfam=\mathsubsubfr
+  \textfont\euexfam=\matheuex
+  \scriptfont\euexfam=\mathsubsym 
+  \scriptscriptfont\euexfam=\mathsubsubsym
+  \textfont\eqfam=\teneq
+  \mathcode`0="7130 \mathcode`1="7131 \mathcode`2="7132 \mathcode`3="7133
+  \mathcode`4="7134 \mathcode`5="7135 \mathcode`6="7136 \mathcode`7="7137
+  \mathcode`8="7138 \mathcode`9="7139 \mathcode`+="2\frfam@2B
+  \mathcode`-="2\frfam@2D \mathcode`!="0\frfam@21
+  \mathcode`(="4\frfam@28 \delcode`(="\frfam@28300
+  \mathcode`)="5\frfam@29 \delcode`)="\frfam@29301
+  \mathcode`[="4\frfam@5B \delcode`[="\frfam@5B302
+  \mathcode`]="5\frfam@5D \delcode`]="\frfam@5D303
+  \mathcode`=="3\frfam@3D
+  \mathchardef\intop="1\euexfam@52 \mathchardef\ointop="1\euexfam@48
+  \mathchardef\coprod="1\euexfam@60 \mathchardef\prod="1\euexfam@51
+  \mathchardef\sum="1\euexfam@50
+  \mathchardef\braceld="\euexfam@7A \mathchardef\bracerd="\euexfam@7B
+  \mathchardef\bracelu="\euexfam@7C \mathchardef\braceru="\euexfam@7D
+  \mathchardef\infty="0\euexfam@31 \mathchardef\nearrow="3\euexfam@25
+  \mathchardef\searrow="3\euexfam@26 \mathchardef\nwarrow="3\euexfam@2D
+  \mathchardef\swarrow="3\euexfam@2E \mathchardef\Leftrightarrow="3\euexfam@2C
+  \mathchardef\Leftarrow="3\euexfam@28
+  \mathchardef\Rightarrow="3\euexfam@29
+  \mathchardef\leftrightarrow="3\euexfam@24 \mathcode`\^^W="3\euexfam@24
+  \mathchardef\leftarrow="3\euexfam@20 \let\gets=\leftarrow \mathcode`\^^X="3\euexfam@20
+  \mathchardef\rightarrow="3\euexfam@21 \let\to=\rightarrow \mathcode`\^^Y="3\euexfam@21
+  \mathchardef\leftharpoonup="3\euexfam@18
+  \mathchardef\leftharpoondown="3\euexfam@19
+  \mathchardef\rightharpoonup="3\euexfam@1A
+  \mathchardef\rightharpoondown="3\euexfam@1B
+  \mathchardef\Relbar="3\eqfam@3D
+  \mathchardef\Gamma="7100 \mathchardef\Delta="7101 \mathchardef\Theta="7102
+  \mathchardef\Lambda="7103 \mathchardef\Xi="7104 \mathchardef\Pi="7105
+  \mathchardef\Sigma="7106 \mathchardef\Upsilon="7107 \mathchardef\Phi="7108
+  \mathchardef\Psi="7109 \mathchardef\Omega="710A \mathchardef\leq="3\scrfam@14
+  \mathchardef\geq="3\scrfam@15 \mathchardef\Re="0\scrfam@3C \mathchardef\Im="0\scrfam@3D
+  \mathchardef\aleph="0\scrfam@40
+  \def\uparrow{\delimiter"3\euexfam@22378 } \mathcode`\^^K="3\euexfam@22
+  \def\downarrow{\delimiter"3\euexfam@23379 } \mathcode`\^^A="3\euexfam@23
+  \def\updownarrow{\delimiter"3\euexfam@6C33F }
+  \def\Uparrow{\delimiter"3\euexfam@2A37E }
+  \def\Downarrow{\delimiter"3\euexfam@2B37F }
+  \def\Updownarrow{\delimiter"3\euexfam@6D377 }
+  \def\rbrace{\delimiter"5\scrfam@67\euexfam@09 } \let\}=\rbrace
+  \def\lbrace{\delimiter"4\scrfam@66\euexfam@08 } \let\{=\lbrace
+  \def\vert{\delimiter"\scrfam@6A30C }
+  \def\backslash{\delimiter"\scrfam@6E30F }
+  \let\varsigma=\sigma \let\varrho=\rho
+#+END_SRC
+
+有一点鲁棒性，但不多（主要是字族在原本的~gkpmac.tex~里是写死的，我因为没看过AmS-TeX实现，怕它载了什么新的字体导致爆炸的发生）。
+
+* 标记元素
+
+** 标题
+
+从TeXbook的/Example Formats/一节摘出来的。
+
+#+BEGIN_SRC tex
+  \def\ti#1{\gdef\t@@{\uppercase{#1}}}
+  \def\au#1{\gdef\a@@{\uppercase{#1}}}
+  \def\ft{\vbox{\bigtype\bf
+   \line{\hrulefill}\kern-.5\baselineskip\line{\hrulefill\phantom{ {\t@@} }\hrulefill}
+   \kern-.5\baselineskip\line{\hrulefill\hbox{ {\t@@} }\hrulefill}
+   \kern-.5\baselineskip\line{\hrulefill\phantom{ {\a@@} }\hrulefill}
+   \kern-.5\baselineskip\line{\hrulefill\hbox{ {\a@@} }\hrulefill}}}
+#+END_SRC
+
+使用例：~\ti{Title Here}\au{A.U.Thor}\ft~，应该是LaTeX-style的。
+
+** 章节
+
+少用不优雅的~%~的技巧在于进入Vertical Mode。
+
+#+BEGIN_SRC tex
+  \newcount\secno
+  \def\chap#1.{\global\secno=0\vskip0pt plus.3\vsize\penalty-250
+   \vskip0pt plus-.3\vsize\bigskip\vskip.16in
+   \message{c:#1}\centerline{\ch#1}\nobreak\smallskip}
+  \def\sect#1\par{\advance\secno by 1\vskip0pt plus.3\vsize\penalty-250
+   \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
+   \expandafter\message{s\the\secno:#1}\leftline{\bf\the\secno.\enspace#1}\nobreak\smallskip\noindent}
+#+END_SRC
+
+** 图文混排
+
+用的是设置hbox宽度的方法。
+
+#+BEGIN_SRC tex
+  \long\def\illu#1#2 #3\eillu{\bgroup\vskip\smallskipamount\kern\lineskip\saveimageresource width #2 {#1}
+   \setbox0=\hbox{\useimageresource\lastsavedimageresourceindex}
+   \dimen0=\hsize\advance\dimen0 by-\wd0\advance\dimen0 by-.7cm
+   \setbox1=\vbox{\hsize=\dimen0\noindent #3}
+   \dimen1=\ht1\ifdim\ht0>\ht1\dimen1=\ht0\setbox3=\box0\setbox0=\box1\setbox1=\box3\fi
+   \hbox to\hsize{\vbox to\dimen1{\vss\box1\vss}\kern.7cm\vbox to\dimen1{\vss\box0\vss}}\egroup}
+  \def\eillu{\relax}
+#+END_SRC
+
+使用例：
+
+#+BEGIN_SRC tex
+  \illu{cnce.jpeg}{4.4cm} As the government increases the tax imposed on tobacco, the relative price is changed, creating incentives
+   for consumers to change their consumption patterns; tobacco that is taxed becomes relatively more expensive and the consumption
+   is reduced.\par
+   Thus there is a decrease in supply and an upward shift of the supply curve from $MPC$ to $MPC + {\rm tax}$ while intersecting
+   $MPB$ at the $Q_{\rm opt}$ level of output, with quantity produced and consumed dropping to $Q_{\rm opt}$ which is the socially
+   optimum quantity. The price increases from $P_{\rm m}$ to $P_{\rm c}$, however.\eillu
+#+END_SRC
+
+** 列表
+
+#+BEGIN_SRC tex
+  \xdef\cl{\item{}}
+  \def\bul{\parskip=2pt\par\penalty-250\hangindent\parindent\textindent{%
+   \hbox to\parindent{\enspace\kern.6pt{\smalltype\raise.3pt\hbox{\bullet}}\hss}}\parskip=0pt}
+  \def\bull#1{\def\p##1{\hbox to 1.4em{(\hfil##1\hfil)}}\itemitem{\hbox to \parindent{\enspace\kern.6pt#1\hss}}}
+#+END_SRC
+
+使用例：
+
+#+BEGIN_SRC tex
+   \bul {\bf Market power} is a fundamental distinction between market structures. It's the extent to which individual firm
+    in the industry is able to control the price at which it sells its products. On the basis of market power, we can distinguish
+    between:
+    \bull{\p a} The extreme of {\bf perfect competition}, where firms have no ability to control the price of there products;
+     also known as {\it zero market power}
+    \bull{\p b} The extreme of {\bf monopoly}, where there is single firm in the market when the firm itself is the market;
+     the firm has the greatest ability to control the price of its product. It's also known as {\it the greatest amount of
+     market power}.
+   \cl In between the two extremes are the other two market structures: {\bf monopolistic competition} and {\bf oligopoly}.
+#+END_SRC
+
+* 未完待续
+
+暑假作业好多。

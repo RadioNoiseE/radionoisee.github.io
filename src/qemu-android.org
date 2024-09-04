@@ -1,0 +1,140 @@
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS: smpl
+
+#+TITLE: Linux下基于QEMU的纯净Android虚拟机（KVMとVirGL、小足印）
+
+* 写在前面
+
+最近有在电脑上玩明日方舟的需求，因为是Linux电脑、模拟iOS是不现实的，所以打算搭一个安卓虚拟机。至于为什么不用WayDroid，主要是因为它的Makefile似乎只支持SystemD系统、同时需要内核支持（显得十分肮脏）。于是我还是用老办法，使用QEMU模拟之。
+
+本文所写的方法仅依赖QEMU（需有KVM和VirGL及SDL支持），能够在X和Wayland环境下正常工作。笔者使用的系统为Gentoo、故支持QEMU内UEFI启动的OVMF默认安装路径可能跟你的会有不同。
+
+* 安装有KVM／VirGL和SDL支持的QEMU（非Gentoo用家可跳过）
+
+** 本体
+
+在Gentoo下，安装~app-emulation/qemu~，并确保其启用了以下两个USE旗标：
+
+#+BEGIN_SRC
+   + + sdl                               : Enable the SDL-based console
+   + + virgl                             : Enable experimental Virgil 3d (virtual software GPU)
+#+END_SRC
+
+** EDK II OVMF
+
+为了支持UEFI，我们还需要安装~sys-firmware/edk2-ovmf~。它会被安装至路径：
+
+#+BEGIN_SRC
+  total 6.2M
+  -rw-r--r-- 1 root root  16K Aug 28  2022 EnrollDefaultKeys.efi
+  -rw-r--r-- 1 root root 1.9M Aug 28  2022 OVMF_CODE.fd
+  -rw-r--r-- 1 root root 1.9M Aug 28  2022 OVMF_CODE.secboot.fd
+  -rw-r--r-- 1 root root 128K Aug 28  2022 OVMF_VARS.fd
+  -rw-r--r-- 1 root root 887K Aug 28  2022 Shell.efi
+  -rw-r--r-- 1 root root 1.5M Aug 28  2022 UefiShell.img
+#+END_SRC
+
+* 取得Android-x86系统镜像
+
+于[[https://sourceforge.net/projects/android-x86/files/][~https://sourceforge.net/projects/android-x86/files/~]]下载系统镜像。除该项目之外，你还可以选择其他的项目，如开发更活跃、引入新特性更多的BlissOS。
+
+* 安装虚拟机
+
+** 启动脚本
+
+新建一个文件夹，将取得的系统镜像重命名为~android-x86.iso~后存入该路径。随后在该文件夹中创建名为~LaunchD.sh~的脚本，内容如下：
+
+#+BEGIN_SRC shell
+  #!/usr/bin/sh
+
+  VM_PATH="/home/$(whoami)/Android"
+
+  args=(
+    -enable-kvm
+    -bios "/usr/share/edk2-ovmf/OVMF_CODE.fd"
+    -m 8G
+    -smp $(($(nproc)/2))
+    -device intel-hda
+    -device hda-duplex
+    -device virtio-vga-gl
+    -display sdl,gl=on
+    -hda "$VM_PATH/android.img"
+    -cdrom "$VM_PATH/android-x86.iso"
+  )
+
+  qemu-system-x86_64 "${args[@]}"
+#+END_SRC
+
+其中需要注意的是：
+ - ~bios~指定OVMF的路径、可能需要根据你的发行版安装的位置进行调整；
+ - ~m~和~smp~请根据实际情况调整；
+ - ~intel-hda~和~hda-duplex~为音频系统相关。
+
+保存并写入脚本后，给予它执行权限：
+
+#+BEGIN_SRC shell
+  chmod +x LaunchD.sh
+#+END_SRC
+
+** 创建虚拟磁盘
+
+为存放我们的Android虚拟机，我们需要创建一个虚拟磁盘，如以下命令以创建一个60G的磁盘：
+
+#+BEGIN_SRC shell
+  qemu-img create -f qcow2 android.img 60G
+#+END_SRC
+
+需要注意，~60G~为该磁盘的最大大小，也即该文件的最大大小；文件的实际大小会随其中实际装载的数据的大小而变化。
+
+** 安装
+
+运行脚本启动该虚拟机。按照[[https://www.android-x86.org/installhowto.html][官方指南]]安装即可。
+
+* 优化／配置
+
+** 调整屏幕分辨率／尺寸参数
+
+首先如下修改启动脚本，添加窗口尺寸参数：
+
+#+BEGIN_SRC diff
+  <   -device virtio-vga-gl,xres=2160,yres=1440
+  ---
+  >   -device virtio-vga-gl
+#+END_SRC
+
+随后启动虚拟机，并于启动加载器选择DEBUG模式，进入MirBSD Korn Shell环境。随后在其中执行：
+
+#+BEGIN_SRC shell
+  mkdir /boot/
+  mount /dev/sda1 /boot/
+  vi /boot/efi/boot/android.cfg
+#+END_SRC
+
+进行以下修改：
+
+#+BEGIN_SRC diff
+  @@ -10,7 +10,7 @@
+     set kd=$2
+     shift 3
+  -  linux $kd/kernel root=/dev/ram0 $src $@
+  +  linux $kd/kernel root=/dev/ram0 $src $@ nomodeset video=2160*1440
+     initrd $kd/initrd.img
+
+  @@ -49,6 +49,7 @@
+     loadfont DejaVuSansMono-18
+  +  set gfxmode=2160x1440
+     terminal_output gfxterm
+     set theme=$prefix/theme/theme.txt
+#+END_SRC
+
+最后清理：
+
+#+BEGIN_SRC shell
+  umount /dev/sda1
+  rm -r /boot/
+  exit
+#+END_SRC
+
+* 写在最后
+
+如此，我们可以实现一个较高性能的安卓虚拟机，而且是在较为干净的情况下。至于为什么不用GTK显示前端，因为它不好！
