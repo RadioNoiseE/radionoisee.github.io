@@ -29,13 +29,14 @@
         color: #0066cc;
         font-size: 12px;
         transition: background-color 0.3s ease;
-      } a:hover {
-        background-color: #f0f8ff; }
+      } a:hover { background-color: #f0f8ff; }
+      .box { display: none; }
+      @media only screen and (min-width: 600px) { .de { display: block; } }
     </style>
   </head>
   <body>
     <div id="content" class="content">
-      <div style="position:relative">
+      <div style="position:relative" class="box de">
         <a href="https://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;height:14px;position:absolute;top:30px;right:52px " src="valid-css.png" alt="[Valid CSS]" title="W3C CSS" /></a>
         <a href="https://radionoisee.github.io/rss.xml"><img style="border:0;height:14px;position:absolute;top:30px;right:8px" src="valid-rss.png" alt="[Valid RSS]" title="RSS Feed" /></a>
       </div>
@@ -53,8 +54,8 @@
       </ul>
       <p text-align="center">
         [<a href="old.html" style="color:#333;transition:unset;text-decoration:underline;background-color:unset;font-size:inherit;font-size-adjust:inherit">Obsolete JS Generated Index</a>]
-         
-	[<a href="me.html" style="color:#333;transition:unset;text-decoration:underline;background-color:unset;font-size:inherit;font-size-adjust:inherit">Who am I</a>]
+         
+        [<a href="me.html" style="color:#333;transition:unset;text-decoration:underline;background-color:unset;font-size:inherit;font-size-adjust:inherit">Who am I</a>]
       </p>
     </div>
   </body>
