@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-13 Tue 15:18 -->
+<!-- 2024-09-09 Mon 13:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>用OCaml写JSON解析器</title>
+<meta name="author" content="RadioNoiseE" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -200,23 +201,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd3d00bb">1. 写在前面</a></li>
-<li><a href="#orga203d0b">2. 数据类型</a></li>
-<li><a href="#orged7990e">3. 定义解析器</a></li>
-<li><a href="#orge5c6f69">4. 词法分析</a></li>
-<li><a href="#org2b20b9b">5. 集成</a></li>
-<li><a href="#orge2b5b60">6. 使用</a></li>
-<li><a href="#orga55b72d">7. 最后</a></li>
+<li><a href="#orgdb01be1">1. 写在前面</a></li>
+<li><a href="#orgf25a181">2. 数据类型</a></li>
+<li><a href="#orgcd3a03e">3. 定义解析器</a></li>
+<li><a href="#orgc7064fa">4. 词法分析</a></li>
+<li><a href="#org233eb22">5. 集成</a></li>
+<li><a href="#orgd0a7a86">6. 使用</a></li>
+<li><a href="#org478e2b7">7. 最后</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd3d00bb" class="outline-2">
-<h2 id="orgd3d00bb"><span class="section-number-2">1.</span> 写在前面</h2>
+<div id="outline-container-orgdb01be1" class="outline-2">
+<h2 id="orgdb01be1"><span class="section-number-2">1.</span> 写在前面</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-本文实际上补完『Real World OCaml』一书中的第16章。不同之处在于我们只使用标准库（而非Core），
-同时只使用OCamlyacc（而非更现代的Menhir、因为用不着）。
+本文实际上补完『Real World OCaml』一书中的第16章。不同之处在于我们只使用标准库（而非Core），同时只使用OCamlyacc（而非更现代的Menhir、因为用不着）。
 </p>
 
 <p>
@@ -229,8 +229,8 @@
 </div>
 </div>
 
-<div id="outline-container-orga203d0b" class="outline-2">
-<h2 id="orga203d0b"><span class="section-number-2">2.</span> 数据类型</h2>
+<div id="outline-container-orgf25a181" class="outline-2">
+<h2 id="orgf25a181"><span class="section-number-2">2.</span> 数据类型</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 我们首先需要为JSON中的每种数据类型在OCaml中作相应定义。创建<code>datatype.ml</code>文件，写入：
@@ -249,18 +249,16 @@
 </div>
 
 <p>
-即，我们分别定义了JSON中的整型数、浮点数、布尔值、字符串、数组（作为由<code>stt</code>中一个类型组成的列表）和对象
-（作为由一个字符串及其对应的<code>stt</code>中一个类型组成的列表）。
+即，我们分别定义了JSON中的整型数、浮点数、布尔值、字符串、数组（作为由<code>stt</code>中一个类型组成的列表）和对象（作为由一个字符串及其对应的<code>stt</code>中一个类型组成的列表）。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orged7990e" class="outline-2">
-<h2 id="orged7990e"><span class="section-number-2">3.</span> 定义解析器</h2>
+<div id="outline-container-orgcd3a03e" class="outline-2">
+<h2 id="orgcd3a03e"><span class="section-number-2">3.</span> 定义解析器</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-这一步，我们需要创建解析器规范文件，用于描述文法。我使用文件名<code>parser.mly</code>，我们将会用OCamlyacc处理它。
-规范文件分为两部分，使用<code>%%</code>分隔：第一部分主要用于初始化解析器，而后半部分则指定文法。
+这一步，我们需要创建解析器规范文件，用于描述文法。我使用文件名<code>parser.mly</code>，我们将会用OCamlyacc处理它。规范文件分为两部分，使用<code>%%</code>分隔：第一部分主要用于初始化解析器，而后半部分则指定文法。
 </p>
 
 <div class="org-src-container">
@@ -292,8 +290,7 @@
 </div>
 
 <p>
-随后，我们确定文法分析的结果类型于一开始定义的一致，并且为了能在文法分析中使用这些类型，读入<code>datatype.ml</code>文件。
-第一部分结束。
+随后，我们确定文法分析的结果类型于一开始定义的一致，并且为了能在文法分析中使用这些类型，读入<code>datatype.ml</code>文件。第一部分结束。
 </p>
 
 <div class="org-src-container">
@@ -322,8 +319,7 @@
 </div>
 
 <p>
-我们定义了在<code>expr</code>中如何解析：遇到整型数则返回类型为整型数的值，浮点数、字符串同理；遇到布尔值则分别返回真／假；
-遇到由方括号界定的数组时则交由<code>array_fields</code>处理，并返回其结果，对象同理。
+我们定义了在<code>expr</code>中如何解析：遇到整型数则返回类型为整型数的值，浮点数、字符串同理；遇到布尔值则分别返回真／假；遇到由方括号界定的数组时则交由<code>array_fields</code>处理，并返回其结果，对象同理。
 </p>
 
 <div class="org-src-container">
@@ -339,8 +335,7 @@
 </div>
 
 <p>
-之所以对于<code>object_fields</code>的规则构造不符合直觉的左递归后逆置的下推自动机，是由于OCamlyacc会生成左递归解析器，
-如此能够减少栈空间的占用。
+之所以对于<code>object_fields</code>的规则构造不符合直觉的左递归后逆置的下推自动机，是由于OCamlyacc会生成左递归解析器，如此能够减少栈空间的占用。
 </p>
 
 <p>
@@ -365,8 +360,8 @@
 </div>
 </div>
 
-<div id="outline-container-orge5c6f69" class="outline-2">
-<h2 id="orge5c6f69"><span class="section-number-2">4.</span> 词法分析</h2>
+<div id="outline-container-orgc7064fa" class="outline-2">
+<h2 id="orgc7064fa"><span class="section-number-2">4.</span> 词法分析</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 我们在上面描述了文法解析器的规则，而一开始声明的那些token是哪里来的呢？就是在这一部分词法分析的时候被定义的。该文件为<code>lexer.mll</code>。
@@ -390,8 +385,7 @@
 </div>
 
 <p>
-第一部分，我们建立了一个（可选）的环境：我们打开了两个有用的模块，其中<code>Lexing</code>模块定义了在随后的工具函数中被使用的<code>lexbuf</code>结构，
-其包含了词法分析机的状态；定义了一个<code>SyntaxError</code>的异常；同时定义了一个工具函数<code>next_line</code>，用来跟踪token的位置。
+第一部分，我们建立了一个（可选）的环境：我们打开了两个有用的模块，其中<code>Lexing</code>模块定义了在随后的工具函数中被使用的<code>lexbuf</code>结构，其包含了词法分析机的状态；定义了一个<code>SyntaxError</code>的异常；同时定义了一个工具函数<code>next_line</code>，用来跟踪token的位置。
 </p>
 
 <div class="org-src-container">
@@ -445,20 +439,17 @@
 </div>
 
 <p>
-上面的片段总体上还是符合直觉的。首先<code>read</code>会对空字符返回<code>NULL</code>的token，忽略空白字符，遇到换行字符时使用刚定义的函数换行并读入新行，
-正则匹配到整型数和浮点数时会返回各自的<code>INT</code>或<code>FLOAT</code>的token并将字符串类型转换，等等。
+上面的片段总体上还是符合直觉的。首先<code>read</code>会对空字符返回<code>NULL</code>的token，忽略空白字符，遇到换行字符时使用刚定义的函数换行并读入新行，正则匹配到整型数和浮点数时会返回各自的<code>INT</code>或<code>FLOAT</code>的token并将字符串类型转换，等等。
 </p>
 
 <p>
-对于字符串开始处的引号，它会调用随后定义的一个<code>read_string</code>工具（其是被递归定义的）：处理一些被转义的特殊字符，将它们读入缓冲区；
-读入所有不特殊的字符，并在读到另一个（象征字符串结束的）引号时返回<code>STRING</code>类型的token，而缓冲区内的字符串将会被作为值传回。
-当读到非法字符，和在字符串未结束即到达文件末尾时会抛出错误。
+对于字符串开始处的引号，它会调用随后定义的一个<code>read_string</code>工具（其是被递归定义的）：处理一些被转义的特殊字符，将它们读入缓冲区；读入所有不特殊的字符，并在读到另一个（象征字符串结束的）引号时返回<code>STRING</code>类型的token，而缓冲区内的字符串将会被作为值传回。当读到非法字符，和在字符串未结束即到达文件末尾时会抛出错误。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2b20b9b" class="outline-2">
-<h2 id="org2b20b9b"><span class="section-number-2">5.</span> 集成</h2>
+<div id="outline-container-org233eb22" class="outline-2">
+<h2 id="org233eb22"><span class="section-number-2">5.</span> 集成</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 最后我们可以将上面的词法分析和文法解析集成起来。命名为<code>util.ml</code>。
@@ -497,8 +488,7 @@
 </div>
 
 <p>
-上面，我们定义了输出当前位置、尝试解析并捕获异常、以及实际解析的函数。注意这里我们的错误恢复非常简陋，甚至都不是恐慌模式，
-而是、什么都不是。
+上面，我们定义了输出当前位置、尝试解析并捕获异常、以及实际解析的函数。注意这里我们的错误恢复非常简陋，甚至都不是恐慌模式，而是、什么都不是。
 </p>
 
 <div class="org-src-container">
@@ -544,8 +534,8 @@
 </div>
 </div>
 
-<div id="outline-container-orge2b5b60" class="outline-2">
-<h2 id="orge2b5b60"><span class="section-number-2">6.</span> 使用</h2>
+<div id="outline-container-orgd0a7a86" class="outline-2">
+<h2 id="orgd0a7a86"><span class="section-number-2">6.</span> 使用</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 我们可以执行：
@@ -605,12 +595,11 @@
 </div>
 </div>
 
-<div id="outline-container-orga55b72d" class="outline-2">
-<h2 id="orga55b72d"><span class="section-number-2">7.</span> 最后</h2>
+<div id="outline-container-org478e2b7" class="outline-2">
+<h2 id="org478e2b7"><span class="section-number-2">7.</span> 最后</h2>
 <div class="outline-text-2" id="text-7">
 <p>
-感觉OCamllex和OCamlyacc用来解析JSON这种简单的东西没这个必要，反而更繁琐了不是。
-但本文主要是介绍如何使用这些工具，而不是如何解析JSON。
+感觉OCamllex和OCamlyacc用来解析JSON这种简单的东西没这个必要，反而更繁琐了不是。但本文主要是介绍如何使用这些工具，而不是如何解析JSON。
 </p>
 
 <p>
@@ -620,7 +609,8 @@
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-08-13 Tue 15:18</p>
+<p class="author">Author: RadioNoiseE</p>
+<p class="date">Created: 2024-09-09 Mon 13:49</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-13 Tue 14:59 -->
+<!-- 2024-09-09 Mon 13:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>2024年，用Mutt来处理邮件</title>
+<meta name="author" content="RadioNoiseE" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -200,22 +201,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb91ac53">1. 写在前面</a></li>
-<li><a href="#org5a415c8">2. 安装</a></li>
-<li><a href="#org0d508d5">3. 配置</a>
+<li><a href="#org20ecab6">1. 写在前面</a></li>
+<li><a href="#orgbff47b7">2. 安装</a></li>
+<li><a href="#org8bcbda7">3. 配置</a>
 <ul>
-<li><a href="#org8e51109">3.1. 接收邮件</a></li>
-<li><a href="#orgdb9b73c">3.2. 发送邮件</a></li>
-<li><a href="#org0d0ee9f">3.3. MIME</a>
+<li><a href="#org851a1d7">3.1. 接收邮件</a></li>
+<li><a href="#org08bea49">3.2. 发送邮件</a></li>
+<li><a href="#orgb12b2bb">3.3. MIME</a>
 <ul>
-<li><a href="#orgc708af5">3.3.1. HTML邮件</a></li>
-<li><a href="#org9cdb57c">3.3.2. 其他格式</a></li>
+<li><a href="#orgb9db16b">3.3.1. HTML邮件</a></li>
+<li><a href="#org58283f7">3.3.2. 其他格式</a></li>
 </ul>
 </li>
-<li><a href="#org993734e">3.4. 优化</a></li>
+<li><a href="#org8c18487">3.4. 优化</a></li>
 </ul>
 </li>
-<li><a href="#orgfbcc24c">4. 最后</a></li>
+<li><a href="#org316ed51">4. 最后</a></li>
 </ul>
 </div>
 </div>
@@ -225,17 +226,19 @@
 </p>
 </blockquote>
 
-<div id="outline-container-orgb91ac53" class="outline-2">
-<h2 id="orgb91ac53"><span class="section-number-2">1.</span> 写在前面</h2>
+<div id="outline-container-org20ecab6" class="outline-2">
+<h2 id="org20ecab6"><span class="section-number-2">1.</span> 写在前面</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 处理邮件，我之前一直用的是ThunderBird，所谓「Mozilla's solution to mail client」。它的界面很好看，然而真的很重，而且当发送的邮件中有尺寸较大的附件时的体验一直很差，会一直卡着。
-直到三天前，我用它接收一个使用邮件传送的9MiB的附件时，它的进度蓝条卡了半个小时还没将页面加载出来，同时还把切换其他信息的动作卡住了。
-这时我才真正意识到了什么叫「All mail clients suck」，并打算换一个；试了试号称「sucks less」的Mutt，感觉情况的确比之前有较大改善。
+</p>
+
+<p>
+直到三天前，我用它接收一个使用邮件传送的9MiB的附件时，它的进度蓝条卡了半个小时还没将页面加载出来，同时还把切换其他信息的动作卡住了。这时我才真正意识到了什么叫「All mail clients suck」，并打算换一个；试了试号称「sucks less」的Mutt，感觉情况的确比之前有较大改善。
 </p>
 
 
-<div id="orgbc6a622" class="figure">
+<div id="org0a79933" class="figure">
 <p><img src="../img/mutt-intro-01.png" alt="mutt-intro-01.png" loading="lazy" align="center" width="85%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>界面</p>
@@ -243,8 +246,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5a415c8" class="outline-2">
-<h2 id="org5a415c8"><span class="section-number-2">2.</span> 安装</h2>
+<div id="outline-container-orgbff47b7" class="outline-2">
+<h2 id="orgbff47b7"><span class="section-number-2">2.</span> 安装</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Gentoo用户需要启用这些USE旗标：
@@ -265,12 +268,12 @@ Gentoo用户需要启用这些USE旗标：
 </div>
 </div>
 
-<div id="outline-container-org0d508d5" class="outline-2">
-<h2 id="org0d508d5"><span class="section-number-2">3.</span> 配置</h2>
+<div id="outline-container-org8bcbda7" class="outline-2">
+<h2 id="org8bcbda7"><span class="section-number-2">3.</span> 配置</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org8e51109" class="outline-3">
-<h3 id="org8e51109"><span class="section-number-3">3.1.</span> 接收邮件</h3>
+<div id="outline-container-org851a1d7" class="outline-3">
+<h3 id="org851a1d7"><span class="section-number-3">3.1.</span> 接收邮件</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 因为我使用iCloud邮箱，故使用的是<code>imap</code>协议。于<code>~/.config/mutt/muttrc</code>下创建配置文件，并添加如下：
@@ -278,8 +281,8 @@ Gentoo用户需要启用这些USE旗标：
 
 <div class="org-src-container">
 <pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">unset</span> <span style="color: #4e3163; font-style: italic;">imap_passive</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> mail_check = 60
-<span style="color: #3a81c3; font-weight: bold;">set</span> imap_keepalive = 300
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">mail_check</span> = 60
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">imap_keepalive</span> = 300
 </pre>
 </div>
 
@@ -288,13 +291,13 @@ Gentoo用户需要启用这些USE旗标：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> realname = <span style="color: #2d9574;">"{NAME}"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> imap_user = <span style="color: #2d9574;">"{USER}"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> imap_pass = <span style="color: #2d9574;">"{PASSWD}"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> from = <span style="color: #2d9574;">"{EADDR}"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> folder = <span style="color: #2d9574;">"imaps://{USER}@imap.mail.me.com:{PORT}/"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> spoolfile = <span style="color: #2d9574;">"+Inbox"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> postponed = <span style="color: #2d9574;">"+Drafts"</span>
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">realname</span> = <span style="color: #2d9574;">"{NAME}"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">imap_user</span> = <span style="color: #2d9574;">"{USER}"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">imap_pass</span> = <span style="color: #2d9574;">"{PASSWD}"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">from</span> = <span style="color: #2d9574;">"{EADDR}"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">folder</span> = <span style="color: #2d9574;">"imaps://{USER}@imap.mail.me.com:{PORT}/"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">spoolfile</span> = <span style="color: #2d9574;">"+Inbox"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">postponed</span> = <span style="color: #2d9574;">"+Drafts"</span>
 </pre>
 </div>
 
@@ -304,33 +307,33 @@ Gentoo用户需要启用这些USE旗标：
 </div>
 </div>
 
-<div id="outline-container-orgdb9b73c" class="outline-3">
-<h3 id="orgdb9b73c"><span class="section-number-3">3.2.</span> 发送邮件</h3>
+<div id="outline-container-org08bea49" class="outline-3">
+<h3 id="org08bea49"><span class="section-number-3">3.2.</span> 发送邮件</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 一般使用<code>smtp</code>协议。如下：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> smtp_url = <span style="color: #2d9574;">"smtp://{USER}@smtp.mail.me.com:{PORT}/"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> smtp_pass = <span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">imap_pass</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> ssl_force_tls = yes
-<span style="color: #3a81c3; font-weight: bold;">set</span> record = <span style="color: #2d9574;">"+Sent Messages"</span>
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">smtp_url</span> = <span style="color: #2d9574;">"smtp://{USER}@smtp.mail.me.com:{PORT}/"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">smtp_pass</span> = <span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">imap_pass</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">ssl_force_tls</span> = yes
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">record</span> = <span style="color: #2d9574;">"+Sent Messages"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0d0ee9f" class="outline-3">
-<h3 id="org0d0ee9f"><span class="section-number-3">3.3.</span> MIME</h3>
+<div id="outline-container-orgb12b2bb" class="outline-3">
+<h3 id="orgb12b2bb"><span class="section-number-3">3.3.</span> MIME</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 邮件里经常会夹带各种奇奇怪怪的附件，而对这些附件的处理正是Mutt做的不错而ThunderBird略有不足之处。
 </p>
 </div>
 
-<div id="outline-container-orgc708af5" class="outline-4">
-<h4 id="orgc708af5"><span class="section-number-4">3.3.1.</span> HTML邮件</h4>
+<div id="outline-container-orgb9db16b" class="outline-4">
+<h4 id="orgb9db16b"><span class="section-number-4">3.3.1.</span> HTML邮件</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 这是最特殊的一个，所以单独出来说。由于Mutt最多就是个TUI界面，不要指望它的HTML邮件预览能力跟ThunderBird对齐；话虽如此，它的支持还是不错的。
@@ -341,7 +344,7 @@ Gentoo用户需要启用这些USE旗标：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> mailcap_path = <span style="color: #2d9574;">"~/.config/mutt/mailcap"</span>
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">mailcap_path</span> = <span style="color: #2d9574;">"~/.config/mutt/mailcap"</span>
 <span style="color: #2aa1ae; font-weight: bold;">auto_view</span> text/html
 </pre>
 </div>
@@ -357,12 +360,11 @@ Gentoo用户需要启用这些USE旗标：
 </div>
 </div>
 
-<div id="outline-container-org9cdb57c" class="outline-4">
-<h4 id="org9cdb57c"><span class="section-number-4">3.3.2.</span> 其他格式</h4>
+<div id="outline-container-org58283f7" class="outline-4">
+<h4 id="org58283f7"><span class="section-number-4">3.3.2.</span> 其他格式</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
-依照HTML预览，不难理解Mutt处理MIME的原理。不同之处在于其他格式可能无法在TUI界面中预览。比如图像，也许用Uberzug++是可行的，但更好的方法还是用正经的图像预览工具去查看他们。
-这就带来了一个问题，Mutt默认的预览附件的行为是阻塞的，就跟你在vim里执行不带<code>&amp;</code>的壳命令一样；而如果你使用<code>&amp;</code>，由于Mutt会在退出后删除临时存储的附件，导致无法预览。
+依照HTML预览，不难理解Mutt处理MIME的原理。不同之处在于其他格式可能无法在TUI界面中预览。比如图像，也许用Uberzug++是可行的，但更好的方法还是用正经的图像预览工具去查看他们。这就带来了一个问题，Mutt默认的预览附件的行为是阻塞的，就跟你在vim里执行不带<code>&amp;</code>的壳命令一样；而如果你使用<code>&amp;</code>，由于Mutt会在退出后删除临时存储的附件，导致无法预览。
 </p>
 
 <p>
@@ -395,7 +397,7 @@ Gentoo用户需要启用这些USE旗标：
 </div>
 
 
-<div id="org4a74371" class="figure">
+<div id="org1f2a278" class="figure">
 <p><img src="../img/mutt-intro-02.png" alt="mutt-intro-02.png" loading="lazy" align="center" width="85%" />
 </p>
 <p><span class="figure-number">Figure 2: </span>预览PDF</p>
@@ -404,8 +406,8 @@ Gentoo用户需要启用这些USE旗标：
 </div>
 </div>
 
-<div id="outline-container-org993734e" class="outline-3">
-<h3 id="org993734e"><span class="section-number-3">3.4.</span> 优化</h3>
+<div id="outline-container-org8c18487" class="outline-3">
+<h3 id="org8c18487"><span class="section-number-3">3.4.</span> 优化</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 默认的Headers很多，大概率我们不需要看到那些，于是我们：
@@ -424,8 +426,8 @@ Gentoo用户需要启用这些USE旗标：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> header_cache = <span style="color: #2d9574;">"/var/tmp/mutt"</span>
-<span style="color: #3a81c3; font-weight: bold;">set</span> message_cachedir = <span style="color: #2d9574;">"/var/tmp/mutt"</span>
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">header_cache</span> = <span style="color: #2d9574;">"/var/tmp/mutt"</span>
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">message_cachedir</span> = <span style="color: #2d9574;">"/var/tmp/mutt"</span>
 </pre>
 </div>
 
@@ -434,8 +436,8 @@ Gentoo用户需要启用这些USE旗标：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> sidebar_visible = yes
-<span style="color: #3a81c3; font-weight: bold;">set</span> sidebar_sort_method = alpha
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">sidebar_visible</span> = yes
+<span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">sidebar_sort_method</span> = alpha
 <span style="color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>k sidebar-prev
 <span style="color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>j sidebar-next
 <span style="color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>o sidebar-open
@@ -458,7 +460,7 @@ Gentoo用户需要启用这些USE旗标：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> pager_index_lines = 4
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">pager_index_lines</span> = 4
 </pre>
 </div>
 
@@ -467,7 +469,7 @@ Gentoo用户需要启用这些USE旗标：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> pager_format = <span style="color: #2d9574;">" %C - %[%H:%M] %.20v, %s%* %?H? [%H] ?"</span>
+<pre class="src src-shell"><span style="color: #3a81c3; font-weight: bold;">set</span> <span style="color: #715ab1;">pager_format</span> = <span style="color: #2d9574;">" %C - %[%H:%M] %.20v, %s%* %?H? [%H] ?"</span>
 </pre>
 </div>
 
@@ -478,15 +480,15 @@ Gentoo用户需要启用这些USE旗标：
 </div>
 </div>
 
-<div id="outline-container-orgfbcc24c" class="outline-2">
-<h2 id="orgfbcc24c"><span class="section-number-2">4.</span> 最后</h2>
+<div id="outline-container-org316ed51" class="outline-2">
+<h2 id="org316ed51"><span class="section-number-2">4.</span> 最后</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 颅内高潮：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #2aa1ae; font-weight: bold;">my_hdr</span> X-Face: *[<span style="color: #3a81c3; font-weight: bold;">&gt;</span>eDAPM?U?Cx<span style="color: #2d9574;">\$</span>/6HNmXzNCNhzKU<span style="color: #2d9574;">\#</span>:oG<span style="color: #2d9574;">\#</span>(lw!uh\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">7nMD</span>%<span style="color: #2d9574;">\$</span>{/<span style="color: #3a81c3; font-weight: bold;">&lt;</span>.wk(r!3C(xNhV.EN!+uOUMq7]/H?Lk98rZl<span style="color: #2d9574;">\"</span>:690@*gjH@zEz{R\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">IuVJlhnlc</span>.0?*BJhGy5N]Fv9D)vv-~-6yg,<span style="color: #2d9574;">\\\$</span><span style="color: #715ab1;">lYpE</span>.<span style="color: #715ab1;">qk</span>=1FR!K1!3+Ec]L<span style="color: #2d9574;">\`</span>~eC,m6bFeXJb-=<span style="color: #2d9574;">\$</span><span style="color: #715ab1;">fWylGg3</span>+ALBb<span style="color: #2d9574;">\'</span>jhg1z8j7G?dT]@LIt,~LzO,v<span style="color: #2d9574;">\"</span>nNOW3a%Y<span style="color: #2d9574;">\\</span>5F<span style="color: #3a81c3; font-weight: bold;">|</span>id}n*k<span style="color: #3a81c3; font-weight: bold;">&gt;</span>2:d<span style="color: #3a81c3; font-weight: bold;">&gt;</span>bhAvcA)QM%?<span style="color: #2d9574;">\\</span>Xe1A<span style="color: #2d9574;">\'</span><span style="color: #3a81c3; font-weight: bold;">&gt;</span>jp9FV*k*@Q(?NhDVT<span style="color: #2d9574;">\`</span>32j-YGEe?d<span style="color: #2d9574;">\\</span>Y+A@w/<span style="color: #2d9574;">\$</span>,EGL^!,w5Dr\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">x</span><span style="color: #3a81c3; font-weight: bold;">|</span>ncyr}<span style="color: #3a81c3; font-weight: bold;">|</span><span style="color: #2aa1ae; font-weight: bold;">Tt^+D.@?uAaHk8T~HZl8U0q</span>
+<pre class="src src-shell"><span style="color: #2aa1ae; font-weight: bold;">my_hdr</span> X-Face: *[<span style="color: #3a81c3; font-weight: bold;">&gt;</span>eDAPM?U?Cx<span style="color: #2d9574;">\$</span>/6HNmXzNCNhzKU<span style="color: #2d9574;">\#</span>:oG<span style="color: #2d9574;">\#</span>(lw!uh\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">7nMD</span>%<span style="color: #2d9574;">\$</span>{/<span style="color: #3a81c3; font-weight: bold;">&lt;</span>.wk(<span style="color: #3a81c3;">r</span>!3C(xNhV.EN!+uOUMq7]/H?Lk98rZl<span style="color: #2d9574;">\"</span>:690@*gjH@zEz{R\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">IuVJlhnlc</span>.0?*BJhGy5N]Fv9D)vv-~-6yg,<span style="color: #2d9574;">\\\$</span><span style="color: #715ab1;">lYpE</span>.<span style="color: #715ab1;">qk</span>=1FR!K1!3+Ec]L<span style="color: #2d9574;">\`</span>~eC,<span style="color: #715ab1;">m6bFeXJb</span>-=<span style="color: #2d9574;">\$</span><span style="color: #715ab1;">fWylGg3</span>+ALBb<span style="color: #2d9574;">\'</span>jhg1z8j7G?dT]@LIt,~LzO,v<span style="color: #2d9574;">\"</span>nNOW3a%Y<span style="color: #2d9574;">\\</span>5F<span style="color: #3a81c3; font-weight: bold;">|</span>id}n*k<span style="color: #3a81c3; font-weight: bold;">&gt;</span>2:d<span style="color: #3a81c3; font-weight: bold;">&gt;</span>bhAvcA)QM%?<span style="color: #2d9574;">\\</span>Xe1A<span style="color: #2d9574;">\'</span><span style="color: #3a81c3; font-weight: bold;">&gt;</span>jp9FV*k*@Q(?NhDVT<span style="color: #2d9574;">\`</span>32j-YGEe?d<span style="color: #2d9574;">\\</span>Y+A@w/<span style="color: #2d9574;">\$</span>,EGL^!,w5Dr\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">x</span><span style="color: #3a81c3; font-weight: bold;">|</span>ncyr}<span style="color: #3a81c3; font-weight: bold;">|</span><span style="color: #2aa1ae; font-weight: bold;">Tt^+D.@?uAaHk8T~HZl8U0q</span>
 </pre>
 </div>
 
@@ -497,7 +499,8 @@ Gentoo用户需要启用这些USE旗标：
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-08-13 Tue 14:59</p>
+<p class="author">Author: RadioNoiseE</p>
+<p class="date">Created: 2024-09-09 Mon 13:45</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

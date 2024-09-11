@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-09-02 Mon 17:22 -->
+<!-- 2024-09-09 Mon 13:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>现代DocBook环境构建</title>
+<meta name="author" content="RadioNoiseE" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -200,25 +201,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2d2d6e1">1. 简介</a></li>
-<li><a href="#org00309ed">2. 工具安装</a>
+<li><a href="#org52239f6">1. 简介</a></li>
+<li><a href="#org4a78c52">2. 工具安装</a>
 <ul>
-<li><a href="#org92757bf">2.1. SaxonC</a></li>
-<li><a href="#orgb723b84">2.2. xslTNG</a></li>
+<li><a href="#orga82e4c7">2.1. SaxonC</a></li>
+<li><a href="#org0eb28a2">2.2. xslTNG</a></li>
 </ul>
 </li>
-<li><a href="#org5aab7ff">3. 使用例</a></li>
-<li><a href="#org7e7d52c">4. 写在后面</a></li>
+<li><a href="#orgbf2a2d0">3. 使用例</a></li>
+<li><a href="#org2e3be68">4. 写在后面</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org2d2d6e1" class="outline-2">
-<h2 id="org2d2d6e1"><span class="section-number-2">1.</span> 简介</h2>
+<div id="outline-container-org52239f6" class="outline-2">
+<h2 id="org52239f6"><span class="section-number-2">1.</span> 简介</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-这篇介绍如何配置一个精简的现代DocBook编写环境。我们使用SaxonC和xslTNG。
-选取SaxonC是由于我不希望为了它搭建一个Java环境、而xslTNG则是很新很好的基于XSLT3.0的DocBook用XSL样表。
+这篇介绍如何配置一个精简的现代DocBook编写环境。我们使用SaxonC和xslTNG。选取SaxonC是由于我不希望为了它搭建一个Java环境、而xslTNG则是很新很好的基于XSLT3.0的DocBook用XSL样表。
 </p>
 
 <p>
@@ -227,20 +227,19 @@
 </div>
 </div>
 
-<div id="outline-container-org00309ed" class="outline-2">
-<h2 id="org00309ed"><span class="section-number-2">2.</span> 工具安装</h2>
+<div id="outline-container-org4a78c52" class="outline-2">
+<h2 id="org4a78c52"><span class="section-number-2">2.</span> 工具安装</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org92757bf" class="outline-3">
-<h3 id="org92757bf"><span class="section-number-3">2.1.</span> SaxonC</h3>
+<div id="outline-container-orga82e4c7" class="outline-3">
+<h3 id="orga82e4c7"><span class="section-number-3">2.1.</span> SaxonC</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-截至写作时，SaxonC的版本号为12.5。因为我穷，所以我使用的的是HE版本。
+截至写作时，SaxonC的版本号为12.5。因为我穷，所以我使用的是HE版本。
 </p>
 
 <p>
-首先从<a href="https://www.saxonica.com/download/c.xml"><code>https://www.saxonica.com/download/c.xml</code></a>下载你对应操作系统的安装包并解包。
-随后进入她并找到名为<code>libsaxon-hec</code>的动态链接库文件，将她移动到随便哪里（只要能用绝对路径表示并相对稳定即可）：
+首先从<a href="https://www.saxonica.com/download/c.xml"><code>https://www.saxonica.com/download/c.xml</code></a>下载你对应操作系统的安装包并解包。随后进入她并找到名为<code>libsaxon-hec</code>的动态链接库文件，将她移动到随便哪里（只要能用绝对路径表示并相对稳定即可）：
 </p>
 
 <div class="org-src-container">
@@ -271,8 +270,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgb723b84" class="outline-3">
-<h3 id="orgb723b84"><span class="section-number-3">2.2.</span> xslTNG</h3>
+<div id="outline-container-org0eb28a2" class="outline-3">
+<h3 id="org0eb28a2"><span class="section-number-3">2.2.</span> xslTNG</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 从<a href="https://github.com/docbook/xslTNG/releases/latest"><code>https://github.com/docbook/xslTNG/releases/latest</code></a>下载最新的release并解压。建议下<code>nosaxon</code>的。随便找个地方把它放好就行了。
@@ -281,8 +280,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5aab7ff" class="outline-2">
-<h2 id="org5aab7ff"><span class="section-number-2">3.</span> 使用例</h2>
+<div id="outline-container-orgbf2a2d0" class="outline-2">
+<h2 id="orgbf2a2d0"><span class="section-number-2">3.</span> 使用例</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 一个简单的例子：
@@ -334,8 +333,8 @@
 </div>
 </div>
 
-<div id="outline-container-org7e7d52c" class="outline-2">
-<h2 id="org7e7d52c"><span class="section-number-2">4.</span> 写在后面</h2>
+<div id="outline-container-org2e3be68" class="outline-2">
+<h2 id="org2e3be68"><span class="section-number-2">4.</span> 写在后面</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 没了。
@@ -344,7 +343,8 @@
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-09-02 Mon 17:22</p>
+<p class="author">Author: RadioNoiseE</p>
+<p class="date">Created: 2024-09-09 Mon 13:39</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
