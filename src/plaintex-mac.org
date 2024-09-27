@@ -1,6 +1,3 @@
-#+LATEX_COMPILER: lualatex
-#+LATEX_CLASS: smpl
-
 #+TITLE: Plain-TeX宏集
 
 * 介绍

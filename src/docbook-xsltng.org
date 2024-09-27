@@ -1,6 +1,3 @@
-#+LATEX_COMPILER: lualatex
-#+LATEX_CLASS: smpl
-
 #+TITLE: 现代DocBook环境构建
 
 * 简介

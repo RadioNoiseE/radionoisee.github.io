@@ -1,6 +1,3 @@
-#+LATEX_COMPILER: lualatex
-#+LATEX_CLASS: smpl
-
 #+TITLE: Linux下基于QEMU的纯净Android虚拟机（KVMとVirGL、小足印）
 
 * 写在前面

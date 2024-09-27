@@ -1,6 +1,3 @@
-#+LATEX_COMPILER: lualatex
-#+LATEX_CLASS: smpl
-
 #+TITLE: 2024年，用Mutt来处理邮件
 
 #+BEGIN_QUOTE

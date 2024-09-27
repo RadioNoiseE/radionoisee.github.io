@@ -1,6 +1,3 @@
-#+LATEX_COMPILER: lualatex
-#+LATEX_CLASS: smpl
-
 #+TITLE: Linux下字体渲染的优化
 
 * 生存策略

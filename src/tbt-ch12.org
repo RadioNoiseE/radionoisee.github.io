@@ -1,6 +1,3 @@
-#+LATEX_COMPILER: lualatex
-#+LATEX_CLASS: smpl
-
 #+TITLE: TeX by Topic第12章〈翻译〉
 
 * 摘要
