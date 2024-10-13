@@ -1,3 +1,5 @@
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style.css"/>
 #+TITLE: 现代DocBook环境构建
 
 * 简介

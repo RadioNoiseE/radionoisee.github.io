@@ -1,3 +1,5 @@
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style.css"/>
 #+TITLE: Plain-TeX宏集
 
 * 介绍
