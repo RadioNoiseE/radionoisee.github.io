@@ -1,5 +1,5 @@
 #+OPTIONS: html-style:nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css"/>
 #+TITLE: Linux下字体渲染的优化
 
 * 生存策略

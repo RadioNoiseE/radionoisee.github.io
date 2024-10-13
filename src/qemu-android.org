@@ -1,5 +1,5 @@
 #+OPTIONS: html-style:nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css"/>
 #+TITLE: Linux下基于QEMU的纯净Android虚拟机（KVMとVirGL、小足印）
 
 * 写在前面

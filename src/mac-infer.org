@@ -1,5 +1,5 @@
 #+OPTIONS: html-style:nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css"/>
 #+TITLE: 修正Facebook静态分析器Infer于无Homebrew之Mac
 
 * 前面
