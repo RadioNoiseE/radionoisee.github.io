@@ -1,15 +1,5 @@
-@font-face {
-    font-family: CJK-SF;
-    font-style: normal;
-    src: local('Source Han Serif'), local('Songti SC');
-    unicode-range: U+3026-3029, U+31C0-31EF, U+3400-4DBF, U+4E00-9FFF, U+20000-2A6DF, U+2B820-2CEA1, U+2CEB0-2EBE0, U+2EBF0-2EE5D, U+31350-323AF;
-}
-@font-face {
-    font-family: CJK-SS;
-    font-style: normal;
-    src: local('Source Han Sans'), local('Hiragino Sans CNS');
-    unicode-range: U+3026-3029, U+31C0-31EF, U+3400-4DBF, U+4E00-9FFF, U+20000-2A6DF, U+2B820-2CEA1, U+2CEB0-2EBE0, U+2EBF0-2EE5D, U+31350-323AF;
-}
+@import "font.css";
+
 body {
     font-family: CJK-SF, Palatino, serif;
 }
