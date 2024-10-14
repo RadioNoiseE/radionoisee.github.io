@@ -1,5 +1,5 @@
 #+OPTIONS: html-style:nil 
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css" />
 #+TITLE: TeX by Topic第12章〈翻译〉
 
 * 摘要

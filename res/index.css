@@ -23,15 +23,13 @@ h2 {
 }
 p {
     text-align: center;
-    font-size: 10px;
-    font-size-adjust: 0.46;
+    font-size: x-small;
 }
 #link-container {
     font-family: monospace;
 } a {
     text-decoration: none;
     color: #0066cc;
-    font-size: 12px;
     transition: background-color 0.3s ease;
 } a:hover {
     background-color: #f0f8ff;

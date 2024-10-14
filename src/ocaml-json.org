@@ -1,5 +1,5 @@
 #+OPTIONS: html-style:nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css" />
 #+TITLE: 用OCaml写JSON解析器
 
 * 写在前面
