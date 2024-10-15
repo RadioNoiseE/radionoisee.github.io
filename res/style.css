@@ -37,7 +37,7 @@ a {
 }
 
 .todo {
-    font-family: CJK-SS, LAT-MS;
+    font-family: LAT-MS;
     color: red;
 }
 
@@ -99,7 +99,7 @@ p.verse {
 }
 
 code {
-    font-family: CJK-SS, LAT-MS;
+    font-family: LAT-MS;
 }
 
 pre {
@@ -107,7 +107,7 @@ pre {
     border-radius: 3px;
     background-color: #f2f2f2;
     padding: 8pt;
-    font-family: CJK-SS, LAT-MS;
+    font-family: LAT-MS;
     overflow: auto;
     margin: 1.2em;
 }
