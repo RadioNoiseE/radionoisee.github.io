@@ -1,5 +1,16 @@
 @import "font.css";
 
+::selection {
+    color: white;
+    background-color: #6b5b95;
+}
+
+@media only screen and (min-width: 600px) {
+    h2, h3, h4, h5, h6 {
+        margin-left: -12px
+    }
+}
+
 body {
     font-family: CJK-SF, LAT-SF, serif;
 }
@@ -38,17 +49,17 @@ a {
 
 .todo {
     font-family: LAT-MS, monospace;
-    color: red;
+    color: #c94c4c;
 }
 
 h.done {
     font-family: LAT-MS, monospace;
-    color: green;
+    color: #618685;
 }
 
 .priority {
     font-family: LAT-MS, monospace;
-    color: orange;
+    color: #d96459;
 }
 
 .tag {
@@ -64,7 +75,7 @@ h.done {
 }
 
 .timestamp-kwd {
-    color: #5f9ea0;
+    color: #588c7e;
 }
 
 .org-right {
@@ -544,7 +555,7 @@ figcaption {
     padding: 10px;
     border: 2px solid gray;
     margin: 10px;
-    background: #ffffcc;
+    background: #f1e3dd;
 }
 
 #org-div-home-and-up {
