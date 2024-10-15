@@ -14,7 +14,7 @@
 
 #+CAPTION: 界面
 #+ATTR_HTML: :width 85%
-#+ATTR_HTML: :align center
+#+ATTR_HTML: :class img-center
 #+ATTR_HTML: :loading lazy
 [[../img/mutt-intro-01.png]]
 
@@ -121,7 +121,7 @@ $1 $n &>/dev/null &
  
 #+CAPTION: 预览PDF
 #+ATTR_HTML: :width 85%
-#+ATTR_HTML: :align center
+#+ATTR_HTML: :class img-center
 #+ATTR_HTML: :loading lazy
 [[../img/mutt-intro-02.png]]
 

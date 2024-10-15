@@ -12,7 +12,7 @@ Emacs的ModeLine[fn::https://www.emacswiki.org/emacs/ModeLine]作为一个常驻
 
 #+CAPTION: 最终效果
 #+ATTR_HTML: :width 85%
-#+ATTR_HTML: :align center
+#+ATTR_HTML: :class img-center
 #+ATTR_HTML: :loading lazy
 [[../img/emacs-modeline-01.png]]
 

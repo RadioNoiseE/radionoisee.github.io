@@ -17,4 +17,4 @@ Build using Emacs with alien technology. Recently migrated from XHTML 1.0 Strict
 
 This site archives my articles, and (at present) most of them are written in Mandarin Chinese. However, future articles may be written in English. You should be able to distinguish between them without pain from the entry names.
 
-I write about Emacs, DocBook XSLT, Unix tools, Gentoo Linux, Mach-O, C/C++, OCaML, PL, Formal Proof (Coq), Type Theory and PLT. Despite CS, I may also writes about {{{ruby(アニメ,Anime)}}} and Galgames.
+I write about Emacs, TeX, DocBook XSLT, Unix tools, Gentoo Linux, Mach-O, C/C++, OCaML, PL, Formal Proof (Coq), Type Theory and PLT. Despite CS, I may also writes about {{{ruby(アニメ,Anime)}}} and Galgames.

@@ -8,7 +8,7 @@
 
 #+CAPTION: 经济暑假作业
 #+ATTR_HTML: :width 85%
-#+ATTR_HTML: :align center
+#+ATTR_HTML: :class img-center
 #+ATTR_HTML: :loading lazy
 [[../img/plaintex-mac-01.png]]
 

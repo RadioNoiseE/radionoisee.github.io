@@ -7,6 +7,7 @@ body {
     color: #333;
     justify-content: center;
 }
+
 #content {
     max-width: 600px;
     margin: 70px auto;
@@ -15,28 +16,39 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     gap: 20px;
 }
+
 h2 {
     font-family: "Hiragino Mincho ProN", CJK-SF, serif;
     text-align: center;
     color: #333;
     font-size: 24px;
 }
+
 p {
     text-align: center;
     font-size: x-small;
 }
+
 #link-container {
     font-family: monospace;
-} a {
+}
+
+a {
     text-decoration: none;
     color: #0066cc;
     transition: background-color 0.3s ease;
-} a:hover {
+}
+
+a:hover {
     background-color: #f0f8ff;
 }
+
 .box {
     display: none;
 }
+
 @media only screen and (min-width: 600px) {
-    .de { display: block; }
+    .de {
+        display: block;
+    }
 }

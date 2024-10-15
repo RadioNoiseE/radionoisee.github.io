@@ -4,7 +4,7 @@
 
 #+CAPTION: 启动介面
 #+ATTR_HTML: :width 85%
-#+ATTR_HTML: :align center
+#+ATTR_HTML: :class img-center
 #+ATTR_HTML: :loading lazy
 [[../img/emacs-mac-01.png]]
 
@@ -42,7 +42,7 @@ M3的续航让我十分满意，于是我尝试在学校中使用她。
 
 #+CAPTION: 经济IA准备
 #+ATTR_HTML: :width 85%
-#+ATTR_HTML: :align center
+#+ATTR_HTML: :class img-center
 #+ATTR_HTML: :loading lazy
 [[../img/emacs-mac-02.png]]
 
@@ -53,7 +53,7 @@ M3的续航让我十分满意，于是我尝试在学校中使用她。
 
 #+CAPTION: 帮社团开发MD2TeX4PDF
 #+ATTR_HTML: :width 85%
-#+ATTR_HTML: :align center
+#+ATTR_HTML: :class img-center
 #+ATTR_HTML: :loading lazy
 [[../img/emacs-mac-03.png]]
 

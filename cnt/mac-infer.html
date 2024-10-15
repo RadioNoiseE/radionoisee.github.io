@@ -1,56 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-13 Sun 18:31 -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Apple macOS version 5.8.0">
+<!-- 2024-10-15 Tue 08:07 -->
+<meta charset="utf-8">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1">
 <title>修正Facebook静态分析器Infer于无Homebrew之Mac</title>
-<meta name="author" content="RadioNoiseE" />
-<meta name="generator" content="Org Mode" />
-<link rel="stylesheet" type="text/css" href="../res/style.css" />
+<meta name="author" content="RadioNoiseE">
+<meta name="generator" content="Org Mode">
+<link rel="stylesheet" type="text/css" href="../res/style.css">
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">修正Facebook静态分析器Infer于无Homebrew之Mac</h1>
-</header><nav id="table-of-contents" role="doc-toc">
+</header>
+<nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb38f99e">1. 前面</a></li>
-<li><a href="#org1983537">2. 修正</a></li>
-<li><a href="#org490dcf3">3. 成果</a></li>
-<li><a href="#orgd6a4887">4. Mac上包管理器现状</a></li>
+<li><a href="#orgbde73c6">1. 前面</a></li>
+<li><a href="#org0320901">2. 修正</a></li>
+<li><a href="#org18e7f99">3. 成果</a></li>
+<li><a href="#orgf5bc6a6">4. Mac上包管理器现状</a></li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-orgb38f99e" class="outline-2">
-<h2 id="orgb38f99e"><span class="section-number-2">1.</span> 前面</h2>
+<div id="outline-container-orgbde73c6" class="outline-2">
+<h2 id="orgbde73c6"><span class="section-number-2">1.</span>
+前面</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-显然，因为显而易见的许多理由，我不希望从源码开始构建Infer（一个静态分析工具）。但是当我们使用从Release中荡下来的二进制时，由于是基于Homebrew构建的，会出现以下报错：
-</p>
-
+显然，因为显而易见的许多理由，我不希望从源码开始构建Infer（一个静态分析工具）。但是当我们使用从Release中荡下来的二进制时，由于是基于Homebrew构建的，会出现以下报错：</p>
 <pre class="example">
 dyld[23826]: Library not loaded: /opt/homebrew/opt/gmp/lib/libgmp.10.dylib
   Referenced from: &lt;B33F0A38-F79B-31A8-A056-2225DACE56DC&gt; /Users/rne/Downloads/infer-osx-arm64-v1.2.0/lib/infer/infer/bin/infer
   Reason: tried: '/opt/homebrew/opt/gmp/lib/libgmp.10.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/opt/gmp/lib/libgmp.10.dylib' (no such file), '/opt/homebrew/opt/gmp/lib/libgmp.10.dylib' (no such file)
 </pre>
-
-<p>
-于是我们修正它，并且就Homebrew展开讨论。
-</p>
+<p>于是我们修正它，并且就Homebrew展开讨论。</p>
 </div>
 </div>
-
-<div id="outline-container-org1983537" class="outline-2">
-<h2 id="org1983537"><span class="section-number-2">2.</span> 修正</h2>
+<div id="outline-container-org0320901" class="outline-2">
+<h2 id="org0320901"><span class="section-number-2">2.</span>
+修正</h2>
 <div class="outline-text-2" id="text-2">
-<p>
-首先使用<code>otool</code>检查：
-</p>
-
+<p>首先使用<code>otool</code>检查：</p>
 <pre class="example">
 infer-osx-arm64-v1.2.0 % otool -L bin/infer        
 bin/infer:
@@ -59,84 +55,83 @@ bin/infer:
         /usr/lib/libsqlite3.dylib (compatibility version 9.0.0, current version 349.1.0)
         /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1336.0.0)
 </pre>
-
 <p>
-第一反应是用<code>patchelf</code>，但是随后发现似乎不能应用修改到Mach-O的二进制。搜索发现了<code>install_name_tool</code>，问题简单了，修改其<code>install_name</code>即可。
-</p>
-
+第一反应是用<code>patchelf</code>，但是随后发现似乎不能应用修改到Mach-O的二进制。搜索发现了<code>install_name_tool</code>，问题简单了，修改其<code>install_name</code>即可。</p>
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #2aa1ae; font-weight: bold;">sudo</span> install_name_tool <span style="color: #4e3163;">-change</span> /opt/homebrew/opt/gmp/lib/libgmp.10.dylib /opt/local/lib/libgmp.10.dylib <span style="color: #3a81c3; font-weight: bold;">$(</span><span style="color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">which</span><span style="color: #655370; background-color: #fbf8ef;"> infer</span><span style="color: #3a81c3; font-weight: bold;">)</span>
-</pre>
-</div>
-
+<pre class="src src-shell">sudo install_name_tool <span style=
+"color: #008b8b;">-change</span> /opt/homebrew/opt/gmp/lib/libgmp.10.dylib /opt/local/lib/libgmp.10.dylib <span style="color: #a020f0;">$(</span>which infer<span style="color: #a020f0;">)</span>
+</pre></div>
 <p>
-随后根据更多的报错去修改各个组件，如<code>/lib/infer/facebook-clang-plugins/clang/install/[bin|lib]</code>下面的东西。
-</p>
-
-<p>
-最终，只要你足够有耐心，你就会得到一个最终能够正常工作的Infer。
-</p>
+随后根据更多的报错去修改各个组件，如<code>/lib/infer/facebook-clang-plugins/clang/install/[bin|lib]</code>下面的东西。</p>
+<p>最终，只要你足够有耐心，你就会得到一个最终能够正常工作的Infer。</p>
 </div>
 </div>
-
-<div id="outline-container-org490dcf3" class="outline-2">
-<h2 id="org490dcf3"><span class="section-number-2">3.</span> 成果</h2>
+<div id="outline-container-org18e7f99" class="outline-2">
+<h2 id="org18e7f99"><span class="section-number-2">3.</span>
+成果</h2>
 <div class="outline-text-2" id="text-3">
-
-<figure id="orgc09e5d7">
-<img src="../img/mac-infer-01.png" alt="mac-infer-01.png" loading="lazy" align="center" width="85%">
-
-<figcaption><span class="figure-number">Figure 1: </span>分析</figcaption>
+<figure id="orgfc1cdfc"><img src="../img/mac-infer-01.png" alt=
+"mac-infer-01.png" loading="lazy" class="img-center" width="85%">
+<figcaption><span class="figure-number">Figure 1:</span>
+分析</figcaption>
 </figure>
-
-<p>
-我还写了一个Emacs中FlyCheck的支持，大概像这样：
-</p>
-
+<p>我还写了一个Emacs中FlyCheck的支持，大概像这样：</p>
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #3a81c3; font-weight: bold;">use-package</span> <span style="color: #4e3163;">flycheck</span>
-  <span style="color: #3a81c3;">:defer</span> t
-  <span style="color: #3a81c3;">:config</span> (<span style="color: #3a81c3; font-weight: bold;">flycheck-define-checker</span> c/c++-infer
-            <span style="color: #da8b55;">"A C/C++ syntax checker using Facebook infer."</span>
-            <span style="color: #3a81c3;">:command</span> (<span style="color: #2d9574;">"infer"</span> <span style="color: #2d9574;">"run"</span> <span style="color: #2d9574;">"--no-progress-bar"</span> <span style="color: #2d9574;">"--"</span>
-                      (eval (<span style="color: #3a81c3; font-weight: bold;">pcase</span> major-mode
-                              ((<span style="color: #3a81c3; font-weight: bold;">or</span> `c++-mode `c++-ts-mode) <span style="color: #2d9574;">"clang++"</span>)
-                              ((<span style="color: #3a81c3; font-weight: bold;">or</span> `c-mode `c-ts-mode) <span style="color: #2d9574;">"clang"</span>)))
-                      <span style="color: #2d9574;">"-c"</span> source
-                      <span style="color: #2d9574;">"-iquote"</span> (eval (flycheck-c/c++-quoted-include-directory)))
-            <span style="color: #3a81c3;">:error-patterns</span> ((<span style="color: #dc752f; background-color: #fbf8ef;">error</span> line-start (file-name) <span style="color: #2d9574;">":"</span> line <span style="color: #2d9574;">": error: "</span> (message) line-end))
-            <span style="color: #3a81c3;">:modes</span> (c-mode c++-mode c-ts-mode c++-ts-mode))
-  <span style="color: #3a81c3;">:custom</span> (flycheck-checkers '(c/c++-infer emacs-lisp opam)))
-</pre>
+<pre class="src src-elisp">(<span style=
+"color: #a020f0;">use-package</span> flycheck
+  <span style="color: #483d8b;">:defer</span> t
+  <span style="color: #483d8b;">:config</span> (<span style=
+"color: #a020f0;">flycheck-define-checker</span> c/c++-infer
+            <span style=
+"color: #8b2252;">"A C/C++ syntax checker using Facebook infer."</span>
+            <span style=
+"color: #483d8b;">:command</span> (<span style=
+"color: #8b2252;">"infer"</span> <span style=
+"color: #8b2252;">"run"</span> <span style=
+"color: #8b2252;">"--no-progress-bar"</span> <span style=
+"color: #8b2252;">"--"</span>
+                      (eval (<span style=
+"color: #a020f0;">pcase</span> major-mode
+                              ((<span style=
+"color: #a020f0;">or</span> `c++-mode `c++-ts-mode) <span style=
+"color: #8b2252;">"clang++"</span>)
+                              ((<span style=
+"color: #a020f0;">or</span> `c-mode `c-ts-mode) <span style=
+"color: #8b2252;">"clang"</span>)))
+                      <span style=
+"color: #8b2252;">"-c"</span> source
+                      <span style=
+"color: #8b2252;">"-iquote"</span> (eval (flycheck-c/c++-quoted-include-directory)))
+            <span style=
+"color: #483d8b;">:error-patterns</span> ((<span style=
+"color: #ff0000;">error</span> line-start (file-name) <span style=
+"color: #8b2252;">":"</span> line <span style=
+"color: #8b2252;">": error: "</span> (message) line-end))
+            <span style=
+"color: #483d8b;">:modes</span> (c-mode c++-mode c-ts-mode c++-ts-mode))
+  <span style=
+"color: #483d8b;">:custom</span> (flycheck-checkers '(c/c++-infer emacs-lisp opam)))
+</pre></div>
 </div>
 </div>
-</div>
-
-<div id="outline-container-orgd6a4887" class="outline-2">
-<h2 id="orgd6a4887"><span class="section-number-2">4.</span> Mac上包管理器现状</h2>
+<div id="outline-container-orgf5bc6a6" class="outline-2">
+<h2 id="orgf5bc6a6"><span class="section-number-2">4.</span>
+Mac上包管理器现状</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-不知到从什么时候开始，Homebrew开始成为了MacOS上包管理器defacto的标准，而每一个日常操作都可能会因为你没有使用Homebrew而出现问题，比如之前使用opam安装Coq依赖之一的<code>gmp-ocaml</code>时因为只寻找Homebrew路径而无法完成编译。
-</p>
-
+不知到从什么时候开始，Homebrew开始成为了MacOS上包管理器defacto的标准，而每一个日常操作都可能会因为你没有使用Homebrew而出现问题，比如之前使用opam安装Coq依赖之一的<code>gmp-ocaml</code>时因为只寻找Homebrew路径而无法完成编译。</p>
 <p>
-解决方法是使用<code>pkg-config</code>查询对应路径，再注入<code>$CPATH</code>环境变量。我实在是无法想像opam这样的包管理器会仅仅考虑Homebrew的情况，而甚至都不尝试从<code>pkg-config</code>查询。
-</p>
-
-<p>
-再比如你需要从源码构建软件，很多宣称支持Mac的软件会在安装脚本中写死用Homebrew安装软件的逻辑。
-</p>
-
-<p>
-我个人认为这是一种极其不健康的软件生态，但是我很怀疑这种现状能否有改善。
-</p>
+解决方法是使用<code>pkg-config</code>查询对应路径，再注入<code>$CPATH</code>环境变量。我实在是无法想像opam这样的包管理器会仅仅考虑Homebrew的情况，而甚至都不尝试从<code>pkg-config</code>查询。</p>
+<p>再比如你需要从源码构建软件，很多宣称支持Mac的软件会在安装脚本中写死用Homebrew安装软件的逻辑。</p>
+<p>我个人认为这是一种极其不健康的软件生态，但是我很怀疑这种现状能否有改善。</p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: RadioNoiseE</p>
-<p class="date">Created: 2024-10-13 Sun 18:31</p>
-<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2024-10-15 Tue 08:07</p>
+<p class="validation"><a href=
+"https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive RNE</title>
-    <link rel="stylesheet" type="text/css" href="./res/index.css" />
-  </head>
-  <body>
-    <div id="content" class="content">
-      <h2>Content Directory Listing</h2>
-      <ul id="link-container">
-      </ul>
-      <script>
+<head>
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Apple macOS version 5.8.0">
+<meta charset="UTF-8">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1.0">
+<title>Archive RNE</title>
+<link rel="stylesheet" type="text/css" href="./res/index.css">
+</head>
+<body>
+<div id="content" class="content">
+<h2>Content Directory Listing</h2>
+<ul id="link-container"></ul>
+<script>
         document.addEventListener('DOMContentLoaded', function() {
           const container = document.getElementById('link-container');    
           fetch(`https://api.github.com/repos/RadioNoiseE/radionoisee.github.io/contents/cnt`)
@@ -33,7 +35,6 @@
               const errorText = document.createElement('p');
               errorText.textContent = 'Failed to load content directory.';
               container.appendChild(errorText); }); });
-      </script>
-    </div>
-  </body>
+</script></div>
+</body>
 </html>
