@@ -1,7 +1,7 @@
 @import "font.css";
 
 body {
-    font-family: CJK-SF, Palatino, serif;
+    font-family: CJK-SF, LAT-SF;
 }
 
 #content {
@@ -10,13 +10,14 @@ body {
 }
 
 .title {
-    font-family: CJK-SS, Geneva, sans-serif;
+    font-family: CJK-SF, LAT-SF;
     text-align: center;
+    font-weight: bold;
     margin-bottom: .2em;
 }
 
 .subtitle {
-    font-family: CJK-SS, Geneva, sans-serif;
+    font-family: CJK-SF, LAT-SF;
     text-align: center;
     font-size: medium;
     font-weight: bold;
@@ -36,23 +37,23 @@ a {
 }
 
 .todo {
-    font-family: monospace;
+    font-family: CJK-SS, LAT-MS;
     color: red;
 }
 
 h.done {
-    font-family: monospace;
+    font-family: LAT-MS;
     color: green;
 }
 
 .priority {
-    font-family: monospace;
+    font-family: LAT-MS;
     color: orange;
 }
 
 .tag {
     background-color: #eee;
-    font-family: monospace;
+    font-family: LAT-MS;
     padding: 2px;
     font-size: 80%;
     font-weight: normal;
@@ -97,12 +98,16 @@ p.verse {
     margin-left: 3%;
 }
 
+code {
+    font-family: CJK-SS, LAT-MS;
+}
+
 pre {
     border: 1px solid #e6e6e6;
     border-radius: 3px;
     background-color: #f2f2f2;
     padding: 8pt;
-    font-family: monospace;
+    font-family: CJK-SS, LAT-MS;
     overflow: auto;
     margin: 1.2em;
 }
