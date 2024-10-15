@@ -1,7 +1,7 @@
 @import "font.css";
 
 body {
-    font-family: CJK-SF, LAT-SF;
+    font-family: CJK-SF, LAT-SF, serif;
 }
 
 #content {
@@ -10,14 +10,14 @@ body {
 }
 
 .title {
-    font-family: CJK-SF, LAT-SF;
+    font-family: CJK-SF, LAT-SF, serif;
     text-align: center;
     font-weight: bold;
     margin-bottom: .2em;
 }
 
 .subtitle {
-    font-family: CJK-SF, LAT-SF;
+    font-family: CJK-SF, LAT-SF, serif;
     text-align: center;
     font-size: medium;
     font-weight: bold;
@@ -37,23 +37,23 @@ a {
 }
 
 .todo {
-    font-family: LAT-MS;
+    font-family: LAT-MS, monospace;
     color: red;
 }
 
 h.done {
-    font-family: LAT-MS;
+    font-family: LAT-MS, monospace;
     color: green;
 }
 
 .priority {
-    font-family: LAT-MS;
+    font-family: LAT-MS, monospace;
     color: orange;
 }
 
 .tag {
     background-color: #eee;
-    font-family: LAT-MS;
+    font-family: LAT-MS, monospace;
     padding: 2px;
     font-size: 80%;
     font-weight: normal;
@@ -99,7 +99,7 @@ p.verse {
 }
 
 code {
-    font-family: LAT-MS;
+    font-family: LAT-MS, monospace;
 }
 
 pre {
@@ -107,7 +107,7 @@ pre {
     border-radius: 3px;
     background-color: #f2f2f2;
     padding: 8pt;
-    font-family: LAT-MS;
+    font-family: LAT-MS, monospace;
     overflow: auto;
     margin: 1.2em;
 }
