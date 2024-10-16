@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content=
 "HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-<!-- 2024-10-15 Tue 08:07 -->
+<!-- 2024-10-16 Wed 08:03 -->
 <meta charset="utf-8">
 <meta name="viewport" content=
 "width=device-width, initial-scale=1">
@@ -21,22 +21,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2bed424">1. 写在前面</a></li>
-<li><a href="#org1fd4d75">2. 安装</a></li>
-<li><a href="#orgeba5d22">3. 配置</a>
+<li><a href="#org21eb5a5">1. 写在前面</a></li>
+<li><a href="#org0c7e563">2. 安装</a></li>
+<li><a href="#orgea1c2d1">3. 配置</a>
 <ul>
-<li><a href="#org7e4aac7">3.1. 接收邮件</a></li>
-<li><a href="#org078c33c">3.2. 发送邮件</a></li>
-<li><a href="#org55c5a19">3.3. MIME</a>
+<li><a href="#org5fab1a6">3.1. 接收邮件</a></li>
+<li><a href="#org6b87df8">3.2. 发送邮件</a></li>
+<li><a href="#org7768ff7">3.3. MIME</a>
 <ul>
-<li><a href="#org627dab2">3.3.1. HTML邮件</a></li>
-<li><a href="#org5957395">3.3.2. 其他格式</a></li>
+<li><a href="#org36f3762">3.3.1. HTML邮件</a></li>
+<li><a href="#org0b87a0d">3.3.2. 其他格式</a></li>
 </ul>
 </li>
-<li><a href="#org7c6abc6">3.4. 优化</a></li>
+<li><a href="#orgdcf15a4">3.4. 优化</a></li>
 </ul>
 </li>
-<li><a href="#orgd169186">4. 最后</a></li>
+<li><a href="#org1f6e596">4. 最后</a></li>
 </ul>
 </div>
 </nav>
@@ -44,23 +44,23 @@
 <p>“All mail clients suck. This one just sucks less.” — Michael
 Elkins, circa 1995</p>
 </blockquote>
-<div id="outline-container-org2bed424" class="outline-2">
-<h2 id="org2bed424"><span class="section-number-2">1.</span>
+<div id="outline-container-org21eb5a5" class="outline-2">
+<h2 id="org21eb5a5"><span class="section-number-2">1.</span>
 写在前面</h2>
 <div class="outline-text-2" id="text-1">
 <p>处理邮件，我之前一直用的是ThunderBird，所谓「Mozilla's solution to mail
 client」。它的界面很好看，然而真的很重，而且当发送的邮件中有尺寸较大的附件时的体验一直很差，会一直卡着。直到三天前，我用它接收一个使用邮件传送的9MiB的附件时，它的进度蓝条卡了半个小时还没将页面加载出来，同时还把切换其他信息的动作卡住了。这时我才真正意识到了什么叫「All
 mail clients suck」，并打算换一个；试了试号称「sucks
 less」的Mutt，感觉情况的确比之前有较大改善。</p>
-<figure id="orgdbf35bf"><img src="../img/mutt-intro-01.png" alt=
+<figure id="org72a83eb"><img src="../img/mutt-intro-01.png" alt=
 "mutt-intro-01.png" loading="lazy" class="img-center" width="85%">
 <figcaption><span class="figure-number">Figure 1:</span>
 界面</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org1fd4d75" class="outline-2">
-<h2 id="org1fd4d75"><span class="section-number-2">2.</span>
+<div id="outline-container-org0c7e563" class="outline-2">
+<h2 id="org0c7e563"><span class="section-number-2">2.</span>
 安装</h2>
 <div class="outline-text-2" id="text-2">
 <p>Gentoo用户需要启用这些USE旗标：</p>
@@ -76,81 +76,94 @@ less」的Mutt，感觉情况的确比之前有较大改善。</p>
 其中，<code>lmdb</code>和<code>hcache</code>是头字段缓存，可选。<code>smtp</code>和<code>imap</code>是其支持的两种协议，你需要查阅文档看一下你的邮件服务供应商支持什么协议；<code>ssl</code>同理。至于<code>slang</code>是一个TUI框架，我只是想试试，你可以保持默认。</p>
 </div>
 </div>
-<div id="outline-container-orgeba5d22" class="outline-2">
-<h2 id="orgeba5d22"><span class="section-number-2">3.</span>
+<div id="outline-container-orgea1c2d1" class="outline-2">
+<h2 id="orgea1c2d1"><span class="section-number-2">3.</span>
 配置</h2>
 <div class="outline-text-2" id="text-3"></div>
-<div id="outline-container-org7e4aac7" class="outline-3">
-<h3 id="org7e4aac7"><span class="section-number-3">3.1.</span>
+<div id="outline-container-org5fab1a6" class="outline-3">
+<h3 id="org5fab1a6"><span class="section-number-3">3.1.</span>
 接收邮件</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 因为我使用iCloud邮箱，故使用的是<code>imap</code>协议。于<code>~/.config/mutt/muttrc</code>下创建配置文件，并添加如下：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #a020f0;">unset</span> imap_passive
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">mail_check</span> = 60
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">imap_keepalive</span> = 300
+"color: #3a81c3; font-weight: bold;">unset</span> <span style=
+"color: #4e3163; font-style: italic;">imap_passive</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">mail_check</span> = 60
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">imap_keepalive</span> = 300
 </pre></div>
 <p>上面控制其行为准则。</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> <span style=
-"color: #a0522d;">realname</span> = <span style=
-"color: #8b2252;">"{NAME}"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">imap_user</span> = <span style=
-"color: #8b2252;">"{USER}"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">imap_pass</span> = <span style=
-"color: #8b2252;">"{PASSWD}"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">from</span> = <span style=
-"color: #8b2252;">"{EADDR}"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">folder</span> = <span style=
-"color: #8b2252;">"imaps://{USER}@imap.mail.me.com:{PORT}/"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">spoolfile</span> = <span style=
-"color: #8b2252;">"+Inbox"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">postponed</span> = <span style=
-"color: #8b2252;">"+Drafts"</span>
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">realname</span> = <span style=
+"color: #2d9574;">"{NAME}"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">imap_user</span> = <span style=
+"color: #2d9574;">"{USER}"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">imap_pass</span> = <span style=
+"color: #2d9574;">"{PASSWD}"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">from</span> = <span style=
+"color: #2d9574;">"{EADDR}"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">folder</span> = <span style=
+"color: #2d9574;">"imaps://{USER}@imap.mail.me.com:{PORT}/"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">spoolfile</span> = <span style=
+"color: #2d9574;">"+Inbox"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">postponed</span> = <span style=
+"color: #2d9574;">"+Drafts"</span>
 </pre></div>
 <p>需根据你的邮箱服务供应商而定。比如iCloud，你需要生成一个app-specific的密码。</p>
 </div>
 </div>
-<div id="outline-container-org078c33c" class="outline-3">
-<h3 id="org078c33c"><span class="section-number-3">3.2.</span>
+<div id="outline-container-org6b87df8" class="outline-3">
+<h3 id="org6b87df8"><span class="section-number-3">3.2.</span>
 发送邮件</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>一般使用<code>smtp</code>协议。如下：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> <span style=
-"color: #a0522d;">smtp_url</span> = <span style=
-"color: #8b2252;">"smtp://{USER}@smtp.mail.me.com:{PORT}/"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">smtp_pass</span> = <span style=
-"color: #a020f0;">$</span>imap_pass
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">ssl_force_tls</span> = yes
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">record</span> = <span style=
-"color: #8b2252;">"+Sent Messages"</span>
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">smtp_url</span> = <span style=
+"color: #2d9574;">"smtp://{USER}@smtp.mail.me.com:{PORT}/"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">smtp_pass</span> = <span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">imap_pass</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">ssl_force_tls</span> = yes
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">record</span> = <span style=
+"color: #2d9574;">"+Sent Messages"</span>
 </pre></div>
 </div>
 </div>
-<div id="outline-container-org55c5a19" class="outline-3">
-<h3 id="org55c5a19"><span class="section-number-3">3.3.</span>
+<div id="outline-container-org7768ff7" class="outline-3">
+<h3 id="org7768ff7"><span class="section-number-3">3.3.</span>
 MIME</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>邮件里经常会夹带各种奇奇怪怪的附件，而对这些附件的处理正是Mutt做的不错而ThunderBird略有不足之处。</p>
 </div>
-<div id="outline-container-org627dab2" class="outline-4">
-<h4 id="org627dab2"><span class="section-number-4">3.3.1.</span>
+<div id="outline-container-org36f3762" class="outline-4">
+<h4 id="org36f3762"><span class="section-number-4">3.3.1.</span>
 HTML邮件</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
@@ -159,24 +172,27 @@ HTML邮件</h4>
 它自己只负责接受邮件，而将HTML渲染则是外部程序的事情。它可以使用一切程序，但常见的有lynx和w3m。这里使用w3m，因为它在我的系统上已经被安装了。</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> <span style=
-"color: #a0522d;">mailcap_path</span> = <span style=
-"color: #8b2252;">"~/.config/mutt/mailcap"</span>
-auto_view text/html
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">mailcap_path</span> = <span style=
+"color: #2d9574;">"~/.config/mutt/mailcap"</span>
+<span style=
+"color: #2aa1ae; font-weight: bold;">auto_view</span> text/html
 </pre></div>
 <p>随后我们创建负责MIME的配置文件，路径与上面<code>mailcap_path</code>指定的一致，添加：</p>
 <div class="org-src-container">
-<pre class="src src-shell">text/html<span style=
-"color: #a020f0;">;</span> w3m <span style=
-"color: #008b8b;">-I</span> %{charset} <span style=
-"color: #008b8b;">-T</span> text/html<span style=
-"color: #a020f0;">;</span> copiousoutput<span style=
-"color: #a020f0;">;</span>
+<pre class="src src-shell"><span style=
+"color: #2aa1ae; font-weight: bold;">text/html</span><span style=
+"color: #3a81c3; font-weight: bold;">;</span> <span style=
+"color: #2aa1ae; font-weight: bold;">w3m</span> <span style=
+"color: #4e3163;">-I</span> %{charset} <span style=
+"color: #4e3163;">-T</span> text/html<span style=
+"color: #3a81c3; font-weight: bold;">;</span> <span style=
+"color: #2aa1ae; font-weight: bold;">copiousoutput</span><span style="color: #3a81c3; font-weight: bold;">;</span>
 </pre></div>
 </div>
 </div>
-<div id="outline-container-org5957395" class="outline-4">
-<h4 id="org5957395"><span class="section-number-4">3.3.2.</span>
+<div id="outline-container-org0b87a0d" class="outline-4">
+<h4 id="org0b87a0d"><span class="section-number-4">3.3.2.</span>
 其他格式</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
@@ -184,39 +200,57 @@ auto_view text/html
 <p>明白问题后就不难解决。我们只需要将这个要预览的文件复制以下即可。创建如下脚本：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #b22222;">#!/bin/</span><span style=
-"color: #a020f0;">sh</span>
+"color: #a49da5; font-style: italic;">#!/bin/</span><span style=
+"color: #3a81c3; font-weight: bold;">sh</span>
 
-<span style="color: #a0522d;">t</span>=/tmp/muttach
-mkdir <span style="color: #008b8b;">-p</span> <span style=
-"color: #a020f0;">$</span>t
-<span style="color: #a0522d;">f</span>=<span style=
-"color: #a020f0;">`</span>basename <span style=
-"color: #a020f0;">$</span>2<span style="color: #a020f0;">`</span>
-<span style="color: #a0522d;">n</span>=<span style=
-"color: #a020f0;">$</span>t/<span style="color: #a020f0;">$</span>f
+<span style=
+"color: #715ab1; font-style: italic;">t</span>=/tmp/muttach
+<span style=
+"color: #2aa1ae; font-weight: bold;">mkdir</span> <span style=
+"color: #4e3163;">-p</span> <span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">t</span>
+<span style=
+"color: #715ab1; font-style: italic;">f</span>=<span style=
+"color: #3a81c3; font-weight: bold;">`</span><span style=
+"color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">basename</span><span style="color: #655370; background-color: #fbf8ef;"> </span><span style="color: #3a81c3; background-color: #fbf8ef; font-weight: bold;">$</span><span style="color: #4e3163; background-color: #fbf8ef; font-style: italic;">2</span><span style="color: #3a81c3; font-weight: bold;">`</span>
+<span style=
+"color: #715ab1; font-style: italic;">n</span>=<span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">t</span>/<span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">f</span>
 
-cp <span style="color: #a020f0;">$</span>2 <span style=
-"color: #a020f0;">$</span>n
-<span style="color: #a020f0;">$</span>1 <span style=
-"color: #a020f0;">$</span>n &amp;&gt;/dev/null &
+<span style=
+"color: #2aa1ae; font-weight: bold;">cp</span> <span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">2</span> <span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">n</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">1</span> <span style=
+"color: #3a81c3; font-weight: bold;">$</span><span style=
+"color: #4e3163; font-style: italic;">n</span> &amp;&gt;/dev/null &
 </pre></div>
 <p>将它放入<code>$PATH</code>后，即可在<code>mailcap</code>中如此使用：</p>
 <div class="org-src-container">
-<pre class="src src-shell">application/pdf<span style=
-"color: #a020f0;">;</span> muttach gv %s<span style=
-"color: #a020f0;">;</span>
-image/*<span style=
-"color: #a020f0;">;</span> muttach imv %s<span style=
-"color: #a020f0;">;</span>
-audio/*<span style=
-"color: #a020f0;">;</span> muttach mpv %s<span style=
-"color: #a020f0;">;</span>
-video/*<span style=
-"color: #a020f0;">;</span> muttach mpv %s<span style=
-"color: #a020f0;">;</span>
+<pre class="src src-shell"><span style=
+"color: #2aa1ae; font-weight: bold;">application/pdf</span><span style="color: #3a81c3; font-weight: bold;">;</span> <span style="color: #2aa1ae; font-weight: bold;">muttach</span> gv %s<span style="color: #3a81c3; font-weight: bold;">;</span>
+<span style=
+"color: #2aa1ae; font-weight: bold;">image/*</span><span style=
+"color: #3a81c3; font-weight: bold;">;</span> <span style=
+"color: #2aa1ae; font-weight: bold;">muttach</span> imv %s<span style="color: #3a81c3; font-weight: bold;">;</span>
+<span style=
+"color: #2aa1ae; font-weight: bold;">audio/*</span><span style=
+"color: #3a81c3; font-weight: bold;">;</span> <span style=
+"color: #2aa1ae; font-weight: bold;">muttach</span> mpv %s<span style="color: #3a81c3; font-weight: bold;">;</span>
+<span style=
+"color: #2aa1ae; font-weight: bold;">video/*</span><span style=
+"color: #3a81c3; font-weight: bold;">;</span> <span style=
+"color: #2aa1ae; font-weight: bold;">muttach</span> mpv %s<span style="color: #3a81c3; font-weight: bold;">;</span>
 </pre></div>
-<figure id="org2b0735f"><img src="../img/mutt-intro-02.png" alt=
+<figure id="orgfa77892"><img src="../img/mutt-intro-02.png" alt=
 "mutt-intro-02.png" loading="lazy" class="img-center" width="85%">
 <figcaption><span class="figure-number">Figure 2:</span>
 预览PDF</figcaption>
@@ -224,88 +258,82 @@ video/*<span style=
 </div>
 </div>
 </div>
-<div id="outline-container-org7c6abc6" class="outline-3">
-<h3 id="org7c6abc6"><span class="section-number-3">3.4.</span>
+<div id="outline-container-orgdcf15a4" class="outline-3">
+<h3 id="orgdcf15a4"><span class="section-number-3">3.4.</span>
 优化</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>默认的Headers很多，大概率我们不需要看到那些，于是我们：</p>
 <div class="org-src-container">
-<pre class="src src-shell">ignore          *
-unignore        From To Cc Bcc Date Subject X-face
-unhdr_order     *
-hdr_order       From: To: Cc: Bcc: Date: Subject: X-Face:
+<pre class="src src-shell"><span style=
+"color: #2aa1ae; font-weight: bold;">ignore</span>          *
+<span style=
+"color: #2aa1ae; font-weight: bold;">unignore</span>        From To Cc Bcc Date Subject X-face
+<span style=
+"color: #2aa1ae; font-weight: bold;">unhdr_order</span>     *
+<span style=
+"color: #2aa1ae; font-weight: bold;">hdr_order</span>       From: To: Cc: Bcc: Date: Subject: X-Face:
 </pre></div>
 <p>为了加快响应速度，我们缓存：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> <span style=
-"color: #a0522d;">header_cache</span> = <span style=
-"color: #8b2252;">"/var/tmp/mutt"</span>
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">message_cachedir</span> = <span style=
-"color: #8b2252;">"/var/tmp/mutt"</span>
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">header_cache</span> = <span style=
+"color: #2d9574;">"/var/tmp/mutt"</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">message_cachedir</span> = <span style=
+"color: #2d9574;">"/var/tmp/mutt"</span>
 </pre></div>
 <p>我们启用侧边栏：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> <span style=
-"color: #a0522d;">sidebar_visible</span> = yes
-<span style="color: #483d8b;">set</span> <span style=
-"color: #a0522d;">sidebar_sort_method</span> = alpha
-<span style="color: #483d8b;">bind</span> index,pager <span style=
-"color: #a020f0;">&lt;</span>Esc<span style=
-"color: #a020f0;">&gt;</span>k sidebar-prev
-<span style="color: #483d8b;">bind</span> index,pager <span style=
-"color: #a020f0;">&lt;</span>Esc<span style=
-"color: #a020f0;">&gt;</span>j sidebar-next
-<span style="color: #483d8b;">bind</span> index,pager <span style=
-"color: #a020f0;">&lt;</span>Esc<span style=
-"color: #a020f0;">&gt;</span>o sidebar-open
-<span style="color: #483d8b;">bind</span> index,pager <span style=
-"color: #a020f0;">&lt;</span>Esc<span style=
-"color: #a020f0;">&gt;</span>u sidebar-page-up
-<span style="color: #483d8b;">bind</span> index,pager <span style=
-"color: #a020f0;">&lt;</span>Esc<span style=
-"color: #a020f0;">&gt;</span>d sidebar-page-down
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">sidebar_visible</span> = yes
+<span style=
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">sidebar_sort_method</span> = alpha
+<span style=
+"color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>k sidebar-prev
+<span style=
+"color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>j sidebar-next
+<span style=
+"color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>o sidebar-open
+<span style=
+"color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>u sidebar-page-up
+<span style=
+"color: #3a81c3; font-weight: bold;">bind</span> index,pager <span style="color: #3a81c3; font-weight: bold;">&lt;</span>Esc<span style="color: #3a81c3; font-weight: bold;">&gt;</span>d sidebar-page-down
 </pre></div>
 <p>为了让侧边栏有内容，我们偷懒：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> imap_check_subscribed
+"color: #3a81c3; font-weight: bold;">set</span> imap_check_subscribed
 </pre></div>
 <p>更方便地查看：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> <span style=
-"color: #a0522d;">pager_index_lines</span> = 4
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">pager_index_lines</span> = 4
 </pre></div>
 <p>更不错的状态：</p>
 <div class="org-src-container">
 <pre class="src src-shell"><span style=
-"color: #483d8b;">set</span> <span style=
-"color: #a0522d;">pager_format</span> = <span style=
-"color: #8b2252;">" %C - %[%H:%M] %.20v, %s%* %?H? [%H] ?"</span>
+"color: #3a81c3; font-weight: bold;">set</span> <span style=
+"color: #715ab1;">pager_format</span> = <span style=
+"color: #2d9574;">" %C - %[%H:%M] %.20v, %s%* %?H? [%H] ?"</span>
 </pre></div>
 <p>以及颜色（色彩高亮），各位可以参考<a href=
 "http://aperiodic.net/phil/configs/mutt/colors">这个</a>。</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd169186" class="outline-2">
-<h2 id="orgd169186"><span class="section-number-2">4.</span>
+<div id="outline-container-org1f6e596" class="outline-2">
+<h2 id="org1f6e596"><span class="section-number-2">4.</span>
 最后</h2>
 <div class="outline-text-2" id="text-4">
 <p>颅内高潮：</p>
 <div class="org-src-container">
-<pre class="src src-shell">my_hdr X-Face: *[<span style=
-"color: #a020f0;">&gt;</span>eDAPM?U?Cx<span style=
-"color: #8b2252;">\$</span>/6HNmXzNCNhzKU<span style=
-"color: #8b2252;">\#</span>:oG<span style=
-"color: #8b2252;">\#</span>(lw!uh\<span style=
-"color: #a020f0;">$</span>7nMD%<span style=
-"color: #8b2252;">\$</span>{/<span style=
-"color: #a020f0;">&lt;</span>.wk(<span style=
-"color: #483d8b;">r</span>!3C(xNhV.EN!+uOUMq7]/H?Lk98rZl<span style="color: #8b2252;">\"</span>:690@*gjH@zEz{R\<span style="color: #a020f0;">$</span>IuVJlhnlc.0?*BJhGy5N]Fv9D)vv-~-6yg,<span style="color: #8b2252;">\\\$</span><span style="color: #a0522d;">lYpE</span>.<span style="color: #a0522d;">qk</span>=1FR!K1!3+Ec]L<span style="color: #8b2252;">\`</span>~eC,<span style="color: #a0522d;">m6bFeXJb</span>-=<span style="color: #8b2252;">\$</span><span style="color: #a0522d;">fWylGg3</span>+ALBb<span style="color: #8b2252;">\'</span>jhg1z8j7G?dT]@LIt,~LzO,v<span style="color: #8b2252;">\"</span>nNOW3a%Y<span style="color: #8b2252;">\\</span>5F<span style="color: #a020f0;">|</span>id}n*k<span style="color: #a020f0;">&gt;</span>2:d<span style="color: #a020f0;">&gt;</span>bhAvcA)QM%?<span style="color: #8b2252;">\\</span>Xe1A<span style="color: #8b2252;">\'</span><span style="color: #a020f0;">&gt;</span>jp9FV*k*@Q(?NhDVT<span style="color: #8b2252;">\`</span>32j-YGEe?d<span style="color: #8b2252;">\\</span>Y+A@w/<span style="color: #8b2252;">\$</span>,EGL^!,w5Dr\<span style="color: #a020f0;">$</span>x<span style="color: #a020f0;">|</span>ncyr}<span style="color: #a020f0;">|</span>Tt^+D.@?uAaHk8T~HZl8U0q
+<pre class="src src-shell"><span style=
+"color: #2aa1ae; font-weight: bold;">my_hdr</span> X-Face: *[<span style="color: #3a81c3; font-weight: bold;">&gt;</span>eDAPM?U?Cx<span style="color: #2d9574;">\$</span>/6HNmXzNCNhzKU<span style="color: #2d9574;">\#</span>:oG<span style="color: #2d9574;">\#</span>(lw!uh\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">7nMD</span>%<span style="color: #2d9574;">\$</span>{/<span style="color: #3a81c3; font-weight: bold;">&lt;</span>.wk(<span style="color: #3a81c3;">r</span>!3C(xNhV.EN!+uOUMq7]/H?Lk98rZl<span style="color: #2d9574;">\"</span>:690@*gjH@zEz{R\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">IuVJlhnlc</span>.0?*BJhGy5N]Fv9D)vv-~-6yg,<span style="color: #2d9574;">\\\$</span><span style="color: #715ab1;">lYpE</span>.<span style="color: #715ab1;">qk</span>=1FR!K1!3+Ec]L<span style="color: #2d9574;">\`</span>~eC,<span style="color: #715ab1;">m6bFeXJb</span>-=<span style="color: #2d9574;">\$</span><span style="color: #715ab1;">fWylGg3</span>+ALBb<span style="color: #2d9574;">\'</span>jhg1z8j7G?dT]@LIt,~LzO,v<span style="color: #2d9574;">\"</span>nNOW3a%Y<span style="color: #2d9574;">\\</span>5F<span style="color: #3a81c3; font-weight: bold;">|</span>id}n*k<span style="color: #3a81c3; font-weight: bold;">&gt;</span>2:d<span style="color: #3a81c3; font-weight: bold;">&gt;</span>bhAvcA)QM%?<span style="color: #2d9574;">\\</span>Xe1A<span style="color: #2d9574;">\'</span><span style="color: #3a81c3; font-weight: bold;">&gt;</span>jp9FV*k*@Q(?NhDVT<span style="color: #2d9574;">\`</span>32j-YGEe?d<span style="color: #2d9574;">\\</span>Y+A@w/<span style="color: #2d9574;">\$</span>,EGL^!,w5Dr\<span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">x</span><span style="color: #3a81c3; font-weight: bold;">|</span>ncyr}<span style="color: #3a81c3; font-weight: bold;">|</span><span style="color: #2aa1ae; font-weight: bold;">Tt^+D.@?uAaHk8T~HZl8U0q</span>
 </pre></div>
 <p>警告：请不要用我的，谢谢。</p>
 </div>
@@ -313,7 +341,7 @@ hdr_order       From: To: Cc: Bcc: Date: Subject: X-Face:
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: RadioNoiseE</p>
-<p class="date">Created: 2024-10-15 Tue 08:07</p>
+<p class="date">Created: 2024-10-16 Wed 08:03</p>
 <p class="validation"><a href=
 "https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

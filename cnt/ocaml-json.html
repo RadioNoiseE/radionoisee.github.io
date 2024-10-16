@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content=
 "HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-<!-- 2024-10-15 Tue 08:07 -->
+<!-- 2024-10-16 Wed 08:04 -->
 <meta charset="utf-8">
 <meta name="viewport" content=
 "width=device-width, initial-scale=1">
@@ -21,18 +21,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org93e836f">1. 写在前面</a></li>
-<li><a href="#org7728f05">2. 数据类型</a></li>
-<li><a href="#org3ee0ae0">3. 定义解析器</a></li>
-<li><a href="#org0de81b2">4. 词法分析</a></li>
-<li><a href="#org174b675">5. 集成</a></li>
-<li><a href="#org2397fe5">6. 使用</a></li>
-<li><a href="#orgb02b00c">7. 最后</a></li>
+<li><a href="#org1ff4c9b">1. 写在前面</a></li>
+<li><a href="#orgaafb213">2. 数据类型</a></li>
+<li><a href="#orga85cf47">3. 定义解析器</a></li>
+<li><a href="#orgf3755ca">4. 词法分析</a></li>
+<li><a href="#org1132005">5. 集成</a></li>
+<li><a href="#org72ff343">6. 使用</a></li>
+<li><a href="#orgf8fc719">7. 最后</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org93e836f" class="outline-2">
-<h2 id="org93e836f"><span class="section-number-2">1.</span>
+<div id="outline-container-org1ff4c9b" class="outline-2">
+<h2 id="org1ff4c9b"><span class="section-number-2">1.</span>
 写在前面</h2>
 <div class="outline-text-2" id="text-1">
 <p>本文实际上补完『Real World
@@ -42,171 +42,221 @@ OCaml』一书中的第16章。不同之处在于我们只使用标准库（而�
 <p>你只需要有最基础的OCaml开发环境即可，Opam不是必须的。你最好有OCaml相关语法知识，虽然没有我觉得也能看懂。</p>
 </div>
 </div>
-<div id="outline-container-org7728f05" class="outline-2">
-<h2 id="org7728f05"><span class="section-number-2">2.</span>
+<div id="outline-container-orgaafb213" class="outline-2">
+<h2 id="orgaafb213"><span class="section-number-2">2.</span>
 数据类型</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 我们首先需要为JSON中的每种数据类型在OCaml中作相应定义。创建<code>datatype.ml</code>文件，写入：</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">type</span> <span style=
-"color: #228b22;">stt</span> = [
-  | <span style="color: #483d8b;">`Integer</span> <span style=
-"color: #a020f0;">of</span> <span style=
-"color: #483d8b;">int</span>
-  | <span style="color: #483d8b;">`Float</span> <span style=
-"color: #a020f0;">of</span> <span style=
-"color: #483d8b;">float</span>
-  | <span style="color: #483d8b;">`Bool</span> <span style=
-"color: #a020f0;">of</span> <span style=
-"color: #483d8b;">bool</span>
-  | <span style="color: #483d8b;">`String</span> <span style=
-"color: #a020f0;">of</span> <span style=
-"color: #483d8b;">string</span>
-  | <span style="color: #483d8b;">`Array</span> <span style=
-"color: #a020f0;">of</span> <span style=
-"color: #228b22;">stt</span> <span style=
-"color: #483d8b;">list</span>
-  | <span style="color: #483d8b;">`Object</span> <span style=
-"color: #a020f0;">of</span> (<span style=
-"color: #483d8b;">string</span> <span style=
-"color: #a020f0;">*</span> <span style=
-"color: #228b22;">stt</span>) <span style=
-"color: #483d8b;">list</span>
-  ]
+"color: #3a81c3; font-weight: bold;">type</span> <span style=
+"color: #ba2f59; font-weight: bold;">stt</span> <span style=
+"color: #655370; background-color: #fbf8ef;">=</span> <span style=
+"color: #655370; background-color: #fbf8ef;">[</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Integer</span> <span style=
+"color: #3a81c3; font-weight: bold;">of</span> <span style=
+"color: #3a81c3; font-weight: bold;">int</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Float</span> <span style=
+"color: #3a81c3; font-weight: bold;">of</span> <span style=
+"color: #3a81c3; font-weight: bold;">float</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Bool</span> <span style=
+"color: #3a81c3; font-weight: bold;">of</span> <span style=
+"color: #3a81c3; font-weight: bold;">bool</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`String</span> <span style=
+"color: #3a81c3; font-weight: bold;">of</span> <span style=
+"color: #3a81c3; font-weight: bold;">string</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Array</span> <span style=
+"color: #3a81c3; font-weight: bold;">of</span> <span style=
+"color: #ba2f59; font-weight: bold;">stt</span> <span style=
+"color: #3a81c3; font-weight: bold;">list</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Object</span> <span style=
+"color: #3a81c3; font-weight: bold;">of</span> <span style=
+"color: #655370; background-color: #fbf8ef;">(</span><span style=
+"color: #3a81c3; font-weight: bold;">string</span> <span style=
+"color: #3a81c3; font-weight: bold;">*</span> <span style=
+"color: #ba2f59; font-weight: bold;">stt</span><span style=
+"color: #655370; background-color: #fbf8ef;">)</span> <span style=
+"color: #3a81c3; font-weight: bold;">list</span>
+  <span style="color: #655370; background-color: #fbf8ef;">]</span>
 </pre></div>
 <p>
 即，我们分别定义了JSON中的整型数、浮点数、布尔值、字符串、数组（作为由<code>stt</code>中一个类型组成的列表）和对象（作为由一个字符串及其对应的<code>stt</code>中一个类型组成的列表）。</p>
 </div>
 </div>
-<div id="outline-container-org3ee0ae0" class="outline-2">
-<h2 id="org3ee0ae0"><span class="section-number-2">3.</span>
+<div id="outline-container-orga85cf47" class="outline-2">
+<h2 id="orga85cf47"><span class="section-number-2">3.</span>
 定义解析器</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 这一步，我们需要创建解析器规范文件，用于描述文法。我使用文件名<code>parser.mly</code>，我们将会用OCamlyacc处理它。规范文件分为两部分，使用<code>%%</code>分隔：第一部分主要用于初始化解析器，而后半部分则指定文法。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">%</span><span style=
-"color: #a0522d;">token</span> <span style=
-"color: #a020f0;">&lt;</span><span style=
-"color: #a0522d;">int</span><span style=
-"color: #a020f0;">&gt;</span> <span style=
-"color: #483d8b;">INT</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #a0522d;">token</span> <span style=
-"color: #a020f0;">&lt;</span><span style=
-"color: #a0522d;">float</span><span style=
-"color: #a020f0;">&gt;</span> <span style=
-"color: #483d8b;">FLOAT</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">TRUE</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">FALSE</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #a0522d;">token</span> <span style=
-"color: #a020f0;">&lt;</span><span style=
-"color: #a0522d;">string</span><span style=
-"color: #a020f0;">&gt;</span> <span style=
-"color: #483d8b;">STRING</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">COLON</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">COMMA</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">LEFT_BRACK</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">RIGHT_BRACK</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">LEFT_BRACE</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">RIGHT_BRACE</span>
-<span style="color: #a020f0;">%</span><span style=
-"color: #0000ff;">token</span> <span style=
-"color: #483d8b;">EOF</span>
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #715ab1;">token</span> <span style=
+"color: #3a81c3; font-weight: bold;">&lt;</span><span style=
+"color: #715ab1;">int</span><span style=
+"color: #3a81c3; font-weight: bold;">&gt;</span> <span style=
+"color: #3a81c3;">INT</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #715ab1;">token</span> <span style=
+"color: #3a81c3; font-weight: bold;">&lt;</span><span style=
+"color: #715ab1;">float</span><span style=
+"color: #3a81c3; font-weight: bold;">&gt;</span> <span style=
+"color: #3a81c3;">FLOAT</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">TRUE</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">FALSE</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #715ab1;">token</span> <span style=
+"color: #3a81c3; font-weight: bold;">&lt;</span><span style=
+"color: #715ab1;">string</span><span style=
+"color: #3a81c3; font-weight: bold;">&gt;</span> <span style=
+"color: #3a81c3;">STRING</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">COLON</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">COMMA</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">LEFT_BRACK</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">RIGHT_BRACK</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">LEFT_BRACE</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">RIGHT_BRACE</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163; font-weight: bold;">token</span> <span style=
+"color: #3a81c3;">EOF</span>
 </pre></div>
 <p>上面我们描述了解析器会遇到的所有token，使用<code>%token &lt;type&gt;
 uid</code>的语法；其中<code>&lt;type&gt;</code>为可选，表示带有值的token。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">%</span><span style=
-"color: #a020f0;">type</span> &lt;<span style=
-"color: #228b22;">Datatype</span>.<span style=
-"color: #228b22;">stt</span>&gt; decl
-<span style="color: #a020f0;">%</span><span style=
-"color: #483d8b;">start</span> decl
-<span style="color: #a020f0;">%</span>{ open <span style=
-"color: #483d8b;">Datatype</span> <span style=
-"color: #a020f0;">%</span>}
-<span style="color: #a020f0;">%%</span>
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #3a81c3; font-weight: bold;">type</span> &lt;<span style=
+"color: #ba2f59; font-weight: bold;">Datatype</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #ba2f59; font-weight: bold;">stt</span><span style=
+"color: #655370; background-color: #fbf8ef;">&gt;</span> decl
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #6c3163;">start</span> decl
+<span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #4e3163; font-style: italic;">open</span> <span style=
+"color: #3a81c3;">Datatype</span> <span style=
+"color: #3a81c3; font-weight: bold;">%</span><span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+<span style="color: #3a81c3; font-weight: bold;">%%</span>
 </pre></div>
 <p>
 随后，我们确定文法分析的结果类型于一开始定义的一致，并且为了能在文法分析中使用这些类型，读入<code>datatype.ml</code>文件。第一部分结束。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #0000ff;">decl</span>:
-  | <span style="color: #a0522d;">expr</span> <span style=
-"color: #483d8b;">EOF</span> { <span style=
-"color: #f0e68c;">$</span>1 }
-  ;
+"color: #6c3163; font-weight: bold;">decl</span><span style=
+"color: #655370; background-color: #fbf8ef;">:</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">expr</span> <span style=
+"color: #3a81c3;">EOF</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #a52a2a;">$</span>1 <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style="color: #655370; background-color: #fbf8ef;">;</span>
 </pre></div>
 <p>
 入口，将文件中所有（EOF之前的）内容交由<code>expr</code>，而词法分析的结果则为<code>expr</code>返回的结果：<code>$1</code>（<code>$2</code>则代表EOF）。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #0000ff;">expr</span>:
-  | <span style="color: #483d8b;">NULL</span> { <span style=
-"color: #483d8b;">Null</span> }
-  | INT { <span style=
-"color: #483d8b;">`Integer</span>(<span style="color: #f0e68c;">$</span>1) }
-  | FLOAT { <span style=
-"color: #483d8b;">`Float</span>(<span style="color: #f0e68c;">$</span>1) }
-  | TRUE { <span style="color: #483d8b;">`Bool</span>(<span style=
-"color: #008b8b;">true</span>) }
-  | FALSE { <span style="color: #483d8b;">`Bool</span>(<span style=
-"color: #008b8b;">false</span>) }
-  | STRING { <span style=
-"color: #483d8b;">`String</span>(<span style=
-"color: #f0e68c;">$</span>1) }
-  | LEFT_BRACK array_fields RIGHT_BRACK { <span style=
-"color: #483d8b;">`Array</span>(<span style=
-"color: #f0e68c;">$</span>2) }
-  | LEFT_BRACE object_fields RIGHT_BRACE { <span style=
-"color: #483d8b;">`Object</span>(<span style=
-"color: #f0e68c;">$</span>2) }
-  ;
+"color: #6c3163; font-weight: bold;">expr</span><span style=
+"color: #655370; background-color: #fbf8ef;">:</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">NULL</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">Null</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">INT</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">`Integer</span><span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>1<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">FLOAT</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">`Float</span><span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>1<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">TRUE</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">`Bool</span><span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #4e3163;">true</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">FALSE</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">`Bool</span><span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #4e3163;">false</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">STRING</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">`String</span><span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>1<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">LEFT_BRACK</span> array_fields <span style="color: #655370; background-color: #fbf8ef;">RIGHT_BRACK</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">`Array</span><span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>2<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">LEFT_BRACE</span> object_fields <span style="color: #655370; background-color: #fbf8ef;">RIGHT_BRACE</span> <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">`Object</span><span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>2<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style="color: #655370; background-color: #fbf8ef;">;</span>
 </pre></div>
 <p>
 我们定义了在<code>expr</code>中如何解析：遇到整型数则返回类型为整型数的值，浮点数、字符串同理；遇到布尔值则分别返回真／假；遇到由方括号界定的数组时则交由<code>array_fields</code>处理，并返回其结果，对象同理。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #0000ff;">object_fields</span>:
-  | <span style=
-"color: #a0522d;">rev_object_fields</span> { <span style=
-"color: #228b22;">List</span>.rev(<span style=
-"color: #f0e68c;">$</span>1) }
-  ;
-rev_object_fields:
-  | /<span style="color: #a020f0;">*</span> Null <span style=
-"color: #a020f0;">*</span>/ { [] }
-  | rev_object_fields COMMA STRING COLON expr { (<span style=
-"color: #f0e68c;">$</span>3, <span style=
-"color: #f0e68c;">$</span>5) <span style=
-"color: #a020f0;">::</span> <span style=
-"color: #f0e68c;">$</span>1 }
-  | STRING COLON expr { [(<span style=
-"color: #f0e68c;">$</span>1, <span style=
-"color: #f0e68c;">$</span>3)] }
-  ;
+"color: #6c3163; font-weight: bold;">object_fields</span><span style="color: #655370; background-color: #fbf8ef;">:</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">rev_object_fields</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">List</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span>rev<span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>1<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style="color: #655370; background-color: #fbf8ef;">;</span>
+<span style=
+"color: #4e3163; font-style: italic;">rev_object_fields</span><span style="color: #655370; background-color: #fbf8ef;">:</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> /<span style=
+"color: #3a81c3; font-weight: bold;">*</span> <span style=
+"color: #655370; background-color: #fbf8ef;">Null</span> <span style="color: #3a81c3; font-weight: bold;">*</span>/ <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #655370; background-color: #fbf8ef;">[]</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> rev_object_fields <span style="color: #655370; background-color: #fbf8ef;">COMMA</span> <span style="color: #655370; background-color: #fbf8ef;">STRING</span> <span style="color: #655370; background-color: #fbf8ef;">COLON</span> expr <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>3<span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #a52a2a;">$</span>5<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #a52a2a;">$</span>1 <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">STRING</span> <span style="color: #655370; background-color: #fbf8ef;">COLON</span> expr <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #655370; background-color: #fbf8ef;">[(</span><span style="color: #a52a2a;">$</span>1<span style="color: #655370; background-color: #fbf8ef;">,</span> <span style="color: #a52a2a;">$</span>3<span style="color: #655370; background-color: #fbf8ef;">)]</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style="color: #655370; background-color: #fbf8ef;">;</span>
 </pre></div>
 <p>
 之所以对于<code>object_fields</code>的规则构造不符合直觉的左递归后逆置的下推自动机，是由于OCamlyacc会生成左递归解析器，如此能够减少栈空间的占用。</p>
@@ -214,222 +264,334 @@ rev_object_fields:
 <p>同理，我们有对于数组的规则。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #0000ff;">array_fields</span>:
-  | <span style=
-"color: #a0522d;">rev_array_fields</span> { <span style=
-"color: #228b22;">List</span>.rev(<span style=
-"color: #f0e68c;">$</span>1) }
-  ;
-rev_array_fields:
-  | /<span style="color: #a020f0;">*</span> Null <span style=
-"color: #a020f0;">*</span>/ { [] }
-  | rev_array_fields COMMA expr { <span style=
-"color: #f0e68c;">$</span>3 <span style=
-"color: #a020f0;">::</span> <span style=
-"color: #f0e68c;">$</span>1 }
-  | expr { [<span style="color: #f0e68c;">$</span>1] }
-  ;
+"color: #6c3163; font-weight: bold;">array_fields</span><span style="color: #655370; background-color: #fbf8ef;">:</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">rev_array_fields</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">List</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span>rev<span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #a52a2a;">$</span>1<span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style="color: #655370; background-color: #fbf8ef;">;</span>
+<span style=
+"color: #4e3163; font-style: italic;">rev_array_fields</span><span style="color: #655370; background-color: #fbf8ef;">:</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> /<span style=
+"color: #3a81c3; font-weight: bold;">*</span> <span style=
+"color: #655370; background-color: #fbf8ef;">Null</span> <span style="color: #3a81c3; font-weight: bold;">*</span>/ <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #655370; background-color: #fbf8ef;">[]</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> rev_array_fields <span style="color: #655370; background-color: #fbf8ef;">COMMA</span> expr <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #a52a2a;">$</span>3 <span style="color: #3a81c3; font-weight: bold;">::</span> <span style="color: #a52a2a;">$</span>1 <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> expr <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #655370; background-color: #fbf8ef;">[</span><span style="color: #a52a2a;">$</span>1<span style="color: #655370; background-color: #fbf8ef;">]</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style="color: #655370; background-color: #fbf8ef;">;</span>
 </pre></div>
 </div>
 </div>
-<div id="outline-container-org0de81b2" class="outline-2">
-<h2 id="org0de81b2"><span class="section-number-2">4.</span>
+<div id="outline-container-orgf3755ca" class="outline-2">
+<h2 id="orgf3755ca"><span class="section-number-2">4.</span>
 词法分析</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 我们在上面描述了文法解析器的规则，而一开始声明的那些token是哪里来的呢？就是在这一部分词法分析的时候被定义的。该文件为<code>lexer.mll</code>。</p>
 <div class="org-src-container">
-<pre class="src src-ocaml">{
-  open <span style="color: #483d8b;">Lexing</span>
-  <span style="color: #a020f0;">open</span> <span style=
-"color: #228b22;">Parser</span>
+<pre class="src src-ocaml"><span style=
+"color: #655370; background-color: #fbf8ef;">{</span>
+  <span style=
+"color: #4e3163; font-style: italic;">open</span> <span style=
+"color: #3a81c3;">Lexing</span>
+  <span style=
+"color: #3a81c3; font-weight: bold;">open</span> <span style=
+"color: #ba2f59; font-weight: bold;">Parser</span>
 
-  <span style="color: #a020f0;">exception</span> <span style=
-"color: #483d8b;">SyntaxError</span> <span style=
-"color: #a020f0;">of</span> <span style=
-"color: #483d8b;">string</span>
+  <span style=
+"color: #3a81c3; font-weight: bold;">exception</span> <span style=
+"color: #3a81c3;">SyntaxError</span> <span style=
+"color: #3a81c3; font-weight: bold;">of</span> <span style=
+"color: #3a81c3; font-weight: bold;">string</span>
 
-  <span style="color: #a020f0;">let</span> <span style=
-"color: #0000ff;">next_line</span> <span style=
-"color: #a0522d;">lexbuf</span> =
-    <span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">pos</span> = <span style=
-"color: #a0522d;">lexbuf</span>.lex_curr_p <span style=
-"color: #a020f0;">in</span>
+  <span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">next_line</span> <span style=
+"color: #715ab1;">lexbuf</span> =
     <span style=
-"color: #a0522d;">lexbuf</span>.lex_curr_p <span style=
-"color: #a020f0;">&lt;-</span> {
-      <span style="color: #a0522d;">pos</span> <span style=
-"color: #a020f0;">with</span> pos_bol = <span style=
-"color: #a0522d;">lexbuf</span>.lex_curr_p;
-               pos_lnum = <span style=
-"color: #a0522d;">pos</span>.pos_lnum <span style=
-"color: #a020f0;">+</span> <span style="color: #008b8b;">1</span>
-      }
-}
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">pos</span> = <span style=
+"color: #715ab1;">lexbuf</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">lex_curr_p</span> <span style="color: #3a81c3; font-weight: bold;">in</span>
+    <span style="color: #715ab1;">lexbuf</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">lex_curr_p</span> <span style="color: #3a81c3; font-weight: bold;">&lt;-</span> <span style="color: #655370; background-color: #fbf8ef;">{</span>
+      <span style="color: #715ab1;">pos</span> <span style=
+"color: #3a81c3; font-weight: bold;">with</span> <span style=
+"color: #4e3163; font-style: italic;">pos_bol</span> <span style=
+"color: #655370; background-color: #fbf8ef;">=</span> <span style=
+"color: #715ab1;">lexbuf</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">lex_curr_p</span><span style=
+"color: #655370; background-color: #fbf8ef;">;</span>
+               <span style=
+"color: #4e3163; font-style: italic;">pos_lnum</span> <span style=
+"color: #655370; background-color: #fbf8ef;">=</span> <span style=
+"color: #715ab1;">pos</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">pos_lnum</span> <span style=
+"color: #3a81c3; font-weight: bold;">+</span> <span style=
+"color: #4e3163;">1</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+<span style="color: #655370; background-color: #fbf8ef;">}</span>
 </pre></div>
 <p>
 第一部分，我们建立了一个（可选）的环境：我们打开了两个有用的模块，其中<code>Lexing</code>模块定义了在随后的工具函数中被使用的<code>lexbuf</code>结构，其包含了词法分析机的状态；定义了一个<code>SyntaxError</code>的异常；同时定义了一个工具函数<code>next_line</code>，用来跟踪token的位置。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">let</span> <span style=
-"color: #a0522d;">int</span> = <span style=
-"color: #8b2252;">'-'</span>? [<span style=
-"color: #8b2252;">'0'</span><span style=
-"color: #a020f0;">-</span><span style=
-"color: #8b2252;">'9'</span>] [<span style=
-"color: #8b2252;">'0'</span><span style=
-"color: #a020f0;">-</span><span style=
-"color: #8b2252;">'9'</span>]<span style="color: #a020f0;">*</span>
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">digit</span> = [<span style=
-"color: #8b2252;">'0'</span><span style=
-"color: #a020f0;">-</span><span style="color: #8b2252;">'9'</span>]
-<span style="color: #a0522d;">let</span> <span style=
-"color: #a0522d;">frac</span> = <span style=
-"color: #8b2252;">'.'</span> <span style=
-"color: #a0522d;">digit</span><span style=
-"color: #a020f0;">*</span>
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">exp</span> = [<span style=
-"color: #8b2252;">'e'</span> <span style=
-"color: #8b2252;">'E'</span>] [<span style=
-"color: #8b2252;">'-'</span> <span style=
-"color: #8b2252;">'+'</span>]? digit<span style=
-"color: #a020f0;">+</span>
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">float</span> = <span style=
-"color: #a0522d;">digit</span><span style=
-"color: #a020f0;">*</span> <span style=
-"color: #0000ff;">frac</span>? exp?
-let <span style="color: #a0522d;">white</span> = [<span style=
-"color: #8b2252;">' '</span> <span style=
-"color: #8b2252;">'</span><span style=
-"color: #8b2252;">\t</span><span style=
-"color: #8b2252;">'</span>]<span style="color: #a020f0;">+</span>
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">newline</span> = <span style=
-"color: #8b2252;">'</span><span style=
-"color: #8b2252;">\r</span><span style=
-"color: #8b2252;">'</span> | <span style=
-"color: #8b2252;">'</span><span style=
-"color: #8b2252;">\n</span><span style=
-"color: #8b2252;">'</span> | <span style=
-"color: #8b2252;">'</span><span style=
-"color: #8b2252;">\r</span><span style="color: #8b2252;">\n'</span>
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">int</span> = <span style=
+"color: #2d9574;">'-'</span><span style=
+"color: #655370; background-color: #fbf8ef;">?</span> <span style=
+"color: #655370; background-color: #fbf8ef;">[</span><span style=
+"color: #2d9574;">'0'</span><span style=
+"color: #3a81c3; font-weight: bold;">-</span><span style=
+"color: #2d9574;">'9'</span><span style=
+"color: #655370; background-color: #fbf8ef;">]</span> <span style=
+"color: #655370; background-color: #fbf8ef;">[</span><span style=
+"color: #2d9574;">'0'</span><span style=
+"color: #3a81c3; font-weight: bold;">-</span><span style=
+"color: #2d9574;">'9'</span><span style=
+"color: #655370; background-color: #fbf8ef;">]</span><span style=
+"color: #3a81c3; font-weight: bold;">*</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">digit</span> = <span style=
+"color: #655370; background-color: #fbf8ef;">[</span><span style=
+"color: #2d9574;">'0'</span><span style=
+"color: #3a81c3; font-weight: bold;">-</span><span style=
+"color: #2d9574;">'9'</span><span style=
+"color: #655370; background-color: #fbf8ef;">]</span>
+<span style="color: #715ab1;">let</span> <span style=
+"color: #715ab1;">frac</span> = <span style=
+"color: #2d9574;">'.'</span> <span style=
+"color: #715ab1;">digit</span><span style=
+"color: #3a81c3; font-weight: bold;">*</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">exp</span> = <span style=
+"color: #655370; background-color: #fbf8ef;">[</span><span style=
+"color: #2d9574;">'e'</span> <span style=
+"color: #2d9574;">'E'</span><span style=
+"color: #655370; background-color: #fbf8ef;">]</span> <span style=
+"color: #655370; background-color: #fbf8ef;">[</span><span style=
+"color: #2d9574;">'-'</span> <span style=
+"color: #2d9574;">'+'</span><span style=
+"color: #655370; background-color: #fbf8ef;">]</span><span style=
+"color: #655370; background-color: #fbf8ef;">?</span> <span style=
+"color: #4e3163; font-style: italic;">digit</span><span style=
+"color: #3a81c3; font-weight: bold;">+</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">float</span> = <span style=
+"color: #715ab1;">digit</span><span style=
+"color: #3a81c3; font-weight: bold;">*</span> <span style=
+"color: #6c3163; font-weight: bold;">frac</span><span style=
+"color: #655370; background-color: #fbf8ef;">?</span> <span style=
+"color: #4e3163; font-style: italic;">exp</span><span style=
+"color: #655370; background-color: #fbf8ef;">?</span>
+<span style=
+"color: #4e3163; font-style: italic;">let</span> <span style=
+"color: #715ab1;">white</span> = <span style=
+"color: #655370; background-color: #fbf8ef;">[</span><span style=
+"color: #2d9574;">' '</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\t</span><span style=
+"color: #2d9574;">'</span><span style=
+"color: #655370; background-color: #fbf8ef;">]</span><span style=
+"color: #3a81c3; font-weight: bold;">+</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">newline</span> = <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\r</span><span style=
+"color: #2d9574;">'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\n</span><span style=
+"color: #2d9574;">'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\r</span><span style=
+"color: #2d9574;">\n'</span>
 </pre></div>
 <p>上面我们创建了一组正则表达式，以此匹配整型数／浮点数／空白字符／行送。基本上是很正常的正则语法。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #0000ff;">rule</span> <span style=
-"color: #a0522d;">read</span> <span style=
-"color: #a020f0;">=</span>
-  <span style="color: #a0522d;">parse</span>
-  | null { NULL }
-  | white { read lexbuf }
-  | newline { next_line <span style=
-"color: #a0522d;">lexbuf</span>; <span style=
-"color: #a0522d;">read</span> <span style=
-"color: #a0522d;">lexbuf</span> }
-  | <span style="color: #a0522d;">int</span> { INT (<span style=
-"color: #0000ff;">int_of_string</span> (<span style=
-"color: #228b22;">Lexing</span>.<span style=
-"color: #0000ff;">lexeme</span> <span style=
-"color: #a0522d;">lexbuf</span>)) }
-  | float { FLOAT (<span style=
-"color: #0000ff;">float_of_string</span> (<span style=
-"color: #228b22;">Lexing</span>.<span style=
-"color: #0000ff;">lexeme</span> <span style=
-"color: #a0522d;">lexbuf</span>)) }
-  | <span style="color: #8b2252;">"true"</span> { <span style=
-"color: #483d8b;">TRUE</span> }
-  | <span style="color: #8b2252;">"false"</span> { <span style=
-"color: #483d8b;">FALSE</span> }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\"</span><span style=
-"color: #8b2252;">'</span> { read_string (<span style=
-"color: #228b22;">Buffer</span>.<span style=
-"color: #0000ff;">create</span> <span style=
-"color: #008b8b;">17</span>) lexbuf }
-  | <span style="color: #8b2252;">':'</span> { <span style=
-"color: #483d8b;">COLON</span> }
-  | <span style="color: #8b2252;">','</span> { <span style=
-"color: #483d8b;">COMMA</span> }
-  | <span style="color: #8b2252;">'['</span> { <span style=
-"color: #483d8b;">LEFT_BRACK</span> }
-  | <span style="color: #8b2252;">']'</span> { <span style=
-"color: #483d8b;">RIGHT_BRACK</span> }
-  | <span style="color: #8b2252;">'{'</span> { <span style=
-"color: #483d8b;">LEFT_BRACE</span> }
-  | <span style="color: #8b2252;">'}'</span> { <span style=
-"color: #483d8b;">RIGHT_BRACE</span> }
-  | _ { <span style="color: #483d8b;">raise</span> (<span style=
-"color: #483d8b;">SyntaxError</span> (<span style=
-"color: #8b2252;">"Unexpected char: "</span> <span style=
-"color: #a020f0;">^</span> <span style=
-"color: #228b22;">Lexing</span>.<span style=
-"color: #0000ff;">lexeme</span> <span style=
-"color: #a0522d;">lexbuf</span>)) }
-  | eof { <span style="color: #483d8b;">EOF</span> }
-<span style="color: #a020f0;">and</span> <span style=
-"color: #0000ff;">read_string</span> buf =
-  <span style="color: #a0522d;">parse</span>
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\"</span><span style=
-"color: #8b2252;">'</span> { STRING (<span style=
-"color: #228b22;">Buffer</span>.<span style=
-"color: #0000ff;">contents</span> <span style=
-"color: #a0522d;">buf</span>) }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span> '/' { <span style=
-"color: #228b22;">Buffer</span>.add_char buf <span style=
-"color: #8b2252;">'/'</span>; read_string buf lexbuf }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span> '\\' { <span style=
-"color: #228b22;">Buffer</span>.add_char buf '\\'; read_string buf lexbuf }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span> 'b' { <span style=
-"color: #228b22;">Buffer</span>.add_char buf '\b'; read_string buf lexbuf }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span> 'f' { <span style=
-"color: #228b22;">Buffer</span>.add_char buf '\012'; read_string buf lexbuf }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span> 'n' { <span style=
-"color: #228b22;">Buffer</span>.add_char buf '\n'; read_string buf lexbuf }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span> 'r' { <span style=
-"color: #228b22;">Buffer</span>.add_char buf '\r'; read_string buf lexbuf }
-  | <span style="color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span> 't' { <span style=
-"color: #228b22;">Buffer</span>.add_char buf '\t'; read_string buf lexbuf }
-  | [<span style="color: #a020f0;">^</span> <span style=
-"color: #8b2252;">'</span><span style=
-"color: #8b2252;">\"</span><span style=
-"color: #8b2252;">'</span> <span style=
-"color: #8b2252;">'</span><span style=
-"color: #8b2252;">\\</span><span style=
-"color: #8b2252;">'</span>]+ { <span style=
-"color: #228b22;">Buffer</span>.add_string buf (<span style=
-"color: #228b22;">Lexing</span>.<span style=
-"color: #0000ff;">lexeme</span> <span style=
-"color: #a0522d;">lexbuf</span>); read_string buf lexbuf }
-  | _ { <span style="color: #483d8b;">raise</span> (<span style=
-"color: #483d8b;">SyntaxError</span> (<span style=
-"color: #8b2252;">"Illegal string character: "</span> <span style=
-"color: #a020f0;">^</span> <span style=
-"color: #228b22;">Lexing</span>.<span style=
-"color: #0000ff;">lexeme</span> <span style=
-"color: #a0522d;">lexbuf</span>)) }
-  | eof { <span style="color: #483d8b;">raise</span> (<span style=
-"color: #483d8b;">SyntaxError</span> (<span style=
-"color: #8b2252;">"String terminated by EOF"</span>)) }
+"color: #6c3163; font-weight: bold;">rule</span> <span style=
+"color: #715ab1;">read</span> <span style=
+"color: #3a81c3; font-weight: bold;">=</span>
+  <span style="color: #715ab1;">parse</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> null <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #655370; background-color: #fbf8ef;">NULL</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> white <span style="color: #655370; background-color: #fbf8ef;">{</span> read lexbuf <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> newline <span style="color: #655370; background-color: #fbf8ef;">{</span> next_line <span style="color: #715ab1;">lexbuf</span><span style="color: #655370; background-color: #fbf8ef;">;</span> <span style="color: #715ab1;">read</span> <span style="color: #715ab1;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">int</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #655370; background-color: #fbf8ef;">INT</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #6c3163; font-weight: bold;">int_of_string</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #ba2f59; font-weight: bold;">Lexing</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">lexeme</span> <span style="color: #715ab1;">lexbuf</span><span style="color: #655370; background-color: #fbf8ef;">))</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> float <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #655370; background-color: #fbf8ef;">FLOAT</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #6c3163; font-weight: bold;">float_of_string</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #ba2f59; font-weight: bold;">Lexing</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">lexeme</span> <span style="color: #715ab1;">lexbuf</span><span style="color: #655370; background-color: #fbf8ef;">))</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">"true"</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">TRUE</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">"false"</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">FALSE</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\"</span><span style=
+"color: #2d9574;">'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> read_string <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #ba2f59; font-weight: bold;">Buffer</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">create</span> <span style="color: #4e3163;">17</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">':'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">COLON</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">','</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">COMMA</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'['</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">LEFT_BRACK</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">']'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">RIGHT_BRACK</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'{'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">LEFT_BRACE</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'}'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #3a81c3;">RIGHT_BRACE</span> <span style=
+"color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> _ <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">raise</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #3a81c3;">SyntaxError</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"Unexpected char: "</span> <span style="color: #3a81c3; font-weight: bold;">^</span> <span style="color: #ba2f59; font-weight: bold;">Lexing</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">lexeme</span> <span style="color: #715ab1;">lexbuf</span><span style="color: #655370; background-color: #fbf8ef;">))</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> eof <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">EOF</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">and</span> <span style=
+"color: #6c3163; font-weight: bold;">read_string</span> <span style="color: #4e3163; font-style: italic;">buf</span> =
+  <span style="color: #715ab1;">parse</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\"</span><span style=
+"color: #2d9574;">'</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #655370; background-color: #fbf8ef;">STRING</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #ba2f59; font-weight: bold;">Buffer</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">contents</span> <span style="color: #715ab1;">buf</span><span style="color: #655370; background-color: #fbf8ef;">)</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span> '/' <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">add_char</span> buf <span style="color: #2d9574;">'/'</span><span style="color: #655370; background-color: #fbf8ef;">;</span> read_string buf <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span> '\\' <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">add_char</span> buf '\\'; read_string buf <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span> 'b' <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">add_char</span> buf '\b'; read_string buf <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span> 'f' <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">add_char</span> buf '\012'; read_string buf <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span> 'n' <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">add_char</span> buf '\n'; read_string buf <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span> 'r' <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">add_char</span> buf '\r'; read_string buf <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span> 't' <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">add_char</span> buf '\t'; read_string buf <span style="color: #4e3163; font-style: italic;">lexbuf</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #655370; background-color: #fbf8ef;">[</span><span style=
+"color: #3a81c3; font-weight: bold;">^</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\"</span><span style=
+"color: #2d9574;">'</span> <span style=
+"color: #2d9574;">'</span><span style=
+"color: #2d9574; font-weight: bold;">\\</span><span style=
+"color: #2d9574;">'</span><span style=
+"color: #655370; background-color: #fbf8ef;">]</span><span style=
+"color: #655370; background-color: #fbf8ef;">+</span> <span style=
+"color: #655370; background-color: #fbf8ef;">{</span> <span style=
+"color: #ba2f59; font-weight: bold;">Buffer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span>add_string buf <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #ba2f59; font-weight: bold;">Lexing</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">lexeme</span> <span style="color: #715ab1;">lexbuf</span><span style="color: #655370; background-color: #fbf8ef;">)</span><span style="color: #655370; background-color: #fbf8ef;">;</span> read_string buf lexbuf <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> _ <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">raise</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #3a81c3;">SyntaxError</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"Illegal string character: "</span> <span style="color: #3a81c3; font-weight: bold;">^</span> <span style="color: #ba2f59; font-weight: bold;">Lexing</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">lexeme</span> <span style="color: #715ab1;">lexbuf</span><span style="color: #655370; background-color: #fbf8ef;">))</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> eof <span style="color: #655370; background-color: #fbf8ef;">{</span> <span style="color: #3a81c3;">raise</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #3a81c3;">SyntaxError</span> <span style="color: #655370; background-color: #fbf8ef;">(</span><span style="color: #2d9574;">"String terminated by EOF"</span><span style="color: #655370; background-color: #fbf8ef;">))</span> <span style="color: #655370; background-color: #fbf8ef;">}</span>
 </pre></div>
 <p>
 上面的片段总体上还是符合直觉的。首先<code>read</code>会对空字符返回<code>NULL</code>的token，忽略空白字符，遇到换行字符时使用刚定义的函数换行并读入新行，正则匹配到整型数和浮点数时会返回各自的<code>INT</code>或<code>FLOAT</code>的token并将字符串类型转换，等等。</p>
@@ -437,286 +599,383 @@ let <span style="color: #a0522d;">white</span> = [<span style=
 对于字符串开始处的引号，它会调用随后定义的一个<code>read_string</code>工具（其是被递归定义的）：处理一些被转义的特殊字符，将它们读入缓冲区；读入所有不特殊的字符，并在读到另一个（象征字符串结束的）引号时返回<code>STRING</code>类型的token，而缓冲区内的字符串将会被作为值传回。当读到非法字符，和在字符串未结束即到达文件末尾时会抛出错误。</p>
 </div>
 </div>
-<div id="outline-container-org174b675" class="outline-2">
-<h2 id="org174b675"><span class="section-number-2">5.</span>
+<div id="outline-container-org1132005" class="outline-2">
+<h2 id="org1132005"><span class="section-number-2">5.</span>
 集成</h2>
 <div class="outline-text-2" id="text-5">
 <p>最后我们可以将上面的词法分析和文法解析集成起来。命名为<code>util.ml</code>。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">type</span> <span style=
-"color: #228b22;">t</span> = <span style=
-"color: #228b22;">Datatype</span>.<span style=
-"color: #228b22;">stt</span>
-<span style="color: #a020f0;">open</span> <span style=
-"color: #228b22;">Datatype</span>
+"color: #3a81c3; font-weight: bold;">type</span> <span style=
+"color: #ba2f59; font-weight: bold;">t</span> <span style=
+"color: #655370; background-color: #fbf8ef;">=</span> <span style=
+"color: #ba2f59; font-weight: bold;">Datatype</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #ba2f59; font-weight: bold;">stt</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">open</span> <span style=
+"color: #ba2f59; font-weight: bold;">Datatype</span>
 </pre></div>
 <p>我们首先定义<code>t</code>为解析之后返回类型的别名，并打开该类型定义文件。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">let</span> <span style=
-"color: #0000ff;">print_position</span> <span style=
-"color: #a0522d;">lexbuf</span> =
-  <span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">pos</span> = <span style=
-"color: #a0522d;">lexbuf</span>.lex_curr_p <span style=
-"color: #a020f0;">in</span>
-  <span style="color: #0000ff;">fprintf</span> <span style=
-"color: #a0522d;">stderr</span> <span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">%s</span><span style=
-"color: #8b2252;">:</span><span style=
-"color: #8b2252;">%d</span><span style=
-"color: #8b2252;">:</span><span style=
-"color: #8b2252;">%d</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">pos</span>.pos_fname <span style=
-"color: #a0522d;">pos</span>.pos_lnum (<span style=
-"color: #a0522d;">pos</span>.pos_cnum <span style=
-"color: #a020f0;">-</span> <span style=
-"color: #a0522d;">pos</span>.pos_bol <span style=
-"color: #a020f0;">+</span><span style="color: #008b8b;">1</span>)
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">print_position</span> <span style="color: #715ab1;">lexbuf</span> =
+  <span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">pos</span> = <span style=
+"color: #715ab1;">lexbuf</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">lex_curr_p</span> <span style="color: #3a81c3; font-weight: bold;">in</span>
+  <span style=
+"color: #6c3163; font-weight: bold;">fprintf</span> <span style=
+"color: #715ab1;">stderr</span> <span style=
+"color: #2d9574;">"</span><span style=
+"color: #2d9574; font-weight: bold;">%s</span><span style=
+"color: #2d9574;">:</span><span style=
+"color: #2d9574; font-weight: bold;">%d</span><span style=
+"color: #2d9574;">:</span><span style=
+"color: #2d9574; font-weight: bold;">%d</span><span style=
+"color: #2d9574;">"</span> <span style=
+"color: #715ab1;">pos</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">pos_fname</span> <span style=
+"color: #715ab1;">pos</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">pos_lnum</span> <span style=
+"color: #655370; background-color: #fbf8ef;">(</span><span style=
+"color: #715ab1;">pos</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">pos_cnum</span> <span style=
+"color: #3a81c3; font-weight: bold;">-</span> <span style=
+"color: #715ab1;">pos</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #4e3163; font-style: italic;">pos_bol</span> <span style=
+"color: #3a81c3; font-weight: bold;">+</span><span style=
+"color: #4e3163;">1</span><span style=
+"color: #655370; background-color: #fbf8ef;">)</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #0000ff;">parse_with_error</span> <span style=
-"color: #a0522d;">lexbuf</span> =
-  <span style="color: #a020f0;">try</span> <span style=
-"color: #228b22;">Parser</span>.<span style=
-"color: #0000ff;">decl</span> <span style=
-"color: #228b22;">Lexer</span>.<span style=
-"color: #a0522d;">read</span> <span style=
-"color: #a0522d;">lexbuf</span> <span style=
-"color: #a020f0;">with</span>
-  | <span style="color: #483d8b;">SyntaxError</span> <span style=
-"color: #a0522d;">msg</span> -&gt;
-     <span style="color: #0000ff;">fprintf</span> <span style=
-"color: #a0522d;">stderr</span> <span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">%a</span><span style=
-"color: #8b2252;">: </span><span style=
-"color: #8b2252;">%s</span><span style=
-"color: #8b2252;">\n</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">print_position</span> <span style=
-"color: #a0522d;">lexbuf</span> <span style=
-"color: #a0522d;">msg</span>;
-     <span style="color: #483d8b;">None</span>
-  | <span style="color: #228b22;">Parser</span>.<span style=
-"color: #a0522d;">error</span> -&gt;
-     <span style="color: #0000ff;">fprintf</span> <span style=
-"color: #a0522d;">stderr</span> <span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">%a</span><span style=
-"color: #8b2252;">: Syntax error</span><span style=
-"color: #8b2252;">\n</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">print_position</span> <span style=
-"color: #a0522d;">lexbuf</span>;
-     <span style="color: #0000ff;">exit</span> (<span style=
-"color: #a020f0;">-</span><span style="color: #008b8b;">1</span>)
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">parse_with_error</span> <span style="color: #715ab1;">lexbuf</span> =
+  <span style=
+"color: #3a81c3; font-weight: bold;">try</span> <span style=
+"color: #ba2f59; font-weight: bold;">Parser</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #6c3163; font-weight: bold;">decl</span> <span style=
+"color: #ba2f59; font-weight: bold;">Lexer</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #715ab1;">read</span> <span style=
+"color: #715ab1;">lexbuf</span> <span style=
+"color: #3a81c3; font-weight: bold;">with</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">SyntaxError</span> <span style=
+"color: #715ab1;">msg</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span>
+     <span style=
+"color: #6c3163; font-weight: bold;">fprintf</span> <span style=
+"color: #715ab1;">stderr</span> <span style=
+"color: #2d9574;">"</span><span style=
+"color: #2d9574; font-weight: bold;">%a</span><span style=
+"color: #2d9574;">: </span><span style=
+"color: #2d9574; font-weight: bold;">%s</span><span style=
+"color: #2d9574; font-weight: bold;">\n</span><span style=
+"color: #2d9574;">"</span> <span style=
+"color: #715ab1;">print_position</span> <span style=
+"color: #715ab1;">lexbuf</span> <span style=
+"color: #715ab1;">msg</span><span style=
+"color: #655370; background-color: #fbf8ef;">;</span>
+     <span style="color: #3a81c3;">None</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #ba2f59; font-weight: bold;">Parser</span><span style=
+"color: #655370; background-color: #fbf8ef;">.</span><span style=
+"color: #715ab1;">error</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span>
+     <span style=
+"color: #6c3163; font-weight: bold;">fprintf</span> <span style=
+"color: #715ab1;">stderr</span> <span style=
+"color: #2d9574;">"</span><span style=
+"color: #2d9574; font-weight: bold;">%a</span><span style=
+"color: #2d9574;">: Syntax error</span><span style=
+"color: #2d9574; font-weight: bold;">\n</span><span style=
+"color: #2d9574;">"</span> <span style=
+"color: #715ab1;">print_position</span> <span style=
+"color: #715ab1;">lexbuf</span><span style=
+"color: #655370; background-color: #fbf8ef;">;</span>
+     <span style=
+"color: #6c3163; font-weight: bold;">exit</span> <span style=
+"color: #655370; background-color: #fbf8ef;">(</span><span style=
+"color: #3a81c3; font-weight: bold;">-</span><span style=
+"color: #4e3163;">1</span><span style=
+"color: #655370; background-color: #fbf8ef;">)</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a020f0;">rec</span> <span style=
-"color: #0000ff;">parse</span> (<span style=
-"color: #a0522d;">json</span>:<span style=
-"color: #228b22;"> string</span>):<span style=
-"color: #228b22;"> </span><span style=
-"color: #228b22;">t</span><span style="color: #228b22;"> </span>=
-  <span style="color: #a020f0;">match</span> <span style=
-"color: #0000ff;">parse_with_error</span> <span style=
-"color: #a0522d;">lexbuf</span> <span style=
-"color: #a020f0;">with</span>
-  | <span style="color: #483d8b;">Some</span> <span style=
-"color: #a0522d;">value</span> -&gt; <span style=
-"color: #a0522d;">value</span>;
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #3a81c3; font-weight: bold;">rec</span> <span style=
+"color: #6c3163; font-weight: bold;">parse</span> <span style=
+"color: #655370; background-color: #fbf8ef;">(</span><span style=
+"color: #715ab1;">json</span><span style=
+"color: #655370; background-color: #fbf8ef;">:</span><span style=
+"color: #ba2f59; font-weight: bold;"> string</span><span style=
+"color: #655370; background-color: #fbf8ef;">)</span><span style=
+"color: #655370; background-color: #fbf8ef;">:</span><span style=
+"color: #ba2f59; font-weight: bold;"> </span><span style=
+"color: #ba2f59; font-weight: bold;">t</span><span style=
+"color: #ba2f59; font-weight: bold;"> </span>=
+  <span style=
+"color: #3a81c3; font-weight: bold;">match</span> <span style=
+"color: #6c3163; font-weight: bold;">parse_with_error</span> <span style="color: #715ab1;">lexbuf</span> <span style="color: #3a81c3; font-weight: bold;">with</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">Some</span> <span style=
+"color: #715ab1;">value</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #715ab1;">value</span><span style="color: #655370; background-color: #fbf8ef;">;</span>
                   <span style=
-"color: #0000ff;">parse</span> <span style=
-"color: #a0522d;">lexbuf</span>
-  | <span style="color: #483d8b;">None</span> -&gt; ()
+"color: #6c3163; font-weight: bold;">parse</span> <span style=
+"color: #715ab1;">lexbuf</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">None</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #655370; background-color: #fbf8ef;">()</span>
 </pre></div>
 <p>
 上面，我们定义了输出当前位置、尝试解析并捕获异常、以及实际解析的函数。注意这里我们的错误恢复非常简陋，甚至都不是恐慌模式，而是、什么都不是。</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">let</span> <span style=
-"color: #0000ff;">typeof</span> = <span style=
-"color: #a020f0;">function</span>
-  | <span style="color: #483d8b;">`Integer</span> <span style=
-"color: #a0522d;">_</span> -&gt; <span style=
-"color: #8b2252;">"int"</span>
-  | <span style="color: #483d8b;">`Float</span> <span style=
-"color: #a0522d;">_</span> -&gt; <span style=
-"color: #8b2252;">"float"</span>
-  | <span style="color: #483d8b;">`Bool</span> <span style=
-"color: #a0522d;">_</span> -&gt; <span style=
-"color: #8b2252;">"bool"</span>
-  | <span style="color: #483d8b;">`String</span> <span style=
-"color: #a0522d;">_</span> -&gt; <span style=
-"color: #8b2252;">"string"</span>
-  | <span style="color: #483d8b;">`Array</span> <span style=
-"color: #a0522d;">_</span> -&gt; <span style=
-"color: #8b2252;">"array"</span>
-  | <span style="color: #483d8b;">`Object</span> <span style=
-"color: #a0522d;">_</span> -&gt; <span style=
-"color: #8b2252;">"object"</span>
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">typeof</span> = <span style=
+"color: #3a81c3; font-weight: bold;">function</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Integer</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #2d9574;">"int"</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Float</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #2d9574;">"float"</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Bool</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #2d9574;">"bool"</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`String</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #2d9574;">"string"</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Array</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #2d9574;">"array"</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Object</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #2d9574;">"object"</span>
 
-<span style="color: #a020f0;">exception</span> <span style=
-"color: #483d8b;">NotNumericValue</span>
-<span style="color: #a020f0;">exception</span> <span style=
-"color: #483d8b;">NotStringableValue</span>
-<span style="color: #a020f0;">exception</span> <span style=
-"color: #483d8b;">NotArray</span>
-<span style="color: #a020f0;">exception</span> <span style=
-"color: #483d8b;">EmptyArray</span>
-<span style="color: #a020f0;">exception</span> <span style=
-"color: #483d8b;">NotObject</span>
-<span style="color: #a020f0;">exception</span> <span style=
-"color: #483d8b;">EmptyObject</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">exception</span> <span style=
+"color: #3a81c3;">NotNumericValue</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">exception</span> <span style=
+"color: #3a81c3;">NotStringableValue</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">exception</span> <span style=
+"color: #3a81c3;">NotArray</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">exception</span> <span style=
+"color: #3a81c3;">EmptyArray</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">exception</span> <span style=
+"color: #3a81c3;">NotObject</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">exception</span> <span style=
+"color: #3a81c3;">EmptyObject</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #0000ff;">as_number</span> = <span style=
-"color: #a020f0;">function</span>
-  | <span style="color: #483d8b;">`Int</span> <span style=
-"color: #a0522d;">i</span> -&gt; <span style=
-"color: #0000ff;">float</span> <span style=
-"color: #a0522d;">i</span>
-  | <span style="color: #483d8b;">`Float</span> <span style=
-"color: #a0522d;">f</span> -&gt; <span style=
-"color: #0000ff;">float</span> <span style=
-"color: #a0522d;">f</span>
-  | <span style="color: #a0522d;">_</span> -&gt; <span style=
-"color: #483d8b;">raise</span> <span style=
-"color: #483d8b;">NotNumericValue</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">as_number</span> = <span style="color: #3a81c3; font-weight: bold;">function</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Int</span> <span style=
+"color: #715ab1;">i</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #6c3163; font-weight: bold;">float</span> <span style="color: #715ab1;">i</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Float</span> <span style=
+"color: #715ab1;">f</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #6c3163; font-weight: bold;">float</span> <span style="color: #715ab1;">f</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #3a81c3; font-weight: bold;">raise</span> <span style="color: #3a81c3;">NotNumericValue</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #0000ff;">as_string</span> = <span style=
-"color: #a020f0;">function</span>
-  | <span style="color: #483d8b;">`String</span> <span style=
-"color: #a0522d;">s</span> -&gt; <span style=
-"color: #0000ff;">string</span> <span style=
-"color: #a0522d;">s</span>
-  | <span style="color: #a0522d;">_</span> -&gt; <span style=
-"color: #483d8b;">NotStringableValue</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">as_string</span> = <span style="color: #3a81c3; font-weight: bold;">function</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`String</span> <span style=
+"color: #715ab1;">s</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #6c3163; font-weight: bold;">string</span> <span style="color: #715ab1;">s</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #3a81c3;">NotStringableValue</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #0000ff;">get_mem</span> <span style=
-"color: #a0522d;">n</span> = <span style=
-"color: #a020f0;">function</span>
-  | <span style="color: #483d8b;">`Array</span> (<span style=
-"color: #a0522d;">a</span>) -&gt; <span style=
-"color: #228b22;">List</span>.<span style=
-"color: #0000ff;">nth</span> <span style=
-"color: #a0522d;">a</span> <span style="color: #a0522d;">n</span>
-  | <span style=
-"color: #483d8b;">`Array</span> ([]) -&gt; <span style=
-"color: #483d8b;">raise</span> <span style=
-"color: #483d8b;">EmptyArray</span>
-  | <span style="color: #a0522d;">_</span> -&gt; <span style=
-"color: #483d8b;">raise</span> <span style=
-"color: #483d8b;">NotArray</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">get_mem</span> <span style=
+"color: #715ab1;">n</span> = <span style=
+"color: #3a81c3; font-weight: bold;">function</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Array</span> <span style=
+"color: #655370; background-color: #fbf8ef;">(</span><span style=
+"color: #715ab1;">a</span><span style=
+"color: #655370; background-color: #fbf8ef;">)</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #ba2f59; font-weight: bold;">List</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">nth</span> <span style="color: #715ab1;">a</span> <span style="color: #715ab1;">n</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Array</span> <span style=
+"color: #655370; background-color: #fbf8ef;">([])</span> <span style="color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #3a81c3; font-weight: bold;">raise</span> <span style="color: #3a81c3;">EmptyArray</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #3a81c3; font-weight: bold;">raise</span> <span style="color: #3a81c3;">NotArray</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #0000ff;">get_child</span> <span style=
-"color: #a0522d;">k</span> = <span style=
-"color: #a020f0;">function</span>
-  | <span style="color: #483d8b;">`Object</span> (<span style=
-"color: #a0522d;">o</span>) -&gt; <span style=
-"color: #228b22;">List</span>.<span style=
-"color: #0000ff;">assoc</span> <span style=
-"color: #a0522d;">k</span> <span style="color: #a0522d;">o</span>
-  | <span style=
-"color: #483d8b;">`Object</span> ([]) -&gt; <span style=
-"color: #483d8b;">raise</span> <span style=
-"color: #483d8b;">EmptyObject</span>
-  | <span style="color: #a0522d;">_</span> -&gt; <span style=
-"color: #483d8b;">raise</span> <span style=
-"color: #483d8b;">NotObject</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #6c3163; font-weight: bold;">get_child</span> <span style=
+"color: #715ab1;">k</span> = <span style=
+"color: #3a81c3; font-weight: bold;">function</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Object</span> <span style=
+"color: #655370; background-color: #fbf8ef;">(</span><span style=
+"color: #715ab1;">o</span><span style=
+"color: #655370; background-color: #fbf8ef;">)</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #ba2f59; font-weight: bold;">List</span><span style="color: #655370; background-color: #fbf8ef;">.</span><span style="color: #6c3163; font-weight: bold;">assoc</span> <span style="color: #715ab1;">k</span> <span style="color: #715ab1;">o</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #3a81c3;">`Object</span> <span style=
+"color: #655370; background-color: #fbf8ef;">([])</span> <span style="color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #3a81c3; font-weight: bold;">raise</span> <span style="color: #3a81c3;">EmptyObject</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">|</span> <span style=
+"color: #715ab1;">_</span> <span style=
+"color: #655370; background-color: #fbf8ef;">-&gt;</span> <span style="color: #3a81c3; font-weight: bold;">raise</span> <span style="color: #3a81c3;">NotObject</span>
 </pre></div>
 <p>上面我们定义了一些帮手函数，用于从解析之后的数据结构中取得我们需要的信息。</p>
 </div>
 </div>
-<div id="outline-container-org2397fe5" class="outline-2">
-<h2 id="org2397fe5"><span class="section-number-2">6.</span>
+<div id="outline-container-org72ff343" class="outline-2">
+<h2 id="org72ff343"><span class="section-number-2">6.</span>
 使用</h2>
 <div class="outline-text-2" id="text-6">
 <p>我们可以执行：</p>
 <div class="org-src-container">
-<pre class="src src-shell">ocamllex lexer.mll
-ocamlyacc parser.mly
-ocamlopt <span style=
-"color: #008b8b;">-c</span> datatype.ml <span style=
-"color: #008b8b;">-for-pack</span> Json
-ocamlopt <span style="color: #008b8b;">-c</span> parser.mli
-ocamlopt <span style=
-"color: #008b8b;">-c</span> lexer.ml <span style=
-"color: #008b8b;">-for-pack</span> Json
-ocamlopt <span style=
-"color: #008b8b;">-c</span> parser.ml <span style=
-"color: #008b8b;">-for-pack</span> Json
-ocamlopt <span style=
-"color: #008b8b;">-c</span> util.ml <span style=
-"color: #008b8b;">-for-pack</span> Json
-ocamlopt <span style="color: #008b8b;">-pack</span> <span style=
-"color: #008b8b;">-o</span> json.cmx datatype.cmx lexer.cmx parser.cmx util.cmx
+<pre class="src src-shell"><span style=
+"color: #2aa1ae; font-weight: bold;">ocamllex</span> lexer.mll
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlyacc</span> parser.mly
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> <span style=
+"color: #4e3163;">-c</span> datatype.ml <span style=
+"color: #4e3163;">-for-pack</span> Json
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> <span style=
+"color: #4e3163;">-c</span> parser.mli
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> <span style=
+"color: #4e3163;">-c</span> lexer.ml <span style=
+"color: #4e3163;">-for-pack</span> Json
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> <span style=
+"color: #4e3163;">-c</span> parser.ml <span style=
+"color: #4e3163;">-for-pack</span> Json
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> <span style=
+"color: #4e3163;">-c</span> util.ml <span style=
+"color: #4e3163;">-for-pack</span> Json
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> <span style=
+"color: #4e3163;">-pack</span> <span style=
+"color: #4e3163;">-o</span> json.cmx datatype.cmx lexer.cmx parser.cmx util.cmx
 </pre></div>
 <p>来将这个解析器打包。随后创建以下用例：</p>
 <div class="org-src-container">
 <pre class="src src-ocaml"><span style=
-"color: #a020f0;">let</span> <span style=
-"color: #a0522d;">json_string</span> = <span style=
-"color: #8b2252;">{</span><span style="color: #8b2252;">|</span>
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">json_string</span> = <span style=
+"color: #2d9574; background-color: #fbf8ef;">{</span><span style=
+"color: #2d9574;">|</span>
 <span style=
-"color: #8b2252;">                   {"number" : 42,</span>
+"color: #2d9574;">                   {"number" : 42,</span>
 <span style=
-"color: #8b2252;">                   "string" : "yes",</span>
+"color: #2d9574;">                   "string" : "yes",</span>
 <span style=
-"color: #8b2252;">                   "list": ["for", "sure", 42]}|</span><span style="color: #8b2252;">}</span>  <span style="color: #b22222;">(* val json_string : string *)</span>
+"color: #2d9574;">                   "list": ["for", "sure", 42]}|</span><span style="color: #2d9574; background-color: #fbf8ef;">}</span>  <span style="color: #a49da5; font-style: italic;">(* val json_string : string *)</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">json</span> = <span style=
-"color: #0000ff;">parse</span> <span style=
-"color: #a0522d;">json_string</span>;;  <span style=
-"color: #b22222;">(* val json : Json.Datatype.stt *)</span>
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">json</span> = <span style=
+"color: #6c3163; font-weight: bold;">parse</span> <span style=
+"color: #715ab1;">json_string</span><span style=
+"color: #655370; background-color: #fbf8ef;">;;</span>  <span style="color: #a49da5; font-style: italic;">(* val json : Json.Datatype.stt *)</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">num</span> = <span style=
-"color: #a0522d;">json</span>
-          <span style="color: #a020f0;">|&gt;</span> <span style=
-"color: #0000ff;">get_child</span> <span style=
-"color: #8b2252;">"number"</span>
-          <span style="color: #a020f0;">|&gt;</span> <span style=
-"color: #0000ff;">as_number</span>;;  <span style=
-"color: #b22222;">(* val num : float *)</span>
-<span style="color: #0000ff;">print_float</span> <span style=
-"color: #a0522d;">num</span>;;
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">num</span> = <span style=
+"color: #715ab1;">json</span>
+          <span style=
+"color: #3a81c3; font-weight: bold;">|&gt;</span> <span style=
+"color: #6c3163; font-weight: bold;">get_child</span> <span style=
+"color: #2d9574;">"number"</span>
+          <span style=
+"color: #3a81c3; font-weight: bold;">|&gt;</span> <span style=
+"color: #6c3163; font-weight: bold;">as_number</span><span style=
+"color: #655370; background-color: #fbf8ef;">;;</span>  <span style="color: #a49da5; font-style: italic;">(* val num : float *)</span>
+<span style=
+"color: #6c3163; font-weight: bold;">print_float</span> <span style="color: #715ab1;">num</span><span style="color: #655370; background-color: #fbf8ef;">;;</span>
 
-<span style="color: #a020f0;">let</span> <span style=
-"color: #a0522d;">mem</span> = <span style=
-"color: #a0522d;">json</span>
-          <span style="color: #a020f0;">|&gt;</span> <span style=
-"color: #0000ff;">get_child</span> <span style=
-"color: #8b2252;">"list"</span>
-          <span style="color: #a020f0;">|&gt;</span> <span style=
-"color: #0000ff;">get_mem</span> <span style=
-"color: #008b8b;">0</span>
-          <span style="color: #a020f0;">|&gt;</span> <span style=
-"color: #0000ff;">as_string</span>;;  <span style=
-"color: #b22222;">(* val mem : string *)</span>
-<span style="color: #0000ff;">print_string</span> <span style=
-"color: #a0522d;">mem</span>;;
+<span style=
+"color: #3a81c3; font-weight: bold;">let</span> <span style=
+"color: #715ab1;">mem</span> = <span style=
+"color: #715ab1;">json</span>
+          <span style=
+"color: #3a81c3; font-weight: bold;">|&gt;</span> <span style=
+"color: #6c3163; font-weight: bold;">get_child</span> <span style=
+"color: #2d9574;">"list"</span>
+          <span style=
+"color: #3a81c3; font-weight: bold;">|&gt;</span> <span style=
+"color: #6c3163; font-weight: bold;">get_mem</span> <span style=
+"color: #4e3163;">0</span>
+          <span style=
+"color: #3a81c3; font-weight: bold;">|&gt;</span> <span style=
+"color: #6c3163; font-weight: bold;">as_string</span><span style=
+"color: #655370; background-color: #fbf8ef;">;;</span>  <span style="color: #a49da5; font-style: italic;">(* val mem : string *)</span>
+<span style=
+"color: #6c3163; font-weight: bold;">print_string</span> <span style="color: #715ab1;">mem</span><span style="color: #655370; background-color: #fbf8ef;">;;</span>
 </pre></div>
 <p>命名为<code>test.ml</code>后，使用：</p>
 <div class="org-src-container">
-<pre class="src src-shell">ocamlopt <span style=
-"color: #008b8b;">-c</span> test.ml
-ocamlopt json.cmx test.cmx
-./a.out
+<pre class="src src-shell"><span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> <span style=
+"color: #4e3163;">-c</span> test.ml
+<span style=
+"color: #2aa1ae; font-weight: bold;">ocamlopt</span> json.cmx test.cmx
+<span style="color: #2aa1ae; font-weight: bold;">./a.out</span>
 </pre></div>
 <p>完成对JSON的解析。</p>
 </div>
 </div>
-<div id="outline-container-orgb02b00c" class="outline-2">
-<h2 id="orgb02b00c"><span class="section-number-2">7.</span>
+<div id="outline-container-orgf8fc719" class="outline-2">
+<h2 id="orgf8fc719"><span class="section-number-2">7.</span>
 最后</h2>
 <div class="outline-text-2" id="text-7">
 <p>
@@ -727,7 +986,7 @@ ocamlopt json.cmx test.cmx
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: RadioNoiseE</p>
-<p class="date">Created: 2024-10-15 Tue 08:07</p>
+<p class="date">Created: 2024-10-16 Wed 08:04</p>
 <p class="validation"><a href=
 "https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

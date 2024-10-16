@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content=
 "HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-<!-- 2024-10-15 Tue 08:07 -->
+<!-- 2024-10-16 Wed 08:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content=
 "width=device-width, initial-scale=1">
@@ -21,28 +21,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc5f1959">1. 生存策略</a>
+<li><a href="#org323525c">1. 生存策略</a>
 <ul>
-<li><a href="#org677f21b">1.1. 当前之怪现状</a></li>
-<li><a href="#org252a9bf">1.2. 关于FontConfig</a></li>
+<li><a href="#orgd55aa46">1.1. 当前之怪现状</a></li>
+<li><a href="#org85a7426">1.2. 关于FontConfig</a></li>
 </ul>
 </li>
-<li><a href="#org4d89ca5">2. 实践</a>
+<li><a href="#org00e0cd0">2. 实践</a>
 <ul>
-<li><a href="#org87093cb">2.1. 字体族配置</a></li>
-<li><a href="#org32ec476">2.2. 启用对应预设</a></li>
+<li><a href="#org4bf01df">2.1. 字体族配置</a></li>
+<li><a href="#org526dd59">2.2. 启用对应预设</a></li>
 </ul>
 </li>
-<li><a href="#org60a4c66">3. 最后</a></li>
+<li><a href="#orgdb50856">3. 最后</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgc5f1959" class="outline-2">
-<h2 id="orgc5f1959"><span class="section-number-2">1.</span>
+<div id="outline-container-org323525c" class="outline-2">
+<h2 id="org323525c"><span class="section-number-2">1.</span>
 生存策略</h2>
 <div class="outline-text-2" id="text-1"></div>
-<div id="outline-container-org677f21b" class="outline-3">
-<h3 id="org677f21b"><span class="section-number-3">1.1.</span>
+<div id="outline-container-orgd55aa46" class="outline-3">
+<h3 id="orgd55aa46"><span class="section-number-3">1.1.</span>
 当前之怪现状</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>现在对于Linux下的字体渲染，感觉有几种（比较主流的）论调：</p>
@@ -58,8 +58,8 @@ class="footref" href="#fn.1" role="doc-backlink">1</a></sup>）；</li>
 2024年了，经过非常少的配置，7px大小的中文矢量字体在我的2K屏幕上轮廓依然锐利；而且是在我完全不使用字体微调的基础上（我极其厌恶扭曲了轮廓的字体）。靠（专利过期后默认开启的）次像素渲染和LCD滤镜善后加上抗锯齿足矣。</p>
 </div>
 </div>
-<div id="outline-container-org252a9bf" class="outline-3">
-<h3 id="org252a9bf"><span class="section-number-3">1.2.</span>
+<div id="outline-container-org85a7426" class="outline-3">
+<h3 id="org85a7426"><span class="section-number-3">1.2.</span>
 关于FontConfig</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
@@ -139,148 +139,157 @@ Available fontconfig .conf files (* is enabled):
 你只需要启用你需要的就好了。（<code>eselect</code>是Gentoo的好东西，其他发行版只需要链接<code>conf.avail</code>路径下的预设即可，见下文）。</p>
 <p>所以，实际上你需要写的只有这些：</p>
 <div class="org-src-container">
-<pre class="src src-xml">&lt;?<span style=
-"color: #a020f0;">xml</span> <span style=
-"color: #8b2252;">version</span><span style=
-"color: #8b2252;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">1.0</span><span style=
-"color: #8b2252;">"</span>?&gt;
-&lt;!<span style="color: #a020f0;">DOCTYPE</span> <span style=
-"color: #228b22;">fontconfig</span> <span style=
-"color: #a020f0;">SYSTEM</span> "fonts.dtd"&gt;
-&lt;<span style="color: #0000ff;">fontconfig</span>&gt;
-  &lt;<span style="color: #0000ff;">alias</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">family</span>&gt;sans-serif&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;<span style="color: #0000ff;">prefer</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Liberation Sans&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Noto Sans CJK SC&lt;/<span style="color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">prefer</span>&gt;
-    &lt;<span style="color: #0000ff;">default</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Apple Symbol&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">default</span>&gt;
-  &lt;/<span style="color: #0000ff;">alias</span>&gt;
-  &lt;<span style="color: #0000ff;">alias</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">family</span>&gt;serif&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;<span style="color: #0000ff;">prefer</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Liberation Serif&lt;/<span style="color: #0000ff;">family</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Noto Serif CJK SC&lt;/<span style="color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">prefer</span>&gt;
-    &lt;<span style="color: #0000ff;">default</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Apple Symbol&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">default</span>&gt;
-  &lt;/<span style="color: #0000ff;">alias</span>&gt;
-  &lt;<span style="color: #0000ff;">alias</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">family</span>&gt;monospace&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;<span style="color: #0000ff;">prefer</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Iosevka Curly Slab&lt;/<span style="color: #0000ff;">family</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Noto Sans CJK SC&lt;/<span style="color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">prefer</span>&gt;
-    &lt;<span style="color: #0000ff;">default</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;Apple Symbol&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">default</span>&gt;
-  &lt;/<span style="color: #0000ff;">alias</span>&gt;
-&lt;/<span style="color: #0000ff;">fontconfig</span>&gt;
+<pre class="src src-xml"><span style=
+"color: #655370; background-color: #fbf8ef;">&lt;?</span><span style="color: #3a81c3; font-weight: bold;">xml</span> <span style="color: #da8b55; font-style: italic;">version</span><span style="color: #da8b55; font-weight: bold;">=</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #da8b55;">1.0</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">?&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;!</span><span style="color: #3a81c3; font-weight: bold;">DOCTYPE</span> <span style="color: #ba2f59; font-weight: bold;">fontconfig</span> <span style="color: #3a81c3; font-weight: bold;">SYSTEM</span> <span style="color: #655370; background-color: #fbf8ef;">"</span>fonts.dtd<span style="color: #655370; background-color: #fbf8ef;">"&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">fontconfig</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>sans-serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Liberation Sans<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans CJK SC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Apple Symbol<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Liberation Serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Serif CJK SC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Apple Symbol<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>monospace<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Iosevka Curly Slab<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans CJK SC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Apple Symbol<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">fontconfig</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
 </pre></div>
 <p>也就是说只需指定三个字体族的偏好字体即可。</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org4d89ca5" class="outline-2">
-<h2 id="org4d89ca5"><span class="section-number-2">2.</span>
+<div id="outline-container-org00e0cd0" class="outline-2">
+<h2 id="org00e0cd0"><span class="section-number-2">2.</span>
 实践</h2>
 <div class="outline-text-2" id="text-2"></div>
-<div id="outline-container-org87093cb" class="outline-3">
-<h3 id="org87093cb"><span class="section-number-3">2.1.</span>
+<div id="outline-container-org4bf01df" class="outline-3">
+<h3 id="org4bf01df"><span class="section-number-3">2.1.</span>
 字体族配置</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>这一步极为简单，只需要创建配置文件<code>/etc/fonts/local.conf</code>并按格式：</p>
 <div class="org-src-container">
-<pre class="src src-xml">&lt;?<span style=
-"color: #a020f0;">xml</span> <span style=
-"color: #8b2252;">version</span><span style=
-"color: #8b2252;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">1.0</span><span style=
-"color: #8b2252;">"</span>?&gt;
-&lt;!<span style="color: #a020f0;">DOCTYPE</span> <span style=
-"color: #228b22;">fontconfig</span> <span style=
-"color: #a020f0;">SYSTEM</span> "fonts.dtd"&gt;
-&lt;<span style="color: #0000ff;">fontconfig</span>&gt;
-  &lt;<span style="color: #0000ff;">alias</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">family</span>&gt;sans-serif&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;<span style="color: #0000ff;">prefer</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FSS1&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FSS2&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">prefer</span>&gt;
-    &lt;<span style="color: #0000ff;">default</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FSSB&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">default</span>&gt;
-  &lt;/<span style="color: #0000ff;">alias</span>&gt;
-  &lt;<span style="color: #0000ff;">alias</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">family</span>&gt;serif&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;<span style="color: #0000ff;">prefer</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FSF1&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FSF2&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">prefer</span>&gt;
-    &lt;<span style="color: #0000ff;">default</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FSFB&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">default</span>&gt;
-  &lt;/<span style="color: #0000ff;">alias</span>&gt;
-  &lt;<span style="color: #0000ff;">alias</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">family</span>&gt;monospace&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;<span style="color: #0000ff;">prefer</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FMS1&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FMS2&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">prefer</span>&gt;
-    &lt;<span style="color: #0000ff;">default</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">family</span>&gt;FMSB&lt;/<span style=
-"color: #0000ff;">family</span>&gt;
-    &lt;/<span style="color: #0000ff;">default</span>&gt;
-  &lt;/<span style="color: #0000ff;">alias</span>&gt;
-&lt;/<span style="color: #0000ff;">fontconfig</span>&gt;
+<pre class="src src-xml"><span style=
+"color: #655370; background-color: #fbf8ef;">&lt;?</span><span style="color: #3a81c3; font-weight: bold;">xml</span> <span style="color: #da8b55; font-style: italic;">version</span><span style="color: #da8b55; font-weight: bold;">=</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #da8b55;">1.0</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">?&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;!</span><span style="color: #3a81c3; font-weight: bold;">DOCTYPE</span> <span style="color: #ba2f59; font-weight: bold;">fontconfig</span> <span style="color: #3a81c3; font-weight: bold;">SYSTEM</span> <span style="color: #655370; background-color: #fbf8ef;">"</span>fonts.dtd<span style="color: #655370; background-color: #fbf8ef;">"&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">fontconfig</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>sans-serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FSS1<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FSS2<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FSSB<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FSF1<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FSF2<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FSFB<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>monospace<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FMS1<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FMS2<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">prefer</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>FMSB<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">family</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">default</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">alias</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">fontconfig</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
 </pre></div>
 <p>
 写入你喜欢的字体即可，不需要什么<code>binding="strong"</code>。注意<code>prefer</code>里按喜好程度填，<code>default</code>里填回滚字体，不需要管什么「中文环境下引号全宽所以中文字体是写在西文字体前面还是后面」这种问题。</p>
@@ -288,15 +297,16 @@ Available fontconfig .conf files (* is enabled):
 顺便，该<code>local.conf</code>文件生效需要启用预设<code>51-local.conf</code>，见下。</p>
 </div>
 </div>
-<div id="outline-container-org32ec476" class="outline-3">
-<h3 id="org32ec476"><span class="section-number-3">2.2.</span>
+<div id="outline-container-org526dd59" class="outline-3">
+<h3 id="org526dd59"><span class="section-number-3">2.2.</span>
 启用对应预设</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>请确保主要字体（比如我使用的思源系列）是用包管理器安装的，否则可能会缺少对应的预设文件需要你想办法解决。</p>
 <p>在Gentoo上可以使用<code>eselect</code>，其他发行版只需要使用：</p>
 <div class="org-src-container">
-<pre class="src src-shell">ln <span style=
-"color: #008b8b;">-s</span> /usr/share/fontconfig/conf.avail/0-example-config.conf <span style="color: #a020f0;">$</span>XDG_CONFIG_HOME/fontconfig/conf.d
+<pre class="src src-shell"><span style=
+"color: #2aa1ae; font-weight: bold;">ln</span> <span style=
+"color: #4e3163;">-s</span> /usr/share/fontconfig/conf.avail/0-example-config.conf <span style="color: #3a81c3; font-weight: bold;">$</span><span style="color: #4e3163; font-style: italic;">XDG_CONFIG_HOME</span>/fontconfig/conf.d
 </pre></div>
 <p>预设主要分两类，渲染相关的和语言环境下字体选择相关的：</p>
 <ul class="org-ul">
@@ -349,510 +359,278 @@ layout - Lagom LCD test</a>网站；滤镜也是根据你的喜好选择。预�
 <p>
 其中<code>noto-cjk.conf</code>提供了根据<code>lang-normalize.conf</code>决定使用何种字体的特性：</p>
 <div class="org-src-container">
-<pre class="src src-xml">&lt;?<span style=
-"color: #a020f0;">xml</span> <span style=
-"color: #8b2252;">version</span><span style=
-"color: #8b2252;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">1.0</span><span style=
-"color: #8b2252;">"</span>?&gt;
-&lt;!<span style="color: #a020f0;">DOCTYPE</span> <span style=
-"color: #228b22;">fontconfig</span> <span style=
-"color: #a020f0;">SYSTEM</span> "fonts.dtd"&gt;
-&lt;<span style="color: #0000ff;">fontconfig</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;ja&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Serif CJK JP&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;ko&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Serif CJK KR&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;zh-cn&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Serif CJK SC&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;zh-tw&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Serif CJK TC&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;ja&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;sans-serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans CJK JP&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;ko&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;sans-serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans CJK KR&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;zh-cn&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;sans-serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans CJK SC&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;zh-tw&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;sans-serif&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans CJK TC&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;ja&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;monospace&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans Mono CJK JP&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;ko&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;monospace&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans Mono CJK KR&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;zh-cn&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;monospace&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans Mono CJK SC&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-  &lt;<span style="color: #0000ff;">match</span> <span style=
-"color: #a0522d;">target</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">pattern</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">lang</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;zh-tw&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">test</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;monospace&lt;/<span style=
-"color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">test</span>&gt;
-    &lt;<span style="color: #0000ff;">edit</span> <span style=
-"color: #a0522d;">name</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">family</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">mode</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">prepend</span><span style=
-"color: #8b2252;">"</span>&gt;
-      &lt;<span style=
-"color: #0000ff;">string</span>&gt;Noto Sans Mono CJK TC&lt;/<span style="color: #0000ff;">string</span>&gt;
-    &lt;/<span style="color: #0000ff;">edit</span>&gt;
-  &lt;/<span style="color: #0000ff;">match</span>&gt;
-&lt;/<span style="color: #0000ff;">fontconfig</span>&gt;
+<pre class="src src-xml"><span style=
+"color: #655370; background-color: #fbf8ef;">&lt;?</span><span style="color: #3a81c3; font-weight: bold;">xml</span> <span style="color: #da8b55; font-style: italic;">version</span><span style="color: #da8b55; font-weight: bold;">=</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #da8b55;">1.0</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">?&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;!</span><span style="color: #3a81c3; font-weight: bold;">DOCTYPE</span> <span style="color: #ba2f59; font-weight: bold;">fontconfig</span> <span style="color: #3a81c3; font-weight: bold;">SYSTEM</span> <span style="color: #655370; background-color: #fbf8ef;">"</span>fonts.dtd<span style="color: #655370; background-color: #fbf8ef;">"&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">fontconfig</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>ja<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Serif CJK JP<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>ko<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Serif CJK KR<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>zh-cn<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Serif CJK SC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>zh-tw<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Serif CJK TC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>ja<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>sans-serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans CJK JP<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>ko<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>sans-serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans CJK KR<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>zh-cn<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>sans-serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans CJK SC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>zh-tw<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>sans-serif<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans CJK TC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>ja<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>monospace<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans Mono CJK JP<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>ko<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>monospace<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans Mono CJK KR<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>zh-cn<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>monospace<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans Mono CJK SC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">match</span> <span style="color: #715ab1; font-style: italic;">target</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">pattern</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">lang</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>zh-tw<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">test</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>monospace<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">test</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">edit</span> <span style="color: #715ab1; font-style: italic;">name</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">family</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">mode</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">prepend</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+      <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Noto Sans Mono CJK TC<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">string</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">edit</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">match</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">fontconfig</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
 </pre></div>
 </li>
 </ul>
@@ -861,8 +639,8 @@ layout - Lagom LCD test</a>网站；滤镜也是根据你的喜好选择。预�
 </div>
 </div>
 </div>
-<div id="outline-container-org60a4c66" class="outline-2">
-<h2 id="org60a4c66"><span class="section-number-2">3.</span>
+<div id="outline-container-orgdb50856" class="outline-2">
+<h2 id="orgdb50856"><span class="section-number-2">3.</span>
 最后</h2>
 <div class="outline-text-2" id="text-3">
 <p>
@@ -889,7 +667,7 @@ layout - Lagom LCD test</a>网站；滤镜也是根据你的喜好选择。预�
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: RadioNoiseE</p>
-<p class="date">Created: 2024-10-15 Tue 08:07</p>
+<p class="date">Created: 2024-10-16 Wed 08:00</p>
 <p class="validation"><a href=
 "https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content=
 "HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-<!-- 2024-10-15 Tue 08:07 -->
+<!-- 2024-10-16 Wed 07:59 -->
 <meta charset="utf-8">
 <meta name="viewport" content=
 "width=device-width, initial-scale=1">
@@ -21,20 +21,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd981fed">1. 简介</a></li>
-<li><a href="#orgd257547">2. 工具安装</a>
+<li><a href="#orgdd0ba00">1. 简介</a></li>
+<li><a href="#orgaf7a00e">2. 工具安装</a>
 <ul>
-<li><a href="#org1fd2205">2.1. SaxonC</a></li>
-<li><a href="#org998cfd6">2.2. xslTNG</a></li>
+<li><a href="#org598a33a">2.1. SaxonC</a></li>
+<li><a href="#orgca7404f">2.2. xslTNG</a></li>
 </ul>
 </li>
-<li><a href="#org4e8aeb5">3. 使用例</a></li>
-<li><a href="#orgb579e8e">4. 写在后面</a></li>
+<li><a href="#orgd19fb8d">3. 使用例</a></li>
+<li><a href="#org6048181">4. 写在后面</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgd981fed" class="outline-2">
-<h2 id="orgd981fed"><span class="section-number-2">1.</span>
+<div id="outline-container-orgdd0ba00" class="outline-2">
+<h2 id="orgdd0ba00"><span class="section-number-2">1.</span>
 简介</h2>
 <div class="outline-text-2" id="text-1">
 <p>
@@ -42,12 +42,12 @@
 <p>本文不会教你怎么写DocBook5.0。</p>
 </div>
 </div>
-<div id="outline-container-orgd257547" class="outline-2">
-<h2 id="orgd257547"><span class="section-number-2">2.</span>
+<div id="outline-container-orgaf7a00e" class="outline-2">
+<h2 id="orgaf7a00e"><span class="section-number-2">2.</span>
 工具安装</h2>
 <div class="outline-text-2" id="text-2"></div>
-<div id="outline-container-org1fd2205" class="outline-3">
-<h3 id="org1fd2205"><span class="section-number-3">2.1.</span>
+<div id="outline-container-org598a33a" class="outline-3">
+<h3 id="org598a33a"><span class="section-number-3">2.1.</span>
 SaxonC</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>截至写作时，SaxonC的版本号为12.5。因为我穷，所以我使用的的是HE版本。</p>
@@ -55,37 +55,34 @@ SaxonC</h3>
 "https://www.saxonica.com/download/c.xml"><code>https://www.saxonica.com/download/c.xml</code></a>下载你对应操作系统的安装包并解包。随后进入她并找到名为<code>libsaxon-hec</code>的动态链接库文件，将她移动到随便哪里（只要能用绝对路径表示并相对稳定即可）：</p>
 <div class="org-src-container">
 <pre class="src src-bash"><span style=
-"color: #a020f0;">doas</span> mv ~/Downloads/libsaxon-HEC-linux-amd64-v12.5.0/libs/nix/libsaxon-hec-12.5.0.so /usr/local/lib64/saxonc/
+"color: #3a81c3; font-weight: bold;">doas</span> mv ~/Downloads/libsaxon-HEC-linux-amd64-v12.5.0/libs/nix/libsaxon-hec-12.5.0.so /usr/local/lib64/saxonc/
 </pre></div>
 <p>
 记住这个绝对路径。随后我们需要更改构建文件，一般位于<code>command</code>文件夹下。将<code>library_dir</code>改为刚才的绝对路径：</p>
 <div class="org-src-container">
 <pre class="src src-diff"><span style=
-"background-color: #d9d9d9;">5c5</span>
-<span style="background-color: #ffeeee;">&lt;</span><span style=
-"background-color: #ffeeee;"> library_dir="</span><span style=
-"background-color: #ffcccc;">..</span><span style=
-"background-color: #ffeeee;">/</span><span style=
-"background-color: #ffcccc;">libs</span><span style=
-"background-color: #ffeeee;">/</span><span style=
-"background-color: #ffcccc;">nix</span><span style=
-"background-color: #ffeeee;">"</span>
-<span style="background-color: #d9d9d9;">---</span>
+"color: #6c3163; background-color: #ddd8eb;">5c5</span>
+<span style="color: #f2241f;">&lt;</span><span style=
+"color: #f2241f;"> library_dir="</span><span style=
+"color: #fbf8ef; background-color: #f2241f;">..</span><span style=
+"color: #f2241f;">/</span><span style=
+"color: #fbf8ef; background-color: #f2241f;">libs</span><span style="color: #f2241f;">/</span><span style="color: #fbf8ef; background-color: #f2241f;">nix</span><span style="color: #f2241f;">"</span>
+<span style="color: #6c3163; background-color: #ddd8eb;">---</span>
 &gt; library_dir="/<span style=
-"background-color: #bbffbb;">usr</span>/<span style=
-"background-color: #bbffbb;">local/lib64/saxonc</span>"
+"color: #fbf8ef; background-color: #67b11d;">usr</span>/<span style="color: #fbf8ef; background-color: #67b11d;">local/lib64/saxonc</span>"
 </pre></div>
 <p>
 随后执行构建脚本即可生成名为<code>transform</code>的二进制可执行文件。把它放到<code>$PATH</code>中并改名为<code>saxonc</code>即可：</p>
 <div class="org-src-container">
-<pre class="src src-bash">install <span style=
-"color: #008b8b;">-s</span> <span style=
-"color: #008b8b;">-m</span> 755 transform /usr/local/bin/saxonc
+<pre class="src src-bash"><span style=
+"color: #2aa1ae; font-weight: bold;">install</span> <span style=
+"color: #4e3163;">-s</span> <span style=
+"color: #4e3163;">-m</span> 755 transform /usr/local/bin/saxonc
 </pre></div>
 </div>
 </div>
-<div id="outline-container-org998cfd6" class="outline-3">
-<h3 id="org998cfd6"><span class="section-number-3">2.2.</span>
+<div id="outline-container-orgca7404f" class="outline-3">
+<h3 id="orgca7404f"><span class="section-number-3">2.2.</span>
 xslTNG</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>从<a href=
@@ -93,101 +90,65 @@ xslTNG</h3>
 </div>
 </div>
 </div>
-<div id="outline-container-org4e8aeb5" class="outline-2">
-<h2 id="org4e8aeb5"><span class="section-number-2">3.</span>
+<div id="outline-container-orgd19fb8d" class="outline-2">
+<h2 id="orgd19fb8d"><span class="section-number-2">3.</span>
 使用例</h2>
 <div class="outline-text-2" id="text-3">
 <p>一个简单的例子：</p>
 <div class="org-src-container">
-<pre class="src src-xml">&lt;?<span style=
-"color: #a020f0;">xml</span> <span style=
-"color: #8b2252;">version</span><span style=
-"color: #8b2252;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">1.0</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;"> </span><span style=
-"color: #8b2252;">encoding</span><span style=
-"color: #8b2252;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">UTF-8</span><span style=
-"color: #8b2252;">"</span>?&gt;
-&lt;<span style="color: #0000ff;">book</span> <span style=
-"color: #483d8b;">xml</span>:<span style=
-"color: #a0522d;">id</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">simple_book</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #483d8b;">xmlns</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">http://docbook.org/ns/docbook</span><span style=
-"color: #8b2252;">"</span> <span style=
-"color: #a0522d;">version</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">5.0</span><span style=
-"color: #8b2252;">"</span>&gt;
-  &lt;<span style=
-"color: #0000ff;">title</span>&gt;Very simple book&lt;/<span style=
-"color: #0000ff;">title</span>&gt;
-  &lt;<span style="color: #0000ff;">chapter</span> <span style=
-"color: #483d8b;">xml</span>:<span style=
-"color: #a0522d;">id</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">chapter_1</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">title</span>&gt;Chapter 1&lt;/<span style=
-"color: #0000ff;">title</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">para</span>&gt;Hello world!&lt;/<span style=
-"color: #0000ff;">para</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">para</span>&gt;I hope that your day is proceeding &lt;<span style="color: #0000ff;">emphasis</span>&gt;splendidly&lt;/<span style="color: #0000ff;">emphasis</span>&gt;!&lt;/<span style="color: #0000ff;">para</span>&gt;
-  &lt;/<span style="color: #0000ff;">chapter</span>&gt;
-  &lt;<span style="color: #0000ff;">chapter</span> <span style=
-"color: #483d8b;">xml</span>:<span style=
-"color: #a0522d;">id</span><span style=
-"color: #a020f0;">=</span><span style=
-"color: #8b2252;">"</span><span style=
-"color: #8b2252;">chapter_2</span><span style=
-"color: #8b2252;">"</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">title</span>&gt;Chapter 2&lt;/<span style=
-"color: #0000ff;">title</span>&gt;
-    &lt;<span style=
-"color: #0000ff;">para</span>&gt;Hello again, world!&lt;/<span style="color: #0000ff;">para</span>&gt;
-  &lt;/<span style="color: #0000ff;">chapter</span>&gt;
-&lt;/<span style="color: #0000ff;">book</span>&gt;
+<pre class="src src-xml"><span style=
+"color: #655370; background-color: #fbf8ef;">&lt;?</span><span style="color: #3a81c3; font-weight: bold;">xml</span> <span style="color: #da8b55; font-style: italic;">version</span><span style="color: #da8b55; font-weight: bold;">=</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #da8b55;">1.0</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #da8b55;"> </span><span style="color: #da8b55; font-style: italic;">encoding</span><span style="color: #da8b55; font-weight: bold;">=</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #da8b55; font-weight: bold;">UTF-8</span><span style="color: #da8b55; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">?&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">book</span> <span style="color: #3a81c3; font-style: italic;">xml</span><span style="color: #4e3163; font-style: italic;">:</span><span style="color: #715ab1; font-style: italic;">id</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">simple_book</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #3a81c3; font-style: italic;">xmlns</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">http://docbook.org/ns/docbook</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span> <span style="color: #715ab1; font-style: italic;">version</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">5.0</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">title</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Very simple book<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">title</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">chapter</span> <span style="color: #3a81c3; font-style: italic;">xml</span><span style="color: #4e3163; font-style: italic;">:</span><span style="color: #715ab1; font-style: italic;">id</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">chapter_1</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">title</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Chapter 1<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">title</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">para</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Hello world!<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">para</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">para</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>I hope that your day is proceeding <span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">emphasis</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>splendidly<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">emphasis</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>!<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">para</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">chapter</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">chapter</span> <span style="color: #3a81c3; font-style: italic;">xml</span><span style="color: #4e3163; font-style: italic;">:</span><span style="color: #715ab1; font-style: italic;">id</span><span style="color: #3a81c3; font-weight: bold;">=</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #2d9574;">chapter_2</span><span style="color: #2d9574; background-color: #fbf8ef;">"</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">title</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Chapter 2<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">title</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+    <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #6c3163; font-weight: bold;">para</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>Hello again, world!<span style="color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">para</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+  <span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">chapter</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
+<span style=
+"color: #655370; background-color: #fbf8ef;">&lt;</span><span style="color: #655370; background-color: #fbf8ef;">/</span><span style="color: #6c3163; font-weight: bold;">book</span><span style="color: #655370; background-color: #fbf8ef;">&gt;</span>
 </pre></div>
 <p>编译到HTML：</p>
 <div class="org-src-container">
-<pre class="src src-bash">saxonc <span style=
-"color: #008b8b;">-s:test.xml</span> <span style=
-"color: #008b8b;">-xsl:/home/</span><span style=
-"color: #008b8b;">$(</span><span style=
-"color: #008b8b;">whoami</span><span style=
-"color: #008b8b;">)</span><span style=
-"color: #008b8b;">/DocBook-xslTNG/xslt/docbook.xsl</span> <span style="color: #008b8b;">-o:test.html</span>
+<pre class="src src-bash"><span style=
+"color: #2aa1ae; font-weight: bold;">saxonc</span> <span style=
+"color: #4e3163;">-s:test.xml</span> <span style=
+"color: #4e3163;">-xsl:/home/</span><span style=
+"color: #4e3163; font-weight: bold;">$(</span><span style=
+"color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">whoami</span><span style="color: #4e3163; font-weight: bold;">)</span><span style="color: #4e3163;">/DocBook-xslTNG/xslt/docbook.xsl</span> <span style="color: #4e3163;">-o:test.html</span>
 </pre></div>
 <p>随后把xslTNG的资源目录移过来：</p>
 <div class="org-src-container">
-<pre class="src src-bash">cp <span style=
-"color: #008b8b;">-r</span> /home/<span style=
-"color: #a020f0;">$(</span>whoami<span style=
-"color: #a020f0;">)</span>/DocBook-xslTNG/resources/* .
+<pre class="src src-bash"><span style=
+"color: #2aa1ae; font-weight: bold;">cp</span> <span style=
+"color: #4e3163;">-r</span> /home/<span style=
+"color: #3a81c3; font-weight: bold;">$(</span><span style=
+"color: #2aa1ae; background-color: #fbf8ef; font-weight: bold;">whoami</span><span style="color: #3a81c3; font-weight: bold;">)</span>/DocBook-xslTNG/resources/* .
 </pre></div>
 <p>然后预览：</p>
 <div class="org-src-container">
-<pre class="src src-bash">xdg-open test.html
+<pre class="src src-bash"><span style=
+"color: #2aa1ae; font-weight: bold;">xdg-open</span> test.html
 </pre></div>
 </div>
 </div>
-<div id="outline-container-orgb579e8e" class="outline-2">
-<h2 id="orgb579e8e"><span class="section-number-2">4.</span>
+<div id="outline-container-org6048181" class="outline-2">
+<h2 id="org6048181"><span class="section-number-2">4.</span>
 写在后面</h2>
 <div class="outline-text-2" id="text-4">
 <p>没了。</p>
@@ -196,7 +157,7 @@ xslTNG</h3>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: RadioNoiseE</p>
-<p class="date">Created: 2024-10-15 Tue 08:07</p>
+<p class="date">Created: 2024-10-16 Wed 07:59</p>
 <p class="validation"><a href=
 "https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

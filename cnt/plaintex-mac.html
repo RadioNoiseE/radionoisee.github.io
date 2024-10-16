@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content=
 "HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-<!-- 2024-10-15 Tue 08:07 -->
+<!-- 2024-10-16 Wed 08:05 -->
 <meta charset="utf-8">
 <meta name="viewport" content=
 "width=device-width, initial-scale=1">
@@ -21,33 +21,33 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2a81806">1. 介绍</a></li>
-<li><a href="#orgc5416ec">2. 字体类</a>
+<li><a href="#orgc7beb25">1. 介绍</a></li>
+<li><a href="#org5fcca23">2. 字体类</a>
 <ul>
-<li><a href="#org6bea20a">2.1. HZ</a></li>
-<li><a href="#org79cf14a">2.2. Protrude</a></li>
-<li><a href="#org0f64c25">2.3. 尺寸相关</a></li>
-<li><a href="#orgf866b7f">2.4. 更换字体</a></li>
+<li><a href="#org711b72d">2.1. HZ</a></li>
+<li><a href="#orge180d0f">2.2. Protrude</a></li>
+<li><a href="#org7af02a9">2.3. 尺寸相关</a></li>
+<li><a href="#orgda5a523">2.4. 更换字体</a></li>
 </ul>
 </li>
-<li><a href="#orgd902237">3. 标记元素</a>
+<li><a href="#orgd7193ed">3. 标记元素</a>
 <ul>
-<li><a href="#org0d9aade">3.1. 标题</a></li>
-<li><a href="#org6b6f6a0">3.2. 章节</a></li>
-<li><a href="#org4a2f2c5">3.3. 图文混排</a></li>
-<li><a href="#org3aabd3c">3.4. 列表</a></li>
+<li><a href="#orga050fd2">3.1. 标题</a></li>
+<li><a href="#orgd1f48d9">3.2. 章节</a></li>
+<li><a href="#org1a78b33">3.3. 图文混排</a></li>
+<li><a href="#org0fd48a1">3.4. 列表</a></li>
 </ul>
 </li>
-<li><a href="#orgb6ad5be">4. 未完待续</a></li>
+<li><a href="#orgf4aa202">4. 未完待续</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org2a81806" class="outline-2">
-<h2 id="org2a81806"><span class="section-number-2">1.</span>
+<div id="outline-container-orgc7beb25" class="outline-2">
+<h2 id="orgc7beb25"><span class="section-number-2">1.</span>
 介绍</h2>
 <div class="outline-text-2" id="text-1">
 <p>本文记录并收集一些在LuaTeX引擎下使用plain-TeX排版的宏集。效果如此：</p>
-<figure id="orga155531"><img src="../img/plaintex-mac-01.png" alt=
+<figure id="orgee94452"><img src="../img/plaintex-mac-01.png" alt=
 "plaintex-mac-01.png" loading="lazy" class="img-center" width=
 "85%">
 <figcaption><span class="figure-number">Figure 1:</span>
@@ -55,12 +55,12 @@
 </figure>
 </div>
 </div>
-<div id="outline-container-orgc5416ec" class="outline-2">
-<h2 id="orgc5416ec"><span class="section-number-2">2.</span>
+<div id="outline-container-org5fcca23" class="outline-2">
+<h2 id="org5fcca23"><span class="section-number-2">2.</span>
 字体类</h2>
 <div class="outline-text-2" id="text-2"></div>
-<div id="outline-container-org6bea20a" class="outline-3">
-<h3 id="org6bea20a"><span class="section-number-3">2.1.</span>
+<div id="outline-container-org711b72d" class="outline-3">
+<h3 id="org711b72d"><span class="section-number-3">2.1.</span>
 HZ</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>即在断行结果较差时自动调整字符宽度以优化结果。注意在我的设定下该特性会影响断行算法。</p>
@@ -73,8 +73,8 @@ HZ</h3>
 <p>应用例：<code>\hzf\tenrm</code>。</p>
 </div>
 </div>
-<div id="outline-container-org79cf14a" class="outline-3">
-<h3 id="org79cf14a"><span class="section-number-3">2.2.</span>
+<div id="outline-container-orge180d0f" class="outline-3">
+<h3 id="orge180d0f"><span class="section-number-3">2.2.</span>
 Protrude</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>类似标点悬挂，也会影响断行算法。比较坑的一点是Han The
@@ -99,7 +99,7 @@ THanh的设定不能直接用，因为LuaTeX下数值含义改变了。</p>
 "color: #696969;">\!</span>=200; <span style=
 "color: #696969;">\r@c</span>#1`\,=700; <span style=
 "color: #696969;">\r@c</span>#1`<span style=
-"color: #ff0000;">\-</span>=700; <span style=
+"color: #dc752f;">\-</span>=700; <span style=
 "color: #696969;">\r@c</span>#1`\.=700;
  <span style="color: #696969;">\r@c</span>#1`<span style=
 "color: #696969;">\;</span>=500; <span style=
@@ -148,7 +148,7 @@ THanh的设定不能直接用，因为LuaTeX下数值含义改变了。</p>
 "color: #696969;">\r@c</span>#1`<span style=
 "color: #696969;">\y</span>=50; <span style=
 "color: #696969;">\l@c</span>#1`<span style=
-"color: #ff0000;">\(</span>=50; <span style=
+"color: #dc752f;">\(</span>=50; <span style=
 "color: #696969;">\l@c</span>#1`<span style=
 "color: #696969;">\A</span>=50;
  <span style="color: #696969;">\l@c</span>#1`<span style=
@@ -174,8 +174,8 @@ THanh的设定不能直接用，因为LuaTeX下数值含义改变了。</p>
 </pre></div>
 </div>
 </div>
-<div id="outline-container-org0f64c25" class="outline-3">
-<h3 id="org0f64c25"><span class="section-number-3">2.3.</span>
+<div id="outline-container-org7af02a9" class="outline-3">
+<h3 id="org7af02a9"><span class="section-number-3">2.3.</span>
 尺寸相关</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>LaTeX2e的NFSS2果然是好文明，虽然有点粗暴。幸好，手动枚举也还能接受。</p>
@@ -194,61 +194,61 @@ THanh的设定不能直接用，因为LuaTeX下数值含义改变了。</p>
 <span style="color: #696969;">\font\eightmus</span>=cmmi8
 <span style="color: #696969;">\def\bigtype</span>{<span style=
 "color: #696969;">\let</span><span style=
-"color: #228b22;">\rm</span>=<span style=
+"color: #ba2f59; font-weight: bold;">\rm</span>=<span style=
 "color: #696969;">\twelverm</span> <span style=
 "color: #696969;">\let</span><span style=
-"color: #556b2f;">\bf</span>=<span style=
+"color: #6c4173;">\bf</span>=<span style=
 "color: #696969;">\twelvebf</span>
  <span style="color: #696969;">\let</span><span style=
-"color: #556b2f;">\it</span>=<span style=
+"color: #3a81c3; font-style: italic;">\it</span>=<span style=
 "color: #696969;">\twelveit</span> <span style=
 "color: #696969;">\let</span><span style=
-"color: #556b2f;">\sl</span>=<span style=
+"color: #3a81c3; font-style: italic;">\sl</span>=<span style=
 "color: #696969;">\twelvesl</span> <span style=
 "color: #696969;">\let\mus</span>=<span style=
 "color: #696969;">\twelvemus</span>
  <span style="color: #696969;">\baselineskip</span>=14pt minus 1pt
- <span style="color: #228b22;">\rm</span>}
+ <span style="color: #ba2f59; font-weight: bold;">\rm</span>}
 <span style="color: #696969;">\def\medtype</span>{<span style=
 "color: #696969;">\let</span><span style=
-"color: #228b22;">\rm</span>=<span style=
+"color: #ba2f59; font-weight: bold;">\rm</span>=<span style=
 "color: #696969;">\tenrm</span> <span style=
 "color: #696969;">\let</span><span style=
-"color: #556b2f;">\bf</span>=<span style=
+"color: #6c4173;">\bf</span>=<span style=
 "color: #696969;">\tenbf</span>
  <span style="color: #696969;">\let</span><span style=
-"color: #556b2f;">\it</span>=<span style=
+"color: #3a81c3; font-style: italic;">\it</span>=<span style=
 "color: #696969;">\tenit</span> <span style=
 "color: #696969;">\let</span><span style=
-"color: #556b2f;">\sl</span>=<span style=
+"color: #3a81c3; font-style: italic;">\sl</span>=<span style=
 "color: #696969;">\tensl</span> <span style=
 "color: #696969;">\let\mus</span>=<span style=
 "color: #696969;">\teni</span>
  <span style="color: #696969;">\baselineskip</span>=12pt minus 1pt
- <span style="color: #228b22;">\rm</span>}
+ <span style="color: #ba2f59; font-weight: bold;">\rm</span>}
 <span style="color: #696969;">\def\smalltype</span>{<span style=
 "color: #696969;">\let</span><span style=
-"color: #228b22;">\rm</span>=<span style=
+"color: #ba2f59; font-weight: bold;">\rm</span>=<span style=
 "color: #696969;">\eightrm</span> <span style=
 "color: #696969;">\let</span><span style=
-"color: #556b2f;">\bf</span>=<span style=
+"color: #6c4173;">\bf</span>=<span style=
 "color: #696969;">\eightbf</span>
  <span style="color: #696969;">\let</span><span style=
-"color: #556b2f;">\it</span>=<span style=
+"color: #3a81c3; font-style: italic;">\it</span>=<span style=
 "color: #696969;">\eightit</span> <span style=
 "color: #696969;">\let</span><span style=
-"color: #556b2f;">\sl</span>=<span style=
+"color: #3a81c3; font-style: italic;">\sl</span>=<span style=
 "color: #696969;">\eightsl</span> <span style=
 "color: #696969;">\let\mus</span>=<span style=
 "color: #696969;">\eightmus</span>
  <span style=
 "color: #696969;">\baselineskip</span>=9.5pt minus .75pt
- <span style="color: #228b22;">\rm</span>}
+ <span style="color: #ba2f59; font-weight: bold;">\rm</span>}
 </pre></div>
 </div>
 </div>
-<div id="outline-container-orgf866b7f" class="outline-3">
-<h3 id="orgf866b7f"><span class="section-number-3">2.4.</span>
+<div id="outline-container-orgda5a523" class="outline-3">
+<h3 id="orgda5a523"><span class="section-number-3">2.4.</span>
 更换字体</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>使用老爷子排版Concrete
@@ -274,20 +274,20 @@ Mathematics时用的字体组合（注意此时主要字体变为了<code>\textr
 "color: #696969;">\or</span> F<span style=
 "color: #696969;">\fi</span>}
 <span style="color: #696969;">\font</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textrm</span>=ccr10
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textrm</span>=ccr10
 <span style="color: #696969;">\font</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textit</span>=ccti10
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textit</span>=ccti10
 <span style="color: #696969;">\font</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textsl</span>=ccsl10
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textsl</span>=ccsl10
 <span style="color: #696969;">\font</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textbf</span>=cmbx10
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textbf</span>=cmbx10
 <span style="color: #696969;">\font</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textsc</span>=cccsc10
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textsc</span>=cccsc10
 <span style="color: #696969;">\font\oldsty</span>=ccmi10
 <span style="color: #696969;">\font\mathtext</span>=ccr10
 <span style="color: #696969;">\font\mathsubtext</span>=ccr7
@@ -354,34 +354,34 @@ Mathematics时用的字体组合（注意此时主要字体变为了<code>\textr
 "color: #696969;">\eulerbf</span>=0pt
 <span style="color: #696969;">\font\teneq</span>=cmr10 
 <span style="color: #696969;">\def</span><span style=
-"color: #228b22;">\rm</span>{<span style=
+"color: #ba2f59; font-weight: bold;">\rm</span>{<span style=
 "color: #696969;">\fam\z@</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textrm</span>}
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textrm</span>}
 <span style="color: #696969;">\def</span><span style=
-"color: #556b2f;">\it</span>{<span style=
+"color: #3a81c3; font-style: italic;">\it</span>{<span style=
 "color: #696969;">\fam\itfam</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textit</span>} <span style=
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textit</span>} <span style=
 "color: #696969;">\textfont\itfam</span>=<span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textit</span>
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textit</span>
 <span style="color: #696969;">\def</span><span style=
-"color: #556b2f;">\sl</span>{<span style=
+"color: #3a81c3; font-style: italic;">\sl</span>{<span style=
 "color: #696969;">\fam\slfam</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textsl</span>} <span style=
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textsl</span>} <span style=
 "color: #696969;">\textfont\slfam</span>=<span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textsl</span>
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textsl</span>
 <span style="color: #696969;">\def</span><span style=
-"color: #556b2f;">\bf</span>{<span style=
+"color: #6c4173;">\bf</span>{<span style=
 "color: #696969;">\fam\bffam</span><span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textbf</span>} <span style=
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textbf</span>} <span style=
 "color: #696969;">\textfont\bffam</span>=<span style=
-"color: #ff0000;">\</span><span style=
-"color: #a020f0;">textbf</span>
+"color: #dc752f; font-weight: bold;">\</span><span style=
+"color: #3a81c3; font-weight: bold;">textbf</span>
 <span style="color: #696969;">\newfam\scrfam</span> <span style=
 "color: #696969;">\edef\scrfam@</span>{<span style=
 "color: #696969;">\hex@\scrfam</span>} <span style=
@@ -629,12 +629,12 @@ Mathematics时用的字体组合（注意此时主要字体变为了<code>\textr
 </div>
 </div>
 </div>
-<div id="outline-container-orgd902237" class="outline-2">
-<h2 id="orgd902237"><span class="section-number-2">3.</span>
+<div id="outline-container-orgd7193ed" class="outline-2">
+<h2 id="orgd7193ed"><span class="section-number-2">3.</span>
 标记元素</h2>
 <div class="outline-text-2" id="text-3"></div>
-<div id="outline-container-org0d9aade" class="outline-3">
-<h3 id="org0d9aade"><span class="section-number-3">3.1.</span>
+<div id="outline-container-orga050fd2" class="outline-3">
+<h3 id="orga050fd2"><span class="section-number-3">3.1.</span>
 标题</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>从TeXbook的<i>Example Formats</i>一节摘出来的。</p>
@@ -649,7 +649,7 @@ Mathematics时用的字体组合（注意此时主要字体变为了<code>\textr
 <span style="color: #696969;">\def\ft</span>{<span style=
 "color: #696969;">\vbox</span>{<span style=
 "color: #696969;">\bigtype</span><span style=
-"color: #556b2f;">\bf</span>
+"color: #6c4173;">\bf</span>
  <span style="color: #696969;">\line</span>{<span style=
 "color: #696969;">\hrulefill</span>}<span style=
 "color: #696969;">\kern</span>-.5<span style=
@@ -677,8 +677,8 @@ Mathematics时用的字体组合（注意此时主要字体变为了<code>\textr
 Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 </div>
 </div>
-<div id="outline-container-org6b6f6a0" class="outline-3">
-<h3 id="org6b6f6a0"><span class="section-number-3">3.2.</span>
+<div id="outline-container-orgd1f48d9" class="outline-3">
+<h3 id="orgd1f48d9"><span class="section-number-3">3.2.</span>
 章节</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>少用不优雅的<code>%</code>的技巧在于进入Vertical Mode。</p>
@@ -691,38 +691,38 @@ Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 "color: #696969;">\vsize\penalty</span>-250
  <span style="color: #696969;">\vskip</span>0pt plus-.3<span style=
 "color: #696969;">\vsize</span><span style=
-"color: #a020f0;">\bigskip</span><span style=
+"color: #3a81c3; font-weight: bold;">\bigskip</span><span style=
 "color: #696969;">\vskip</span>.16in
  <span style="color: #696969;">\message</span>{c:#1}<span style=
 "color: #696969;">\centerline</span>{<span style=
 "color: #696969;">\ch</span>#1}<span style=
 "color: #696969;">\nobreak</span><span style=
-"color: #a020f0;">\smallskip</span>}
+"color: #3a81c3; font-weight: bold;">\smallskip</span>}
 <span style="color: #696969;">\def\sect</span>#1<span style=
-"color: #a020f0;">\par</span>{<span style=
+"color: #3a81c3; font-weight: bold;">\par</span>{<span style=
 "color: #696969;">\advance\secno</span> by 1<span style=
 "color: #696969;">\vskip</span>0pt plus.3<span style=
 "color: #696969;">\vsize\penalty</span>-250
  <span style="color: #696969;">\vskip</span>0pt plus-.3<span style=
 "color: #696969;">\vsize</span><span style=
-"color: #a020f0;">\bigskip</span><span style=
+"color: #3a81c3; font-weight: bold;">\bigskip</span><span style=
 "color: #696969;">\vskip\parskip</span>
  <span style=
 "color: #696969;">\expandafter\message</span>{s<span style=
 "color: #696969;">\the\secno</span>:#1}<span style=
 "color: #696969;">\leftline</span>{<span style=
-"color: #a020f0;">\bf</span><span style=
-"color: #556b2f;">\the\secno</span><span style=
-"color: #556b2f;">.</span><span style=
-"color: #a020f0;">\enspace</span><span style=
-"color: #556b2f;">#1</span>}<span style=
+"color: #3a81c3; font-weight: bold;">\bf</span><span style=
+"color: #6c4173;">\the\secno</span><span style=
+"color: #6c4173;">.</span><span style=
+"color: #3a81c3; font-weight: bold;">\enspace</span><span style=
+"color: #6c4173;">#1</span>}<span style=
 "color: #696969;">\nobreak</span><span style=
-"color: #a020f0;">\smallskip\noindent</span>}
+"color: #3a81c3; font-weight: bold;">\smallskip\noindent</span>}
 </pre></div>
 </div>
 </div>
-<div id="outline-container-org4a2f2c5" class="outline-3">
-<h3 id="org4a2f2c5"><span class="section-number-3">3.3.</span>
+<div id="outline-container-org1a78b33" class="outline-3">
+<h3 id="org1a78b33"><span class="section-number-3">3.3.</span>
 图文混排</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>用的是设置hbox宽度的方法。</p>
@@ -742,7 +742,7 @@ Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 "color: #696969;">\vbox</span>{<span style=
 "color: #696969;">\hsize</span>=<span style=
 "color: #696969;">\dimen</span>0<span style=
-"color: #a020f0;">\noindent</span> #3}
+"color: #3a81c3; font-weight: bold;">\noindent</span> #3}
  <span style="color: #696969;">\dimen</span>1=<span style=
 "color: #696969;">\ht</span>1<span style=
 "color: #696969;">\ifdim\ht</span>0&gt;<span style=
@@ -776,8 +776,9 @@ Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 <pre class="src src-tex"><span style=
 "color: #696969;">\illu</span>{cnce.jpeg}{4.4cm} As the government increases the tax imposed on tobacco, the relative price is changed, creating incentives
  for consumers to change their consumption patterns; tobacco that is taxed becomes relatively more expensive and the consumption
- is reduced.<span style="color: #a020f0;">\par</span>
- Thus there is a decrease in supply and an upward shift of the supply curve from <span style="color: #8b4513;">$MPC$</span> to <span style="color: #8b4513;">$MPC + {</span><span style="color: #8b4513;">\rm</span><span style="color: #8b4513;"> tax</span><span style="color: #8b4513;">}$</span> while intersecting
+ is reduced.<span style=
+"color: #3a81c3; font-weight: bold;">\par</span>
+ Thus there is a decrease in supply and an upward shift of the supply curve from <span style="color: #8b4513;">$MPC$</span> to <span style="color: #8b4513;">$MPC + {</span><span style="color: #8b4513; font-weight: bold;">\rm</span><span style="color: #8b4513; font-weight: bold;"> tax</span><span style="color: #8b4513;">}$</span> while intersecting
  <span style="color: #8b4513;">$MPB$</span> at the <span style=
 "color: #8b4513;">$Q</span><span style=
 "color: #8b0000;">_{\rm opt}</span><span style=
@@ -793,22 +794,22 @@ Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 </pre></div>
 </div>
 </div>
-<div id="outline-container-org3aabd3c" class="outline-3">
-<h3 id="org3aabd3c"><span class="section-number-3">3.4.</span>
+<div id="outline-container-org0fd48a1" class="outline-3">
+<h3 id="org0fd48a1"><span class="section-number-3">3.4.</span>
 列表</h3>
 <div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 <pre class="src src-tex"><span style=
 "color: #696969;">\xdef\cl</span>{<span style=
-"color: #a020f0;">\item</span>{}}
+"color: #3a81c3; font-weight: bold;">\item</span>{}}
 <span style="color: #696969;">\def\bul</span>{<span style=
 "color: #696969;">\parskip</span>=2pt<span style=
-"color: #a020f0;">\par</span><span style=
+"color: #3a81c3; font-weight: bold;">\par</span><span style=
 "color: #696969;">\penalty</span>-250<span style=
-"color: #696969;">\hangindent\parindent\textindent</span>{<span style="color: #b22222;">%</span>
+"color: #696969;">\hangindent\parindent\textindent</span>{<span style="color: #a49da5; font-style: italic;">%</span>
  <span style="color: #696969;">\hbox</span> to<span style=
 "color: #696969;">\parindent</span>{<span style=
-"color: #a020f0;">\enspace</span><span style=
+"color: #3a81c3; font-weight: bold;">\enspace</span><span style=
 "color: #696969;">\kern</span>.6pt{<span style=
 "color: #696969;">\smalltype\raise</span>.3pt<span style=
 "color: #696969;">\hbox</span>{<span style=
@@ -823,7 +824,7 @@ Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 "color: #696969;">\itemitem</span>{<span style=
 "color: #696969;">\hbox</span> to <span style=
 "color: #696969;">\parindent</span>{<span style=
-"color: #a020f0;">\enspace</span><span style=
+"color: #3a81c3; font-weight: bold;">\enspace</span><span style=
 "color: #696969;">\kern</span>.6pt#1<span style=
 "color: #696969;">\hss</span>}}}
 </pre></div>
@@ -831,31 +832,32 @@ Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 <div class="org-src-container">
 <pre class="src src-tex"><span style=
 "color: #696969;">\bul</span> {<span style=
-"color: #a020f0;">\bf</span><span style=
-"color: #556b2f;"> Market power</span>} is a fundamental distinction between market structures. It's the extent to which individual firm
+"color: #3a81c3; font-weight: bold;">\bf</span><span style=
+"color: #6c4173;"> Market power</span>} is a fundamental distinction between market structures. It's the extent to which individual firm
  in the industry is able to control the price at which it sells its products. On the basis of market power, we can distinguish
  between:
  <span style="color: #696969;">\bull</span>{<span style=
 "color: #696969;">\p</span> a} The extreme of {<span style=
-"color: #a020f0;">\bf</span><span style=
-"color: #556b2f;"> perfect competition</span>}, where firms have no ability to control the price of there products;
+"color: #3a81c3; font-weight: bold;">\bf</span><span style=
+"color: #6c4173;"> perfect competition</span>}, where firms have no ability to control the price of there products;
   also known as {<span style=
-"color: #a020f0;">\it</span><span style=
-"color: #556b2f;"> zero market power</span>}
+"color: #3a81c3; font-weight: bold;">\it</span><span style=
+"color: #3a81c3; font-style: italic;"> zero market power</span>}
  <span style="color: #696969;">\bull</span>{<span style=
 "color: #696969;">\p</span> b} The extreme of {<span style=
-"color: #a020f0;">\bf</span><span style=
-"color: #556b2f;"> monopoly</span>}, where there is single firm in the market when the firm itself is the market;
-  the firm has the greatest ability to control the price of its product. It's also known as {<span style="color: #a020f0;">\it</span><span style="color: #556b2f;"> the greatest amount of</span>
-<span style="color: #556b2f;">  market power</span>}.
+"color: #3a81c3; font-weight: bold;">\bf</span><span style=
+"color: #6c4173;"> monopoly</span>}, where there is single firm in the market when the firm itself is the market;
+  the firm has the greatest ability to control the price of its product. It's also known as {<span style="color: #3a81c3; font-weight: bold;">\it</span><span style="color: #3a81c3; font-style: italic;"> the greatest amount of</span>
 <span style=
-"color: #696969;">\cl</span> In between the two extremes are the other two market structures: {<span style="color: #a020f0;">\bf</span><span style="color: #556b2f;"> monopolistic competition</span>} and {<span style="color: #a020f0;">\bf</span><span style="color: #556b2f;"> oligopoly</span>}.
+"color: #3a81c3; font-style: italic;">  market power</span>}.
+<span style=
+"color: #696969;">\cl</span> In between the two extremes are the other two market structures: {<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;"> monopolistic competition</span>} and {<span style="color: #3a81c3; font-weight: bold;">\bf</span><span style="color: #6c4173;"> oligopoly</span>}.
 </pre></div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb6ad5be" class="outline-2">
-<h2 id="orgb6ad5be"><span class="section-number-2">4.</span>
+<div id="outline-container-orgf4aa202" class="outline-2">
+<h2 id="orgf4aa202"><span class="section-number-2">4.</span>
 未完待续</h2>
 <div class="outline-text-2" id="text-4">
 <p>暑假作业好多。</p>
@@ -864,7 +866,7 @@ Here}\au{A.U.Thor}\ft</code>，应该是LaTeX-style的。</p>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: RadioNoiseE</p>
-<p class="date">Created: 2024-10-15 Tue 08:07</p>
+<p class="date">Created: 2024-10-16 Wed 08:05</p>
 <p class="validation"><a href=
 "https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
