@@ -6,9 +6,17 @@
     <managingEditor>RadioNoiseE@gmail.com (RnE)</managingEditor>
     <title>Archive RNE</title>
     <copyright>Copyright (c) 2024, RnE</copyright>
-    <language>zh-cn</language>
-    <pubDate>Fri, 11 Oct 2024 12:18:27 +0800</pubDate>
-    <lastBuildDate>Fri, 11 Oct 2024 04:18:27 +0000</lastBuildDate>
+    <language>en-us</language>
+    <pubDate>Fri, 18 Oct 2024 10:02:23 +0800</pubDate>
+    <lastBuildDate>Fri, 18 Oct 2024 02:02:23 +0000</lastBuildDate>
+    <item>
+      <title>Note: Type theory and formal proof</title>
+      <link>https://radionoisee.github.io/cnt/ttapf-note.html</link>
+      <description><![CDATA[<p>About untyped lambda calculus.</p><p>Expect future update.</p>]]></description>
+      <category>type theory</category>
+      <pubdate>Fri, 18 Oct 2024 10:02:23 +0800</pubdate>
+      <guid isPermaLink="false">tag:archrne,2024:note</guid>      
+    </item>
     <item>
       <title>Article: Package management current status on Mach</title>
       <link>https://radionoisee.github.io/cnt/mac-infer.html</link>
