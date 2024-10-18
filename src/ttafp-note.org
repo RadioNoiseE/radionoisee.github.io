@@ -1,0 +1,120 @@
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../res/style.css" />
+#+TITLE: Type Theory and Formal Proof: Notes
+
+* An Introduction
+
+These notes are based on the book /Type Theory and Formal Proof/ by Rob Nederpelt and Herman Geuvers.
+
+* Untyped Lambda Calculus
+
+/Lambda-calculus/ encapsulates a formalization of the basic aspects of functions. Untyped lambda-calculus means we do not consider the types in this chapter.
+
+** Construction Principles
+
+- /Abstraction/: From an expression $M$ and a variable $x$ we can construct a new expression $\lambda x . M$. We call this the /abstraction of $x$ over $M$/.
+- /Application/: From expressions $M$ and $N$ we can construct expression $M N$. We call this /application of $M$ to $N$/.
+
+** Lambda Terms
+
+Expressions in the lambda calculus are called lambda-terms. We assume the existence of an infinite set $V = \{x, y, z, \ldots\}$ of so-called /variables/
+while the below inductive definition establishes how the set $\Lambda$ of all lambda-terms are constructed:
+
+1) /Variable/: If $u \in V$, then $u \in \Lambda$.
+2) /Application/: If $M$ and $N \in \Lambda$, then $(MN) \in \Lambda$.
+3) /Abstraction/: If $u \in V$ and $M \in \Lambda$, then $(\lambda u . M) \in \Lambda$.
+
+An /inductive definition/ of $\Lambda$ means that the above (1), (2), and (3) are the only ways to construct elements of $\Lambda$. An alternative and shorter way is to define $\Lambda$ via /abstract syntax/:
+
+$$\Lambda = V | (\Lambda \Lambda) | (\lambda V . \Lambda).$$
+
+The /syntactical identity/ of two lambda-terms can be denoted with the symbol $\equiv$.
+
+The /subterms/ of a given lambda-term form a /multiset/:
+
+- /Basis/: $\texttt{Sub}(x) = {x}$, for each $x \in V$.
+- /Application/: $\texttt{Sub}((M N)) = \texttt{Sub}(M) \cup \texttt{Sub}(N) \cup \{(M N)\}$.
+- /Abstraction/: $\texttt{Sub}((\lambda x . M)) = \texttt{Sub}(M) \cup \{(\lambda x. M)\}$.
+
+They follow /reflexivity/ and /transitivity/. A proper subterm of $M$ is $L$ if $L \not\equiv M$.
+
+The expressions have the following precedence and associativity:
+
+- Parentheses in an outermost position may be omitted.
+- Application is /left-associative/.
+- Application takes precedence over abstraction.
+- Successive abstractions may be combined in a /right-associative/ way under one $\lambda$.
+
+** Free and Bound Variables
+
+Variable occurrences in a lambda-term can be divided into three categories: /free/ occurrences, /bound/ occurrences and /binding/ occurrences.
+
+Binding variables are those occurred immediately after a $\lambda$. In the construction of a lambda-term, the single variable and the variables that aren't bound by the binding variables are free variables. However, during the process of abstraction, an occurrence of $x$ which is free in $M$ becomes bound in $\lambda x. M$; that is, abstraction of $x$ over $M$ binds all free occurrences of $X$ in $M$.
+
+Then we have the following recursive rule, in which $FV(L)$ denotes the set of free variables in the lambda-term $L$.
+
+- /Variable/: $FV(x) = \{x\}$.
+- /Application/: $FV(MN) = FV(M) \cup FV(N)$.
+- /Abstraction/: $FV(\lambda x . M) = FV(M) \backslash \{x\}$.
+
+The lambda-term is /closed/ if $FV(M) = \emptyset$. A closed set is also called a /combinator/. The set of all close lambda-terms is denoted by $\Lambda^0$.
+
+** Alpha Conversation
+
+Functions in the lambda-notation have the property that the /name/ of the binding variable is not essential; the name is only used to express the transformation or procedure from input to output. Thus the relation /alpha-conversation/ or /alpha-equivalence/ is defined to describe this process formally. It's based on the possibility of renaming binding (and bound) variables.
+
+$M^{x\rightarrow y}$ denote the result of replacing every free occurrence of $x$ in $M$ by $y$. The relation $\lambda x. M =_\alpha \lambda y . M^{x \rightarrow y}$ is called /renaming/.
+
+In the renaming of $\lambda x . M$ to $\lambda y . M^{x \rightarrow y}$, it's prevented that the /new/ binding variable $y$ binds /old/ free $y$'s; and that any /old/ binding $y$ binds a /new/ $y$.
+
+Alpha-conversation follows /compatibility/, /reflexivity/, /symmetry/ and /transitivity/. If $M$ and $N$ are said to be /alpha-convertible/ or /alpha-equivalent/, then $M$ is called an /alpha-variant/ of $N$.
+
+We can abstract from the names of the bound (and binding) variables, by considering lambda-terms /modulo alpha-equivalence/.
+
+** Beta Reduction
+
+1) /Basis/: $(\lambda x . M)N \rightarrow_\beta M [x := N]$.
+2) /Compatibility/: If $M \rightarrow_\beta N$, then $ML \rightarrow_\beta NL$, $LM \rightarrow_\beta LN$ and $\lambda x . M \rightarrow_\beta \lambda x . N$.
+
+The suffix $[x := N]$ in (1) not in lambda-terms, are meant to be /meta-notation/ called substitution, which follow:
+
+- $x[x := N] \equiv N$, $y[x := N] \equiv y$ if $x \not\equiv y$.
+- $(PQ)[x := N] \equiv (P[x := N])(Q[x := N])$.
+- $(\lambda y . P)[x := N] \equiv \lambda z . (P^{y \rightarrow z}[x := N])$, if $\lambda z . P^{y \rightarrow z}$ is an alpha-variant of $\lambda y . P$ such that $z \notin FV(N)$.
+
+The subterm of the form $(\lambda x . M)N$ is called a /redex/ (from reducible expression) and subterm $M[x := N]$ is called the /contractum/ (of the regex).
+
+Note that in general, the substitutions $M[x := N][y := L]$ does not describe the same lambda-term as $M[y := L][x := N]$ because of the left-associativity ($M[x := N][y := L] \equiv M[y := L][x := N[y := L]] \land x \notin FV(L)$).
+
+We define the relation $\rightarrow_\beta$ to be one-step beta-reduction since one redex is replaced bu its contractum. The further beta-reduction performed after the one-step reduction can be defined using $\twoheadrightarrow_\beta$ which generally take zero-or-more-step.
+We can proof that $\twoheadrightarrow_\beta$ is /reflective/ and /transitive/.
+
+Similar to alpha-conversation, we can define /beta-conversation/ or /beta-equal/. If $M =_\beta N$ and there is an $n \geq 0$ and there are terms $M_0$ ro $M_n$ such that $M_0 \equiv M$, $M_n \equiv N$ and for all $i$ such that $0 \leq i < n$:
+
+$$M_i \rightarrow_\beta M_{i+1} \lor M_{i+1} \rightarrow_\beta M_i.$$
+
+$\twoheadrightarrow_\beta$ extends $\rightarrow_\beta$ to multi-steps, while $=_\beta$ further extends $\twoheadrightarrow_\beta$ in both directions. Thus $=_\beta$ is /reflective/, /symmetric/ and /transitive/.
+
+- $M$ is in /beta-normal/ form if $M$ does not contain any redex.
+- $M$ has a beta-normal form or is /beta-normalizing/ if there is an $N$ in beta-normal form such that $M =_\beta N$.
+
+A /reduction path/ from $M$ is an infinite or finite sequence $N_0, N_1, N_2, \ldots$ that is connected using one-step beta-reduction and that starts from $M$.
+
+- $M$ is /weakly normalizing/ if there is an $N$ in the beta-normal form such that $M \twoheadrightarrow_\beta$. (/One of/ the reduction path leads to an outcome.)
+- $M$ is /strongly normalizing/ if there are no infinite reduction paths starting from $M$. (/Each/ reduction path leads to an outcome.)
+
+Suppose that for a given lambda-term $M$, we have $M \twoheadrightarrow_\beta N_i$ and $M \twoheadrightarrow_\beta N_2$, then there is a lambda-term $N_3$ such that $N_1 \twoheadrightarrow_\beta N_3$ and $N_2 \twoheadrightarrow_\beta N_3$. This is the /Church-Rosser Theorem/.
+
+** Fixed Point Theorem
+
+Every lambda-term $L$ has a /fixed point/, which can be constructed usind a /fixed point combinator/, defined as:
+
+$$Y \equiv \lambda y . (\lambda x . y(xx))(\lambda x . y(xx)).$$
+
+Then we have $YL$ which is a fixed point of $L$, since $L(YL) =_\beta YL$, which can be shown as follows:
+
+$$\begin{align*}
+YL &\rightarrow_\beta (\lambda x . L(xx))(\lambda x . L(xx))\\
+   &\rightarrow_\beta L((\lambda x . L(xx))(\lambda x . L(xx)))\\
+   &=_\beta L(YL).
+\end{align*}$$

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Apple macOS version 5.8.0">
+<!-- 2024-10-18 Fri 09:50 -->
+<meta charset="utf-8">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1">
+<title>Type Theory and Formal Proof: Notes</title>
+<meta name="author" content="RadioNoiseE">
+<meta name="generator" content="Org Mode">
+<link rel="stylesheet" type="text/css" href="../res/style.css">
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+<script id="MathJax-script" async src=
+"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Type Theory and Formal Proof: Notes</h1>
+</header>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org7a2b379">1. An Introduction</a></li>
+<li><a href="#orgca6ec16">2. Untyped Lambda Calculus</a>
+<ul>
+<li><a href="#org63a73dc">2.1. Construction Principles</a></li>
+<li><a href="#org4f02795">2.2. Lambda Terms</a></li>
+<li><a href="#org1c9903c">2.3. Free and Bound Variables</a></li>
+<li><a href="#orgc7efd2b">2.4. Alpha Conversation</a></li>
+<li><a href="#org0cb18ef">2.5. Beta Reduction</a></li>
+<li><a href="#org0fa62ec">2.6. Fixed Point Theorem</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org7a2b379" class="outline-2">
+<h2 id="org7a2b379"><span class="section-number-2">1.</span> An
+Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>These notes are based on the book <i>Type Theory and Formal
+Proof</i> by Rob Nederpelt and Herman Geuvers.</p>
+</div>
+</div>
+<div id="outline-container-orgca6ec16" class="outline-2">
+<h2 id="orgca6ec16"><span class="section-number-2">2.</span>
+Untyped Lambda Calculus</h2>
+<div class="outline-text-2" id="text-2">
+<p><i>Lambda-calculus</i> encapsulates a formalization of the basic
+aspects of functions. Untyped lambda-calculus means we do not
+consider the types in this chapter.</p>
+</div>
+<div id="outline-container-org63a73dc" class="outline-3">
+<h3 id="org63a73dc"><span class="section-number-3">2.1.</span>
+Construction Principles</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li><i>Abstraction</i>: From an expression \(M\) and a variable
+\(x\) we can construct a new expression \(\lambda x . M\). We call
+this the <i>abstraction of \(x\) over \(M\)</i>.</li>
+<li><i>Application</i>: From expressions \(M\) and \(N\) we can
+construct expression \(M N\). We call this <i>application of \(M\)
+to \(N\)</i>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4f02795" class="outline-3">
+<h3 id="org4f02795"><span class="section-number-3">2.2.</span>
+Lambda Terms</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>Expressions in the lambda calculus are called lambda-terms. We
+assume the existence of an infinite set \(V = \{x, y, z, \ldots\}\)
+of so-called <i>variables</i> while the below inductive definition
+establishes how the set \(\Lambda\) of all lambda-terms are
+constructed:</p>
+<ol class="org-ol">
+<li><i>Variable</i>: If \(u \in V\), then \(u \in \Lambda\).</li>
+<li><i>Application</i>: If \(M\) and \(N \in \Lambda\), then \((MN)
+\in \Lambda\).</li>
+<li><i>Abstraction</i>: If \(u \in V\) and \(M \in \Lambda\), then
+\((\lambda u . M) \in \Lambda\).</li>
+</ol>
+<p>An <i>inductive definition</i> of \(\Lambda\) means that the
+above (1), (2), and (3) are the only ways to construct elements of
+\(\Lambda\). An alternative and shorter way is to define
+\(\Lambda\) via <i>abstract syntax</i>:</p>
+<p>\[\Lambda = V | (\Lambda \Lambda) | (\lambda V . \Lambda).\]</p>
+<p>The <i>syntactical identity</i> of two lambda-terms can be
+denoted with the symbol \(\equiv\).</p>
+<p>The <i>subterms</i> of a given lambda-term form a
+<i>multiset</i>:</p>
+<ul class="org-ul">
+<li><i>Basis</i>: \(\texttt{Sub}(x) = {x}\), for each \(x \in
+V\).</li>
+<li><i>Application</i>: \(\texttt{Sub}((M N)) = \texttt{Sub}(M)
+\cup \texttt{Sub}(N) \cup \{(M N)\}\).</li>
+<li><i>Abstraction</i>: \(\texttt{Sub}((\lambda x . M)) =
+\texttt{Sub}(M) \cup \{(\lambda x. M)\}\).</li>
+</ul>
+<p>They follow <i>reflexivity</i> and <i>transitivity</i>. A proper
+subterm of \(M\) is \(L\) if \(L \not\equiv M\).</p>
+<p>The expressions have the following precedence and
+associativity:</p>
+<ul class="org-ul">
+<li>Parentheses in an outermost position may be omitted.</li>
+<li>Application is <i>left-associative</i>.</li>
+<li>Application takes precedence over abstraction.</li>
+<li>Successive abstractions may be combined in a
+<i>right-associative</i> way under one \(\lambda\).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1c9903c" class="outline-3">
+<h3 id="org1c9903c"><span class="section-number-3">2.3.</span> Free
+and Bound Variables</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>Variable occurrences in a lambda-term can be divided into three
+categories: <i>free</i> occurrences, <i>bound</i> occurrences and
+<i>binding</i> occurrences.</p>
+<p>Binding variables are those occurred immediately after a
+\(\lambda\). In the construction of a lambda-term, the single
+variable and the variables that aren't bound by the binding
+variables are free variables. However, during the process of
+abstraction, an occurrence of \(x\) which is free in \(M\) becomes
+bound in \(\lambda x. M\); that is, abstraction of \(x\) over \(M\)
+binds all free occurrences of \(X\) in \(M\).</p>
+<p>Then we have the following recursive rule, in which \(FV(L)\)
+denotes the set of free variables in the lambda-term \(L\).</p>
+<ul class="org-ul">
+<li><i>Variable</i>: \(FV(x) = \{x\}\).</li>
+<li><i>Application</i>: \(FV(MN) = FV(M) \cup FV(N)\).</li>
+<li><i>Abstraction</i>: \(FV(\lambda x . M) = FV(M) \backslash
+\{x\}\).</li>
+</ul>
+<p>The lambda-term is <i>closed</i> if \(FV(M) = \emptyset\). A
+closed set is also called a <i>combinator</i>. The set of all close
+lambda-terms is denoted by \(\Lambda^0\).</p>
+</div>
+</div>
+<div id="outline-container-orgc7efd2b" class="outline-3">
+<h3 id="orgc7efd2b"><span class="section-number-3">2.4.</span>
+Alpha Conversation</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>Functions in the lambda-notation have the property that the
+<i>name</i> of the binding variable is not essential; the name is
+only used to express the transformation or procedure from input to
+output. Thus the relation <i>alpha-conversation</i> or
+<i>alpha-equivalence</i> is defined to describe this process
+formally. It's based on the possibility of renaming binding (and
+bound) variables.</p>
+<p>\(M^{x\rightarrow y}\) denote the result of replacing every free
+occurrence of \(x\) in \(M\) by \(y\). The relation \(\lambda x. M
+=_\alpha \lambda y . M^{x \rightarrow y}\) is called
+<i>renaming</i>.</p>
+<p>In the renaming of \(\lambda x . M\) to \(\lambda y . M^{x
+\rightarrow y}\), it's prevented that the <i>new</i> binding
+variable \(y\) binds <i>old</i> free \(y\)'s; and that any
+<i>old</i> binding \(y\) binds a <i>new</i> \(y\).</p>
+<p>Alpha-conversation follows <i>compatibility</i>,
+<i>reflexivity</i>, <i>symmetry</i> and <i>transitivity</i>. If
+\(M\) and \(N\) are said to be <i>alpha-convertible</i> or
+<i>alpha-equivalent</i>, then \(M\) is called an
+<i>alpha-variant</i> of \(N\).</p>
+<p>We can abstract from the names of the bound (and binding)
+variables, by considering lambda-terms <i>modulo
+alpha-equivalence</i>.</p>
+</div>
+</div>
+<div id="outline-container-org0cb18ef" class="outline-3">
+<h3 id="org0cb18ef"><span class="section-number-3">2.5.</span> Beta
+Reduction</h3>
+<div class="outline-text-3" id="text-2-5">
+<ol class="org-ol">
+<li><i>Basis</i>: \((\lambda x . M)N \rightarrow_\beta M [x :=
+N]\).</li>
+<li><i>Compatibility</i>: If \(M \rightarrow_\beta N\), then \(ML
+\rightarrow_\beta NL\), \(LM \rightarrow_\beta LN\) and \(\lambda x
+. M \rightarrow_\beta \lambda x . N\).</li>
+</ol>
+<p>The suffix \([x := N]\) in (1) not in lambda-terms, are meant to
+be <i>meta-notation</i> called substitution, which follow:</p>
+<ul class="org-ul">
+<li>\(x[x := N] \equiv N\), \(y[x := N] \equiv y\) if \(x
+\not\equiv y\).</li>
+<li>\((PQ)[x := N] \equiv (P[x := N])(Q[x := N])\).</li>
+<li>\((\lambda y . P)[x := N] \equiv \lambda z . (P^{y \rightarrow
+z}[x := N])\), if \(\lambda z . P^{y \rightarrow z}\) is an
+alpha-variant of \(\lambda y . P\) such that \(z \notin
+FV(N)\).</li>
+</ul>
+<p>The subterm of the form \((\lambda x . M)N\) is called a
+<i>redex</i> (from reducible expression) and subterm \(M[x := N]\)
+is called the <i>contractum</i> (of the regex).</p>
+<p>Note that in general, the substitutions \(M[x := N][y := L]\)
+does not describe the same lambda-term as \(M[y := L][x := N]\)
+because of the left-associativity (\(M[x := N][y := L] \equiv M[y
+:= L][x := N[y := L]] \land x \notin FV(L)\)).</p>
+<p>We define the relation \(\rightarrow_\beta\) to be one-step
+beta-reduction since one redex is replaced bu its contractum. The
+further beta-reduction performed after the one-step reduction can
+be defined using \(\twoheadrightarrow_\beta\) which generally take
+zero-or-more-step. We can proof that \(\twoheadrightarrow_\beta\)
+is <i>reflective</i> and <i>transitive</i>.</p>
+<p>Similar to alpha-conversation, we can define
+<i>beta-conversation</i> or <i>beta-equal</i>. If \(M =_\beta N\)
+and there is an \(n \geq 0\) and there are terms \(M_0\) ro \(M_n\)
+such that \(M_0 \equiv M\), \(M_n \equiv N\) and for all \(i\) such
+that \(0 \leq i &lt; n\):</p>
+<p>\[M_i \rightarrow_\beta M_{i+1} \lor M_{i+1} \rightarrow_\beta
+M_i.\]</p>
+<p>\(\twoheadrightarrow_\beta\) extends \(\rightarrow_\beta\) to
+multi-steps, while \(=_\beta\) further extends
+\(\twoheadrightarrow_\beta\) in both directions. Thus \(=_\beta\)
+is <i>reflective</i>, <i>symmetric</i> and <i>transitive</i>.</p>
+<ul class="org-ul">
+<li>\(M\) is in <i>beta-normal</i> form if \(M\) does not contain
+any redex.</li>
+<li>\(M\) has a beta-normal form or is <i>beta-normalizing</i> if
+there is an \(N\) in beta-normal form such that \(M =_\beta
+N\).</li>
+</ul>
+<p>A <i>reduction path</i> from \(M\) is an infinite or finite
+sequence \(N_0, N_1, N_2, \ldots\) that is connected using one-step
+beta-reduction and that starts from \(M\).</p>
+<ul class="org-ul">
+<li>\(M\) is <i>weakly normalizing</i> if there is an \(N\) in the
+beta-normal form such that \(M \twoheadrightarrow_\beta\). (<i>One
+of</i> the reduction path leads to an outcome.)</li>
+<li>\(M\) is <i>strongly normalizing</i> if there are no infinite
+reduction paths starting from \(M\). (<i>Each</i> reduction path
+leads to an outcome.)</li>
+</ul>
+<p>Suppose that for a given lambda-term \(M\), we have \(M
+\twoheadrightarrow_\beta N_i\) and \(M \twoheadrightarrow_\beta
+N_2\), then there is a lambda-term \(N_3\) such that \(N_1
+\twoheadrightarrow_\beta N_3\) and \(N_2 \twoheadrightarrow_\beta
+N_3\). This is the <i>Church-Rosser Theorem</i>.</p>
+</div>
+</div>
+<div id="outline-container-org0fa62ec" class="outline-3">
+<h3 id="org0fa62ec"><span class="section-number-3">2.6.</span>
+Fixed Point Theorem</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>Every lambda-term \(L\) has a <i>fixed point</i>, which can be
+constructed usind a <i>fixed point combinator</i>, defined as:</p>
+<p>\[Y \equiv \lambda y . (\lambda x . y(xx))(\lambda x .
+y(xx)).\]</p>
+<p>Then we have \(YL\) which is a fixed point of \(L\), since
+\(L(YL) =_\beta YL\), which can be shown as follows:</p>
+<p>\[\begin{align*} YL &amp;\rightarrow_\beta (\lambda x .
+L(xx))(\lambda x . L(xx))\\ &amp;\rightarrow_\beta L((\lambda x .
+L(xx))(\lambda x . L(xx)))\\ &amp;=_\beta L(YL). \end{align*}\]</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: RadioNoiseE</p>
+<p class="date">Created: 2024-10-18 Fri 09:50</p>
+<p class="validation"><a href=
+"https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
